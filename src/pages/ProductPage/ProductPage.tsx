@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-const Product: FC = () => {
+const ProductPage: FC = () => {
   return <h2>Current Product</h2>;
 };
 
-export default Product;
+export default ProductPage;

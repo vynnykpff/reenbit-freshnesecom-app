@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
-const Products: FC = () => {
+const ProductsPage: FC = () => {
   const params = useParams();
   return (
     <>
@@ -16,4 +16,4 @@ const Products: FC = () => {
   );
 };
 
-export default Products;
+export default ProductsPage;
