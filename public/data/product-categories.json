@@ -1,0 +1,170 @@
+[
+  {
+    "id": "783dbe3f-ed77-4110-9bbc-12a03d901bfe",
+    "name": "Books",
+    "brands": [
+      {
+        "name": "Penguin Random House"
+      },
+      {
+        "name": "HarperCollins"
+      },
+      {
+        "name": "Simon & Schuster"
+      },
+      {
+        "name": "Hachette Livre"
+      },
+      {
+        "name": "Macmillan Publishers"
+      }
+    ]
+  },
+  {
+    "id": "2b3b3f1a-42ef-43c7-a811-eaaf36e1a3d2",
+    "name": "Clothes ",
+    "brands": [
+      {
+        "name": "Nike"
+      },
+      {
+        "name": "Adidas"
+      },
+      {
+        "name": "Gucci"
+      },
+      {
+        "name": "Zara"
+      },
+      {
+        "name": "Calvin Klein"
+      }
+    ]
+  },
+  {
+    "id": "gdhtbe3f-ed77-4110-9bbc-12a06703dbfe",
+    "name": "Electronics",
+    "brands": [
+      {
+        "name": "Apple"
+      },
+      {
+        "name": "Samsung"
+      },
+      {
+        "name": "Sony"
+      },
+      {
+        "name": "LG"
+      },
+      {
+        "name": "Philips"
+      }
+    ]
+  },
+  {
+    "id": "9f7fcb3b-280b-4f87-b709-3cfd0b217b70",
+    "name": "Food",
+    "brands": [
+      {
+        "name": "Coca-Cola"
+      },
+      {
+        "name": "McDonald's"
+      },
+      {
+        "name": "Pepsi"
+      },
+      {
+        "name": "Danone"
+      },
+      {
+        "name": "Starbucks"
+      }
+    ]
+  },
+  {
+    "id": "4a9a76de-d781-447b-9d58-c8c725e66379",
+    "name": "Hand tools",
+    "brands": [
+      {
+        "name": "DeWalt"
+      },
+      {
+        "name": "Stanley"
+      },
+      {
+        "name": "Craftsman"
+      },
+      {
+        "name": "Makita"
+      },
+      {
+        "name": "Einhell"
+      }
+    ]
+  },
+  {
+    "id": "e1831af3-b32b-4911-b4e2-24d78024cabf",
+    "name": "Skin and care",
+    "brands": [
+      {
+        "name": "Dove"
+      },
+      {
+        "name": "NIVEA"
+      },
+      {
+        "name": "Neutrogena"
+      },
+      {
+        "name": "Olay"
+      },
+      {
+        "name": "Cetaphil"
+      }
+    ]
+  },
+  {
+    "id": "2ca04625-e089-46fc-9467-93efb74701fa",
+    "name": "Toys",
+    "brands": [
+      {
+        "name": "LEGO"
+      },
+      {
+        "name": "Disney"
+      },
+      {
+        "name": "Mattel"
+      },
+      {
+        "name": "Nerf"
+      },
+      {
+        "name": "Hasbro"
+      }
+    ]
+  },
+  {
+    "id": "2cvbe25-e089-46fc-9467-93efbghjk01fa",
+    "name": "Sports and outdoors",
+    "brands": [
+      {
+        "name": "Bowflex"
+      },
+      {
+        "name": "Rogue Fitness"
+      },
+      {
+        "name": "Nautilus"
+      },
+      {
+        "name": "PowerBlock"
+      },
+      {
+        "name": "Ironmaster"
+      }
+    ]
+  }
+]
