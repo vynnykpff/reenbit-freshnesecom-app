@@ -1,11 +1,9 @@
-import { ROUTES } from "@/common/constants/Routes.ts";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import slugify from "slugify";
+import { ROUTES } from "@/common/constants";
 
 export const Header: FC = () => {
-  const tempSlug = slugify("Iphone 15 Pro Max").toLowerCase();
-  const tempUrl = `/electronics/smartphones/apple/${tempSlug}`;
+  const tempProductId = Math.floor(Math.random() * 1000);
   return (
     <header>
       <ul>
@@ -16,7 +14,7 @@ export const Header: FC = () => {
           <Link to={ROUTES.PRODUCTS}>All Products</Link>
         </li>
         <li>
-          <Link to={`${ROUTES.PRODUCTS}${tempUrl}`}>Product</Link>
+          <Link to={`${ROUTES.PRODUCTS}/${tempProductId}`}>Product</Link>
         </li>
         <li>
           <Link to={ROUTES.CART}>Shopping Cart</Link>

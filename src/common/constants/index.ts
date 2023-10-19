@@ -1,1 +1,1 @@
-export { ROUTES } from "./Routes.ts";
+export { ROUTES } from "@/common/constants/Routes.ts";
