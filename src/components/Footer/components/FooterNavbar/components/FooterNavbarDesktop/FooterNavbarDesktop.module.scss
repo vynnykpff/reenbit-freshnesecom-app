@@ -1,0 +1,27 @@
+@import "@/styles/variables";
+
+.footerNavbarDesktopContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 48px;
+
+  .footerNavbarDesktopNavigateTitle {
+    margin-bottom: 16px;
+  }
+
+  .footerNavbarDesktopNavigateList {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    .footerNavbarDesktopNavigateListItem {
+      color: var(--secondary-c2-color-500);
+      transition: $primary-transition;
+      font-size: 14px;
+
+      &:hover {
+        color: var(--secondary-c2-color-300);
+        transition: $primary-transition;
+      }
+    }
+  }
+}

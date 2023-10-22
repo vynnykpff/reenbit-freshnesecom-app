@@ -1,4 +1,4 @@
-@import "./variables";
+@import "variables";
 
 @mixin desktop() {
   @media (max-width: $DESKTOP) {

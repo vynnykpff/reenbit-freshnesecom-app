@@ -1,5 +1,9 @@
 .layoutContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   .mainContainer {
     margin: 0 45px;
+    flex: 1 1 auto;
   }
 }

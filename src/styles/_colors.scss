@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import "variables";
 
 @mixin color-theme {
   --primary-c1-color-900: #{$primary-c1-color-900};
