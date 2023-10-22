@@ -1,6 +1,29 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@500;600;700&display=swap');
 @import "normalize.css";
-@import "reset.scss";
+@import "./reset.scss";
+@import "./colors.scss";
+
+
+:root {
+  @include color-theme;
+
+  margin-right: calc(-1 * (100vw - 100%));
+  overflow-x: hidden;
+}
+
+*::-webkit-scrollbar-track {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-c1-color-600);
+  border-radius: 20px;
+}
 
 body {
   font-family: "Open Sans", sans-serif;

@@ -1,0 +1,46 @@
+@import "@/styles/variables";
+
+.headerInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-bottom: 13px;
+  background-color: #fff;
+  border-bottom: 1px solid var(--primary-c1-color-400);
+
+  .headerInfoList {
+    display: flex;
+    gap: 30px;
+
+    .headerInfoListItem {
+      color: var(--primary-c1-color-900);
+      font-size: 13px;
+      transition: $primary-transition;
+
+      &:hover {
+        color: var(--primary-c1-color-800);
+        transition: $primary-transition
+      }
+
+      &:first-child {
+        color: var(--secondary-c2-color-500);
+        transition: $primary-transition;
+
+        &:hover {
+          color: var(--secondary-c2-color-300);
+          transition: $primary-transition;
+        }
+      }
+    }
+
+    .headerAboutListItem {
+      color: var(--secondary-c2-color-500);
+      transition: $primary-transition;
+
+      &:hover {
+        color: var(--secondary-c2-color-300);
+        transition: $primary-transition;
+      }
+    }
+  }
+}

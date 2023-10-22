@@ -1,0 +1,16 @@
+.headerCategoriesContainer {
+  background-color: var(--primary-c1-color-300);
+  padding: 8px 45px;
+  margin: 0 20px 30px;
+  .headerCategoriesList {
+    display: flex;
+    justify-content: center;
+    column-gap: 40px;
+
+    .headerCategoriesListItem {
+      .selectCategories {
+        width: 200px
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@import "@/styles/variables";
+
+.searchContainer {
+  display: flex;
+  column-gap: 24px;
+  padding: 5px 15px;
+  align-items: center;
+  background-color: var(--primary-c1-color-300);
+  border: 1px solid var(--primary-c1-color-600);
+  border-radius: 15px;
+  width: 30%;
+  transition: $primary-transition;
+
+  &:hover {
+    transition: $primary-transition;
+    border: 1px solid var(--primary-c1-color-700);
+  }
+
+  .selectCategoriesField {
+    font-size: 15px;
+  }
+
+  .searchInputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+
+
+    &:before {
+      content: "|";
+      width: 2px;
+      height: 100%;
+      margin-right: 24px;
+      color: var(--primary-c1-color-700);
+    }
+
+    .searchInput {
+      background-color: transparent;
+      width: 100%;
+      margin-right: 8px;
+    }
+
+    .searchIcon {
+      stroke: var(--primary-c1-color-900);
+      width: 20px;
+      height: 19px;
+      transition: $primary-transition;
+
+      &:hover {
+        stroke: var(--primary-c1-color-800);
+        transition: $primary-transition;
+      }
+    }
+  }
+}

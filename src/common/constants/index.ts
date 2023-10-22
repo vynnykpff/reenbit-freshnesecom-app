@@ -1,1 +1,2 @@
-export { ROUTES } from "@/common/constants/Routes.ts";
+export { Routes } from "./Routes.ts";
+export { ABOUT_INFO_LINKS, CONTACTS_INFO_LINKS, PRODUCT_CATEGORIES_WITH_BRANDS, PRODUCT_CATEGORIES, BREADCRUMBS } from "./StaticNavigation";

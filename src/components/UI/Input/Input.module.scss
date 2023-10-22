@@ -1,11 +1,12 @@
 .input {
   border: none;
-  outline: none;
-  border-radius: 8px;
-  color: #222;
+  color: var(--primary-c1-color-900);
   cursor: pointer;
+  font-size: 14px;
+  outline: none;
+  height: 100%;
 
   &::placeholder {
-    color: #444;
+    color: var(--primary-c1-color-700);
   }
 }

@@ -1,0 +1,39 @@
+@import "@/styles/variables";
+
+.breadcrumbs {
+  font-size: 13px;
+  font-weight: 500;
+  padding-bottom: 16px;
+
+  & > * {
+    display: inline-block;
+    margin-right: 8px;
+  }
+
+  .crumb {
+    &:before {
+      content: "/";
+      margin-right: 8px;
+      color: var(--primary-c1-color-700);
+    }
+
+    &:last-child:after {
+      display: none;
+    }
+  }
+
+  .pastCrumb {
+    color: var(--primary-c1-color-700);
+    transition: $primary-transition;
+
+    &:hover {
+      transition: $primary-transition;
+      color: var(--primary-c1-color-800);
+    }
+  }
+
+  .activeCrumb {
+    cursor: default;
+    color: var(--primary-c1-color-900);
+  }
+}

@@ -1,44 +1,27 @@
-import { ROUTES } from "@/common/constants";
-import { ProductCategory } from "@/common/types";
-import { useCategories } from "@/hooks";
+import { Routes } from "@/common/constants";
+import { HeaderCategories, HeaderInfo, HeaderToolbar } from "@/components/Header/components";
+import { Breadcrumbs } from "@/components/UI/Breadcrumbs";
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import styles from "./Header.module.scss";
 
 const MAX_RANGE = 1000;
 
 export const Header: FC = () => {
   const tempProductId = Math.floor(Math.random() * MAX_RANGE);
-  const { categories } = useCategories();
 
   return (
-    <header>
-      <ul>
-        {categories.map((category: ProductCategory) => (
-          <>
-            <li key={category.id}>{category.name}</li>
-            <ul>
-              {category.brands.map(brand => (
-                <li>{brand.name}</li>
-              ))}
-            </ul>
-            <br />
-          </>
-        ))}
-      </ul>
-      <br />
-      <br />
+    <header className={styles.headerContainer}>
+      <HeaderInfo />
+      <HeaderToolbar />
+      <HeaderCategories />
+      <Breadcrumbs />
       <ul>
         <li>
-          <Link to={ROUTES.HOME}>Home</Link>
+          <Link to={Routes.PRODUCTS}>All Products</Link>
         </li>
         <li>
-          <Link to={ROUTES.PRODUCTS}>All Products</Link>
-        </li>
-        <li>
-          <Link to={`${ROUTES.PRODUCTS}/${tempProductId}`}>Product</Link>
-        </li>
-        <li>
-          <Link to={ROUTES.CART}>Shopping Cart</Link>
+          <Link to={`${Routes.PRODUCTS}/${tempProductId}`}>Product</Link>
         </li>
       </ul>
     </header>

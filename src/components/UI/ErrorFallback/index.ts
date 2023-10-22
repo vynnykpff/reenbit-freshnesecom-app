@@ -1,1 +1,1 @@
-export * from "./ErrorFallback.tsx";
+export { ErrorFallback } from "./ErrorFallback.tsx";
