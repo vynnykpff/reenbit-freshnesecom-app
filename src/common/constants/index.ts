@@ -12,3 +12,4 @@ export {
   ACCOUNT_LINKS,
   NAVIGATION_KEYS,
 } from "./StaticNavigation";
+export { SPRING_CONFIG } from "./SpringConfig.ts";

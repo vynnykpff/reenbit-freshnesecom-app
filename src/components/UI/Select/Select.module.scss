@@ -30,15 +30,9 @@
       font-weight: 500;
     }
 
-    .arrowIcon {
-      transition: $primary-transition;
-      stroke: var(--secondary-c2-color-500);
+    .selectArrowIcon {
       width: 16px;
       height: 16px;
-
-      &[data-active="true"] {
-        transform: rotate(180deg);
-      }
     }
   }
 

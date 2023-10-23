@@ -5,6 +5,7 @@
   .headerCategoriesList {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     column-gap: 40px;
 
     .headerCategoriesListItem {

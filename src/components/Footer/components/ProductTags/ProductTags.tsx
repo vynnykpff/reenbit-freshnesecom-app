@@ -3,11 +3,10 @@ import { FC } from "react";
 import styles from "./ProductTags.module.scss";
 import commonStyles from "@/styles/Common.module.scss";
 
+const numTags = 10;
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const tags = Array.from({ length: numTags }, (_, index) => `#tag-${index + 1}`);
 export const ProductTags: FC = () => {
-  const numTags = 19;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const tags = Array.from({ length: numTags }, (_, index) => `#tag-${index + 1}`);
-
   return (
     <div className={styles.productTagsContainer}>
       <h3 className={cn(commonStyles.titleCategory, styles.productTagsTitle)}>Product tags</h3>

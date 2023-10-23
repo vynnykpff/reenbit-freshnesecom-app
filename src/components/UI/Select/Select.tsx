@@ -1,3 +1,4 @@
+import { SPRING_CONFIG } from "@/common/constants";
 import { SelectVariantFields } from "@/common/types";
 import { Dispatch, FC, SelectHTMLAttributes, SetStateAction, useState } from "react";
 import cn from "classnames";
@@ -6,13 +7,7 @@ import { getSelectVariantProperty } from "@/utils";
 import SelectArrow from "#/icons/select-chevron.svg?react";
 import { animated, useSpring } from "react-spring";
 import styles from "./Select.module.scss";
-
-const enum SPRING_CONFIG {
-  MAX_VISIBLE_HEIGHT = 215,
-  MAX_HIDDEN_HEIGHT = 0,
-  TENSION = 1600,
-  FRICTION = 200,
-}
+import commonStyles from "@/styles/Common.module.scss";
 
 export type Variant = string | SelectVariantFields;
 
@@ -84,7 +79,7 @@ export const Select: FC<SelectProps> = ({
         ) : (
           <span className={cn(styles.selectTitle, styles.selectPlaceholder)}>{placeholder}</span>
         )}
-        <SelectArrow className={styles.arrowIcon} data-active={variantsVisible} />
+        <SelectArrow className={cn(styles.selectArrowIcon, commonStyles.arrowIcon)} data-active={variantsVisible} />
       </div>
       {renderVariants()}
     </div>

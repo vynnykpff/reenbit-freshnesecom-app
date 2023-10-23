@@ -13,6 +13,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
+
     .productTagsListItem {
       background-color: var(--primary-c1-color-400);
       transition: $primary-transition;
