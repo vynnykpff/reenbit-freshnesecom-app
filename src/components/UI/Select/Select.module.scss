@@ -15,7 +15,6 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     color: var(--primary-c1-color-900);
     height: 40px;
     border: 2px solid transparent;
@@ -31,8 +30,8 @@
     }
 
     .selectArrowIcon {
-      width: 16px;
-      height: 16px;
+      min-width: 16px;
+      min-height: 16px;
     }
   }
 

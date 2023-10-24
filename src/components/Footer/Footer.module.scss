@@ -1,6 +1,12 @@
+@import "@/styles/media";
+
 .footerContainer {
   padding: 0 45px;
   margin-bottom: 30px;
+
+  @include largeMobile {
+    padding: 0 24px;
+  }
 
   .footerCopyright {
     font-size: 14px;

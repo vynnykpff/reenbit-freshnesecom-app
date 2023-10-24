@@ -1,14 +1,22 @@
-import { ChangeEvent, FC, useState } from "react";
-import { PRODUCT_CATEGORIES } from "@/common/constants";
-import { Input, Select } from "@/components/UI";
-import { SelectProps } from "@/components/UI/Select/Select.tsx";
 import SearchIcon from "#/icons/search.svg?react";
+import { MediaQueries, PRODUCT_CATEGORIES, SEARCH_PLACEHOLDER, SELECT_WIDTH } from "@/common/constants";
+import { SelectProps } from "@/common/types";
+import { Input, Select } from "@/components/UI";
+import { useMatchMedia } from "@/hooks";
+import { ChangeEvent, FC, useState } from "react";
 import styles from "./Search.module.scss";
-
-const MAX_WITH_SELECT = "180px";
 
 export const Search: FC<Pick<SelectProps, "currentState" | "setCurrentState">> = ({ currentState, setCurrentState }) => {
   const [searchValue, setSearchValue] = useState("");
+  const isMobile = useMatchMedia(`(max-width: ${MediaQueries.LARGE_MOBILE}px)`);
+
+  const getSelectWidth = (): string => {
+    return isMobile ? SELECT_WIDTH.MOBILE : SELECT_WIDTH.DESKTOP;
+  };
+
+  const getSearchPlaceholder = (): string => {
+    return isMobile ? SEARCH_PLACEHOLDER.MOBILE : SEARCH_PLACEHOLDER.DESKTOP;
+  };
 
   return (
     <div className={styles.searchContainer}>
@@ -18,13 +26,13 @@ export const Search: FC<Pick<SelectProps, "currentState" | "setCurrentState">> =
         className={styles.selectCategoriesField}
         variants={PRODUCT_CATEGORIES}
         isShowSelectedValue
-        maxWidth={MAX_WITH_SELECT}
+        maxWidth={getSelectWidth()}
       />
 
       <div className={styles.searchInputContainer}>
         <Input
           className={styles.searchInput}
-          placeholder="Search Products, categories ..."
+          placeholder={getSearchPlaceholder()}
           value={searchValue}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
         />

@@ -1,0 +1,24 @@
+@import "@/styles/media";
+
+.headerCategoriesMobileContainer {
+  width: 100%;
+  .headerCategoriesMobileContent {
+    position: absolute;
+    right: 0;
+    background-color: var(--primary-c1-color-100);
+    height: 100%;
+    width: 100%;
+    max-width: 280px;
+    padding: 45px 30px;
+  }
+}
+
+.headerCategoriesMobileContainerActive {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  min-width: $MOBILE;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}

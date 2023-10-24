@@ -1,26 +1,14 @@
-import { SPRING_CONFIG } from "@/common/constants";
-import { SelectVariantFields } from "@/common/types";
-import { Dispatch, FC, SelectHTMLAttributes, SetStateAction, useState } from "react";
-import cn from "classnames";
-import { useOutsideClick } from "@/hooks";
-import { getSelectVariantProperty } from "@/utils";
 import SelectArrow from "#/icons/select-chevron.svg?react";
-import { animated, useSpring } from "react-spring";
-import styles from "./Select.module.scss";
+import { SelectProps, SelectVariantFields } from "@/common/types";
+import { useOutsideClick } from "@/hooks";
 import commonStyles from "@/styles/Common.module.scss";
+import { getSelectVariantProperty } from "@/utils";
+import cn from "classnames";
+import { FC, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import styles from "./Select.module.scss";
 
 export type Variant = string | SelectVariantFields;
-
-export type SelectProps = {
-  currentState: string;
-  setCurrentState: Dispatch<SetStateAction<SelectProps["currentState"]>> | ((val: SelectProps["currentState"]) => void);
-  variants: Variant[];
-  maxWidth?: string;
-  minWidth?: string;
-  isShowSelectedValue?: boolean;
-  placeholder?: string;
-  bgColor?: string;
-} & SelectHTMLAttributes<HTMLSelectElement>;
 
 export const Select: FC<SelectProps> = ({
   currentState,
@@ -46,29 +34,7 @@ export const Select: FC<SelectProps> = ({
     if (setCurrentState !== undefined) {
       setCurrentState(getSelectVariantProperty(val, "value"));
     }
-  };
-
-  const springProps = useSpring({
-    maxHeight: variantsVisible ? SPRING_CONFIG.MAX_VISIBLE_HEIGHT : SPRING_CONFIG.MAX_HIDDEN_HEIGHT,
-    config: { tension: SPRING_CONFIG.TENSION, friction: SPRING_CONFIG.FRICTION },
-  });
-
-  const renderVariants = () => {
-    if (variantsVisible) {
-      return (
-        <animated.div
-          style={springProps}
-          onClick={() => setVariantsVisible(false)}
-          className={cn(styles.selectVariantsContainer, className)}
-        >
-          {filteredVariants.map((variant, key) => (
-            <span onClick={() => setValue(variant)} key={key}>
-              {getSelectVariantProperty(variant, "text")}
-            </span>
-          ))}
-        </animated.div>
-      );
-    }
+    setVariantsVisible(false);
   };
 
   return (
@@ -81,7 +47,30 @@ export const Select: FC<SelectProps> = ({
         )}
         <SelectArrow className={cn(styles.selectArrowIcon, commonStyles.arrowIcon)} data-active={variantsVisible} />
       </div>
-      {renderVariants()}
+      <AnimatePresence>
+        {variantsVisible && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ type: "tween", duration: 0.2 }}
+            className={cn(styles.selectVariantsContainer, className)}
+          >
+            {filteredVariants.map((variant, key) => (
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setValue(variant)}
+                key={key}
+              >
+                {getSelectVariantProperty(variant, "text")}
+              </motion.span>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

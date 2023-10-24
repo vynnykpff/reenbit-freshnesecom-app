@@ -1,4 +1,8 @@
 export { Routes } from "./Routes.ts";
+export { SPRING_CONFIG } from "./SpringConfig.ts";
+export { MediaQueries } from "./MediaQueries.ts";
+export { SELECT_WIDTH, SEARCH_PLACEHOLDER } from "./Search.ts";
+export { Attributes } from "./Attributes.ts";
 export {
   ABOUT_INFO_LINKS,
   CONTACTS_INFO_LINKS,
@@ -12,4 +16,3 @@ export {
   ACCOUNT_LINKS,
   NAVIGATION_KEYS,
 } from "./StaticNavigation";
-export { SPRING_CONFIG } from "./SpringConfig.ts";

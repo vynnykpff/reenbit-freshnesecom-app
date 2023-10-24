@@ -1,35 +1,59 @@
 @import "@/styles/variables";
+@import "@/styles/media";
 
 .headerToolbarContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
   margin: 0 20px 18px;
 
-  .headerToolbarLinksContainer {
+  @include largeMobile {
+    margin: 0 0 18px;
+    padding-top: 16px;
+  }
+
+  .headerNavbarContainer {
     display: flex;
+    align-items: center;
     column-gap: 20px;
 
-    .active {
-      .headerToolbarIcon  {
-        stroke: var(--secondary-c2-color-500);
+    .headerToolbarLinksContainer {
+      display: flex;
+      column-gap: 20px;
+
+      @include tablet {
+        order: 2;
+      }
+
+      .active {
+        .headerToolbarIcon {
+          stroke: var(--secondary-c2-color-500);
+
+          &:hover {
+            stroke: var(--secondary-c2-color-300);
+          }
+        }
+      }
+
+      .headerToolbarIcon {
+        stroke: var(--primary-c1-color-900);
+        transition: $primary-transition;
+        width: 22px;
+        height: 22px;
+        display: flex;
 
         &:hover {
-          stroke: var(--secondary-c2-color-300);
+          stroke: var(--primary-c1-color-800);
+          transition: $primary-transition;
         }
       }
     }
 
-    .headerToolbarIcon {
-      stroke: #151515;
-      transition: $primary-transition;
-      width: 22px;
-      height: 22px;
-
-      &:hover {
-        stroke: var(--primary-c1-color-800);
-        transition: $primary-transition;
-      }
+    .headerToolbarBurgerButton {
+      order: 2;
+      z-index: 2;
     }
   }
 }

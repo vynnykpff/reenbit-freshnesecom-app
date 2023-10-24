@@ -42,6 +42,16 @@ export const GET_IN_TOUCH_LINKS: NavigationLink[] = [
     link: "#",
     id: "footer_blog",
   },
+  {
+    title: "Phone number",
+    link: "tel:+420 336 775 664",
+    id: "footer_phone_number",
+  },
+  {
+    title: "Email",
+    link: "mailto:info@freshnesecom.com",
+    id: "footer_email",
+  },
 ];
 
 export const CONNECTIONS_LINKS: NavigationLink[] = [

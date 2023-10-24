@@ -1,0 +1,22 @@
+@import "@/styles/media";
+
+.headerCategoriesContainer {
+  background-color: var(--primary-c1-color-300);
+  padding: 8px 45px;
+  margin: 0 20px 30px;
+
+  @include largeMobile {
+    margin: 0 0 30px;
+  }
+
+  .headerCategoriesDesktopList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 40px;
+
+    .selectCategories {
+      width: 200px;
+    }
+  }
+}
