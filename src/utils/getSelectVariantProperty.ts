@@ -1,5 +1,4 @@
-import { SelectVariantFields } from "@/common/types";
-import { Variant } from "@/components/UI/Select";
+import { SelectVariantFields, Variant } from "@/common/types";
 import { isSelectVariantObject } from "./isSelectVarianObject.ts";
 
 export const getSelectVariantProperty = (variant: Variant, property: keyof SelectVariantFields) => {

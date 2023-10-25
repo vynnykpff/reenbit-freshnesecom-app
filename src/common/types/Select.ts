@@ -1,10 +1,11 @@
-import { Variant } from "@/components/UI/Select";
 import { Dispatch, SelectHTMLAttributes, SetStateAction } from "react";
 
 export type SelectVariantFields = {
   text: string;
   value: string;
 };
+
+export type Variant = string | SelectVariantFields;
 
 export type SelectProps = {
   currentState: string;

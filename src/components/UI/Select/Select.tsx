@@ -1,14 +1,12 @@
 import SelectArrow from "#/icons/select-chevron.svg?react";
-import { SelectProps, SelectVariantFields } from "@/common/types";
+import { SelectProps, Variant } from "@/common/types";
 import { useOutsideClick } from "@/hooks";
 import commonStyles from "@/styles/Common.module.scss";
 import { getSelectVariantProperty } from "@/utils";
 import cn from "classnames";
-import { FC, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { FC, useState } from "react";
 import styles from "./Select.module.scss";
-
-export type Variant = string | SelectVariantFields;
 
 export const Select: FC<SelectProps> = ({
   currentState,
@@ -25,6 +23,7 @@ export const Select: FC<SelectProps> = ({
   const containerRef = useOutsideClick<HTMLDivElement>(() => {
     setVariantsVisible(false);
   });
+
   const filteredVariants = variants.filter(v => getSelectVariantProperty(v, "value") !== currentState);
 
   const [currentVariant, setCurrentVariant] = useState<Variant>(variants[0]);
