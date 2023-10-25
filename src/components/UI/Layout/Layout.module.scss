@@ -4,12 +4,14 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
   .mainContainer {
-    margin: 0 45px 30px;
+    margin: 0 45px 80px;
     flex: 1 1 auto;
 
-    @include largeMobile {
-      margin: 0 24px 30px;
+    @include laptop {
+      margin: 0 24px 50px;
     }
+
   }
 }

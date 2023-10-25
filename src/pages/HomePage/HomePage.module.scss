@@ -1,0 +1,71 @@
+@import "@/styles/variables";
+@import "@/styles/media";
+
+.homePageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 30%;
+  min-width: 550px;
+  margin: 0 auto;
+  font-weight: 700;
+
+  @include tablet {
+    max-width: 100%;
+    min-width: auto;
+  }
+
+  .homePageTitle {
+    font-size: 35px;
+    margin-bottom: 16px;
+    font-family: $secondary-font;
+
+    @include largeMobile {
+      font-size: 30px;
+    }
+
+    .homePageTitleAccentText {
+      color: var(--secondary-c2-color-500);
+    }
+  }
+
+  .homePageSubTitle {
+    font-size: 22px;
+    color: var(--primary-c1-color-900);
+    opacity: 0.6;
+    margin-bottom: 45px;
+    font-weight: 600;
+
+    @include largeMobile {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+  }
+
+  .homePageButtonContainer {
+    width: 100%;
+    .homePageButton {
+      width: 100%;
+      background-color: var(--secondary-c2-color-500);
+      color: var(--primary-c1-color-100);
+      border: 2px solid var(--secondary-c2-color-400);
+      font-weight: 700;
+      font-size: 22px;
+      padding: 8px 12px;
+      transition: $primary-transition;
+
+      &:hover {
+        background-color: var(--secondary-c2-color-400);
+        border: 2px solid var(--secondary-c2-color-500);
+        transition: $primary-transition;
+      }
+
+      @include largeMobile {
+        font-size: 20px;
+        padding: 6px 10px;
+      }
+    }
+  }
+
+}
