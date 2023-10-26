@@ -1,0 +1,23 @@
+@import "@/styles/variables";
+
+.footerNavbarDesktopContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  .footerNavbarDesktopNavigateWrapper {
+    width: 180px
+  }
+
+  .footerNavbarDesktopNavigateTitle {
+    margin-bottom: 16px;
+  }
+
+  .footerNavbarDesktopNavigateList {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+}

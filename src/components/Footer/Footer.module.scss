@@ -1,0 +1,16 @@
+@import "@/styles/media";
+
+.footerContainer {
+  padding: 0 45px;
+  margin-bottom: 30px;
+
+  @include largeMobile {
+    padding: 0 24px;
+  }
+
+  .footerCopyright {
+    font-size: 14px;
+    color: var(--primary-c1-color-900);
+    text-align: center;
+  }
+}

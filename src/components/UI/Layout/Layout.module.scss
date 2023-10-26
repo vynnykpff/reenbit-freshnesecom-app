@@ -1,0 +1,17 @@
+@import "@/styles/media";
+
+.layoutContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .mainContainer {
+    margin: 0 45px 80px;
+    flex: 1 1 auto;
+
+    @include laptop {
+      margin: 0 24px 50px;
+    }
+
+  }
+}

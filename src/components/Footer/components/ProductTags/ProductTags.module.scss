@@ -1,0 +1,31 @@
+@import "@/styles/variables";
+
+.productTagsContainer {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-bottom: 48px;
+
+  .productTagsTitle {
+    margin-bottom: 16px;
+  }
+
+  .productTagsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    .productTagsListItem {
+      background-color: var(--primary-c1-color-400);
+      transition: $primary-transition;
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-size: 13px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--primary-c1-color-500);
+        transition: $primary-transition;
+      }
+    }
+  }
+}

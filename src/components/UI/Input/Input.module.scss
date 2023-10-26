@@ -1,0 +1,12 @@
+.input {
+  border: none;
+  color: var(--primary-c1-color-900);
+  cursor: pointer;
+  font-size: 14px;
+  outline: none;
+  height: 100%;
+
+  &::placeholder {
+    color: var(--primary-c1-color-700);
+  }
+}

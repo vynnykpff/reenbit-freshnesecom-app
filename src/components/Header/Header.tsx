@@ -1,27 +1,22 @@
+import { MediaQueries } from "@/common/constants";
+import { HeaderCategories, HeaderInfo, HeaderToolbar } from "@/components/Header/components";
+import { Breadcrumbs } from "@/components/UI/Breadcrumbs";
+import { HeaderCategoriesContextProvider } from "@/contexts/HeaderCategoriesContext";
+import { useMatchMedia } from "@/hooks";
 import { FC } from "react";
-import { Link } from "react-router-dom";
-import { ROUTES } from "@/common/constants";
-
-const MAX_RANGE = 1000;
+import styles from "./Header.module.scss";
 
 export const Header: FC = () => {
-  const tempProductId = Math.floor(Math.random() * MAX_RANGE);
+  const isMobile = useMatchMedia(`(max-width: ${MediaQueries.LARGE_MOBILE}px)`);
+
   return (
-    <header>
-      <ul>
-        <li>
-          <Link to={ROUTES.HOME}>Home</Link>
-        </li>
-        <li>
-          <Link to={ROUTES.PRODUCTS}>All Products</Link>
-        </li>
-        <li>
-          <Link to={`${ROUTES.PRODUCTS}/${tempProductId}`}>Product</Link>
-        </li>
-        <li>
-          <Link to={ROUTES.CART}>Shopping Cart</Link>
-        </li>
-      </ul>
+    <header className={styles.headerContainer}>
+      {!isMobile && <HeaderInfo />}
+      <HeaderCategoriesContextProvider>
+        <HeaderToolbar />
+        <HeaderCategories />
+      </HeaderCategoriesContextProvider>
+      <Breadcrumbs />
     </header>
   );
 };

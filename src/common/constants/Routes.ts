@@ -1,4 +1,4 @@
-export const enum ROUTES {
+export const enum Routes {
   HOME = "/",
   PRODUCTS = "/products",
   PRODUCT = "/products/:id",

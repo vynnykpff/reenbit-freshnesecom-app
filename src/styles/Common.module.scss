@@ -1,0 +1,28 @@
+@import "./variables";
+
+.titleCategory {
+  font-family: $secondary-font;
+  color: var(--primary-c1-color-900);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.arrowIcon {
+  transition: $primary-transition;
+  stroke: var(--secondary-c2-color-500);
+
+  &[data-active="true"] {
+    transform: rotate(180deg);
+  }
+}
+
+.footerNavbarNavigationListItem {
+  color: var(--secondary-c2-color-500);
+  transition: $primary-transition;
+  font-size: 14px;
+
+  &:hover {
+    color: var(--secondary-c2-color-300);
+    transition: $primary-transition;
+  }
+}
