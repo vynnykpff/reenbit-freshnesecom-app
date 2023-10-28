@@ -1,10 +1,9 @@
-import { FC, MouseEvent, useContext, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import cn from "classnames";
-import { removeDataAttribute } from "@/utils";
-import { Attributes, PRODUCT_CATEGORIES_WITH_BRANDS } from "@/common/constants";
-import { RenderCategories } from "../RenderCategories";
+import { Attributes } from "@/common/constants";
 import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts/HeaderCategoriesContext";
+import { removeDataAttribute } from "@/utils";
+import cn from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
+import { FC, MouseEvent, useContext } from "react";
 import styles from "./HeaderCategoriesMobile.module.scss";
 
 export const HeaderCategoriesMobile: FC = () => {
@@ -13,13 +12,13 @@ export const HeaderCategoriesMobile: FC = () => {
     dispatch,
   } = useContext(HeaderCategoriesContext);
 
-  const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState(
-    PRODUCT_CATEGORIES_WITH_BRANDS[0].brands[0].text,
-  );
+  // const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState(
+  //   PRODUCT_CATEGORIES_WITH_BRANDS[0].brands[0].text,
+  // );
 
-  useEffect(() => {
-    handleCloseBurgerMenu();
-  }, [currentProductCategoryWithBrands]);
+  // useEffect(() => {
+  //   handleCloseBurgerMenu();
+  // }, [currentProductCategoryWithBrands]);
 
   const handleCloseBurgerMenu = () => {
     removeDataAttribute({ tagName: "body", attributeName: Attributes.SCROLLABLE });
@@ -45,7 +44,7 @@ export const HeaderCategoriesMobile: FC = () => {
             onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
             className={styles.headerCategoriesMobileContent}
           >
-            <RenderCategories currentState={currentProductCategoryWithBrands} setCurrentState={setCurrentProductCategoryWithBrands} />
+            {/*<RenderCategories currentState={currentProductCategoryWithBrands} setCurrentState={setCurrentProductCategoryWithBrands} />*/}
           </motion.div>
         </motion.section>
       )}

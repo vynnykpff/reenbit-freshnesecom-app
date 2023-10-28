@@ -1,27 +1,28 @@
-import { PRODUCT_CATEGORIES_WITH_BRANDS } from "@/common/constants";
-import { ProductCategory, SelectProps } from "@/common/types";
+import { ProductCategory } from "@/common/types";
 import { Select } from "@/components/UI";
+import { useAppSelector } from "@/store";
 import cn from "classnames";
-import { FC } from "react";
+import { FC, useState } from "react";
 import styles from "./RenderCategories.module.scss";
 
 type Props = {
   className?: string[] | string;
-  currentState: SelectProps["currentState"];
-  setCurrentState: SelectProps["setCurrentState"];
 };
 
-export const RenderCategories: FC<Props> = ({ className = "", currentState, setCurrentState }) => {
+export const RenderCategories: FC<Props> = ({ className = "" }) => {
+  const { productsCategoriesWithBrands } = useAppSelector(state => state.products);
+  const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState(productsCategoriesWithBrands[0]?.brands[0].text);
+
   return (
     <ul className={cn(styles.headerCategoriesList, className[0])}>
-      {PRODUCT_CATEGORIES_WITH_BRANDS.map((category: ProductCategory) => (
-        <li className={styles.headerCategoriesListItem} key={category.id}>
+      {productsCategoriesWithBrands.map((product: ProductCategory) => (
+        <li className={styles.headerCategoriesListItem} key={product.id}>
           <Select
-            currentState={currentState}
-            setCurrentState={setCurrentState}
+            currentState={currentProductCategoryWithBrands}
+            setCurrentState={setCurrentProductCategoryWithBrands}
             className={cn(styles.selectCategories, className[1])}
-            variants={category.brands}
-            placeholder={category.title}
+            variants={product.brands}
+            placeholder={product.title}
           />
         </li>
       ))}
