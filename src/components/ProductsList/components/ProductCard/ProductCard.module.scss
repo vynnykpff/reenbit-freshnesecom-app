@@ -1,0 +1,23 @@
+@import "@/styles/media";
+
+.productCardContainer {
+  display: flex;
+  border: 1px solid var(--primary-c1-color-600);
+  border-radius: 12px;
+  width: 100%;
+
+  .productCardContentWrapper {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-between;
+    padding: 32px;
+
+    @include laptop {
+      padding: 24px;
+    }
+
+    @include tablet {
+      flex-direction: column;
+    }
+  }
+}

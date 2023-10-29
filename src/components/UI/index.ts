@@ -5,3 +5,4 @@ export { ErrorFallback } from "./ErrorFallback";
 export { Search } from "./Search";
 export { Loader } from "./Loader";
 export { Button } from "./Button";
+export { Rating } from "./Rating";

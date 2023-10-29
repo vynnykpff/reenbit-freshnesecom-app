@@ -1,0 +1,39 @@
+@import "@/styles/variables";
+
+.productCardDetailsContainer {
+  .productCardContentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 25px;
+
+    .productCardTitle {
+      font-family: $secondary-font;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .productCardShortDescription {
+      font-size: 14px;
+    }
+  }
+
+  .productCardDescriptionContainer {
+    display: flex;
+    column-gap: 32px;
+
+    .productCardCharacteristics {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .productCardCharacteristicsItem {
+        color: var(--primary-c1-color-700);
+      }
+
+      .productCardCharacteristicsAccentItem {
+        color: var(--secondary-c2-color-500);
+      }
+    }
+  }
+}

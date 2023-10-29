@@ -6,7 +6,7 @@ type Props = {
   };
   resetErrorBoundary: () => void;
 };
-
+// TODO: Refactor this component
 export const ErrorFallback: FC<Props> = ({ error, resetErrorBoundary }) => {
   return (
     <div>

@@ -3,4 +3,6 @@ export { MediaQueries } from "./MediaQueries.ts";
 export { SELECT_WIDTH, SEARCH_PLACEHOLDER } from "./Search.ts";
 export { Attributes } from "./Attributes.ts";
 export { ErrorMessages } from "./ErrorMessages.ts";
+// TODO: probably remove static navigation
 export * from "./StaticNavigation";
+export * from "./StaticProductDescription.ts";

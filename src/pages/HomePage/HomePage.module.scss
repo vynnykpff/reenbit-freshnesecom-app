@@ -47,19 +47,8 @@
     width: 100%;
     .homePageButton {
       width: 100%;
-      background-color: var(--secondary-c2-color-500);
-      color: var(--primary-c1-color-100);
-      border: 2px solid var(--secondary-c2-color-400);
-      font-weight: 700;
       font-size: 22px;
       padding: 8px 12px;
-      transition: $primary-transition;
-
-      &:hover {
-        background-color: var(--secondary-c2-color-400);
-        border: 2px solid var(--secondary-c2-color-500);
-        transition: $primary-transition;
-      }
 
       @include largeMobile {
         font-size: 20px;
