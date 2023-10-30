@@ -1,14 +1,12 @@
 import { FC } from "react";
+import { Product } from "@/common/types";
+import { ProductCardPriceWithDiscount, ProductCardPriceWithoutDiscount } from "./components";
 import styles from "./ProductCardPrice.module.scss";
 
-export const ProductCardPrice: FC = () => {
-  return (
-    <div className={styles.priceContainer}>
-      <div className={styles.totalPriceContainer}>
-        <p className={styles.discountPrice}>36.99</p>
-        <span className={styles.priceCurrency}>USD</span>
-      </div>
-      <p className={styles.originalPrice}>48.56</p>
-    </div>
-  );
+export const ProductCardPrice: FC<Product["price"]> = props => {
+  const handleCheckDiscount = () => {
+    return !props.discount ? <ProductCardPriceWithoutDiscount {...props} /> : <ProductCardPriceWithDiscount {...props} />;
+  };
+
+  return <div className={styles.priceContainer}>{handleCheckDiscount()}</div>;
 };

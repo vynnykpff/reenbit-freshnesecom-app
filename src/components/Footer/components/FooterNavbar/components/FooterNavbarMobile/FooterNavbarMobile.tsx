@@ -23,10 +23,14 @@ export const FooterNavbarMobile: FC = () => {
       {FOOTER_NAVIGATION_TITLES.map((item: Omit<NavigationLink, "link">) => (
         <div key={item.id}>
           <div className={styles.footerNavbarMobileContent} onClick={() => handleDropdownClick(item.title)}>
-            <h3 className={cn(commonStyles.titleCategory, styles.footerNavbarMobileTitle)}>{item.title}</h3>
-            <DropdownArrow className={cn(commonStyles.arrowIcon, styles.dropdownIcon)} data-active={openDropdown === item.title} />
+            <h4 className={cn(commonStyles.titleCategory, styles.footerNavbarMobileTitle)}>{item.title}</h4>
+            <DropdownArrow className={cn(commonStyles.arrowIcon, commonStyles.dropdownIcon)} data-active={openDropdown === item.title} />
           </div>
-          <Dropdown dropDownData={NAVIGATION_KEYS[item.title]} isShowDropList={openDropdown === item.title} />
+          <Dropdown
+            dropDownData={NAVIGATION_KEYS[item.title]}
+            isShowDropList={openDropdown === item.title}
+            className={["", commonStyles.footerNavbarNavigationListItem]}
+          />
         </div>
       ))}
     </nav>

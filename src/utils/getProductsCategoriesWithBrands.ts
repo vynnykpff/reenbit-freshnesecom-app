@@ -8,13 +8,13 @@ const enum ProductDefaultBrand {
 
 export const getProductsCategoriesWithBrands = (products: Product[]) => {
   const categoryData = products.reduce<Record<string, ProductCategory>>((acc, product) => {
-    const { category, brands } = product;
+    const { category, brand } = product;
 
     if (!acc[category]) {
       acc[category] = {
         title: category,
         id: getSlugString(category),
-        brands: [
+        brand: [
           {
             text: ProductDefaultBrand.TEXT,
             value: ProductDefaultBrand.VALUE,
@@ -23,12 +23,10 @@ export const getProductsCategoriesWithBrands = (products: Product[]) => {
       };
     }
 
-    const categoryBrands = acc[category].brands;
-    brands.forEach(brand => {
-      categoryBrands.push({
-        text: brand.text,
-        value: brand.value,
-      });
+    const categoryBrands = acc[category].brand;
+    categoryBrands.push({
+      text: brand.text,
+      value: brand.value,
     });
 
     return acc;

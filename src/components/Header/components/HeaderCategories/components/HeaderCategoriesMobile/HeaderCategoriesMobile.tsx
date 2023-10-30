@@ -1,9 +1,11 @@
-import { Attributes } from "@/common/constants";
-import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts/HeaderCategoriesContext";
-import { removeDataAttribute } from "@/utils";
-import cn from "classnames";
+import { RenderCategories } from "@/components/Header/components/HeaderCategories/components";
+import { useAppSelector } from "@/store";
+import { FC, MouseEvent, useContext, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FC, MouseEvent, useContext } from "react";
+import cn from "classnames";
+import { removeDataAttribute } from "@/utils";
+import { Attributes, animationBurgerMenu, animationList } from "@/common/constants";
+import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts/HeaderCategoriesContext";
 import styles from "./HeaderCategoriesMobile.module.scss";
 
 export const HeaderCategoriesMobile: FC = () => {
@@ -12,13 +14,12 @@ export const HeaderCategoriesMobile: FC = () => {
     dispatch,
   } = useContext(HeaderCategoriesContext);
 
-  // const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState(
-  //   PRODUCT_CATEGORIES_WITH_BRANDS[0].brands[0].text,
-  // );
+  const { productsCategoriesWithBrands } = useAppSelector(state => state.products);
+  const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState(productsCategoriesWithBrands[0]?.brand[0].text);
 
-  // useEffect(() => {
-  //   handleCloseBurgerMenu();
-  // }, [currentProductCategoryWithBrands]);
+  useEffect(() => {
+    handleCloseBurgerMenu();
+  }, [currentProductCategoryWithBrands]);
 
   const handleCloseBurgerMenu = () => {
     removeDataAttribute({ tagName: "body", attributeName: Attributes.SCROLLABLE });
@@ -29,22 +30,20 @@ export const HeaderCategoriesMobile: FC = () => {
     <AnimatePresence>
       {isOpenBurgerNav && (
         <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ type: "tween", duration: 0.2 }}
+          {...animationList}
           onClick={handleCloseBurgerMenu}
           className={cn(styles.headerCategoriesMobileContainer, isOpenBurgerNav && styles.headerCategoriesMobileContainerActive)}
         >
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "tween", duration: 0.2 }}
+            {...animationBurgerMenu}
             onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
             className={styles.headerCategoriesMobileContent}
           >
-            {/*<RenderCategories currentState={currentProductCategoryWithBrands} setCurrentState={setCurrentProductCategoryWithBrands} />*/}
+            <RenderCategories
+              currentCategory={currentProductCategoryWithBrands}
+              setCurrentState={setCurrentProductCategoryWithBrands}
+              productsCategoriesWithBrands={productsCategoriesWithBrands}
+            />
           </motion.div>
         </motion.section>
       )}

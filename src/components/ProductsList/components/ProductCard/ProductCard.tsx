@@ -1,15 +1,18 @@
 import { FC } from "react";
+import { motion } from "framer-motion";
+import { animationVariants } from "@/common/constants";
+import { Product } from "@/common/types";
 import { ProductCardDetails, ProductCardImage, ProductCardInfo } from "./components";
 import styles from "./ProductCard.module.scss";
 
-export const ProductCard: FC = () => {
+export const ProductCard: FC<Product> = props => {
   return (
-    <div className={styles.productCardContainer}>
-      <ProductCardImage />
+    <motion.div className={styles.productCardContainer} {...animationVariants}>
+      <ProductCardImage images={props.images} title={props.title} />
       <div className={styles.productCardContentWrapper}>
-        <ProductCardDetails />
-        <ProductCardInfo />
+        <ProductCardDetails {...props} />
+        <ProductCardInfo price={props.price} delivery={props.delivery} />
       </div>
-    </div>
+    </motion.div>
   );
 };

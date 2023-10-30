@@ -1,22 +1,40 @@
 @import "@/styles/variables";
 
-.productCardButtonsContainer{
+.productCardButtonsContainer {
   display: flex;
   flex-direction: column;
   gap: 12px;
 
-  .productDetailsButton{
+  .productDetailsButtonContainer {
+    width: 100%;
+
+    .productDetailsButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .productDetailsIcon {
+        width: 20px;
+        height: 20px;
+        stroke: var(--primary-c1-color-100);
+        transform: rotate(-90deg);
+      }
+    }
   }
+
 
   .productWishListButton {
     font-family: $secondary-font;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 8px 16px;
     color: var(--primary-c1-color-900);
     background-color: var(--primary-c1-color-400);
     border: none;
+    width: 100%;
 
     .likeIcon {
       stroke: var(--primary-c1-color-900);

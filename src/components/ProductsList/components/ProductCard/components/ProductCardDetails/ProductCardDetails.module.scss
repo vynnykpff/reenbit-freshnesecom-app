@@ -1,11 +1,24 @@
 @import "@/styles/variables";
+@import "@/styles/media";
+
 
 .productCardDetailsContainer {
+  overflow-wrap: break-word;
+  width: calc(100% - 212px);
+
+  @include tablet {
+    width: 100%;
+  }
+
   .productCardContentWrapper {
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin-bottom: 25px;
+
+    @include tablet {
+      margin-bottom: 16px;
+    }
 
     .productCardTitle {
       font-family: $secondary-font;
@@ -19,21 +32,5 @@
   }
 
   .productCardDescriptionContainer {
-    display: flex;
-    column-gap: 32px;
-
-    .productCardCharacteristics {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-
-      .productCardCharacteristicsItem {
-        color: var(--primary-c1-color-700);
-      }
-
-      .productCardCharacteristicsAccentItem {
-        color: var(--secondary-c2-color-500);
-      }
-    }
   }
 }

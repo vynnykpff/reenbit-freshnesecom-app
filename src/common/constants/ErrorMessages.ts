@@ -1,3 +1,3 @@
 export const enum ErrorMessages {
-  DEFAULT = "Something went wrong",
+  DEFAULT = "Oops, something went wrong",
 }

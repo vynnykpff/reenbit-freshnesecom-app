@@ -18,6 +18,12 @@
   }
 }
 
+@mixin productCardMobile() {
+  @media (max-width: $PRODUCT_CARD_MOBILE) {
+    @content;
+  }
+}
+
 @mixin largeMobile() {
   @media (max-width: $LARGE_MOBILE) {
     @content;

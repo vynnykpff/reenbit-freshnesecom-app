@@ -1,11 +1,17 @@
 import { FC } from "react";
+import { ProductDeliveryType } from "@/common/constants";
+import { Product } from "@/common/types";
 import styles from "./ProductCardDelivery.module.scss";
 
-export const ProductCardDelivery: FC = () => {
+export const ProductCardDelivery: FC<Product["delivery"]> = ({ time, cost }) => {
+  const handleGetDeliveryType = (): string => {
+    return cost ? ProductDeliveryType.PAID : ProductDeliveryType.FREE;
+  };
+
   return (
     <div className={styles.deliveryInfoContainer}>
-      <p className={styles.deliveryType}>Free Shipping</p>
-      <p className={styles.deliveryDuration}>Delivery in 1 day</p>
+      <p className={styles.deliveryType}>{handleGetDeliveryType()} Shipping</p>
+      <p className={styles.deliveryDuration}>Delivery in {time} day</p>
     </div>
   );
 };

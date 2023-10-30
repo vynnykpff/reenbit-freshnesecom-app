@@ -1,0 +1,20 @@
+.productCardDetailsMobileContainer {
+  margin-bottom: 16px;
+
+  .productCardDetailsMobileDropDownMenuWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .productCardDetailsTitle {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  .productCardDescriptionContainer {
+    display: flex;
+    gap: 32px;
+    padding-top: 8px;
+  }
+}

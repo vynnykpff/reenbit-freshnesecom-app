@@ -1,2 +1,13 @@
+@import "@/styles/media";
+
 .productInfoContainer {
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  max-width: 180px;
+
+
+  @include tablet {
+    max-width: 100%;
+  }
 }

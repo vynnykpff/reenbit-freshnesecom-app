@@ -32,7 +32,7 @@ export const HeaderToolbar: FC = () => {
   const [currentProductCategory, setCurrentProductCategory] = useState(productsCategories[0]?.value);
 
   useEffect(() => {
-    if (productsCategories.length > 0) {
+    if (productsCategories.length) {
       setCurrentProductCategory(productsCategories[0]?.value);
     }
   }, [productsCategories]);

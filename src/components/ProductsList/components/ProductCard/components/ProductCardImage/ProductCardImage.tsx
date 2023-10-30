@@ -1,16 +1,26 @@
+import NoAvailableImageIcon from "#/icons/no-image-available.svg?react";
+import { Routes, tempProductId } from "@/common/constants";
+import { Product } from "@/common/types";
+import { getSlugString } from "@/utils";
 import { FC } from "react";
-// import NoAvailableImageIcon from "#/icons/no-image-available.svg?react";
+import { Link } from "react-router-dom";
 import styles from "./ProductCardImage.module.scss";
 
-export const ProductCardImage: FC = () => {
-  return (
-    <div className={styles.productCardImageContainer}>
-      <img
-        className={styles.productCardImage}
-        src="https://lookagain.scene7.com/is/image/OttoUK/553w/iphone-14-pro-max-128gb-deep-purple-by-apple~33H509FRSP.jpg"
-        alt="#"
-      />
-      {/*<NoAvailableImageIcon className={styles.productCardNoAvailableImage} />*/}
-    </div>
-  );
+type Props = {
+  images: Product["images"];
+  title: Product["title"];
+};
+
+export const ProductCardImage: FC<Props> = ({ images, title }) => {
+  const renderProductImage = () => {
+    return images.length ? (
+      <Link className={styles.productCardImageWrapper} to={`${Routes.PRODUCTS}/${tempProductId}`}>
+        <img className={styles.productCardImage} src={images[0]} alt={getSlugString(title)} />
+      </Link>
+    ) : (
+      <NoAvailableImageIcon className={styles.productCardNoAvailableImage} />
+    );
+  };
+
+  return <div className={styles.productCardImageContainer}>{renderProductImage()}</div>;
 };

@@ -1,36 +1,41 @@
-import { StaticProductCardKeys } from "@/common/constants";
+import { MediaQueries, Routes, tempProductId } from "@/common/constants";
+import { NavigationLink, Product } from "@/common/types";
 import { Rating } from "@/components/UI";
-import cn from "classnames";
-import { FC } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useMatchMedia } from "@/hooks";
+import { useAppSelector } from "@/store";
+import { generateCharacteristics } from "@/utils";
+import { FC, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { ProductCardDetailsDesktop, ProductCardDetailsMobile } from "./components";
 import styles from "./ProductCardDetails.module.scss";
 
-export const ProductCardDetails: FC = () => {
-  // const isTablet = useMatchMedia(`(max-width: ${MediaQueries.TABLET}px)`);
+export const ProductCardDetails: FC<Product> = ({ title, description, rating, originCountry, brand, delivery, stock }) => {
+  const isMobile = useMatchMedia(`(max-width: ${MediaQueries.TABLET}px)`);
+  const { isPending } = useAppSelector(state => state.products);
+  const [productCharacteristics, setProductCharacteristics] = useState<NavigationLink[]>([]);
+
+  useEffect(() => {
+    if (!isPending) {
+      setProductCharacteristics(generateCharacteristics({ originCountry, brand, delivery, stock }));
+    }
+  }, []);
 
   return (
     <div className={styles.productCardDetailsContainer}>
       <div className={styles.productCardContentWrapper}>
-        <h3 className={styles.productCardTitle}>Product Title</h3>
-        <p className={styles.productCardShortDescription}>Space for a small product description</p>
-        <Rating amountRating={4} />
+        <h3 className={styles.productCardTitle}>
+          <Link to={`${Routes.PRODUCTS}/${tempProductId}`}>{title}</Link>
+        </h3>
+        <p className={styles.productCardShortDescription}>{description?.short}</p>
+        <Rating amountRating={rating} />
       </div>
       <div className={styles.productCardDescriptionContainer}>
-        <ul className={styles.productCardCharacteristics}>
-          {StaticProductCardKeys.map(item => (
-            <li key={uuidv4()} className={styles.productCardCharacteristicsItem}>
-              {item}
-            </li>
-          ))}
-        </ul>
-        <ul className={styles.productCardCharacteristics}>
-          <li className={styles.productCardCharacteristicsItem}>USA</li>
-          <li className={styles.productCardCharacteristicsItem}>Apple</li>
-          <li className={styles.productCardCharacteristicsItem}>Europe</li>
-          <li className={cn(styles.productCardCharacteristicsItem, styles.productCardCharacteristicsAccentItem)}>320 pcs</li>
-        </ul>
+        {isMobile ? (
+          <ProductCardDetailsMobile productCharacteristics={productCharacteristics} />
+        ) : (
+          <ProductCardDetailsDesktop productCharacteristics={productCharacteristics} />
+        )}
       </div>
-      {/*<Dropdown dropDownData={[]} isShowDropList={true} />*/}
     </div>
   );
 };

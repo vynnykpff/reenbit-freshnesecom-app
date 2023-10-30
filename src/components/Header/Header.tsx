@@ -1,5 +1,5 @@
 import { MediaQueries } from "@/common/constants";
-import { HeaderCategories, HeaderInfo, HeaderToolbar } from "@/components/Header/components";
+import { HeaderCategories, HeaderInfo, HeaderInfoMobile, HeaderToolbar } from "@/components/Header/components";
 import { Breadcrumbs } from "@/components/UI/Breadcrumbs";
 import { HeaderCategoriesContextProvider } from "@/contexts/HeaderCategoriesContext";
 import { useMatchMedia } from "@/hooks";
@@ -11,7 +11,7 @@ export const Header: FC = () => {
 
   return (
     <header className={styles.headerContainer}>
-      {!isMobile && <HeaderInfo />}
+      {isMobile ? <HeaderInfoMobile /> : <HeaderInfo />}
       <HeaderCategoriesContextProvider>
         <HeaderToolbar />
         <HeaderCategories />
