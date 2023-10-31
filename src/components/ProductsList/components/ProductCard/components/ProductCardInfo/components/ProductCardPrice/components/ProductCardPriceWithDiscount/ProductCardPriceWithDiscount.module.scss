@@ -1,0 +1,11 @@
+.productCardPriceWithDiscountContainer {
+  .originalPrice {
+    color: var(--primary-c1-color-700);
+    font-size: 14px;
+    text-decoration: line-through;
+  }
+
+  .discountPrice{
+    max-width: 100%;
+  }
+}

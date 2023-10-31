@@ -1,0 +1,32 @@
+@import "@/styles/variables";
+@import "@/styles/media";
+
+.productCardDetailsContainer {
+  overflow-wrap: break-word;
+  width: calc(100% - 212px);
+
+  @include tablet {
+    width: 100%;
+  }
+
+  .productCardContentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 25px;
+
+    @include tablet {
+      margin-bottom: 16px;
+    }
+
+    .productCardTitle {
+      font-family: $secondary-font;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .productCardShortDescription {
+      font-size: 14px;
+    }
+  }
+}

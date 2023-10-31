@@ -1,0 +1,26 @@
+@import "@/styles/variables";
+
+.ratingContainer {
+  display: flex;
+  gap: 3px;
+  stroke: var(--primary-c1-color-600);
+
+  .ratingIconFill {
+    stroke: none;
+    fill: var(--primary-c1-color-900);
+    transition: $primary-transition;
+
+    &:hover {
+      transition: $primary-transition;
+      fill: var(--additional-c3-color-600);
+    }
+  }
+
+  .ratingIconOutline {
+    &:hover {
+      transition: $primary-transition;
+      stroke: var(--additional-c3-color-600);
+    }
+  }
+
+}

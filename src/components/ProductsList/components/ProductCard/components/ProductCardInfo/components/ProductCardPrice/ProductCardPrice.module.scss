@@ -1,0 +1,16 @@
+@import "@/styles/variables";
+
+.priceContainer {
+  font-family: $secondary-font;
+  font-weight: 600;
+  margin-bottom: 16px;
+
+  .totalPriceContainer {
+    font-size: 18px;
+    display: flex;
+    column-gap: 4px;
+    color: var(--primary-c1-color-900);
+    margin-bottom: 4px;
+    overflow-wrap: break-word;
+  }
+}

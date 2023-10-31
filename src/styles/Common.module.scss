@@ -16,13 +16,45 @@
   }
 }
 
+.dropdownIcon {
+  width: 20px;
+  height: 20px;
+}
+
 .footerNavbarNavigationListItem {
   color: var(--secondary-c2-color-500);
   transition: $primary-transition;
   font-size: 14px;
+  gap: 16px;
+  margin-top: 16px;
 
   &:hover {
     color: var(--secondary-c2-color-300);
     transition: $primary-transition;
+  }
+}
+
+.productCardCharacteristics {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 100%;
+
+  .productCardCharacteristicsItem {
+    display: flex;
+    color: var(--primary-c1-color-700);
+    word-break: break-all;
+
+    & span {
+      &:first-child {
+        max-width: 80px;
+        min-width: 80px;
+        margin-right: 20px;
+      }
+    }
+
+    &:last-child {
+      color: var(--secondary-c2-color-500);
+    }
   }
 }

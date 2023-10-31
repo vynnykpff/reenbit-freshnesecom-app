@@ -1,0 +1,11 @@
+.headerInfoContainerMobile {
+
+  .headerInfoListMobile {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .headerInfoListItemMobile {
+      color: var(--primary-c1-color-900) !important;
+    }
+  }
+}

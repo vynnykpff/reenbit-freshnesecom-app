@@ -1,12 +1,16 @@
 import SearchIcon from "#/icons/search.svg?react";
-import { MediaQueries, PRODUCT_CATEGORIES, SEARCH_PLACEHOLDER, SELECT_WIDTH } from "@/common/constants";
-import { SelectProps } from "@/common/types";
+import { MediaQueries, SEARCH_PLACEHOLDER, SELECT_WIDTH } from "@/common/constants";
+import { SelectProps, SelectVariantFields } from "@/common/types";
 import { Input, Select } from "@/components/UI";
 import { useMatchMedia } from "@/hooks";
 import { ChangeEvent, FC, useState } from "react";
 import styles from "./Search.module.scss";
 
-export const Search: FC<Pick<SelectProps, "currentState" | "setCurrentState">> = ({ currentState, setCurrentState }) => {
+export const Search: FC<Pick<SelectProps, "currentState" | "setCurrentState"> & { productsCategories: SelectVariantFields[] }> = ({
+  currentState,
+  setCurrentState,
+  productsCategories,
+}) => {
   const [searchValue, setSearchValue] = useState("");
   const isMobile = useMatchMedia(`(max-width: ${MediaQueries.LARGE_MOBILE}px)`);
 
@@ -24,7 +28,7 @@ export const Search: FC<Pick<SelectProps, "currentState" | "setCurrentState">> =
         currentState={currentState}
         setCurrentState={setCurrentState}
         className={styles.selectCategoriesField}
-        variants={PRODUCT_CATEGORIES}
+        variants={productsCategories}
         isShowSelectedValue
         maxWidth={getSelectWidth()}
       />
