@@ -11,7 +11,7 @@ type Props = {
 export const generateCharacteristics = ({ originCountry, brand, delivery, stock }: Props): NavigationLink[] => {
   return [
     { title: "Origin", value: originCountry, id: `${getSlugString(originCountry)}_country`, link: "#" },
-    { title: "Brand", value: brand.text, id: `${getSlugString(originCountry)}_brand`, link: "#" },
+    { title: "Brand", value: brand, id: `${getSlugString(originCountry)}_brand`, link: "#" },
     { title: "Delivery", value: delivery.regions, id: `${getSlugString(originCountry)}_region`, link: "#" },
     { title: "Stock", value: `${stock.amount} ${stock.unitMeasure}`, id: `${getSlugString(originCountry)}_stock`, link: "#" },
   ];

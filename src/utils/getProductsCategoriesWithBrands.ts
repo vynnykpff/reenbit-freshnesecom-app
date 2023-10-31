@@ -1,4 +1,4 @@
-import { Product, ProductCategory } from "@/common/types";
+import { Product, ProductBrand, ProductCategory } from "@/common/types";
 import { getSlugString } from "./getSlugString.ts";
 
 const enum ProductDefaultBrand {
@@ -9,6 +9,11 @@ const enum ProductDefaultBrand {
 export const getProductsCategoriesWithBrands = (products: Product[]) => {
   const categoryData = products.reduce<Record<string, ProductCategory>>((acc, product) => {
     const { category, brand } = product;
+
+    const brandObject: ProductBrand = {
+      text: brand,
+      value: brand.toLowerCase(),
+    };
 
     if (!acc[category]) {
       acc[category] = {
@@ -25,8 +30,8 @@ export const getProductsCategoriesWithBrands = (products: Product[]) => {
 
     const categoryBrands = acc[category].brand;
     categoryBrands.push({
-      text: brand.text,
-      value: brand.value,
+      text: brandObject.text,
+      value: brandObject.value,
     });
 
     return acc;

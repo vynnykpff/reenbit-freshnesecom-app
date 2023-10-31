@@ -38,23 +38,23 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 100%;
+  max-width: 100%;
 
   .productCardCharacteristicsItem {
     display: flex;
     color: var(--primary-c1-color-700);
+    word-break: break-all;
 
     & span {
       &:first-child {
-        min-width: 100px;
+        max-width: 80px;
+        min-width: 80px;
+        margin-right: 20px;
       }
     }
 
     &:last-child {
       color: var(--secondary-c2-color-500);
     }
-  }
-
-  .productCardCharacteristicsAccentItem {
   }
 }

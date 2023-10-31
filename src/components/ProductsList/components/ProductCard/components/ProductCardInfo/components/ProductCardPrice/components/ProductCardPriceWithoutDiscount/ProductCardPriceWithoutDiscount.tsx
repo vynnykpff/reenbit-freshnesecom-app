@@ -5,7 +5,7 @@ import commonStyles from "../../ProductCardPrice.module.scss";
 
 export const ProductCardPriceWithoutDiscount: FC<Product["price"]> = ({ original, currency }) => {
   return (
-    <div style={{ overflowWrap: "break-word" }} className={commonStyles.totalPriceContainer}>
+    <div className={commonStyles.totalPriceContainer}>
       <p className={styles.discountPrice}>{original}</p>
       <span className={styles.priceCurrency}>{currency}</span>
     </div>

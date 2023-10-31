@@ -16,18 +16,18 @@ export const Rating: FC<Props> = ({ amountRating, className = "" }) => {
     const ratingIcons = [];
     for (let i = START_VALUE; i < MAX_AMOUNT_STARS; i++) {
       ratingIcons.push(
-        <span key={i}>
+        <li key={i}>
           {i < amountRating ? (
             <RatingIcon className={cn(styles.ratingIcon, styles.ratingIconFill, className[1])} />
           ) : (
             <RatingIcon className={cn(styles.ratingIcon, styles.ratingIconOutline)} />
           )}
-        </span>,
+        </li>,
       );
     }
 
     return ratingIcons;
   };
 
-  return <div className={cn(styles.ratingContainer, className[0])}>{renderRating()}</div>;
+  return <ul className={cn(styles.ratingContainer, className[0])}>{renderRating()}</ul>;
 };

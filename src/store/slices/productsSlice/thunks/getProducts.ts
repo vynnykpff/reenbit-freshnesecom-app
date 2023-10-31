@@ -17,7 +17,7 @@ const storeHandler: CaseReducer<ProductsState, PayloadAction<Product[]>> = (stat
     ...state,
     products: action.payload,
     productsCategoriesWithBrands: getProductsCategoriesWithBrands(action.payload),
-    productsCategories: getProductsCategories(getProductsCategoriesWithBrands(action.payload)),
+    productsCategories: getProductsCategories(action.payload),
   };
 };
 

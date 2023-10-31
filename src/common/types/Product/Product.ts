@@ -1,8 +1,8 @@
-import { ProductDescription } from "./ProductDescription.ts";
-import { ProductReview } from "./ProductUserFeedback.ts";
-import { ProductBrand, ProductCategory, ProductDelivery, ProductPrice, ProductStock } from "./ProductInfo.ts";
 import { BaseState } from "../BaseState.ts";
 import { SelectVariantFields } from "../Select.ts";
+import { ProductDescription } from "./ProductDescription.ts";
+import { ProductCategory, ProductDelivery, ProductPrice, ProductStock } from "./ProductInfo.ts";
+import { ProductReview } from "./ProductUserFeedback.ts";
 
 export type ProductId = {
   id: string;
@@ -10,7 +10,7 @@ export type ProductId = {
 
 export type Product = {
   category: string;
-  brand: ProductBrand;
+  brand: string;
   images: string[];
   title: string;
   description: ProductDescription;

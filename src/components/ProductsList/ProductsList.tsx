@@ -7,10 +7,10 @@ export const ProductsList: FC = () => {
   const { products } = useAppSelector(state => state.products);
 
   return (
-    <section className={styles.productsListContainer}>
+    <ul className={styles.productsListContainer}>
       {products.map(product => (
         <ProductCard key={product.id} {...product} />
       ))}
-    </section>
+    </ul>
   );
 };
