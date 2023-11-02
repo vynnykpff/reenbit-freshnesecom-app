@@ -5,3 +5,4 @@ export type { StoreAsyncThunk } from "./StoreAsyncThunk.ts";
 export type { BaseState } from "./BaseState.ts";
 export type * from "./Select.ts";
 export type * from "./Product";
+export type * from "./Filter";

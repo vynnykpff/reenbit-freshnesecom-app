@@ -1,15 +1,10 @@
-import { SelectVariantFields } from "@/common/types";
+import { SelectVariants } from "@/common/types";
 import { ProductId } from "./Product.ts";
 
 export type ProductCategory = {
   title: string;
-  brand: SelectVariantFields[];
+  brands: SelectVariants;
 } & ProductId;
-
-export type ProductBrand = {
-  text: string;
-  value: string;
-};
 
 export type ProductDelivery = {
   time: number;

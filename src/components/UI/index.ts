@@ -6,3 +6,5 @@ export { Search } from "./Search";
 export { Loader } from "./Loader";
 export { Button } from "./Button";
 export { Rating } from "./Rating";
+export { NoMatches } from "./NoMatches";
+export { BurgerMenuButton } from "./BurgerMenuButton";

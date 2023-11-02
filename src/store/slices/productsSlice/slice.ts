@@ -6,7 +6,7 @@ import productsSliceThunks from "./thunks";
 const initialState: ProductsState = {
   products: [],
   productsCategoriesWithBrands: [],
-  productsCategories: [],
+  productsCategories: {},
   isPending: false,
   error: null,
 };

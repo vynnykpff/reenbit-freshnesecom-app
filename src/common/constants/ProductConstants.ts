@@ -3,15 +3,11 @@ export const enum ProductDeliveryType {
   FREE = "Free",
 }
 
-export const ProductCardDetailsObject = {
-  Origin: "",
-  Brand: "",
-  Delivery: "",
-  Stock: "",
-};
-
-export const ProductCardKeys = Object.keys(ProductCardDetailsObject);
-
 const MAX_RANGE = 1000;
 
 export const tempProductId = Math.floor(Math.random() * MAX_RANGE);
+
+export const enum ProductFilterType {
+  ALL_CATEGORIES = "all_categories",
+  ALL_BRANDS = "all_brands",
+}

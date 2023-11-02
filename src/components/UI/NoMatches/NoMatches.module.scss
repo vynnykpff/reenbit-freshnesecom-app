@@ -1,0 +1,32 @@
+@import "@/styles/variables";
+@import "@/styles/media";
+
+
+.noMatchesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: $secondary-font;
+  color: var(--primary-c1-color-900);
+
+  .noMatchesImage {
+    width: 80px;
+    margin-bottom: 30px;
+  }
+
+  .noMatchesTitle {
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+
+    @include largeMobile {
+      font-size: 16px;
+    }
+
+    .noMatchesAccentMessage {
+      font-weight: 700;
+      color: var(--secondary-c2-color-500);
+    }
+  }
+}
