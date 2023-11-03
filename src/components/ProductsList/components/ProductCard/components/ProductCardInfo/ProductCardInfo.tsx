@@ -6,14 +6,15 @@ import styles from "./ProductCardInfo.module.scss";
 type Props = {
   price: Product["price"];
   delivery: Product["delivery"];
+  title: Product["title"];
 };
 
-export const ProductCardInfo: FC<Props> = ({ price, delivery }) => {
+export const ProductCardInfo: FC<Props> = ({ price, delivery, title }) => {
   return (
     <div className={styles.productInfoContainer}>
       <ProductCardPrice {...price} />
       <ProductCardDelivery {...delivery} />
-      <ProductCardNavigation />
+      <ProductCardNavigation title={title} />
     </div>
   );
 };

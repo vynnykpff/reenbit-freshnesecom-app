@@ -11,7 +11,7 @@ export const ProductCard: FC<Product> = props => {
       <ProductCardImage images={props.images} title={props.title} />
       <div className={styles.productCardContentWrapper}>
         <ProductCardDetails {...props} />
-        <ProductCardInfo price={props.price} delivery={props.delivery} />
+        <ProductCardInfo price={props.price} delivery={props.delivery} title={props.title} />
       </div>
     </motion.li>
   );

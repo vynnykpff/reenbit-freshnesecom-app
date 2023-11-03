@@ -1,14 +1,14 @@
 import { BREADCRUMBS, Routes } from "@/common/constants";
+import { useAppSelector } from "@/store";
 import cn from "classnames";
 import { FC } from "react";
 import { Link, NavLink, useLocation, useMatch } from "react-router-dom";
 import styles from "./Breadcrumbs.module.scss";
 
-const PRODUCT_NAME = "Iphone 15 Pro Max";
-
 export const Breadcrumbs: FC = () => {
   const { pathname } = useLocation();
   const isHomePage = useMatch(Routes.HOME);
+  const { currentProduct } = useAppSelector(state => state.products);
 
   const renderBreadcrumbs = (pathname: string) => {
     let currentLink = "";
@@ -18,7 +18,7 @@ export const Breadcrumbs: FC = () => {
       currentLink += `/${crumb}`;
 
       const isLastElement = index === routePaths.length - 1;
-      const breadcrumb = BREADCRUMBS[currentLink as keyof typeof BREADCRUMBS] ?? PRODUCT_NAME;
+      const breadcrumb = BREADCRUMBS[currentLink as keyof typeof BREADCRUMBS] ?? currentProduct;
 
       return (
         <Link key={crumb} className={cn(styles.crumb, isLastElement ? styles.activeCrumb : styles.pastCrumb)} to={currentLink}>

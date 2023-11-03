@@ -1,11 +1,14 @@
-import { ChangeEvent, FC, useEffect } from "react";
-import { useActions, useAppSelector } from "@/store";
-import { MediaQueries, SEARCH_LENGTH, SearchDelay, SearchPlaceholder, SearchSelectWidth } from "@/common/constants";
-import { SelectProps, SelectVariants } from "@/common/types";
-import { Input, Select } from "@/components/UI";
-import { useDebounce, useMatchMedia, useSearch } from "@/hooks";
-import SearchIcon from "#/icons/search.svg?react";
 import CancelIcon from "#/icons/cancel.svg?react";
+import SearchIcon from "#/icons/search.svg?react";
+import { MediaQueries, Routes, SEARCH_DELAY, SEARCH_LENGTH, SearchPlaceholder, SearchSelectWidth } from "@/common/constants";
+import { SelectProps, SelectVariants } from "@/common/types";
+import { SearchDropList } from "@/components/Header/components/HeaderToolbar/components/SearchDropList";
+import { Input, Select } from "@/components/UI";
+import { useMatchMedia } from "@/hooks";
+import { useActions, useAppSelector } from "@/store";
+import { FC, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useDebouncedCallback } from "use-debounce";
 import styles from "./Search.module.scss";
 
 export const Search: FC<
@@ -15,13 +18,28 @@ export const Search: FC<
 > = ({ currentVariant, setCurrentVariant, productsCategories }) => {
   const isMobile = useMatchMedia(`(max-width: ${MediaQueries.LARGE_MOBILE}px)`);
   const { setSearchValue, setBrand } = useActions();
-  const { localSearchValue, handleSearch } = useSearch();
   const { searchValue, productCategory, productBrand } = useAppSelector(state => state.productsFilter);
-  const debounce = useDebounce(localSearchValue, SearchDelay.DEFAULT);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const [localSearchValue, setLocalSearchValue] = useState("");
 
-  useEffect(() => {
-    handleSetSearch();
-  }, [debounce]);
+  const onSearchInputChange = (inputValue: string) => {
+    setLocalSearchValue(inputValue);
+    updateGlobalSearchValue();
+  };
+
+  const updateGlobalSearchValue = useDebouncedCallback(() => {
+    if (localSearchValue.length >= SEARCH_LENGTH) {
+      setSearchValue(localSearchValue);
+    } else {
+      setSearchValue("");
+    }
+  }, SEARCH_DELAY);
+
+  const resetSearchValue = () => {
+    setSearchValue("");
+    setLocalSearchValue("");
+  };
 
   useEffect(() => {
     const productTempCategory = productBrand.split("_");
@@ -29,13 +47,6 @@ export const Search: FC<
       setBrand("");
     }
   }, [currentVariant]);
-
-  const handleSetSearch = () => {
-    if (localSearchValue.length >= SEARCH_LENGTH) {
-      return setSearchValue(localSearchValue);
-    }
-    setSearchValue("");
-  };
 
   const getSelectWidth = (): string => {
     return isMobile ? SearchSelectWidth.MOBILE : SearchSelectWidth.DESKTOP;
@@ -46,7 +57,7 @@ export const Search: FC<
   };
 
   return (
-    <div className={styles.searchContainer}>
+    <div ref={searchRef} className={styles.searchContainer}>
       <Select
         currentVariant={currentVariant}
         setCurrentVariant={setCurrentVariant}
@@ -60,14 +71,15 @@ export const Search: FC<
           className={styles.searchInput}
           placeholder={getSearchPlaceholder()}
           value={localSearchValue}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleSearch(e.target.value)}
+          onChange={e => onSearchInputChange(e.target.value)}
         />
         {searchValue.length ? (
-          <CancelIcon className={styles.searchIcon} onClick={() => handleSearch("")} />
+          <CancelIcon className={styles.searchIcon} onClick={resetSearchValue} />
         ) : (
           <SearchIcon className={styles.searchIcon} />
         )}
       </div>
+      {location.pathname !== (Routes.PRODUCTS as string) && <SearchDropList searchRef={searchRef} />}
     </div>
   );
 };

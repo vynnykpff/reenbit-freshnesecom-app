@@ -1,10 +1,11 @@
 import { ErrorMessages } from "@/common/constants";
 import { ProductsState } from "@/common/types";
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import productsSliceThunks from "./thunks";
 
 const initialState: ProductsState = {
   products: [],
+  currentProduct: "",
   productsCategoriesWithBrands: [],
   productsCategories: {},
   isPending: false,
@@ -14,7 +15,14 @@ const initialState: ProductsState = {
 export const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentProduct: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        currentProduct: action.payload,
+      };
+    },
+  },
   extraReducers: builder => {
     for (const thunk of productsSliceThunks) {
       builder.addCase(thunk.asyncThunk.pending, state => {

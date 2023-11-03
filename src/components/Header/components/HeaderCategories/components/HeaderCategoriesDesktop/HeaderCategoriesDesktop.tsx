@@ -1,5 +1,8 @@
+import { Routes } from "@/common/constants";
+import { useChangeEffect } from "@/hooks";
 import { useActions, useAppSelector } from "@/store";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RenderCategories } from "../RenderCategories";
 import styles from "./HeaderCategoriesDesktop.module.scss";
 
@@ -8,9 +11,16 @@ export const HeaderCategoriesDesktop: FC = () => {
   const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState("");
   const { setBrand, setCategory } = useActions();
 
-  useEffect(() => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useChangeEffect(() => {
     setBrand(currentProductCategoryWithBrands);
     checkCategory();
+
+    if (location.pathname !== (Routes.PRODUCTS as string)) {
+      navigate(Routes.PRODUCTS);
+    }
   }, [currentProductCategoryWithBrands]);
 
   const checkCategory = () => {

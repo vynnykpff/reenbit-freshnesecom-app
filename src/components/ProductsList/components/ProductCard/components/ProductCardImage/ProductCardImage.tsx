@@ -1,6 +1,7 @@
 import NoAvailableImageIcon from "#/icons/no-image-available.svg?react";
-import { Routes, tempProductId } from "@/common/constants";
+import { Routes } from "@/common/constants";
 import { Product } from "@/common/types";
+import { useActions } from "@/store";
 import { getSlugString } from "@/utils";
 import { FC } from "react";
 import { Link } from "react-router-dom";
@@ -12,9 +13,15 @@ type Props = {
 };
 
 export const ProductCardImage: FC<Props> = ({ images, title }) => {
+  const { setCurrentProduct } = useActions();
+
   const renderProductImage = () => {
     return images.length ? (
-      <Link className={styles.productCardImageWrapper} to={`${Routes.PRODUCTS}/${tempProductId}`}>
+      <Link
+        onClick={() => setCurrentProduct(title)}
+        className={styles.productCardImageWrapper}
+        to={`${Routes.PRODUCTS}/${getSlugString(title)}`}
+      >
         <img className={styles.productCardImage} src={images[0]} alt={getSlugString(title)} />
       </Link>
     ) : (
@@ -22,5 +29,9 @@ export const ProductCardImage: FC<Props> = ({ images, title }) => {
     );
   };
 
-  return <div className={styles.productCardImageContainer}>{renderProductImage()}</div>;
+  return (
+    <div className={styles.productCardImageContainer}>
+      <div className={styles.productCardImageWrapper}>{renderProductImage()}</div>
+    </div>
+  );
 };

@@ -26,6 +26,7 @@ export type Product = {
 
 export type ProductsState = {
   products: Product[];
+  currentProduct: string;
   productsCategoriesWithBrands: ProductCategory[];
   productsCategories: SelectVariants;
 } & BaseState;

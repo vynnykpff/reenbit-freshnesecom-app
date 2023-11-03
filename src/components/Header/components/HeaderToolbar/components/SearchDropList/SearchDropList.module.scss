@@ -1,0 +1,55 @@
+@import "@/styles/variables";
+
+.searchDropListContainer {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  min-height: 50px;
+  width: 100%;
+  border-radius: 12px;
+  z-index: 1;
+  padding: 10px 0;
+  background-color: var(--primary-c1-color-300);
+  border: 1px solid var(--primary-c1-color-600);
+  transition: border .3s;
+
+  &:hover {
+    transition: border .3s;
+    border: 1px solid var(--primary-c1-color-700);
+  }
+
+  .searchDropListHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--primary-c1-color-700);
+
+    .searchDropListHeaderItem {
+      color: var(--primary-c1-color-700);
+      font-size: 14px;
+      font-family: $secondary-font;
+      transition: $primary-transition;
+
+      &:hover {
+        color: var(--primary-c1-color-800);
+        transition: $primary-transition;
+      }
+    }
+  }
+
+  .searchDropListNoMatches {
+    font-family: $secondary-font;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-c1-color-800);
+    transition: $primary-transition;
+
+
+    &:hover {
+      transition: $primary-transition;
+      color: var(--primary-c1-color-700);
+    }
+  }
+}
