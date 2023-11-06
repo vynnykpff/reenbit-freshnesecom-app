@@ -9,3 +9,4 @@ export { Rating } from "./Rating";
 export { NoMatches } from "./NoMatches";
 export { BurgerMenuButton } from "./BurgerMenuButton";
 export { ItemCounter } from "./ItemCounter";
+export { Checkbox } from "./Checkbox";

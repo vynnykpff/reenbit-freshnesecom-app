@@ -1,4 +1,5 @@
 import { ProductsList } from "@/components";
+import { Sidebar } from "@/components/Sidebar";
 import { ErrorFallback, ItemCounter } from "@/components/UI";
 import { useProductsFilter } from "@/hooks";
 import { useAppSelector } from "@/store";
@@ -20,7 +21,10 @@ const ProductsPage: FC = () => {
         <h2 className={styles.productsPageTitle}>All Products</h2>
         <ItemCounter count={filteredProducts.length} counterName="Products found" />
       </div>
-      <ProductsList />
+      <div className={styles.productsPageContent}>
+        <Sidebar />
+        <ProductsList />
+      </div>
       <div className={styles.paginationContainer}>
         <ItemCounter count={products.length} counterName="All Products" />
       </div>

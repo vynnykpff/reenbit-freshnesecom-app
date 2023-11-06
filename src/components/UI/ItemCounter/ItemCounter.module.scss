@@ -2,6 +2,8 @@
 
 .itemCounterContainer {
   display: flex;
+  align-items: center;
+  flex-shrink: 0;
   column-gap: 4px;
 
   .itemCounter {

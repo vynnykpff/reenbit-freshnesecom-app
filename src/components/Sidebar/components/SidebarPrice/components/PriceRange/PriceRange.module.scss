@@ -1,0 +1,49 @@
+@import "@/styles/variables";
+
+.priceRangeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+  .priceRangeLabelContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+    .priceRangeLabel {
+      font-family: $secondary-font;
+      color: var(--primary-c1-color-900);
+      font-size: 14px;
+      font-weight: 600;
+      width: 109px;
+    }
+  }
+
+  .priceRangeInputContainer {
+    display: flex;
+    align-items: center;
+    column-gap: 14px;
+    justify-content: space-between;
+
+    .priceRangeInput {
+      width: 109px;
+      font-size: 14px;
+      background-color: var(--primary-c1-color-300);
+      border: 1px solid var(--primary-c1-color-600);
+      border-radius: 12px;
+      padding: 10px 20px;
+      color: var(--primary-c1-color-700);
+    }
+
+    .priceRangeDivider {
+      width: 5px;
+      height: 1.5px;
+      display: flex;
+      align-items: center;
+      background-color: var(--primary-c1-color-700);
+      font-size: 14px;
+      border-radius: 12px;
+    }
+  }
+}

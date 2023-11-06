@@ -58,3 +58,15 @@
     }
   }
 }
+
+.sidebarItemContainer {
+  margin-bottom: 48px;
+  
+  .sidebarTitle {
+    color: var(--primary-c1-color-900);
+    font-family: $secondary-font;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+}

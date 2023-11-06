@@ -1,0 +1,30 @@
+.handle {
+  border: 1px solid var(--primary-c1-color-600) !important;
+  background-color: var(--primary-c1-color-100) !important;
+  opacity: 1;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15) !important;
+
+  &:hover, &:active, &:focus {
+    border: 1px solid var(--primary-c1-color-600) !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+.rail, .track {
+  background-color: var(--primary-c1-color-500);
+  border-radius: 12px;
+  height: 6px;
+}
+
+.track {
+  background-color: var(--secondary-c2-color-500);
+}
+
+.rc-slider {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}

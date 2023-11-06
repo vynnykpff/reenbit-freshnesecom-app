@@ -1,0 +1,17 @@
+.sidebarBrandsList {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 8px;
+  color: var(--primary-c1-color-900);
+
+  .sidebarBrandsItem {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+
+    .sidebarBrandsItemLabel {
+      color: var(--primary-c1-color-900);
+    }
+  }
+}

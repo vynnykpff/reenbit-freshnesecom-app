@@ -1,0 +1,36 @@
+@import "@/styles/variables";
+
+.sidebarCategoriesList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+
+  .sidebarCategoriesItem {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    transition: $primary-transition;
+    word-break: break-word;
+
+    &:hover {
+      .sidebarCategoriesItemTitle {
+        color: var(--primary-c1-color-700);
+        transition: $primary-transition;
+      }
+    }
+
+    .sidebarCategoriesItemTitle {
+      font-family: "Open Sans", sans-serif;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+      color: var(--primary-c1-color-900);
+      background-color: transparent;
+      font-weight: 400;
+    }
+
+    .sidebarCategoriesItemCounter {
+      column-gap: 0;
+    }
+  }
+}
