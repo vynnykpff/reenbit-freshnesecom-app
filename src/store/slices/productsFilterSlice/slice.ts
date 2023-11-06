@@ -14,22 +14,13 @@ export const productsFilterSlice = createSlice({
   initialState,
   reducers: {
     setSearchValue: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        searchValue: action.payload,
-      };
+      state.searchValue = action.payload;
     },
     setCategory: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        productCategory: action.payload,
-      };
+      state.productCategory = action.payload;
     },
     setBrand: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        productBrand: action.payload,
-      };
+      state.productBrand = action.payload;
     },
   },
 });

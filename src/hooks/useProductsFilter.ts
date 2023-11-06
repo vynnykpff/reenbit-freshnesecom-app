@@ -1,11 +1,11 @@
 import { ProductFilterType } from "@/common/constants";
 import { Product } from "@/common/types";
 import { useAppSelector } from "@/store";
+import { applyTrimAndLowerCase } from "@/utils";
 
 export type ProductFilter = (p: Product, i: number, d: Product[]) => boolean;
 
 const MERGED_PRODUCT_BRANDS = ProductFilterType.ALL_BRANDS.split("_").join("");
-
 export const useProductsFilter = () => {
   const { products } = useAppSelector(state => state.products);
   const { searchValue, productBrand, productCategory } = useAppSelector(state => state.productsFilter);
@@ -17,21 +17,18 @@ export const useProductsFilter = () => {
   }
 
   if (productCategory !== (ProductFilterType.ALL_CATEGORIES as string)) {
-    filters.push(product => {
-      return product.category.trim().toLowerCase().includes(productCategory.trim().toLowerCase());
-    });
+    const formattedCategory = applyTrimAndLowerCase(productCategory);
+    filters.push(product => applyTrimAndLowerCase(product.category).includes(formattedCategory));
   }
 
   if (productBrand && !productBrand.startsWith(ProductFilterType.ALL_BRANDS)) {
-    filters.push(product => {
-      return productBrand.replaceAll(MERGED_PRODUCT_BRANDS, "").trim().toLowerCase().includes(product.brand.toLowerCase());
-    });
+    const formattedBrand = applyTrimAndLowerCase(productBrand.replaceAll(MERGED_PRODUCT_BRANDS, ""));
+    filters.push(product => formattedBrand.includes(applyTrimAndLowerCase(product.brand)));
   }
 
   if (searchValue) {
-    filters.push(product => {
-      return product.title.trim().toLowerCase().includes(searchValue.trim().toLowerCase());
-    });
+    const formattedSearchValue = applyTrimAndLowerCase(searchValue);
+    filters.push(product => applyTrimAndLowerCase(product.title).includes(formattedSearchValue));
   }
 
   let res = products;
