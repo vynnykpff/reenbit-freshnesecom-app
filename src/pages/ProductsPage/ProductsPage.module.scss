@@ -1,7 +1,6 @@
 @import "@/styles/variables";
 @import "@/styles/media";
 
-
 .productsPageContainer {
 
   .productsPageHeader {
@@ -9,6 +8,10 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 143px;
+
+    @media (max-width: 678px) {
+      margin-bottom: 80px;
+    }
 
     .productsPageTitle {
       font-family: $secondary-font;
@@ -24,7 +27,12 @@
 
   .productsPageContent {
     display: flex;
+    column-gap: 35px;
     align-items: flex-start;
+
+    @media (max-width: 678px) {
+      flex-direction: column;
+    }
   }
 
   .paginationContainer {

@@ -8,6 +8,7 @@
   flex-direction: column;
   position: relative;
   cursor: pointer;
+  user-select: none;
 
   .selectedVariant {
     width: 100%;

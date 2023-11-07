@@ -1,14 +1,16 @@
-.sidebarResetFiltersButton {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  background-color: transparent;
-  color: var(--primary-c1-color-700);
-  border: none;
-  margin-top: -10px;
-
-  &:hover {
+.sidebarResetFiltersContainer {
+  .sidebarResetFiltersButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
     background-color: transparent;
-    color: var(--primary-c1-color-600);
+    color: var(--primary-c1-color-700);
+    border: none;
+    margin-top: -10px;
+
+    &:hover {
+      background-color: transparent;
+      color: var(--primary-c1-color-600);
+    }
   }
 }

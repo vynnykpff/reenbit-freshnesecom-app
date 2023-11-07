@@ -1,11 +1,12 @@
-import { FC, MouseEvent, useContext, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import cn from "classnames";
-import { useActions, useAppSelector } from "@/store";
-import { checkCategory, removeDataAttribute } from "@/utils";
-import { Attributes, animationBurgerMenu, animationList } from "@/common/constants";
-import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts/HeaderCategoriesContext";
+import { animationBurgerMenu, animationList } from "@/common/constants";
 import { RenderCategories } from "@/components/Header/components/HeaderCategories/components";
+import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts/HeaderCategoriesContext";
+import { useWindowScrollable } from "@/hooks";
+import { useActions, useAppSelector } from "@/store";
+import { checkCategory } from "@/utils";
+import cn from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
+import { FC, MouseEvent, useContext, useEffect, useState } from "react";
 
 import styles from "./HeaderCategoriesMobile.module.scss";
 
@@ -19,8 +20,9 @@ export const HeaderCategoriesMobile: FC = () => {
   const { setBrand, setCategory } = useActions();
   const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState("");
 
+  useWindowScrollable(!isOpenBurgerNav);
+
   const handleCloseBurgerMenu = () => {
-    removeDataAttribute({ tagName: "body", attributeName: Attributes.SCROLLABLE });
     dispatch(updateHeaderCategories({ isOpenBurgerNav: false }));
   };
 

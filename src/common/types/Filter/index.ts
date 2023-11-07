@@ -1,1 +1,1 @@
-export type { ProductsFilterState } from "./ProductsFilter.ts";
+export type * from "./ProductsFilter.ts";

@@ -13,12 +13,9 @@ const asyncThunk = createAsyncThunk("products/getProducts", async function (_, {
 });
 
 const storeHandler: CaseReducer<ProductsState, PayloadAction<Product[]>> = (state, action) => {
-  return {
-    ...state,
-    products: action.payload,
-    productsCategoriesWithBrands: getProductsCategoriesWithBrands(action.payload),
-    productsCategories: getProductsCategories(action.payload),
-  };
+  state.products = action.payload;
+  state.productsCategoriesWithBrands = getProductsCategoriesWithBrands(action.payload);
+  state.productsCategories = getProductsCategories(action.payload);
 };
 
 export const getProducts: StoreAsyncThunk<typeof asyncThunk, typeof storeHandler> = {

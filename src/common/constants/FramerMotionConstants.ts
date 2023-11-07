@@ -25,3 +25,10 @@ export const animationBurgerMenu = {
   exit: { x: "100%" },
   transition: { type: "tween", duration: 0.2 },
 };
+
+export const animationSidebarMenu = {
+  initial: { x: "-100%" },
+  animate: { x: 0 },
+  exit: { x: "-100%" },
+  transition: { type: "tween", duration: 0.2 },
+};

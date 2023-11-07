@@ -1,4 +1,5 @@
 import { PriceRange } from "@/components/Sidebar/components/SidebarPrice/components";
+import cn from "classnames";
 import { FC, useState } from "react";
 import Slider from "rc-slider";
 import { useAppSelector } from "@/store";
@@ -21,7 +22,7 @@ export const SidebarPrice: FC = () => {
     });
 
   return (
-    <div className={commonStyles.sidebarItemContainer}>
+    <div className={cn(commonStyles.sidebarItemContainer, styles.sidebarPriceContainer)}>
       <h4 className={commonStyles.sidebarTitle}>Price</h4>
       <motion.div {...animationVariants}>
         <Slider

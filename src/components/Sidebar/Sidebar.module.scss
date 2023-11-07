@@ -1,4 +1,11 @@
 .sidebarContainer {
-  max-width: 100%;
-  margin-right: 35px;
+  width: 100%;
+  max-width: 268px;
+  user-select: none;
+  position: sticky;
+  top: 16px;
+  margin-bottom: 48px;
+  max-height: 90vh;
+  overflow: auto;
+  padding-right: 10px;
 }

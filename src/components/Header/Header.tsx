@@ -16,7 +16,9 @@ export const Header: FC = () => {
         <HeaderToolbar />
         <HeaderCategories />
       </HeaderCategoriesContextProvider>
-      <Breadcrumbs />
+      <div className="container">
+        <Breadcrumbs />
+      </div>
     </header>
   );
 };

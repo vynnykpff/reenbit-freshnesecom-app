@@ -12,6 +12,7 @@
   font-size: 15px;
   padding: 10px 14px;
   transition: $primary-transition;
+  user-select: none;
 
   &:hover {
     background-color: var(--secondary-c2-color-300);

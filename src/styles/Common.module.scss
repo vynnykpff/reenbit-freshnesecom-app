@@ -1,5 +1,6 @@
 @import "./variables";
 
+
 .titleCategory {
   font-family: $secondary-font;
   color: var(--primary-c1-color-900);
@@ -43,7 +44,7 @@
   .productCardCharacteristicsItem {
     display: flex;
     color: var(--primary-c1-color-700);
-    word-break: break-all;
+    word-break: break-word;
 
     & span {
       &:first-child {
@@ -61,7 +62,12 @@
 
 .sidebarItemContainer {
   margin-bottom: 48px;
-  
+
+  @media (max-width: 678px) {
+    margin-bottom: 30px;
+  }
+
+
   .sidebarTitle {
     color: var(--primary-c1-color-900);
     font-family: $secondary-font;
