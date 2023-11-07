@@ -1,16 +1,11 @@
 import { Dispatch, SelectHTMLAttributes, SetStateAction } from "react";
 
-export type SelectVariantFields = {
-  text: string;
-  value: string;
-};
-
-export type Variant = string | SelectVariantFields;
+export type SelectVariants = Record<string, string>;
 
 export type SelectProps = {
-  currentState: string;
-  setCurrentState: Dispatch<SetStateAction<SelectProps["currentState"]>> | ((val: SelectProps["currentState"]) => void);
-  variants: Variant[];
+  currentVariant: string;
+  setCurrentVariant: Dispatch<SetStateAction<SelectProps["currentVariant"]>> | ((val: SelectProps["currentVariant"]) => void);
+  variants: Record<string, string>;
   maxWidth?: string;
   minWidth?: string;
   isShowSelectedValue?: boolean;

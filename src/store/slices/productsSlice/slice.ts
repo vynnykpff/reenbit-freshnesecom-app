@@ -1,12 +1,13 @@
 import { ErrorMessages } from "@/common/constants";
 import { ProductsState } from "@/common/types";
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import productsSliceThunks from "./thunks";
 
 const initialState: ProductsState = {
   products: [],
+  currentProduct: "",
   productsCategoriesWithBrands: [],
-  productsCategories: [],
+  productsCategories: {},
   isPending: false,
   error: null,
 };
@@ -14,30 +15,25 @@ const initialState: ProductsState = {
 export const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentProduct: (state, action: PayloadAction<string>) => {
+      state.currentProduct = action.payload;
+    },
+  },
   extraReducers: builder => {
     for (const thunk of productsSliceThunks) {
       builder.addCase(thunk.asyncThunk.pending, state => {
-        return {
-          ...state,
-          isPending: true,
-          error: null,
-        };
+        state.isPending = true;
+        state.error = null;
       });
       builder.addCase(thunk.asyncThunk.rejected, (state, { payload }) => {
-        return {
-          ...state,
-          isPending: false,
-          error: (payload as string) ?? ErrorMessages.DEFAULT,
-        };
+        state.isPending = false;
+        state.error = (payload as string) ?? ErrorMessages.DEFAULT;
       });
       builder.addCase(thunk.asyncThunk.fulfilled, (state, action) => {
-        return {
-          ...state,
-          ...thunk.storeHandler(state, action),
-          isPending: false,
-          error: null,
-        };
+        state.isPending = false;
+        state.error = null;
+        thunk.storeHandler(state, action);
       });
     }
   },

@@ -1,12 +1,14 @@
 import { ProductsList } from "@/components";
-import { ErrorFallback } from "@/components/UI";
+import { ErrorFallback, ItemCounter } from "@/components/UI";
+import { useProductsFilter } from "@/hooks";
 import { useAppSelector } from "@/store";
 import { FC } from "react";
 import { withErrorBoundary } from "react-error-boundary";
 import styles from "./ProductsPage.module.scss";
 
 const ProductsPage: FC = () => {
-  const { error } = useAppSelector(state => state.products);
+  const { error, products } = useAppSelector(state => state.products);
+  const filteredProducts = useProductsFilter();
 
   if (error) {
     throw new Error(error);
@@ -14,8 +16,14 @@ const ProductsPage: FC = () => {
 
   return (
     <div className={styles.productsPageContainer}>
-      <h2 className={styles.productsPageTitle}>All Products</h2>
+      <div className={styles.productsPageHeader}>
+        <h2 className={styles.productsPageTitle}>All Products</h2>
+        <ItemCounter count={filteredProducts.length} counterName="Products found" />
+      </div>
       <ProductsList />
+      <div className={styles.paginationContainer}>
+        <ItemCounter count={products.length} counterName="All Products" />
+      </div>
     </div>
   );
 };

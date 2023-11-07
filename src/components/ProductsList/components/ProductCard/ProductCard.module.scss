@@ -8,6 +8,10 @@
   height: 100%;
   margin-bottom: 32px;
 
+  &:hover {
+    box-shadow: var(--primary-c1-color-300) 0 8px 24px;
+  }
+
   @include productCardMobile {
     flex-direction: column;
   }

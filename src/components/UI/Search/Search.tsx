@@ -1,47 +1,85 @@
+import CancelIcon from "#/icons/cancel.svg?react";
 import SearchIcon from "#/icons/search.svg?react";
-import { MediaQueries, SEARCH_PLACEHOLDER, SELECT_WIDTH } from "@/common/constants";
-import { SelectProps, SelectVariantFields } from "@/common/types";
+import { MediaQueries, Routes, SEARCH_DELAY, SEARCH_LENGTH, SearchPlaceholder, SearchSelectWidth } from "@/common/constants";
+import { SelectProps, SelectVariants } from "@/common/types";
+import { SearchDropList } from "@/components/Header/components/HeaderToolbar/components/SearchDropList";
 import { Input, Select } from "@/components/UI";
 import { useMatchMedia } from "@/hooks";
-import { ChangeEvent, FC, useState } from "react";
+import { useActions, useAppSelector } from "@/store";
+import { FC, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useDebouncedCallback } from "use-debounce";
 import styles from "./Search.module.scss";
 
-export const Search: FC<Pick<SelectProps, "currentState" | "setCurrentState"> & { productsCategories: SelectVariantFields[] }> = ({
-  currentState,
-  setCurrentState,
-  productsCategories,
-}) => {
-  const [searchValue, setSearchValue] = useState("");
+export const Search: FC<
+  Pick<SelectProps, "currentVariant" | "setCurrentVariant"> & {
+    productsCategories: SelectVariants;
+  }
+> = ({ currentVariant, setCurrentVariant, productsCategories }) => {
   const isMobile = useMatchMedia(`(max-width: ${MediaQueries.LARGE_MOBILE}px)`);
+  const { setSearchValue, setBrand } = useActions();
+  const { searchValue, productCategory, productBrand } = useAppSelector(state => state.productsFilter);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const [localSearchValue, setLocalSearchValue] = useState("");
+
+  const onSearchInputChange = (inputValue: string) => {
+    setLocalSearchValue(inputValue);
+    updateGlobalSearchValue();
+  };
+
+  const updateGlobalSearchValue = useDebouncedCallback(() => {
+    if (localSearchValue.length >= SEARCH_LENGTH) {
+      setSearchValue(localSearchValue);
+    } else {
+      setSearchValue("");
+    }
+  }, SEARCH_DELAY);
+
+  const resetSearchValue = () => {
+    setSearchValue("");
+    setLocalSearchValue("");
+  };
+
+  useEffect(() => {
+    const productTempCategory = productBrand.split("_");
+    if (productCategory !== productTempCategory[productTempCategory.length - 1]) {
+      setBrand("");
+    }
+  }, [currentVariant]);
 
   const getSelectWidth = (): string => {
-    return isMobile ? SELECT_WIDTH.MOBILE : SELECT_WIDTH.DESKTOP;
+    return isMobile ? SearchSelectWidth.MOBILE : SearchSelectWidth.DESKTOP;
   };
 
   const getSearchPlaceholder = (): string => {
-    return isMobile ? SEARCH_PLACEHOLDER.MOBILE : SEARCH_PLACEHOLDER.DESKTOP;
+    return isMobile ? SearchPlaceholder.MOBILE : SearchPlaceholder.DESKTOP;
   };
 
   return (
-    <div className={styles.searchContainer}>
+    <div ref={searchRef} className={styles.searchContainer}>
       <Select
-        currentState={currentState}
-        setCurrentState={setCurrentState}
+        currentVariant={currentVariant}
+        setCurrentVariant={setCurrentVariant}
         className={styles.selectCategoriesField}
         variants={productsCategories}
         isShowSelectedValue
         maxWidth={getSelectWidth()}
       />
-
       <div className={styles.searchInputContainer}>
         <Input
           className={styles.searchInput}
           placeholder={getSearchPlaceholder()}
-          value={searchValue}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
+          value={localSearchValue}
+          onChange={e => onSearchInputChange(e.target.value)}
         />
-        <SearchIcon className={styles.searchIcon} />
+        {searchValue.length ? (
+          <CancelIcon className={styles.searchIcon} onClick={resetSearchValue} />
+        ) : (
+          <SearchIcon className={styles.searchIcon} />
+        )}
       </div>
+      {location.pathname !== (Routes.PRODUCTS as string) && <SearchDropList searchRef={searchRef} />}
     </div>
   );
 };

@@ -5,8 +5,8 @@ import { FC } from "react";
 import styles from "./RenderCategories.module.scss";
 
 type Props = {
-  currentCategory: SelectProps["currentState"];
-  setCurrentState: SelectProps["setCurrentState"];
+  currentCategory: SelectProps["currentVariant"];
+  setCurrentState: SelectProps["setCurrentVariant"];
   productsCategoriesWithBrands: ProductCategory[];
   className?: string[] | string;
 };
@@ -17,10 +17,10 @@ export const RenderCategories: FC<Props> = ({ className = "", currentCategory, s
       {productsCategoriesWithBrands.map((product: ProductCategory) => (
         <li className={styles.headerCategoriesListItem} key={product.id}>
           <Select
-            currentState={currentCategory}
-            setCurrentState={setCurrentState}
+            currentVariant={currentCategory}
+            setCurrentVariant={setCurrentState}
             className={cn(styles.selectCategories, className[1])}
-            variants={product.brand}
+            variants={product.brands}
             placeholder={product.title}
           />
         </li>

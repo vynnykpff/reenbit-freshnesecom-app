@@ -1,17 +1,16 @@
-import { FC, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import cn from "classnames";
-import { useOutsideClick } from "@/hooks";
-import { getSelectVariantProperty } from "@/utils";
-import { animationList, animationSelect } from "@/common/constants";
-import { SelectProps, Variant } from "@/common/types";
 import SelectArrow from "#/icons/select-chevron.svg?react";
-import styles from "./Select.module.scss";
+import { animationList, animationSelect } from "@/common/constants";
+import { SelectProps } from "@/common/types";
+import { useOutsideClick } from "@/hooks";
 import commonStyles from "@/styles/Common.module.scss";
+import cn from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
+import { FC, useState } from "react";
+import styles from "./Select.module.scss";
 
 export const Select: FC<SelectProps> = ({
-  currentState,
-  setCurrentState,
+  currentVariant,
+  setCurrentVariant,
   variants,
   maxWidth,
   minWidth,
@@ -25,23 +24,30 @@ export const Select: FC<SelectProps> = ({
     setVariantsVisible(false);
   });
 
-  const filteredVariants = variants.filter(v => getSelectVariantProperty(v, "value") !== currentState);
-
-  const [currentVariant, setCurrentVariant] = useState<Variant>(variants[0]);
-
-  const setValue = (val: Variant) => {
-    setCurrentVariant(val);
-    if (setCurrentState !== undefined) {
-      setCurrentState(getSelectVariantProperty(val, "value"));
-    }
+  const setValue = (key: string) => {
+    setCurrentVariant(key);
     setVariantsVisible(false);
+  };
+
+  const renderVariants = () => {
+    return Object.keys(variants).map((value, i) => {
+      if (value === currentVariant) {
+        return null;
+      }
+
+      return (
+        <motion.span {...animationList} onClick={() => setValue(value)} key={i}>
+          {variants[value]}
+        </motion.span>
+      );
+    });
   };
 
   return (
     <div ref={containerRef} style={{ maxWidth, minWidth }} className={styles.selectContainer}>
       <div style={{ background: bgColor }} onClick={() => setVariantsVisible(!variantsVisible)} className={styles.selectedVariant}>
         {isShowSelectedValue ? (
-          <span className={styles.selectTitle}>{getSelectVariantProperty(currentVariant, "text")}</span>
+          <span className={styles.selectTitle}>{variants[currentVariant]}</span>
         ) : (
           <span className={cn(styles.selectTitle, styles.selectPlaceholder)}>{placeholder}</span>
         )}
@@ -50,11 +56,7 @@ export const Select: FC<SelectProps> = ({
       <AnimatePresence>
         {variantsVisible && (
           <motion.div {...animationSelect} className={cn(styles.selectVariantsContainer, className)}>
-            {filteredVariants.map((variant, key) => (
-              <motion.span {...animationList} onClick={() => setValue(variant)} key={key}>
-                {getSelectVariantProperty(variant, "text")}
-              </motion.span>
-            ))}
+            {renderVariants()}
           </motion.div>
         )}
       </AnimatePresence>

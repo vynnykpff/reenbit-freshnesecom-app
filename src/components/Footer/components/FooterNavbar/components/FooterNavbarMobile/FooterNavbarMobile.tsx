@@ -10,9 +10,7 @@ import styles from "./FooterNavbarMobile.module.scss";
 
 export const FooterNavbarMobile: FC = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const containerRef = useOutsideClick<HTMLDivElement>(() => {
-    setOpenDropdown(null);
-  });
+  const containerRef = useOutsideClick<HTMLDivElement>(() => setOpenDropdown(null));
 
   const handleDropdownClick = (item: string) => {
     return openDropdown === item ? setOpenDropdown(null) : setOpenDropdown(item);

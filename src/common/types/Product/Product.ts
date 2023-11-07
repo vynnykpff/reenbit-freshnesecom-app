@@ -1,5 +1,5 @@
 import { BaseState } from "../BaseState.ts";
-import { SelectVariantFields } from "../Select.ts";
+import { SelectVariants } from "../Select.ts";
 import { ProductDescription } from "./ProductDescription.ts";
 import { ProductCategory, ProductDelivery, ProductPrice, ProductStock } from "./ProductInfo.ts";
 import { ProductReview } from "./ProductUserFeedback.ts";
@@ -26,6 +26,7 @@ export type Product = {
 
 export type ProductsState = {
   products: Product[];
+  currentProduct: string;
   productsCategoriesWithBrands: ProductCategory[];
-  productsCategories: SelectVariantFields[];
+  productsCategories: SelectVariants;
 } & BaseState;

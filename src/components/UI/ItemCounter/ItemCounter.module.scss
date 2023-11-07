@@ -1,0 +1,29 @@
+@import "@/styles/variables";
+
+.itemCounterContainer {
+  display: flex;
+  column-gap: 4px;
+
+  .itemCounter {
+    display: flex;
+    align-items: center;
+    font-family: $secondary-font;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0 8px;
+    border-radius: 12px;
+    background-color: var(--secondary-c2-color-100);
+    color: var(--secondary-c2-color-500);
+  }
+
+  .itemCounterTitle {
+    color: var(--primary-c1-color-700);
+    font-size: 14px;
+    transition: $primary-transition;
+
+    &:hover {
+      transition: $primary-transition;
+      color: var(--primary-c1-color-800);
+    }
+  }
+}

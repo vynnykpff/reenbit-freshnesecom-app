@@ -1,16 +1,21 @@
+import { NoMatches } from "@/components/UI";
+import { useProductsFilter } from "@/hooks";
 import { useAppSelector } from "@/store";
-import { ProductCard } from "./components";
 import { FC } from "react";
+import { ProductCard } from "./components";
 import styles from "./ProductsList.module.scss";
 
 export const ProductsList: FC = () => {
-  const { products } = useAppSelector(state => state.products);
+  const { searchValue } = useAppSelector(state => state.productsFilter);
+  const filteredProducts = useProductsFilter();
 
   return (
     <ul className={styles.productsListContainer}>
-      {products.map(product => (
-        <ProductCard key={product.id} {...product} />
-      ))}
+      {filteredProducts.length ? (
+        filteredProducts.map(product => <ProductCard key={product.id} {...product} />)
+      ) : (
+        <NoMatches message={searchValue} />
+      )}
     </ul>
   );
 };
