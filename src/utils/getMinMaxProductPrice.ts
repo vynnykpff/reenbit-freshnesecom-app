@@ -1,7 +1,7 @@
 import { Product } from "@/common/types";
 
 export const getMinMaxProductPrice = (products: Product[]) => {
-  if (products.length === 0) {
+  if (!products.length) {
     return { minPrice: 0, maxPrice: 0 };
   }
 

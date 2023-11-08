@@ -1,11 +1,11 @@
-import cn from "classnames";
-import { FC, useState } from "react";
 import { animationVariants } from "@/common/constants";
 import { FiltersProps } from "@/common/types";
-import { Button, ItemCounter } from "@/components/UI";
+import { ItemCounter } from "@/components/UI";
 import { useAppSelector } from "@/store";
 import commonStyles from "@/styles/Common.module.scss";
+import cn from "classnames";
 import { motion } from "framer-motion";
+import { FC, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./SidebarCategories.module.scss";
 
@@ -14,7 +14,6 @@ const ALL_CATEGORIES = "All Categories";
 export const SidebarCategories: FC<FiltersProps> = ({ setIsShowFilters }) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const { products, productsCategories } = useAppSelector(state => state.products);
-
   const getUniqCategories = (category: string) => {
     if (category === ALL_CATEGORIES) {
       return products.length;
@@ -41,9 +40,9 @@ export const SidebarCategories: FC<FiltersProps> = ({ setIsShowFilters }) => {
       <motion.ul {...animationVariants} className={styles.sidebarCategoriesList}>
         {Object.values(productsCategories).map(category => (
           <li key={uuidv4()} onClick={() => handleShowFiltersMenu(category)} className={styles.sidebarCategoriesItem}>
-            <Button className={cn(styles.sidebarCategoriesItemTitle, activeCategory === category && styles.sidebarCategoryItemTitleActive)}>
+            <span className={cn(styles.sidebarCategoriesItemTitle, activeCategory === category && styles.sidebarCategoryItemTitleActive)}>
               {category}
-            </Button>
+            </span>
             <ItemCounter className={[styles.sidebarCategoriesItemCounter]} count={getUniqCategories(category)} />
           </li>
         ))}

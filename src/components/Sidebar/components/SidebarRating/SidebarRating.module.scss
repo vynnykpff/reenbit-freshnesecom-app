@@ -1,4 +1,8 @@
 .sidebarRatingList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
   .sidebarRatingItem {
     display: flex;
     align-items: center;

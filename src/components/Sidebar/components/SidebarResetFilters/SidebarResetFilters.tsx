@@ -13,7 +13,7 @@ export const SidebarResetFilters: FC<FiltersProps> = ({ setIsShowFilters }) => {
   return (
     <div className={styles.sidebarResetFiltersContainer}>
       <Button className={styles.sidebarResetFiltersButton} onClick={handleResetFilters}>
-        Reset Filters
+        Reset
       </Button>
     </div>
   );
