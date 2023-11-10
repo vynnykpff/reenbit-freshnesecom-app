@@ -1,14 +1,22 @@
-import CancelIcon from "#/icons/cancel.svg?react";
-import SearchIcon from "#/icons/search.svg?react";
-import { MediaQueries, Routes, SEARCH_DELAY, SEARCH_LENGTH, SearchPlaceholder, SearchSelectWidth } from "@/common/constants";
-import { SelectProps, SelectVariants } from "@/common/types";
-import { SearchDropList } from "@/components/Header/components/HeaderToolbar/components/SearchDropList";
-import { Input, Select } from "@/components/UI";
-import { useMatchMedia } from "@/hooks";
-import { useActions, useAppSelector } from "@/store";
 import { FC, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
+import { useActions, useAppSelector } from "@/store";
+import { useMatchMedia } from "@/hooks";
+import { SelectProps, SelectVariants } from "@/common/types";
+import { Input, Select } from "@/components/UI";
+import { SearchDropList } from "@/components/Header/components";
+import {
+  MediaQueries,
+  ProductFilterType,
+  Routes,
+  SEARCH_LENGTH,
+  SearchDelay,
+  SearchPlaceholder,
+  SearchSelectWidth,
+} from "@/common/constants";
+import CancelIcon from "#/icons/cancel.svg?react";
+import SearchIcon from "#/icons/search.svg?react";
 import styles from "./Search.module.scss";
 
 export const Search: FC<
@@ -34,7 +42,7 @@ export const Search: FC<
     } else {
       setSearchValue("");
     }
-  }, SEARCH_DELAY);
+  }, SearchDelay.DEFAULT);
 
   const resetSearchValue = () => {
     setSearchValue("");
@@ -42,9 +50,10 @@ export const Search: FC<
   };
 
   useEffect(() => {
-    const productTempCategory = productBrand.split("_");
+    const lastBrandObject = productBrand[productBrand.length - 1];
+    const productTempCategory = lastBrandObject ? lastBrandObject.brand.split("_") : [];
     if (productCategory !== productTempCategory[productTempCategory.length - 1]) {
-      setBrand("");
+      setBrand({ brand: ProductFilterType.ALL_BRANDS });
     }
   }, [currentVariant]);
 

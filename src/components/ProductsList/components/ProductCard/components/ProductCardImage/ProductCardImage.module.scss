@@ -15,7 +15,7 @@
     align-items: center;
     overflow: hidden;
 
-    @media (max-width: 878px) {
+    @include sidebarTablet {
       width: 100%;
     }
 
@@ -30,7 +30,7 @@
         object-fit: contain;
         object-position: 50% 50%;
 
-        @media (max-width: 878px) {
+        @include sidebarTablet {
           padding: 10px 80px;
         }
         
@@ -38,7 +38,7 @@
           padding: 10px 30px;
         }
 
-        @media (max-width: 678px) {
+        @include sidebarLargeMobile {
           padding: 10px 60px;
         }
 

@@ -11,7 +11,7 @@ type Props = {
 export const Sidebar: FC<Props> = ({ setIsShowFilters, className = "" }) => {
   return (
     <aside className={cn(styles.sidebarContainer, className[0])}>
-      <SidebarCategories setIsShowFilters={setIsShowFilters} />
+      <SidebarCategories />
       <SidebarBrands />
       <SidebarRating />
       <SidebarPrice />

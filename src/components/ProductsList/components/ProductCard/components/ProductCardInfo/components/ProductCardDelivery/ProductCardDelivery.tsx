@@ -1,9 +1,7 @@
 import { FC } from "react";
-import { ProductDeliveryType } from "@/common/constants";
 import { Product } from "@/common/types";
+import { DAY_DELIVERY, ProductDeliveryType } from "@/common/constants";
 import styles from "./ProductCardDelivery.module.scss";
-
-const DAY_DELIVERY = 1;
 
 export const ProductCardDelivery: FC<Product["delivery"]> = ({ time, cost }) => {
   const handleGetDeliveryType = (): string => {

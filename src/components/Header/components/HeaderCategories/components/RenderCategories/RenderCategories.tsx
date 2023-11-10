@@ -1,7 +1,7 @@
-import { ProductCategory, SelectProps } from "@/common/types";
-import { Select } from "@/components/UI";
-import cn from "classnames";
 import { FC } from "react";
+import cn from "classnames";
+import { Select } from "@/components/UI";
+import { ProductCategory, SelectProps } from "@/common/types";
 import styles from "./RenderCategories.module.scss";
 
 type Props = {

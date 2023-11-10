@@ -1,5 +1,5 @@
 @import "./variables";
-
+@import "./media";
 
 .titleCategory {
   font-family: $secondary-font;
@@ -63,10 +63,9 @@
 .sidebarItemContainer {
   margin-bottom: 48px;
 
-  @media (max-width: 678px) {
+  @include sidebarLargeMobile {
     margin-bottom: 30px;
   }
-
 
   .sidebarTitle {
     color: var(--primary-c1-color-900);

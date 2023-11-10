@@ -1,9 +1,9 @@
-import { animationVariants } from "@/common/constants";
-import { useOutsideClick, useProductsFilter } from "@/hooks";
-import { useAppSelector } from "@/store";
-import { motion } from "framer-motion";
 import { FC, MutableRefObject, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useAppSelector } from "@/store";
+import { useFilteredProducts, useOutsideClick } from "@/hooks";
 import { SearchDropListItem } from "./components";
+import { animationVariants } from "@/common/constants";
 import styles from "./SearchDropList.module.scss";
 
 type Props = {
@@ -14,7 +14,7 @@ export const SearchDropList: FC<Props> = ({ searchRef }) => {
   const { searchValue } = useAppSelector(state => state.productsFilter);
   const [isVisible, setIsVisible] = useState(!!searchValue);
 
-  const filteredProducts = useProductsFilter();
+  const filteredProducts = useFilteredProducts();
   const containerRef = useOutsideClick(
     () => {
       setIsVisible(false);

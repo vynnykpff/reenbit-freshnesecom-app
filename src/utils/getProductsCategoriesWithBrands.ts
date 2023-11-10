@@ -1,10 +1,7 @@
+import { ProductDefaultValue, ProductFilterType } from "@/common/constants";
 import { Product, ProductCategory } from "@/common/types";
+import { getTitleBrand } from "./getTitleBrand.ts";
 import { getSlugString } from "./getSlugString.ts";
-
-const enum ProductDefaultBrand {
-  TEXT = "All brands",
-  VALUE = "all_brands",
-}
 
 export const getProductsCategoriesWithBrands = (products: Product[]) => {
   const categoryData = products.reduce<Record<string, ProductCategory>>((acc, product) => {
@@ -15,12 +12,12 @@ export const getProductsCategoriesWithBrands = (products: Product[]) => {
         title: category,
         id: getSlugString(category),
         brands: {
-          [`${ProductDefaultBrand.VALUE}_${getSlugString(category)}`]: ProductDefaultBrand.TEXT,
+          [getTitleBrand(ProductFilterType.ALL_BRANDS, getSlugString(category))]: ProductDefaultValue.BRANDS,
         },
       };
     }
 
-    acc[category].brands[`${brand.toLowerCase()}_${getSlugString(category)}`] = brand;
+    acc[category].brands[getTitleBrand(brand.toLowerCase(), getSlugString(category))] = brand;
 
     return acc;
   }, {});

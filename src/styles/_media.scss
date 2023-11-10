@@ -6,14 +6,32 @@
   }
 }
 
+@mixin productCardsContainer() {
+  @media (max-width: $PRODUCT_CARDS_CONTAINER) {
+    @content;
+  }
+}
+
 @mixin laptop() {
   @media (max-width: $LAPTOP) {
     @content;
   }
 }
 
+@mixin sidebarTablet() {
+  @media (max-width: $SIDEBAR_TABLET_CONTAINER) {
+    @content;
+  }
+}
+
 @mixin tablet() {
   @media (max-width: $TABLET) {
+    @content;
+  }
+}
+
+@mixin sidebarLargeMobile() {
+  @media (max-width: $SIDEBAR_MOBILE_CONTAINER) {
     @content;
   }
 }
