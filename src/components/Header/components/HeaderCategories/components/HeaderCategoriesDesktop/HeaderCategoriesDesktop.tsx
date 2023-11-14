@@ -9,8 +9,8 @@ import styles from "./HeaderCategoriesDesktop.module.scss";
 
 export const HeaderCategoriesDesktop: FC = () => {
   const { productsCategoriesWithBrands } = useAppSelector(state => state.products);
-  const { setBrand, setCategory, resetBrands } = useActions();
 
+  const { setBrand, setCategory, resetBrands } = useActions();
   const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState("");
 
   const location = useLocation();
@@ -18,7 +18,7 @@ export const HeaderCategoriesDesktop: FC = () => {
 
   useChangeEffect(() => {
     resetBrands();
-    setBrand({ brand: currentProductCategoryWithBrands });
+    setBrand(currentProductCategoryWithBrands);
 
     checkCategory({ currentProductCategoryWithBrands, productsCategoriesWithBrands, setCategory });
 

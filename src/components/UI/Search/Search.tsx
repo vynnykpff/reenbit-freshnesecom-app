@@ -7,11 +7,11 @@ import { SelectProps, SelectVariants } from "@/common/types";
 import { Input, Select } from "@/components/UI";
 import { SearchDropList } from "@/components/Header/components";
 import {
+  GlobalDelay,
   MediaQueries,
   ProductFilterType,
   Routes,
   SEARCH_LENGTH,
-  SearchDelay,
   SearchPlaceholder,
   SearchSelectWidth,
 } from "@/common/constants";
@@ -25,24 +25,20 @@ export const Search: FC<
   }
 > = ({ currentVariant, setCurrentVariant, productsCategories }) => {
   const isMobile = useMatchMedia(`(max-width: ${MediaQueries.LARGE_MOBILE}px)`);
+
+  const { productCategory, productBrands } = useAppSelector(state => state.productsFilter);
+  const searchValue = useAppSelector(state => state.products.searchValue);
   const { setSearchValue, setBrand } = useActions();
-  const { searchValue, productCategory, productBrand } = useAppSelector(state => state.productsFilter);
+
   const searchRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
   const [localSearchValue, setLocalSearchValue] = useState("");
+
+  const location = useLocation();
 
   const onSearchInputChange = (inputValue: string) => {
     setLocalSearchValue(inputValue);
     updateGlobalSearchValue();
   };
-
-  const updateGlobalSearchValue = useDebouncedCallback(() => {
-    if (localSearchValue.length >= SEARCH_LENGTH) {
-      setSearchValue(localSearchValue);
-    } else {
-      setSearchValue("");
-    }
-  }, SearchDelay.DEFAULT);
 
   const resetSearchValue = () => {
     setSearchValue("");
@@ -50,12 +46,24 @@ export const Search: FC<
   };
 
   useEffect(() => {
-    const lastBrandObject = productBrand[productBrand.length - 1];
-    const productTempCategory = lastBrandObject ? lastBrandObject.brand.split("_") : [];
+    resetSearchValue();
+  }, [productCategory]);
+
+  useEffect(() => {
+    const lastBrandObject = productBrands[productBrands.length - 1];
+    const productTempCategory = lastBrandObject ? lastBrandObject.split("_") : [];
     if (productCategory !== productTempCategory[productTempCategory.length - 1]) {
-      setBrand({ brand: ProductFilterType.ALL_BRANDS });
+      setBrand(ProductFilterType.ALL_BRANDS);
     }
   }, [currentVariant]);
+
+  const updateGlobalSearchValue = useDebouncedCallback(() => {
+    if (localSearchValue.length >= SEARCH_LENGTH) {
+      setSearchValue(localSearchValue);
+    } else {
+      setSearchValue("");
+    }
+  }, GlobalDelay.DEFAULT);
 
   const getSelectWidth = (): string => {
     return isMobile ? SearchSelectWidth.MOBILE : SearchSelectWidth.DESKTOP;

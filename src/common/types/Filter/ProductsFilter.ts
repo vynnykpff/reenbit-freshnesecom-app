@@ -1,20 +1,18 @@
-import { BaseState, Product } from "@/common/types";
 import { Dispatch, SetStateAction } from "react";
+import { Product } from "@/common/types";
 
-export type ProductBrand = {
-  brand: Product["brand"];
-};
+export type ProductBrand = Product["brand"][];
 
-export type ProductRating = {
-  rating: Product["rating"];
-};
+export type ProductRating = Product["rating"][];
+
+export type ProductFilterPrice = [number, number];
 
 export type ProductsFilterState = {
-  searchValue: string;
-  productCategory: string;
-  productBrand: ProductBrand[];
-  productRating: ProductRating[];
-} & BaseState;
+  productCategory: Product["category"];
+  productBrands: ProductBrand;
+  productRatings: ProductRating;
+  productPrice: ProductFilterPrice;
+};
 
 export type FiltersProps = {
   setIsShowFilters?: Dispatch<SetStateAction<boolean>>;

@@ -4,15 +4,16 @@ import { v4 as uuidv4 } from "uuid";
 import { useActions, useAppSelector } from "@/store";
 import { getSlugString, getTitleBrand } from "@/utils";
 import { Checkbox } from "@/components/UI";
-import { ProductDefaultValue, ProductFilterType, animationVariants } from "@/common/constants";
+import { PRODUCTS_PRICE_DEFAULT, ProductDefaultValue, ProductFilterType, animationVariants } from "@/common/constants";
 import commonStyles from "@/styles/Common.module.scss";
 import styles from "./SidebarBrands.module.scss";
 
 export const SidebarBrands: FC = () => {
   const { products, productsCategoriesWithBrands } = useAppSelector(state => state.products);
-  const { productCategory, productBrand } = useAppSelector(state => state.productsFilter);
+  const { productCategory, productBrands } = useAppSelector(state => state.productsFilter);
+
   const [currentProductCategoryBrands, setCurrentProductCategoryBrands] = useState<string[]>([]);
-  const { setBrand, removeBrand } = useActions();
+  const { setBrand, removeBrand, setPrice } = useActions();
 
   const handleSetProductBrand = (selectedProductBrand: string) => {
     const slugBrand = getSlugString(selectedProductBrand);
@@ -20,12 +21,14 @@ export const SidebarBrands: FC = () => {
       const defaultBrand = getTitleBrand(slugBrand, category.id);
 
       Object.values(category.brands).forEach(brand => {
-        if (productBrand.some(({ brand }) => brand === defaultBrand)) {
-          return removeBrand({ brand: defaultBrand });
+        if (productBrands.some(brand => brand === defaultBrand)) {
+          setPrice(PRODUCTS_PRICE_DEFAULT);
+          return removeBrand(defaultBrand);
         }
 
         if (brand === selectedProductBrand) {
-          setBrand({ brand: defaultBrand });
+          setPrice(PRODUCTS_PRICE_DEFAULT);
+          setBrand(defaultBrand);
         }
       });
     });
@@ -55,7 +58,7 @@ export const SidebarBrands: FC = () => {
   }, [productCategory]);
 
   const handleIsChecked = (brand: string): boolean => {
-    return !!productBrand.filter(item => item.brand.includes(getSlugString(brand))).length;
+    return !!productBrands.filter(item => item.includes(getSlugString(brand))).length;
   };
 
   return (

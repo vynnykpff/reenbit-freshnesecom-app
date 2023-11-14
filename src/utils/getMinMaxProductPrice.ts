@@ -1,7 +1,7 @@
-import { Product } from "@/common/types";
+import { Product, ProductSelectedPrice } from "@/common/types";
 
 export const getMinMaxProductPrice = (products: Product[]) => {
-  if (products.length === 0) {
+  if (!products.length) {
     return { minPrice: 0, maxPrice: 0 };
   }
 
@@ -18,6 +18,13 @@ export const getMinMaxProductPrice = (products: Product[]) => {
       maxPrice: Math.max(prices.maxPrice, product.price.discount || product.price.original),
     };
   }, initialPrices);
+
+  return { minPrice, maxPrice };
+};
+
+export const getMinMaxSelectedPrice = (selectedPrices: ProductSelectedPrice) => {
+  const minPrice = Array.isArray(selectedPrices) ? selectedPrices[0] : selectedPrices;
+  const maxPrice = Array.isArray(selectedPrices) ? selectedPrices[1] : selectedPrices;
 
   return { minPrice, maxPrice };
 };

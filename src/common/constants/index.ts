@@ -6,3 +6,4 @@ export * from "./FramerMotionConstants.ts";
 export * from "./ProductConstants";
 export * from "./StaticNavigation";
 export * from "./Search.ts";
+export * from "./GlobalConstants.ts";

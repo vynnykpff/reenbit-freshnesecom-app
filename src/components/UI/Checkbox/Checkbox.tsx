@@ -11,7 +11,7 @@ type Props = {
 export const Checkbox: FC<Props> = ({ id, name, isChecked }) => {
   return (
     <div className={styles.checkboxContainer}>
-      <input className={styles.checkboxInput} type="checkbox" checked={isChecked} id={id} />
+      <input className={styles.checkboxInput} type="checkbox" readOnly checked={isChecked} id={id} />
       <label className={styles.checkboxLabel} htmlFor={id}>
         {isChecked && <CheckboxIcon className={styles.checkboxIcon} />}
         {name}

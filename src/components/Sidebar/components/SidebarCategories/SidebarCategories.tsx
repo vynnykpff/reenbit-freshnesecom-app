@@ -13,9 +13,8 @@ import styles from "./SidebarCategories.module.scss";
 
 export const SidebarCategories: FC<FiltersProps> = () => {
   const { products, productsCategoriesWithBrands } = useAppSelector(state => state.products);
-  const { productCategory, productBrand } = useAppSelector(state => state.productsFilter);
+  const { productCategory, productBrands } = useAppSelector(state => state.productsFilter);
   const { setCategory, setBrand, resetBrands } = useActions();
-
   const [localProductsCategories, setLocalProductsCategories] = useState(productsCategoriesWithBrands);
 
   useEffect(() => {
@@ -30,14 +29,14 @@ export const SidebarCategories: FC<FiltersProps> = () => {
     }
 
     const categoryBrands = Object.keys(currentCategoryBrands.brands);
-    const selectedBrands = productBrand.map(item => item.brand);
+    const selectedBrands = productBrands.map(brand => brand);
 
     const selectedBrandsInCurrentCategory = selectedBrands.filter(
       brand => brand !== (ProductFilterType.ALL_BRANDS as string) && categoryBrands.includes(brand),
     );
 
     resetBrands();
-    selectedBrandsInCurrentCategory.map(brand => setBrand({ brand }));
+    selectedBrandsInCurrentCategory.map(brand => setBrand(brand));
   };
 
   useChangeEffect(() => {

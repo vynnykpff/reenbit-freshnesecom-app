@@ -1,17 +1,21 @@
-import { ProductFilterType } from "@/common/constants";
-import { Product } from "@/common/types";
 import { useAppSelector } from "@/store";
 import { applyTrimAndLowerCase } from "@/utils";
+import { Product } from "@/common/types";
+import { ProductFilterType } from "@/common/constants";
 
 export type ProductFilter = (p: Product, i: number, d: Product[]) => boolean;
 
 const MERGED_PRODUCT_BRANDS = ProductFilterType.ALL_BRANDS.split("_").join("");
 export const useFilteredProducts = () => {
-  const { products } = useAppSelector(state => state.products);
-  const { searchValue, productBrand, productCategory } = useAppSelector(state => state.productsFilter);
+  const { products, searchValue } = useAppSelector(state => state.products);
+  const { productBrands, productCategory, productRatings, productPrice } = useAppSelector(state => state.productsFilter);
   const filters: ProductFilter[] = [];
 
-  if (productCategory === (ProductFilterType.ALL_CATEGORIES as string) && !searchValue && productBrand[0].brand === "") {
+  if (productRatings.length) {
+    filters.push(product => productRatings.some(item => item === product.rating));
+  }
+
+  if (productCategory === (ProductFilterType.ALL_CATEGORIES as string) && !searchValue && !productBrands.length && !productRatings) {
     return products;
   }
 
@@ -20,12 +24,22 @@ export const useFilteredProducts = () => {
     filters.push(product => applyTrimAndLowerCase(product.category).includes(formattedCategory));
   }
 
-  if (productBrand && productBrand.length > 0 && !productBrand[0].brand.startsWith(ProductFilterType.ALL_BRANDS)) {
-    const formattedBrands = productBrand.map(brandObj => {
-      return applyTrimAndLowerCase(brandObj.brand.replaceAll(MERGED_PRODUCT_BRANDS, ""));
+  if (productBrands.length && !productBrands[0].startsWith(ProductFilterType.ALL_BRANDS)) {
+    const formattedBrands = productBrands.map(brandObj => {
+      return applyTrimAndLowerCase(brandObj.replaceAll(MERGED_PRODUCT_BRANDS, ""));
     });
 
     filters.push(product => formattedBrands.some(formattedBrand => formattedBrand.includes(applyTrimAndLowerCase(product.brand))));
+  }
+
+  if (productPrice[0] && productPrice[1]) {
+    filters.push(product => {
+      if (!product.price.discount) {
+        return product.price.original >= productPrice[0] && product.price.original <= productPrice[1];
+      } else {
+        return product.price.discount >= productPrice[0] && product.price.discount <= productPrice[1];
+      }
+    });
   }
 
   if (searchValue) {

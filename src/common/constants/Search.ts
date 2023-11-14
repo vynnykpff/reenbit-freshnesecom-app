@@ -8,8 +8,4 @@ export const enum SearchSelectWidth {
   MOBILE = "140px",
 }
 
-export const enum SearchDelay {
-  DEFAULT = 500,
-}
-
 export const SEARCH_LENGTH = 3;

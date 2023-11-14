@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const SearchDropList: FC<Props> = ({ searchRef }) => {
-  const { searchValue } = useAppSelector(state => state.productsFilter);
+  const { searchValue } = useAppSelector(state => state.products);
   const [isVisible, setIsVisible] = useState(!!searchValue);
 
   const filteredProducts = useFilteredProducts();

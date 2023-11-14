@@ -28,7 +28,7 @@ export const HeaderCategoriesMobile: FC = () => {
 
   useChangeEffect(() => {
     resetBrands();
-    setBrand({ brand: currentProductCategoryWithBrands });
+    setBrand(currentProductCategoryWithBrands);
 
     checkCategory({ currentProductCategoryWithBrands, productsCategoriesWithBrands, setCategory });
   }, [currentProductCategoryWithBrands]);

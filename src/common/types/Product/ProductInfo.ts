@@ -22,3 +22,5 @@ export type ProductPrice = {
   discount: number;
   currency: string;
 };
+
+export type ProductSelectedPrice = number | number[];
