@@ -23,13 +23,7 @@
     }
 
     .sidebarCategoriesItemTitle {
-      font-family: "Open Sans", sans-serif;
-      border: none;
-      padding: 0;
-      border-radius: 0;
       color: var(--primary-c1-color-900);
-      background-color: transparent;
-      font-weight: 400;
     }
 
     .sidebarCategoryItemTitleActive {
@@ -37,7 +31,6 @@
       color: var(--secondary-c2-color-500);
       font-weight: 600;
     }
-
 
     .sidebarCategoriesItemCounter {
       column-gap: 0;

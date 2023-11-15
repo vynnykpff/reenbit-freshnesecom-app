@@ -1,6 +1,6 @@
-import { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, FC, SetStateAction, useEffect } from "react";
 import { useDebounce } from "use-debounce";
-import { useActions } from "@/store";
+import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { checkMaxPriceCorrectValue, checkMinPriceCorrectValue } from "@/utils";
 import { ProductFilterPrice } from "@/common/types";
@@ -28,20 +28,23 @@ const similarPriceInputProperties = {
 
 export const PriceRange: FC<Props> = ({ price, defaultPrice, setSliderValue }) => {
   const [debouncedPrice] = useDebounce(price, GlobalDelay.PRICE);
+  const { productRatings } = useAppSelector(state => state.productsFilter);
   const { setPrice } = useActions();
 
   useChangeEffect(() => {
-    setPrice(debouncedPrice);
+    if (!productRatings.length) {
+      setPrice(debouncedPrice);
+    }
   }, [debouncedPrice]);
 
   const [debouncedMinCorrectionValue] = useDebounce(price[ProductPrices.MIN_PRICE], GlobalDelay.PRICE);
   const [debouncedMaxCorrectionValue] = useDebounce(price[ProductPrices.MAX_PRICE], GlobalDelay.PRICE);
 
-  useChangeEffect(() => {
+  useEffect(() => {
     checkMinPriceCorrectValue({ defaultPrice, price: price[ProductPrices.MIN_PRICE], setSliderValue });
   }, [debouncedMinCorrectionValue]);
 
-  useChangeEffect(() => {
+  useEffect(() => {
     checkMaxPriceCorrectValue({ defaultPrice, price: price[ProductPrices.MAX_PRICE], setSliderValue });
   }, [debouncedMaxCorrectionValue]);
 
@@ -57,28 +60,26 @@ export const PriceRange: FC<Props> = ({ price, defaultPrice, setSliderValue }) =
 
   return (
     <div className={styles.priceRangeContainer}>
-      <div className={styles.priceRangeLabelContainer}>
+      <div className={styles.priceRangeInputWrapper}>
         <label className={styles.priceRangeLabel} htmlFor="min-price">
           Min
         </label>
-        <label className={styles.priceRangeLabel} htmlFor="max-price">
-          Max
-        </label>
-      </div>
-      <div className={styles.priceRangeInputContainer}>
         <Input
           {...similarPriceInputProperties}
           onChange={handlePriceChange(ProductPrices.MIN_PRICE)}
           id="min-price"
-          defaultValue={defaultPrice[ProductPrices.MIN_PRICE]}
           value={getInputValue(price[ProductPrices.MIN_PRICE])}
         />
-        <div className={styles.priceRangeDivider} />
+      </div>
+      <div className={styles.priceRangeDivider}></div>
+      <div className={styles.priceRangeInputWrapper}>
+        <label className={styles.priceRangeLabel} htmlFor="max-price">
+          Max
+        </label>
         <Input
           {...similarPriceInputProperties}
           onChange={handlePriceChange(ProductPrices.MAX_PRICE)}
           id="max-price"
-          defaultValue={defaultPrice[ProductPrices.MAX_PRICE]}
           value={getInputValue(price[ProductPrices.MAX_PRICE])}
         />
       </div>

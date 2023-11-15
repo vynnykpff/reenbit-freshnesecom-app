@@ -6,7 +6,7 @@ import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { getSlugString } from "@/utils";
 import { FiltersProps } from "@/common/types";
-import { Button, ItemCounter } from "@/components/UI";
+import { ItemCounter } from "@/components/UI";
 import { DEFAULT_CATEGORY, ProductDefaultValue, ProductFilterType, animationVariants } from "@/common/constants";
 import commonStyles from "@/styles/Common.module.scss";
 import styles from "./SidebarCategories.module.scss";
@@ -57,14 +57,14 @@ export const SidebarCategories: FC<FiltersProps> = () => {
       <motion.ul {...animationVariants} className={styles.sidebarCategoriesList}>
         {localProductsCategories.map(category => (
           <li key={uuidv4()} onClick={() => setCategory(getSlugString(category.title))} className={styles.sidebarCategoriesItem}>
-            <Button
+            <span
               className={cn(
                 styles.sidebarCategoriesItemTitle,
                 productCategory === getSlugString(category.title) && styles.sidebarCategoryItemTitleActive,
               )}
             >
               {category.title}
-            </Button>
+            </span>
             <ItemCounter className={[styles.sidebarCategoriesItemCounter]} count={getUniqCategories(category.title)} />
           </li>
         ))}

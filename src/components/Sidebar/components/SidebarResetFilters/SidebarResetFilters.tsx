@@ -1,19 +1,25 @@
-import { Button } from "@/components/UI";
 import { FC } from "react";
+import { useActions } from "@/store";
+import { FiltersProps } from "@/common/types";
+import { Button } from "@/components/UI";
 import styles from "./SidebarResetFilters.module.scss";
 
-import { FiltersProps } from "@/common/types/Filter/ProductsFilter.ts";
-
 export const SidebarResetFilters: FC<FiltersProps> = ({ setIsShowFilters }) => {
+  const { resetFilters, setSearchValue } = useActions();
+
   const handleResetFilters = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    resetFilters();
+    setSearchValue("");
+
     return setIsShowFilters && setIsShowFilters(false);
   };
 
   return (
     <div className={styles.sidebarResetFiltersContainer}>
       <Button className={styles.sidebarResetFiltersButton} onClick={handleResetFilters}>
-        Reset Filters
+        Reset
       </Button>
     </div>
   );

@@ -1,6 +1,5 @@
-import { ProductPrices } from "@/common/constants";
-import { ProductFilterPrice } from "@/common/types";
 import { Dispatch, SetStateAction } from "react";
+import { ProductFilterPrice } from "@/common/types";
 
 type Params = {
   defaultPrice: ProductFilterPrice;
@@ -9,21 +8,21 @@ type Params = {
 };
 
 export const checkMinPriceCorrectValue = ({ defaultPrice, price, setSliderValue }: Params) => {
-  if (price > defaultPrice[ProductPrices.MIN_PRICE]) {
-    setSliderValue(prev => [defaultPrice[ProductPrices.MAX_PRICE], prev[ProductPrices.MAX_PRICE]]);
+  if (price > defaultPrice[1]) {
+    setSliderValue(prev => [defaultPrice[1], prev[1]]);
   }
 
-  if (price < defaultPrice[ProductPrices.MIN_PRICE]) {
-    setSliderValue(prev => [defaultPrice[ProductPrices.MIN_PRICE], prev[ProductPrices.MAX_PRICE]]);
+  if (price < defaultPrice[0]) {
+    setSliderValue(prev => [defaultPrice[0], prev[1]]);
   }
 };
 
 export const checkMaxPriceCorrectValue = ({ defaultPrice, price, setSliderValue }: Params) => {
-  if (price > defaultPrice[ProductPrices.MAX_PRICE]) {
-    setSliderValue(prev => [prev[ProductPrices.MIN_PRICE], defaultPrice[ProductPrices.MAX_PRICE]]);
+  if (price > defaultPrice[1]) {
+    setSliderValue(prev => [prev[0], defaultPrice[1]]);
   }
 
-  if (price < defaultPrice[ProductPrices.MIN_PRICE]) {
-    setSliderValue(prev => [prev[ProductPrices.MIN_PRICE], defaultPrice[ProductPrices.MIN_PRICE]]);
+  if (price < defaultPrice[0]) {
+    setSliderValue(prev => [prev[0], defaultPrice[0]]);
   }
 };

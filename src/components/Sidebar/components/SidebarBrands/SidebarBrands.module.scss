@@ -2,10 +2,10 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  row-gap: 8px;
+  row-gap: 12px;
   color: var(--primary-c1-color-900);
   max-height: 160px;
-  padding: 5px 10px 5px 0;
+  padding: 30px 10px 5px 0;
   overflow-y: auto;
 
   .sidebarBrandsItem {

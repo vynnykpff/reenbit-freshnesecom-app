@@ -1,23 +1,22 @@
 .sidebarRatingList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
   .sidebarRatingItem {
     display: flex;
     align-items: center;
     column-gap: 8px;
-
     &:hover {
-
     }
-
     .ratingList {
       cursor: pointer;
     }
-
     .sidebarRatingIcon {
       fill: var(--additional-c3-color-600);
       width: 18px;
       cursor: pointer;
     }
-
     .sidebarOutlineRatingIcon {
       width: 18px;
     }

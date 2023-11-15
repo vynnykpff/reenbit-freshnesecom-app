@@ -7,7 +7,7 @@ import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect, useFilteredProducts } from "@/hooks";
 import { getMinMaxProductPrice, getMinMaxSelectedPrice } from "@/utils";
 import { ProductSelectedPrice } from "@/common/types";
-import { GlobalDelay, ProductFilterType, animationVariants } from "@/common/constants";
+import { GlobalDelay, PRODUCTS_PRICE_DEFAULT, ProductFilterType, animationVariants } from "@/common/constants";
 import { PriceRange } from "./components";
 import commonStyles from "@/styles/Common.module.scss";
 import "rc-slider/assets/index.css";
@@ -43,6 +43,12 @@ export const SidebarPrice: FC = () => {
       resetPrice();
     }
   }, [productRatings]);
+
+  useEffect(() => {
+    if (!filteredProducts.length) {
+      setSliderValue(PRODUCTS_PRICE_DEFAULT);
+    }
+  }, [filteredProducts]);
 
   const handleAfterPriceChange = useDebouncedCallback((selectedPrices: ProductSelectedPrice) => {
     const currentSelectedPrices = getMinMaxSelectedPrice(selectedPrices);

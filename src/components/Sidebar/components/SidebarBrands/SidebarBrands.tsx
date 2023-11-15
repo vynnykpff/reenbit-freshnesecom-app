@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useActions, useAppSelector } from "@/store";
 import { getSlugString, getTitleBrand } from "@/utils";
 import { Checkbox } from "@/components/UI";
-import { PRODUCTS_PRICE_DEFAULT, ProductDefaultValue, ProductFilterType, animationVariants } from "@/common/constants";
+import { ProductDefaultValue, ProductFilterType, animationVariants } from "@/common/constants";
 import commonStyles from "@/styles/Common.module.scss";
 import styles from "./SidebarBrands.module.scss";
 
@@ -13,7 +13,7 @@ export const SidebarBrands: FC = () => {
   const { productCategory, productBrands } = useAppSelector(state => state.productsFilter);
 
   const [currentProductCategoryBrands, setCurrentProductCategoryBrands] = useState<string[]>([]);
-  const { setBrand, removeBrand, setPrice } = useActions();
+  const { setBrand, removeBrand, resetPrice } = useActions();
 
   const handleSetProductBrand = (selectedProductBrand: string) => {
     const slugBrand = getSlugString(selectedProductBrand);
@@ -22,12 +22,12 @@ export const SidebarBrands: FC = () => {
 
       Object.values(category.brands).forEach(brand => {
         if (productBrands.some(brand => brand === defaultBrand)) {
-          setPrice(PRODUCTS_PRICE_DEFAULT);
+          resetPrice();
           return removeBrand(defaultBrand);
         }
 
         if (brand === selectedProductBrand) {
-          setPrice(PRODUCTS_PRICE_DEFAULT);
+          resetPrice();
           setBrand(defaultBrand);
         }
       });

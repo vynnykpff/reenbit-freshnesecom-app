@@ -1,5 +1,5 @@
-import cn from "classnames";
 import { Dispatch, FC, SetStateAction } from "react";
+import cn from "classnames";
 import { SidebarBrands, SidebarCategories, SidebarPrice, SidebarRating, SidebarResetFilters } from "./components";
 import styles from "./Sidebar.module.scss";
 

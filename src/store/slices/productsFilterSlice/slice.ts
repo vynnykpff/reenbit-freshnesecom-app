@@ -67,6 +67,13 @@ export const productsFilterSlice = createSlice({
     resetPrice: state => {
       state.productPrice = PRODUCTS_PRICE_DEFAULT;
     },
+
+    resetFilters: state => {
+      state.productCategory = ProductFilterType.ALL_CATEGORIES;
+      state.productBrands = [];
+      state.productRatings = [];
+      state.productPrice = PRODUCTS_PRICE_DEFAULT;
+    },
   },
 });
 
