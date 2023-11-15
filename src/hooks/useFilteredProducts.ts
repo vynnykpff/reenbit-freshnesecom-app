@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/store";
-import { applyTrimAndLowerCase } from "@/utils";
+import { applyTrimAndLowerCase, getSlugString } from "@/utils";
 import { Product } from "@/common/types";
 import { ProductFilterType } from "@/common/constants";
 
@@ -29,7 +29,7 @@ export const useFilteredProducts = () => {
       return applyTrimAndLowerCase(brandObj.replaceAll(MERGED_PRODUCT_BRANDS, ""));
     });
 
-    filters.push(product => formattedBrands.some(formattedBrand => formattedBrand.includes(applyTrimAndLowerCase(product.brand))));
+    filters.push(product => formattedBrands.some(formattedBrand => formattedBrand.includes(getSlugString(product.brand))));
   }
 
   if (productPrice[0] && productPrice[1]) {
