@@ -3,6 +3,7 @@
 .productCardImageContainer {
   display: flex;
   align-items: center;
+  user-select: none;
 
   .productCardImageWrapper {
     width: 270px;

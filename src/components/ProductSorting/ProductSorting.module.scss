@@ -1,0 +1,89 @@
+@import "@/styles/variables";
+@import "@/styles/media";
+
+.productSortingContainer {
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 80px;
+  order: 2;
+
+  @include sidebarLargeMobile {
+    margin-bottom: 0;
+    width: auto;
+  }
+
+
+  .productSortingContent {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--primary-c1-color-600);
+    background-color: var(--primary-c1-color-300);
+    transition: $primary-transition;
+    border-radius: 12px;
+    padding: 0 15px;
+    width: 245px;
+
+    &:hover {
+      transition: $primary-transition;
+      border: 1px solid var(--primary-c1-color-700);
+    }
+
+    @include largeMobile {
+      width: 100%;
+      min-width: 220px;
+    }
+
+
+    .productSortingTitle {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      color: var(--primary-c1-color-900);
+      font-family: $secondary-font;
+      user-select: none;
+
+      &:after {
+        content: "|";
+        display: flex;
+        align-items: center;
+        width: 2px;
+        height: 100%;
+        margin: 0 24px;
+        color: var(--primary-c1-color-700);
+
+        @include largeMobile {
+          margin: 0 18px;
+        }
+      }
+    }
+
+    .productSortingSelect {
+      font-size: 13px;
+      font-weight: 600;
+      width: 100%;
+    }
+  }
+
+  .productSortingIconWrapper {
+
+    transition: $primary-transition;
+    &:hover {
+      .productSortingIcon {
+        fill: var(--primary-c1-color-700);
+        transition: $primary-transition;
+      }
+    }
+
+    .productSortingIcon {
+      width: 22px;
+      min-width: 22px;
+      fill: var(--primary-c1-color-900);
+      transition: $primary-transition;
+    }
+  }
+
+
+}

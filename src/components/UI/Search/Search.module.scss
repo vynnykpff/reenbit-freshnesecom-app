@@ -8,7 +8,7 @@
   align-items: center;
   background-color: var(--primary-c1-color-300);
   border: 1px solid var(--primary-c1-color-600);
-  border-radius: 15px;
+  border-radius: 12px;
   width: 30%;
   min-width: 500px;
   transition: $primary-transition;
@@ -32,6 +32,7 @@
 
   .selectCategoriesField {
     font-size: 15px;
+    width: 100%;
   }
 
   .searchInputContainer {

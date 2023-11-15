@@ -4,8 +4,7 @@ import { withErrorBoundary } from "react-error-boundary";
 import { useAppSelector } from "@/store";
 import { useFilteredProducts, useMatchMedia } from "@/hooks";
 import { MediaQueries } from "@/common/constants";
-import { ProductsList } from "@/components";
-import { Sidebar, SidebarMobile } from "@/components/Sidebar";
+import { ProductSorting, ProductsList, Sidebar, SidebarMobile } from "@/components";
 import { ErrorFallback, ItemCounter } from "@/components/UI";
 import styles from "./ProductsPage.module.scss";
 
@@ -20,12 +19,22 @@ const ProductsPage: FC = () => {
 
   return (
     <div className={cn(styles.productsPageContainer, "container")}>
-      <div className={styles.productsPageHeader}>
-        <h2 className={styles.productsPageTitle}>All Products</h2>
-        <ItemCounter count={filteredProducts.length} counterName="Products found" />
+      <div className={styles.productsPageHeaderContainer}>
+        <div className={styles.productsPageHeader}>
+          <h2 className={styles.productsPageTitle}>All Products</h2>
+          <ItemCounter count={filteredProducts.length} counterName="Products found" />
+        </div>
+        {!isMobile && <ProductSorting />}
       </div>
       <div className={styles.productsPageContent}>
-        {isMobile ? <SidebarMobile /> : <Sidebar />}
+        {isMobile ? (
+          <div className={styles.productsPageContentContainer}>
+            <ProductSorting />
+            <SidebarMobile />
+          </div>
+        ) : (
+          <Sidebar />
+        )}
         <ProductsList />
       </div>
       <div className={styles.paginationContainer}>

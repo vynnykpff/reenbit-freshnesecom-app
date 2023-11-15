@@ -7,13 +7,7 @@ body[scrollable] {
 }
 
 .sidebarMobileContainer {
-  margin-bottom: 30px;
-  position: sticky;
-  top: 0;
-  padding: 16px 0;
-  background-color: var(--primary-c1-color-100);
-  width: 100%;
-  z-index: 3;
+  order: 1;
 
   &:hover {
     .sidebarMobileButton {
