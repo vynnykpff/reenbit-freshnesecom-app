@@ -1,14 +1,15 @@
 import { useAppSelector } from "@/store";
-import { applyTrimAndLowerCase } from "@/utils";
+import { applyTrimAndLowerCase, getSlugString, sortByPrice, sortByRating, sortByTitle } from "@/utils";
 import { Product } from "@/common/types";
-import { ProductFilterType } from "@/common/constants";
+import { ProductFilterType, SortingVariants } from "@/common/constants";
 
 export type ProductFilter = (p: Product, i: number, d: Product[]) => boolean;
 
 const MERGED_PRODUCT_BRANDS = ProductFilterType.ALL_BRANDS.split("_").join("");
+
 export const useFilteredProducts = () => {
   const { products, searchValue } = useAppSelector(state => state.products);
-  const { productBrands, productCategory, productRatings, productPrice } = useAppSelector(state => state.productsFilter);
+  const { productBrands, productCategory, productRatings, productPrice, sortBy, sortType } = useAppSelector(state => state.productsFilter);
   const filters: ProductFilter[] = [];
 
   if (productRatings.length) {
@@ -29,7 +30,7 @@ export const useFilteredProducts = () => {
       return applyTrimAndLowerCase(brandObj.replaceAll(MERGED_PRODUCT_BRANDS, ""));
     });
 
-    filters.push(product => formattedBrands.some(formattedBrand => formattedBrand.includes(applyTrimAndLowerCase(product.brand))));
+    filters.push(product => formattedBrands.some(formattedBrand => formattedBrand.includes(getSlugString(product.brand))));
   }
 
   if (productPrice[0] && productPrice[1]) {
@@ -47,10 +48,27 @@ export const useFilteredProducts = () => {
     filters.push(product => applyTrimAndLowerCase(product.title).includes(formattedSearchValue));
   }
 
-  let res = products;
+  let res = [...products];
 
   for (const filterCb of filters) {
     res = res.filter(filterCb);
   }
+
+  if (sortBy !== SortingVariants.DEFAULT) {
+    switch (sortBy) {
+      case SortingVariants.PRICE:
+        res = sortByPrice(res, sortType);
+        break;
+      case SortingVariants.RATING:
+        res = sortByRating(res, sortType);
+        break;
+      case SortingVariants.TITLE:
+        res = sortByTitle(res, sortType);
+        break;
+      default:
+        break;
+    }
+  }
+
   return res;
 };

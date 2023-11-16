@@ -1,13 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getTitleBrand } from "@/utils";
-import { PRODUCTS_PRICE_DEFAULT, PRODUCT_RATING_DEFAULT, ProductFilterType } from "@/common/constants";
 import { Product, ProductsFilterState } from "@/common/types";
+import { PRODUCTS_PRICE_DEFAULT, PRODUCT_RATING_DEFAULT, ProductFilterType, SortingTypes, SortingVariants } from "@/common/constants";
 
 const initialState: ProductsFilterState = {
   productCategory: ProductFilterType.ALL_CATEGORIES,
   productBrands: [],
   productRatings: [],
   productPrice: PRODUCTS_PRICE_DEFAULT,
+  sortBy: SortingVariants.DEFAULT,
+  sortType: SortingTypes.DESC,
 };
 
 export const productsFilterSlice = createSlice({
@@ -73,6 +75,16 @@ export const productsFilterSlice = createSlice({
       state.productBrands = [];
       state.productRatings = [];
       state.productPrice = PRODUCTS_PRICE_DEFAULT;
+      state.sortBy = SortingVariants.DEFAULT;
+      state.sortType = SortingTypes.DESC;
+    },
+
+    setSortBy: (state, action: PayloadAction<SortingVariants>) => {
+      state.sortBy = action.payload;
+    },
+
+    setSortType: (state, action: PayloadAction<SortingTypes>) => {
+      state.sortType = action.payload;
     },
   },
 });

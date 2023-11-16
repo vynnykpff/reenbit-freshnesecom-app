@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { Product } from "@/common/types";
+import { SortingTypes, SortingVariants } from "@/common/constants";
 
 export type ProductBrand = Product["brand"][];
 
@@ -12,6 +13,8 @@ export type ProductsFilterState = {
   productBrands: ProductBrand;
   productRatings: ProductRating;
   productPrice: ProductFilterPrice;
+  sortBy: SortingVariants;
+  sortType: SortingTypes;
 };
 
 export type FiltersProps = {

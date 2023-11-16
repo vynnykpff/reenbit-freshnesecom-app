@@ -1,20 +1,20 @@
 .sidebarBrandsList {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   row-gap: 12px;
   color: var(--primary-c1-color-900);
-  max-height: 185px;
   padding-bottom: 5px;
   overflow-y: auto;
+  max-height: 192px;
+}
 
-  .sidebarBrandsItem {
-    display: flex;
-    align-items: center;
-    column-gap: 12px;
+.sidebarBrandsItem {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  flex-grow: 1;
 
-    .sidebarBrandsItemLabel {
-      color: var(--primary-c1-color-900);
-    }
+  .sidebarBrandsItemLabel {
+    color: var(--primary-c1-color-900);
   }
 }
