@@ -1,6 +1,5 @@
 import { ProductsFilterState } from "@/common/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
 const initialState: ProductsFilterState = {
   searchValue: "",
   productCategory: "",
@@ -8,7 +7,6 @@ const initialState: ProductsFilterState = {
   isPending: false,
   error: null,
 };
-
 export const productsFilterSlice = createSlice({
   name: "products_filter",
   initialState,
@@ -24,5 +22,4 @@ export const productsFilterSlice = createSlice({
     },
   },
 });
-
 export const { actions: productsFilterActions, reducer: productsFilterReducer } = productsFilterSlice;

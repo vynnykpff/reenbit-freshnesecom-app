@@ -15,7 +15,7 @@
     align-items: center;
     overflow: hidden;
 
-    @include productCardMobile {
+    @media (max-width: 878px) {
       width: 100%;
     }
 
@@ -30,9 +30,22 @@
         object-fit: contain;
         object-position: 50% 50%;
 
-        @include largeMobile {
-          padding: 10px;
+        @media (max-width: 878px) {
+          padding: 10px 80px;
         }
+        
+        @include tablet {
+          padding: 10px 30px;
+        }
+
+        @media (max-width: 678px) {
+          padding: 10px 60px;
+        }
+
+        @include largeMobile {
+          padding: 10px 20px;
+        }
+
       }
     }
 

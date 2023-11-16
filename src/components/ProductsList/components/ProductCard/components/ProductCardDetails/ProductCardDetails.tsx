@@ -1,4 +1,4 @@
-import { MediaQueries, Routes } from "@/common/constants";
+import { Routes } from "@/common/constants";
 import { Product } from "@/common/types";
 import { Rating } from "@/components/UI";
 import { useMatchMedia } from "@/hooks";
@@ -10,7 +10,7 @@ import { ProductCardDetailsDesktop, ProductCardDetailsMobile } from "./component
 import styles from "./ProductCardDetails.module.scss";
 
 export const ProductCardDetails: FC<Product> = ({ title, description, rating, originCountry, brand, delivery, stock }) => {
-  const isMobile = useMatchMedia(`(max-width: ${MediaQueries.TABLET}px)`);
+  const isMobile = useMatchMedia("(max-width: 1150px)");
   const { setCurrentProduct } = useActions();
 
   return (

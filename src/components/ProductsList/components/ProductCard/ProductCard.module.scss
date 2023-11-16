@@ -8,11 +8,13 @@
   height: 100%;
   margin-bottom: 32px;
 
-  &:hover {
-    box-shadow: var(--primary-c1-color-300) 0 8px 24px;
+  @media (min-width: 678px) {
+    &:hover {
+      box-shadow: var(--primary-c1-color-300) 0 8px 24px;
+    }
   }
 
-  @include productCardMobile {
+  @media (max-width: 878px) {
     flex-direction: column;
   }
 
@@ -24,16 +26,13 @@
     column-gap: 24px;
     padding: 32px;
 
-    @include laptop {
-      padding: 24px;
-    }
-
-    @include productCardMobile {
+    @media (max-width: 878px) {
       width: 100%;
     }
 
-    @include tablet {
+    @media (max-width: 1150px) {
       flex-direction: column;
+      padding: 24px;
     }
   }
 }

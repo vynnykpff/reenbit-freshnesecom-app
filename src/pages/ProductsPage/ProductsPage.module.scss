@@ -1,14 +1,17 @@
 @import "@/styles/variables";
 @import "@/styles/media";
 
-
 .productsPageContainer {
 
   .productsPageHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 143px;
+
+    @media (max-width: 678px) {
+      margin-bottom: 80px;
+    }
 
     .productsPageTitle {
       font-family: $secondary-font;
@@ -22,9 +25,14 @@
     }
   }
 
-  .productsPageList {
-    font-weight: 600;
-    color: var(--secondary-c2-color-500);
+  .productsPageContent {
+    display: flex;
+    column-gap: 35px;
+    align-items: flex-start;
+
+    @media (max-width: 678px) {
+      flex-direction: column;
+    }
   }
 
   .paginationContainer {

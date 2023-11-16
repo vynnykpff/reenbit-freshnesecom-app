@@ -2,7 +2,6 @@ import { ErrorMessages } from "@/common/constants";
 import { ProductsState } from "@/common/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import productsSliceThunks from "./thunks";
-
 const initialState: ProductsState = {
   products: [],
   currentProduct: "",
@@ -11,7 +10,6 @@ const initialState: ProductsState = {
   isPending: false,
   error: null,
 };
-
 export const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -38,5 +36,4 @@ export const productsSlice = createSlice({
     }
   },
 });
-
 export const { actions: productsActions, reducer: productsReducer } = productsSlice;

@@ -20,7 +20,7 @@ export const Rating: FC<Props> = ({ amountRating, className = "" }) => {
           {i < amountRating ? (
             <RatingIcon className={cn(styles.ratingIcon, styles.ratingIconFill, className[1])} />
           ) : (
-            <RatingIcon className={cn(styles.ratingIcon, styles.ratingIconOutline)} />
+            <RatingIcon className={cn(styles.ratingIcon, styles.ratingIconOutline, className[2])} />
           )}
         </li>,
       );

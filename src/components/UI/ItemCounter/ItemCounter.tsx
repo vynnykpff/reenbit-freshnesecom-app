@@ -1,11 +1,18 @@
+import cn from "classnames";
 import { FC } from "react";
 import styles from "./ItemCounter.module.scss";
 
-export const ItemCounter: FC<{ count: number; counterName: string }> = ({ count, counterName }) => {
+type Props = {
+  count: number;
+  counterName?: string;
+  className?: string | string[];
+};
+
+export const ItemCounter: FC<Props> = ({ count, counterName, className = "" }) => {
   return (
-    <div className={styles.itemCounterContainer}>
-      <span className={styles.itemCounter}>{count}</span>
-      <span className={styles.itemCounterTitle}>{counterName}</span>
+    <div className={cn(styles.itemCounterContainer, className[0])}>
+      <span className={cn(styles.itemCounter, className[1])}>{count}</span>
+      <span className={cn(styles.itemCounterTitle, className[2])}>{counterName}</span>
     </div>
   );
 };

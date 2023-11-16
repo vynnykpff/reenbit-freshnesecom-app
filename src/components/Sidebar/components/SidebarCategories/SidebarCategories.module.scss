@@ -1,0 +1,40 @@
+@import "@/styles/variables";
+
+.sidebarCategoriesList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  max-height: 180px;
+  padding: 5px 10px 5px 0;
+  overflow-y: auto;
+
+  .sidebarCategoriesItem {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    transition: color .3s;
+    word-break: break-word;
+
+    &:hover {
+      .sidebarCategoriesItemTitle {
+        color: var(--secondary-c2-color-500);
+        transition: color .3s;
+      }
+    }
+
+    .sidebarCategoriesItemTitle {
+      color: var(--primary-c1-color-900);
+    }
+
+    .sidebarCategoryItemTitleActive {
+      font-family: "Open Sans", sans-serif;
+      color: var(--secondary-c2-color-500);
+      font-weight: 600;
+    }
+
+
+    .sidebarCategoriesItemCounter {
+      column-gap: 0;
+    }
+  }
+}

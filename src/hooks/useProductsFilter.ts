@@ -9,9 +9,7 @@ const MERGED_PRODUCT_BRANDS = ProductFilterType.ALL_BRANDS.split("_").join("");
 export const useProductsFilter = () => {
   const { products } = useAppSelector(state => state.products);
   const { searchValue, productBrand, productCategory } = useAppSelector(state => state.productsFilter);
-
   const filters: ProductFilter[] = [];
-
   if (!productCategory && !searchValue) {
     return products;
   }
@@ -32,10 +30,8 @@ export const useProductsFilter = () => {
   }
 
   let res = products;
-
   for (const filterCb of filters) {
     res = res.filter(filterCb);
   }
-
   return res;
 };

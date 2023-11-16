@@ -32,8 +32,15 @@ html, body {
 body {
   font-family: "Open Sans", sans-serif;
   min-width: $MOBILE;
+  scroll-behavior: smooth;
 }
 
 body[scrollable] {
   overflow: hidden;
+}
+
+.container {
+  max-width: 1520px;
+  width: 100%;
+  margin: 0 auto;
 }
