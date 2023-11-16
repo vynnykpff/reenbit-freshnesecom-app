@@ -1,4 +1,4 @@
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useActions, useAppSelector } from "@/store";
 import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts";
@@ -19,7 +19,11 @@ export const HeaderToolbar: FC = () => {
   } = useContext(HeaderCategoriesContext);
 
   const { productCategory } = useAppSelector(state => state.productsFilter);
-  const { setCategory } = useActions();
+  const { setCategory, resetFilters } = useActions();
+
+  useEffect(() => {
+    resetFilters();
+  }, [location.pathname]);
 
   useWindowScrollable(!isOpenBurgerNav);
 
