@@ -29,4 +29,5 @@ export type ProductsState = {
   currentProduct: string;
   productsCategoriesWithBrands: ProductCategory[];
   productsCategories: SelectVariants;
+  searchValue: string;
 } & BaseState;

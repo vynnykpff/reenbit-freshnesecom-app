@@ -1,25 +1,67 @@
-import { PriceRange } from "@/components/Sidebar/components/SidebarPrice/components";
-import cn from "classnames";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 import Slider from "rc-slider";
-import { useAppSelector } from "@/store";
-import { getMinMaxProductPrice } from "@/utils";
-import "rc-slider/assets/index.css";
-import { animationVariants } from "@/common/constants";
+import cn from "classnames";
 import { motion } from "framer-motion";
+import { useActions, useAppSelector } from "@/store";
+import { useChangeEffect, useFilteredProducts } from "@/hooks";
+import { getMinMaxProductPrice, getMinMaxSelectedPrice } from "@/utils";
+import { ProductSelectedPrice } from "@/common/types";
+import { GlobalDelay, PRODUCTS_PRICE_DEFAULT, ProductFilterType, animationVariants } from "@/common/constants";
+import { PriceRange } from "./components";
 import commonStyles from "@/styles/Common.module.scss";
+import "rc-slider/assets/index.css";
 import styles from "./SidebarPrice.module.scss";
 
 export const SidebarPrice: FC = () => {
   const { products } = useAppSelector(state => state.products);
-  const { minPrice, maxPrice } = getMinMaxProductPrice(products);
-  const [price, setPrice] = useState({ minPrice, maxPrice });
+  const { productCategory, productRatings, productBrands } = useAppSelector(state => state.productsFilter);
+  const { setPrice, resetRating, resetPrice } = useActions();
 
-  const handleChange = (selectedPrices: number | number[]) =>
-    setPrice({
-      minPrice: Array.isArray(selectedPrices) ? selectedPrices[0] : selectedPrices,
-      maxPrice: Array.isArray(selectedPrices) ? selectedPrices[1] : selectedPrices,
-    });
+  const filteredProducts = useFilteredProducts();
+  const [localPrice, setLocalPrice] = useState(getMinMaxProductPrice(filteredProducts));
+  const [sliderValue, setSliderValue] = useState<[number, number]>([localPrice.minPrice, localPrice.maxPrice]);
+
+  useEffect(() => {
+    const prices = getMinMaxProductPrice(filteredProducts);
+    setLocalPrice(prices);
+    setSliderValue([prices.minPrice, prices.maxPrice]);
+  }, [productCategory, productBrands, productRatings]);
+
+  useEffect(() => {
+    const currentFilteredProducts = productCategory === (ProductFilterType.ALL_CATEGORIES as string) ? products : filteredProducts;
+    const prices = getMinMaxProductPrice(currentFilteredProducts);
+    setPrice([prices.minPrice, prices.maxPrice]);
+  }, [productCategory]);
+
+  useChangeEffect(() => {
+    if (productRatings.length) {
+      resetRating();
+      resetPrice();
+    }
+  }, [productCategory]);
+
+  useChangeEffect(() => {
+    if (!productRatings.length) {
+      resetPrice();
+    }
+  }, [productRatings]);
+
+  useEffect(() => {
+    if (!filteredProducts.length) {
+      setSliderValue(PRODUCTS_PRICE_DEFAULT);
+    }
+  }, [filteredProducts]);
+
+  const handleAfterPriceChange = useDebouncedCallback((selectedPrices: ProductSelectedPrice) => {
+    const currentSelectedPrices = getMinMaxSelectedPrice(selectedPrices);
+    setPrice([currentSelectedPrices.minPrice, currentSelectedPrices.maxPrice]);
+  }, GlobalDelay.DEFAULT);
+
+  const handlePriceChange = (selectedPrices: ProductSelectedPrice) => {
+    const { minPrice, maxPrice } = getMinMaxSelectedPrice(selectedPrices);
+    setSliderValue([minPrice, maxPrice]);
+  };
 
   return (
     <div className={cn(commonStyles.sidebarItemContainer, styles.sidebarPriceContainer)}>
@@ -29,13 +71,14 @@ export const SidebarPrice: FC = () => {
           classNames={{ handle: styles.handle, rail: styles.rail, track: styles.track }}
           className={styles["rc-slider"]}
           range
-          min={minPrice}
-          max={maxPrice}
-          defaultValue={[minPrice, maxPrice]}
-          onChange={handleChange}
+          min={localPrice.minPrice}
+          max={localPrice.maxPrice}
+          value={sliderValue}
+          onChange={handlePriceChange}
+          onAfterChange={handleAfterPriceChange}
           pushable
         />
-        <PriceRange price={price} />
+        <PriceRange setSliderValue={setSliderValue} price={sliderValue} defaultPrice={[localPrice.minPrice, localPrice.maxPrice]} />
       </motion.div>
     </div>
   );

@@ -1,19 +1,18 @@
+import { FC } from "react";
+import cn from "classnames";
+import { withErrorBoundary } from "react-error-boundary";
+import { useAppSelector } from "@/store";
+import { useFilteredProducts, useMatchMedia } from "@/hooks";
 import { MediaQueries } from "@/common/constants";
 import { ProductsList } from "@/components";
-import { Sidebar } from "@/components/Sidebar";
-import { SidebarMobile } from "@/components/Sidebar/components";
+import { Sidebar, SidebarMobile } from "@/components/Sidebar";
 import { ErrorFallback, ItemCounter } from "@/components/UI";
-import { useMatchMedia, useProductsFilter } from "@/hooks";
-import { useAppSelector } from "@/store";
-import cn from "classnames";
-import { FC } from "react";
-import { withErrorBoundary } from "react-error-boundary";
 import styles from "./ProductsPage.module.scss";
 
 const ProductsPage: FC = () => {
   const { error, products } = useAppSelector(state => state.products);
   const isMobile = useMatchMedia(`(max-width: ${MediaQueries.SIDEBAR_MOBILE}px)`);
-  const filteredProducts = useProductsFilter();
+  const filteredProducts = useFilteredProducts();
 
   if (error) {
     throw new Error(error);

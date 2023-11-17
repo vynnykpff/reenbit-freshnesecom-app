@@ -1,11 +1,12 @@
-import { Product } from "@/common/types";
+import { PRODUCT_INITIAL_PRICE, ProductPrices } from "@/common/constants";
+import { Product, ProductSelectedPrice } from "@/common/types";
 
 export const getMinMaxProductPrice = (products: Product[]) => {
   if (!products.length) {
-    return { minPrice: 0, maxPrice: 0 };
+    return { minPrice: ProductPrices.MIN_PRICE, maxPrice: ProductPrices.MAX_PRICE };
   }
 
-  const initialPrice = products[0].price.discount || products[0].price.original;
+  const initialPrice = products[PRODUCT_INITIAL_PRICE].price.discount || products[PRODUCT_INITIAL_PRICE].price.original;
 
   const initialPrices = {
     minPrice: initialPrice,
@@ -18,6 +19,13 @@ export const getMinMaxProductPrice = (products: Product[]) => {
       maxPrice: Math.max(prices.maxPrice, product.price.discount || product.price.original),
     };
   }, initialPrices);
+
+  return { minPrice, maxPrice };
+};
+
+export const getMinMaxSelectedPrice = (selectedPrices: ProductSelectedPrice) => {
+  const minPrice = Array.isArray(selectedPrices) ? selectedPrices[ProductPrices.MIN_PRICE] : selectedPrices;
+  const maxPrice = Array.isArray(selectedPrices) ? selectedPrices[ProductPrices.MAX_PRICE] : selectedPrices;
 
   return { minPrice, maxPrice };
 };

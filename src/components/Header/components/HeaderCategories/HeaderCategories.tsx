@@ -1,5 +1,5 @@
-import { useAppSelector } from "@/store";
 import { FC } from "react";
+import { useAppSelector } from "@/store";
 import { useMatchMedia } from "@/hooks";
 import { MediaQueries } from "@/common/constants";
 import { HeaderCategoriesDesktop, HeaderCategoriesMobile } from "./components";

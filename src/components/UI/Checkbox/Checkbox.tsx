@@ -1,22 +1,17 @@
-import { FC, ReactNode, useState } from "react";
-import CheckboxIcon from "#/icons/checkbox-mark.svg?react";
+import { FC, ReactNode } from "react";
 import styles from "./Checkbox.module.scss";
+import CheckboxIcon from "#/icons/checkbox-mark.svg?react";
 
 type Props = {
   id: string;
   name: string | ReactNode;
+  isChecked: boolean;
 };
 
-export const Checkbox: FC<Props> = ({ id, name }) => {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleInputCheck = () => {
-    setIsChecked(prev => !prev);
-  };
-
+export const Checkbox: FC<Props> = ({ id, name, isChecked }) => {
   return (
-    <div className={styles.checkboxContainer} onClick={handleInputCheck}>
-      <input className={styles.checkboxInput} type="checkbox" checked={isChecked} onChange={handleInputCheck} id={id} />
+    <div className={styles.checkboxContainer}>
+      <input className={styles.checkboxInput} type="checkbox" readOnly checked={isChecked} id={id} />
       <label className={styles.checkboxLabel} htmlFor={id}>
         {isChecked && <CheckboxIcon className={styles.checkboxIcon} />}
         {name}

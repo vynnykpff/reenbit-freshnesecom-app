@@ -1,4 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import { productsReducer } from "./slices/productsSlice";
 import { productsFilterReducer } from "./slices/productsFilterSlice";
 
@@ -7,9 +9,25 @@ const rootReducer = combineReducers({
   productsFilter: productsFilterReducer,
 });
 
+const persistConfig = {
+  key: "root",
+  storage,
+  blacklist: ["products"],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

@@ -8,13 +8,13 @@
   height: 100%;
   margin-bottom: 32px;
 
-  @media (min-width: 678px) {
+  @include sidebarLargeMobile {
     &:hover {
       box-shadow: var(--primary-c1-color-300) 0 8px 24px;
     }
   }
 
-  @media (max-width: 878px) {
+  @include sidebarTablet {
     flex-direction: column;
   }
 
@@ -26,11 +26,11 @@
     column-gap: 24px;
     padding: 32px;
 
-    @media (max-width: 878px) {
+    @include sidebarTablet {
       width: 100%;
     }
 
-    @media (max-width: 1150px) {
+    @include productCardsContainer {
       flex-direction: column;
       padding: 24px;
     }

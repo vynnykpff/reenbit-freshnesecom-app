@@ -7,6 +7,7 @@ const initialState: ProductsState = {
   currentProduct: "",
   productsCategoriesWithBrands: [],
   productsCategories: {},
+  searchValue: "",
   isPending: false,
   error: null,
 };
@@ -16,6 +17,9 @@ export const productsSlice = createSlice({
   reducers: {
     setCurrentProduct: (state, action: PayloadAction<string>) => {
       state.currentProduct = action.payload;
+    },
+    setSearchValue: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
     },
   },
   extraReducers: builder => {

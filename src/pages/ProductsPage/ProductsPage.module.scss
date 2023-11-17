@@ -9,7 +9,7 @@
     align-items: center;
     margin-bottom: 143px;
 
-    @media (max-width: 678px) {
+    @include sidebarLargeMobile {
       margin-bottom: 80px;
     }
 
@@ -30,7 +30,7 @@
     column-gap: 35px;
     align-items: flex-start;
 
-    @media (max-width: 678px) {
+    @include sidebarLargeMobile {
       flex-direction: column;
     }
   }

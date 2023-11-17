@@ -5,5 +5,7 @@ export { getProductsCategories } from "./getProductsCategories.ts";
 export { getSlugString } from "./getSlugString.ts";
 export { generateCharacteristics } from "./generateCharacteristics.ts";
 export { checkCategory } from "./checkCategory.ts";
-export { getMinMaxProductPrice } from "./getMinMaxProductPrice.ts";
 export { applyTrimAndLowerCase } from "./applyTrimAndLowerCase.ts";
+export { getTitleBrand } from "./getTitleBrand.ts";
+export * from "./getMinMaxProductPrice.ts";
+export * from "./checkPriceCorrectValue.ts";

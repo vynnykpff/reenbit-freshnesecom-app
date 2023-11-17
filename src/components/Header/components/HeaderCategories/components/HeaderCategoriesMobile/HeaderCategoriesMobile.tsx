@@ -1,13 +1,12 @@
+import { FC, MouseEvent, useContext, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import cn from "classnames";
 import { animationBurgerMenu, animationList } from "@/common/constants";
-import { RenderCategories } from "@/components/Header/components/HeaderCategories/components";
 import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts/HeaderCategoriesContext";
-import { useWindowScrollable } from "@/hooks";
+import { RenderCategories } from "../RenderCategories";
+import { useChangeEffect, useWindowScrollable } from "@/hooks";
 import { useActions, useAppSelector } from "@/store";
 import { checkCategory } from "@/utils";
-import cn from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
-import { FC, MouseEvent, useContext, useEffect, useState } from "react";
-
 import styles from "./HeaderCategoriesMobile.module.scss";
 
 export const HeaderCategoriesMobile: FC = () => {
@@ -17,7 +16,8 @@ export const HeaderCategoriesMobile: FC = () => {
   } = useContext(HeaderCategoriesContext);
 
   const { productsCategoriesWithBrands } = useAppSelector(state => state.products);
-  const { setBrand, setCategory } = useActions();
+  const { setBrand, setCategory, resetBrands } = useActions();
+
   const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState("");
 
   useWindowScrollable(!isOpenBurgerNav);
@@ -26,10 +26,11 @@ export const HeaderCategoriesMobile: FC = () => {
     dispatch(updateHeaderCategories({ isOpenBurgerNav: false }));
   };
 
-  useEffect(() => {
+  useChangeEffect(() => {
+    resetBrands();
     setBrand(currentProductCategoryWithBrands);
+
     checkCategory({ currentProductCategoryWithBrands, productsCategoriesWithBrands, setCategory });
-    handleCloseBurgerMenu();
   }, [currentProductCategoryWithBrands]);
 
   return (
