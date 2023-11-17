@@ -25,6 +25,7 @@ export const SidebarCategories: FC<FiltersProps> = () => {
     const currentCategoryBrands = productsCategoriesWithBrands.find(o => o.id === productCategory);
 
     if (!currentCategoryBrands) {
+      resetBrands();
       return;
     }
 
