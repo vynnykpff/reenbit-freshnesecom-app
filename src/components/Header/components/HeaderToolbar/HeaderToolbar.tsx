@@ -1,8 +1,8 @@
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useActions, useAppSelector } from "@/store";
 import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts";
-import { useMatchMedia, useWindowScrollable } from "@/hooks";
+import { useChangeEffect, useMatchMedia, useWindowScrollable } from "@/hooks";
 import { BurgerMenuButton, Search } from "@/components/UI";
 import { MediaQueries, Routes } from "@/common/constants";
 import CartIcon from "#/icons/cart.svg?react";
@@ -21,7 +21,7 @@ export const HeaderToolbar: FC = () => {
   const { productCategory } = useAppSelector(state => state.productsFilter);
   const { setCategory, resetFilters } = useActions();
 
-  useEffect(() => {
+  useChangeEffect(() => {
     resetFilters();
   }, [location.pathname]);
 

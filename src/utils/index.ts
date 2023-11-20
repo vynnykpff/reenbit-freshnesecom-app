@@ -9,4 +9,3 @@ export { applyTrimAndLowerCase } from "./applyTrimAndLowerCase.ts";
 export { getTitleBrand } from "./getTitleBrand.ts";
 export * from "./getMinMaxProductPrice.ts";
 export * from "./checkPriceCorrectValue.ts";
-export * from "./getSortedProducts.ts";

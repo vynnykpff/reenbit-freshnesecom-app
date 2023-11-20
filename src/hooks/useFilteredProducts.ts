@@ -1,11 +1,43 @@
 import { useAppSelector } from "@/store";
-import { applyTrimAndLowerCase, getSlugString, sortByPrice, sortByRating, sortByTitle } from "@/utils";
+import { applyTrimAndLowerCase, getSlugString } from "@/utils";
 import { Product } from "@/common/types";
-import { ProductFilterType, SortingVariants } from "@/common/constants";
+import { ProductFilterType, SortingTypes, SortingVariants } from "@/common/constants";
 
 export type ProductFilter = (p: Product, i: number, d: Product[]) => boolean;
 
 const MERGED_PRODUCT_BRANDS = ProductFilterType.ALL_BRANDS.split("_").join("");
+
+type SortFunction = (res: Product[], sortType: SortingTypes) => Product[];
+
+const SortFunctions: Record<SortingVariants, SortFunction> = {
+  [SortingVariants.PRICE](res, sortType) {
+    return res.sort((a, b) => {
+      const priceA = a.price ? (!a.price.discount ? a.price.original : a.price.discount) : 0;
+      const priceB = b.price ? (!b.price.discount ? b.price.original : b.price.discount) : 0;
+
+      return sortType === SortingTypes.ASC ? priceA - priceB : priceB - priceA;
+    });
+  },
+
+  [SortingVariants.RATING](res, sortType) {
+    return res.sort((a, b) => {
+      return sortType === SortingTypes.ASC ? a.rating - b.rating : b.rating - a.rating;
+    });
+  },
+
+  [SortingVariants.TITLE](res, sortType) {
+    return res.sort((a, b) => {
+      const titleA = a.title.toLowerCase();
+      const titleB = b.title.toLowerCase();
+
+      return sortType === SortingTypes.ASC ? titleA.localeCompare(titleB) : titleB.localeCompare(titleA);
+    });
+  },
+
+  [SortingVariants.DEFAULT](res) {
+    return res;
+  },
+};
 
 export const useFilteredProducts = () => {
   const { products, searchValue } = useAppSelector(state => state.products);
@@ -22,7 +54,7 @@ export const useFilteredProducts = () => {
 
   if (productCategory !== (ProductFilterType.ALL_CATEGORIES as string)) {
     const formattedCategory = applyTrimAndLowerCase(productCategory);
-    filters.push(product => applyTrimAndLowerCase(product.category).includes(formattedCategory));
+    filters.push(product => applyTrimAndLowerCase(product.category) === formattedCategory);
   }
 
   if (productBrands.length && !productBrands[0].startsWith(ProductFilterType.ALL_BRANDS)) {
@@ -54,21 +86,7 @@ export const useFilteredProducts = () => {
     res = res.filter(filterCb);
   }
 
-  if (sortBy !== SortingVariants.DEFAULT) {
-    switch (sortBy) {
-      case SortingVariants.PRICE:
-        res = sortByPrice(res, sortType);
-        break;
-      case SortingVariants.RATING:
-        res = sortByRating(res, sortType);
-        break;
-      case SortingVariants.TITLE:
-        res = sortByTitle(res, sortType);
-        break;
-      default:
-        break;
-    }
-  }
+  res = SortFunctions[sortBy](res, sortType);
 
   return res;
 };

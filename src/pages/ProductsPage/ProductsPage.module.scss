@@ -27,6 +27,7 @@
     display: flex;
     column-gap: 35px;
     align-items: flex-start;
+    margin-bottom: 50px;
 
     @include sidebarLargeMobile {
       flex-direction: column;
@@ -50,10 +51,5 @@
         align-items: flex-start;
       }
     }
-  }
-
-  .paginationContainer {
-    display: flex;
-    justify-content: flex-end;
   }
 }

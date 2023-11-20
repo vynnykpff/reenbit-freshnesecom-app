@@ -1,24 +1,32 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { persistReducer, persistStore } from "redux-persist";
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { productsReducer } from "./slices/productsSlice";
-import { productsFilterReducer } from "./slices/productsFilterSlice";
+import { productsFiltersReducer } from "./slices/productsFilterSlice";
+import { productsPaginationReducer } from "./slices/paginationSlice";
 
 const rootReducer = combineReducers({
   products: productsReducer,
-  productsFilter: productsFilterReducer,
+  productsFilter: productsFiltersReducer,
+  productsPagination: productsPaginationReducer,
 });
 
 const persistConfig = {
-  key: "key",
+  key: "root",
   storage,
-  blacklist: ["products"],
+  blacklist: ["products", "pagination"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);

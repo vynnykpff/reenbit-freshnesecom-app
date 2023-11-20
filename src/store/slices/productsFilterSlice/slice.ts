@@ -13,7 +13,7 @@ const initialState: ProductsFilterState = {
 };
 
 export const productsFilterSlice = createSlice({
-  name: "products_filter",
+  name: "products_filters",
   initialState,
   reducers: {
     setCategory: (state, action: PayloadAction<Product["category"]>) => {
@@ -89,4 +89,4 @@ export const productsFilterSlice = createSlice({
   },
 });
 
-export const { actions: productsFilterActions, reducer: productsFilterReducer } = productsFilterSlice;
+export const { actions: productsFiltersActions, reducer: productsFiltersReducer } = productsFilterSlice;

@@ -1,0 +1,45 @@
+.paginationPagesContainer{
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+  .paginationPageTitle {
+    color: var(--primary-c1-color-700);
+    font-size: 14px;
+  }
+
+  .paginationList {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    user-select: none;
+  }
+
+  .paginationPageItem {
+    font-size: 14px;
+    color: var(--primary-c1-color-900);
+    cursor: pointer;
+  }
+
+  .paginationPageItemActive {
+    color: var(--secondary-c2-color-500);
+    font-weight: 600;
+  }
+
+  .navigationRightPaginateIcon {
+    transform: rotate(-90deg);
+  }
+
+  .navigationLeftPaginateIcon {
+    transform: rotate(90deg);
+  }
+
+  .navigationPaginateIcon {
+    stroke: var(--secondary-c2-color-500);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    cursor: pointer;
+  }
+
+}

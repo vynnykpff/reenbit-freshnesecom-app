@@ -1,8 +1,7 @@
 import { PersistGate } from "redux-persist/integration/react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import { store } from "@/store";
-import { persistor } from "@/store/store.ts";
+import { persistor, store } from "@/store";
 import { App } from "./App.tsx";
 import { Loader } from "@/components/UI";
 import "./styles/index.scss";

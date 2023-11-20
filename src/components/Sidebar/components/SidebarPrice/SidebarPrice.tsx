@@ -32,9 +32,12 @@ export const SidebarPrice: FC = () => {
     const currentFilteredProducts = productCategory === (ProductFilterType.ALL_CATEGORIES as string) ? products : filteredProducts;
     const prices = getMinMaxProductPrice(currentFilteredProducts);
     setPrice([prices.minPrice, prices.maxPrice]);
+  }, [productCategory]);
 
+  useChangeEffect(() => {
     if (productRatings.length) {
       resetRating();
+      resetPrice();
     }
   }, [productCategory]);
 

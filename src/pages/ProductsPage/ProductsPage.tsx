@@ -1,15 +1,15 @@
 import { FC } from "react";
-import cn from "classnames";
 import { withErrorBoundary } from "react-error-boundary";
+import cn from "classnames";
 import { useAppSelector } from "@/store";
 import { useFilteredProducts, useMatchMedia } from "@/hooks";
 import { MediaQueries } from "@/common/constants";
-import { ProductSorting, ProductsList, Sidebar, SidebarMobile } from "@/components";
+import { Pagination, ProductSorting, ProductsList, Sidebar, SidebarMobile } from "@/components";
 import { ErrorFallback, ItemCounter } from "@/components/UI";
 import styles from "./ProductsPage.module.scss";
 
 const ProductsPage: FC = () => {
-  const { error, products } = useAppSelector(state => state.products);
+  const { error } = useAppSelector(state => state.products);
   const isMobile = useMatchMedia(`(max-width: ${MediaQueries.SIDEBAR_MOBILE}px)`);
   const filteredProducts = useFilteredProducts();
 
@@ -37,9 +37,7 @@ const ProductsPage: FC = () => {
         )}
         <ProductsList />
       </div>
-      <div className={styles.paginationContainer}>
-        <ItemCounter count={products.length} counterName="All Products" />
-      </div>
+      <Pagination />
     </div>
   );
 };
