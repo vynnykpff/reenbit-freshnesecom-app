@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["products", "pagination"],
+  blacklist: ["products", "productsPagination"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
