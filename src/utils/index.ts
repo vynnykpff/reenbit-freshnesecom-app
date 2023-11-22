@@ -7,5 +7,6 @@ export { generateCharacteristics } from "./generateCharacteristics.ts";
 export { checkCategory } from "./checkCategory.ts";
 export { applyTrimAndLowerCase } from "./applyTrimAndLowerCase.ts";
 export { getTitleBrand } from "./getTitleBrand.ts";
+export { getCountPages } from "./getCountPages.ts";
 export * from "./getMinMaxProductPrice.ts";
 export * from "./checkPriceCorrectValue.ts";

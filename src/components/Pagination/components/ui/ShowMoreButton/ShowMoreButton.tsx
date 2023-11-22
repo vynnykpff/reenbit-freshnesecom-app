@@ -13,7 +13,6 @@ export const ShowMoreButton: FC = () => {
     const newEndPage = paginationEndPage + DEFAULT_AMOUNT_PRODUCT_PER_PAGE;
     setEndPaginationPage(newEndPage);
     setPaginationPage(paginationPage + NEXT_PAGE);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
