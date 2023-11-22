@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
 import cn from "classnames";
-import { FOOTER_NAVIGATION_TITLES, NAVIGATION_KEYS } from "@/common/constants";
+import { useOutsideClick } from "@/hooks";
 import { NavigationLink } from "@/common/types";
 import { Dropdown } from "@/components/UI/Dropdown";
-import { useOutsideClick } from "@/hooks";
+import { FOOTER_NAVIGATION_TITLES, NAVIGATION_KEYS } from "@/common/constants";
 import DropdownArrow from "#/icons/select-chevron.svg?react";
 import commonStyles from "@/styles/Common.module.scss";
 import styles from "./FooterNavbarMobile.module.scss";

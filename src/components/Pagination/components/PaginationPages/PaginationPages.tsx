@@ -3,6 +3,7 @@ import ReactPaginate from "react-paginate";
 import cn from "classnames";
 import { useActions, useAppSelector } from "@/store";
 import { useFilteredProducts } from "@/hooks";
+import { PaginationState } from "@/common/types";
 import { DEFAULT_AMOUNT_PRODUCT_PER_PAGE, NEXT_PAGE, PaginationVariables } from "@/common/constants";
 import NavigationPaginateIcon from "#/icons/select-chevron.svg?react";
 import styles from "./PaginationPages.module.scss";
@@ -16,21 +17,31 @@ export const PaginationPages: FC = () => {
   const filteredProducts = useFilteredProducts();
   const totalPages = Math.ceil(filteredProducts.length / DEFAULT_AMOUNT_PRODUCT_PER_PAGE);
 
+  const setMarkersForPage = ({ paginationPage, paginationStartPage, paginationEndPage }: PaginationState) => {
+    setPaginationPage(paginationPage);
+    setStartPaginationPage(paginationStartPage);
+    setEndPaginationPage(paginationEndPage);
+  };
+
   useEffect(() => {
     setPaginationPage(Math.ceil(paginationStartPage / DEFAULT_AMOUNT_PRODUCT_PER_PAGE));
   }, []);
 
   useEffect(() => {
-    setPaginationPage(Math.ceil(paginationStartPage / DEFAULT_AMOUNT_PRODUCT_PER_PAGE));
-    setStartPaginationPage(0);
-    setEndPaginationPage(DEFAULT_AMOUNT_PRODUCT_PER_PAGE);
+    setMarkersForPage({
+      paginationPage: Math.ceil(paginationStartPage / DEFAULT_AMOUNT_PRODUCT_PER_PAGE),
+      paginationStartPage: 0,
+      paginationEndPage: DEFAULT_AMOUNT_PRODUCT_PER_PAGE,
+    });
   }, [productCategory, productBrands, productRatings, productPrice]);
 
   const handlePageChange = (selectedPage: { selected: number }) => {
     const newStartPage = (selectedPage.selected * DEFAULT_AMOUNT_PRODUCT_PER_PAGE) % filteredProducts.length;
-    setStartPaginationPage(newStartPage);
-    setEndPaginationPage(DEFAULT_AMOUNT_PRODUCT_PER_PAGE);
-    setPaginationPage(selectedPage.selected);
+    setMarkersForPage({
+      paginationPage: selectedPage.selected,
+      paginationStartPage: newStartPage,
+      paginationEndPage: DEFAULT_AMOUNT_PRODUCT_PER_PAGE,
+    });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

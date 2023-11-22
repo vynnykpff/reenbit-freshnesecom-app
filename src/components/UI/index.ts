@@ -10,3 +10,5 @@ export { NoMatches } from "./NoMatches";
 export { BurgerMenuButton } from "./BurgerMenuButton";
 export { ItemCounter } from "./ItemCounter";
 export { Checkbox } from "./Checkbox";
+export { Breadcrumbs } from "./Breadcrumbs";
+export { Dropdown } from "./Dropdown";

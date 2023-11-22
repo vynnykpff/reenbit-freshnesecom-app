@@ -1,13 +1,14 @@
-import { BREADCRUMBS, Routes } from "@/common/constants";
-import { useAppSelector } from "@/store";
-import cn from "classnames";
 import { FC } from "react";
+import cn from "classnames";
 import { Link, NavLink, useLocation, useMatch } from "react-router-dom";
+import { useAppSelector } from "@/store";
+import { BREADCRUMBS, Routes } from "@/common/constants";
 import styles from "./Breadcrumbs.module.scss";
 
 export const Breadcrumbs: FC = () => {
   const { pathname } = useLocation();
   const isHomePage = useMatch(Routes.HOME);
+  // TODO: create another slice in store
   const { currentProduct } = useAppSelector(state => state.products);
 
   const renderBreadcrumbs = (pathname: string) => {

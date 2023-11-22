@@ -1,5 +1,5 @@
 import { NavigationLink, Product } from "@/common/types";
-import { getSlugString } from "@/utils/getSlugString.ts";
+import { getSlugString } from "./getSlugString.ts";
 
 type Props = {
   originCountry: Product["originCountry"];

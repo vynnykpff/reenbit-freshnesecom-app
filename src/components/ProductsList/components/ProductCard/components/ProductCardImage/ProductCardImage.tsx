@@ -1,10 +1,10 @@
-import NoAvailableImageIcon from "#/icons/no-image-available.svg?react";
-import { Routes } from "@/common/constants";
-import { Product } from "@/common/types";
-import { useActions } from "@/store";
-import { getSlugString } from "@/utils";
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import { useActions } from "@/store";
+import { getSlugString } from "@/utils";
+import { Product } from "@/common/types";
+import { Routes } from "@/common/constants";
+import NoAvailableImageIcon from "#/icons/no-image-available.svg?react";
 import styles from "./ProductCardImage.module.scss";
 
 type Props = {

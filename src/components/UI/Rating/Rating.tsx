@@ -1,5 +1,5 @@
-import cn from "classnames";
 import { FC } from "react";
+import cn from "classnames";
 import RatingIcon from "#/icons/rating-star.svg?react";
 import styles from "./Rating.module.scss";
 

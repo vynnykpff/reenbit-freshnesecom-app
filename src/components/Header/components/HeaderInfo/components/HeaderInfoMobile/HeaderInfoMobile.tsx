@@ -1,7 +1,7 @@
-import { CONTACTS_INFO_LINKS } from "@/common/constants";
-import cn from "classnames";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
+import cn from "classnames";
+import { CONTACTS_INFO_LINKS } from "@/common/constants";
 import commonStyles from "../../HeaderInfo.module.scss";
 import styles from "./HeaderInfoMobile.module.scss";
 

@@ -1,5 +1,5 @@
+import { productsApi } from "./api";
 import { Product } from "@/common/types";
-import { productsApi } from "@/services/api";
 
 export class ProductsService {
   public static async getProducts(): Promise<Product[]> {

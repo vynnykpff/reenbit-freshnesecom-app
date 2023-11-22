@@ -1,6 +1,6 @@
-import { ContextState } from "@/common/types";
-import { createContextDefaultState } from "@/utils";
 import { createContext } from "react";
+import { createContextDefaultState } from "@/utils";
+import { ContextState } from "@/common/types";
 
 export type HeaderCategoriesContextState = {
   isOpenBurgerNav: boolean;

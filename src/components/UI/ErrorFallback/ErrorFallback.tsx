@@ -1,6 +1,6 @@
-import { ErrorMessages } from "@/common/constants";
-import { Button } from "@/components/UI";
 import { FC } from "react";
+import { Button } from "@/components/UI";
+import { ErrorMessages } from "@/common/constants";
 import ErrorIcon from "#/icons/error.svg?react";
 import styles from "./ErrorFallback.module.scss";
 

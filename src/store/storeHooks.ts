@@ -1,6 +1,6 @@
-import { ActionCreators } from "@/store/slices";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { ActionCreators } from "./slices";
 import type { AppDispatch, RootState } from "./store";
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

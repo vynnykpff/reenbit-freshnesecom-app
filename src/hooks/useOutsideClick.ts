@@ -1,5 +1,5 @@
-import { useWindowEvent } from "./useWindowEvent.ts";
 import { RefObject, useCallback, useRef } from "react";
+import { useWindowEvent } from "./useWindowEvent.ts";
 
 export const useOutsideClick = <T extends HTMLElement>(
   then: () => void,
