@@ -6,13 +6,10 @@ import { ProductCard } from "./components";
 import styles from "./ProductsList.module.scss";
 
 export const ProductsList: FC = () => {
-  const { paginationPage, productsPerPage } = useAppSelector(state => state.productsPagination);
+  const { paginationStartPage, paginationEndPage } = useAppSelector(state => state.productsPagination);
   const filteredProducts = useFilteredProducts();
 
-  const startIndex = (paginationPage - 1) * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-
-  const slicedProducts = filteredProducts.slice(startIndex, endIndex);
+  const slicedProducts = filteredProducts.slice(paginationStartPage, paginationStartPage + paginationEndPage);
 
   return (
     <ul className={styles.productsListContainer}>
