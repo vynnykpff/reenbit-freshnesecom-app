@@ -11,7 +11,6 @@ export const ShowMoreButton: FC = () => {
 
   const handleShowMoreProducts = () => {
     const newEndPage = paginationEndPage + DEFAULT_AMOUNT_PRODUCT_PER_PAGE;
-    // TODO: refactor this
     setEndPaginationPage(newEndPage);
     setPaginationPage(paginationPage + NEXT_PAGE);
   };

@@ -3,6 +3,7 @@ import ReactPaginate from "react-paginate";
 import cn from "classnames";
 import { useActions, useAppSelector } from "@/store";
 import { useFilteredProducts } from "@/hooks";
+import { getCountPages } from "@/utils";
 import { PaginationState } from "@/common/types";
 import { DEFAULT_AMOUNT_PRODUCT_PER_PAGE, NEXT_PAGE, PaginationVariables } from "@/common/constants";
 import NavigationPaginateIcon from "#/icons/select-chevron.svg?react";
@@ -15,7 +16,7 @@ export const PaginationPages: FC = () => {
   const { setPaginationPage, setStartPaginationPage, setEndPaginationPage } = useActions();
   const { paginationPage, paginationStartPage } = useAppSelector(state => state.productsPagination);
   const filteredProducts = useFilteredProducts();
-  const totalPages = Math.ceil(filteredProducts.length / DEFAULT_AMOUNT_PRODUCT_PER_PAGE);
+  const totalPages = getCountPages(filteredProducts.length);
 
   const setMarkersForPage = ({ paginationPage, paginationStartPage, paginationEndPage }: PaginationState) => {
     setPaginationPage(paginationPage);
@@ -24,12 +25,12 @@ export const PaginationPages: FC = () => {
   };
 
   useEffect(() => {
-    setPaginationPage(Math.ceil(paginationStartPage / DEFAULT_AMOUNT_PRODUCT_PER_PAGE));
+    setPaginationPage(getCountPages(paginationStartPage));
   }, []);
 
   useEffect(() => {
     setMarkersForPage({
-      paginationPage: Math.ceil(paginationStartPage / DEFAULT_AMOUNT_PRODUCT_PER_PAGE),
+      paginationPage: getCountPages(paginationStartPage),
       paginationStartPage: 0,
       paginationEndPage: DEFAULT_AMOUNT_PRODUCT_PER_PAGE,
     });

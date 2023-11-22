@@ -48,6 +48,10 @@ export const PriceRange: FC<Props> = ({ price, defaultPrice, setSliderValue }) =
     checkMaxPriceCorrectValue({ defaultPrice, price: price[ProductPrices.MAX_PRICE], setSliderValue });
   }, [debouncedMaxCorrectionValue]);
 
+  useChangeEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [debouncedMinCorrectionValue, debouncedMaxCorrectionValue]);
+
   const handlePriceChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = +e.target.value;
 

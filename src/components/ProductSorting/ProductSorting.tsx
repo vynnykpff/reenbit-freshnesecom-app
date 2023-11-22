@@ -25,11 +25,13 @@ export const ProductSorting: FC = () => {
     setCurrentSortingVariant(item);
     const selectedOption = item.toLowerCase() as SortingVariants;
     setSortBy(selectedOption);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleChangeTypeSorting = () => {
     setIsChangeTypeSorting(prev => !prev);
     setSortType(isChangeTypeSorting ? SortingTypes.DESC : SortingTypes.ASC);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
