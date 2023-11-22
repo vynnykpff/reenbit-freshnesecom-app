@@ -3,24 +3,22 @@
 
 .productsPageContainer {
 
-  .productsPageHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 143px;
+  .productsPageHeaderContainer {
+    .productsPageHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
 
-    @include sidebarLargeMobile {
-      margin-bottom: 80px;
-    }
+      .productsPageTitle {
+        font-family: $secondary-font;
+        color: var(--primary-c1-color-900);
+        font-size: 32px;
+        font-weight: 600;
 
-    .productsPageTitle {
-      font-family: $secondary-font;
-      color: var(--primary-c1-color-900);
-      font-size: 32px;
-      font-weight: 600;
-
-      @include tablet {
-        font-size: 24px;
+        @include tablet {
+          font-size: 24px;
+        }
       }
     }
   }
@@ -32,6 +30,25 @@
 
     @include sidebarLargeMobile {
       flex-direction: column;
+    }
+
+    .productsPageContentContainer {
+      position: sticky;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--primary-c1-color-100);
+      width: 100%;
+      margin-bottom: 16px;
+      padding: 16px 0;
+      gap: 16px;
+
+      @media (max-width: 370px) {
+        flex-direction: column;
+        justify-content: stretch;
+        align-items: flex-start;
+      }
     }
   }
 

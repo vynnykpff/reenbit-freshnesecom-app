@@ -1,11 +1,11 @@
-import SelectArrow from "#/icons/select-chevron.svg?react";
-import { animationList, animationSelect } from "@/common/constants";
-import { SelectProps } from "@/common/types";
-import { useOutsideClick } from "@/hooks";
-import commonStyles from "@/styles/Common.module.scss";
-import cn from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
 import { FC, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import cn from "classnames";
+import { useOutsideClick } from "@/hooks";
+import { SelectProps } from "@/common/types";
+import commonStyles from "@/styles/Common.module.scss";
+import { animationList, animationSelect } from "@/common/constants";
+import SelectArrow from "#/icons/select-chevron.svg?react";
 import styles from "./Select.module.scss";
 
 export const Select: FC<SelectProps> = ({
@@ -47,7 +47,7 @@ export const Select: FC<SelectProps> = ({
     <div ref={containerRef} style={{ maxWidth, minWidth }} className={styles.selectContainer}>
       <div style={{ background: bgColor }} onClick={() => setVariantsVisible(!variantsVisible)} className={styles.selectedVariant}>
         {isShowSelectedValue ? (
-          <span className={styles.selectTitle}>{variants[currentVariant]}</span>
+          <span className={cn(styles.selectTitle, className)}>{variants[currentVariant]}</span>
         ) : (
           <span className={cn(styles.selectTitle, styles.selectPlaceholder)}>{placeholder}</span>
         )}

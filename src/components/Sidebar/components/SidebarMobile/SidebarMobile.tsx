@@ -1,15 +1,17 @@
-import FiltersLogo from "#/icons/filter.svg?react";
-import { animationList, animationSidebarMenu } from "@/common/constants";
+import { FC, MouseEvent, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import cn from "classnames";
+import { useMatchMedia, useWindowScrollable } from "@/hooks";
+import { MediaQueries, animationList, animationSidebarMenu } from "@/common/constants";
 import { Sidebar } from "@/components/Sidebar";
 import { BurgerMenuButton, Button } from "@/components/UI";
-import { useWindowScrollable } from "@/hooks";
-import cn from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
-import { FC, MouseEvent, useState } from "react";
+import FiltersLogo from "#/icons/filter.svg?react";
+import commonStyles from "@/styles/Common.module.scss";
 import styles from "./SidebarMobile.module.scss";
 
 export const SidebarMobile: FC = () => {
   const [isShowFilters, setIsShowFilters] = useState(false);
+  const isMobile = useMatchMedia(`(max-width: ${MediaQueries.LARGE_MOBILE}px)`);
 
   useWindowScrollable(!isShowFilters);
 
@@ -19,9 +21,9 @@ export const SidebarMobile: FC = () => {
 
   return (
     <div className={styles.sidebarMobileContainer}>
-      <Button className={styles.sidebarMobileButton} onClick={handleShowFiltersMenu}>
+      <Button className={cn(styles.sidebarMobileButton, isMobile && commonStyles.shortButtonIconWrapper)} onClick={handleShowFiltersMenu}>
         <FiltersLogo className={styles.sidebarMobileIcon} />
-        <span>Filters</span>
+        {!isMobile && <span>Filters</span>}
       </Button>
 
       <AnimatePresence>

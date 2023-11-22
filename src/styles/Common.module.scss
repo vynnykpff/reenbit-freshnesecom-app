@@ -75,3 +75,20 @@
     margin-bottom: 16px;
   }
 }
+
+.shortButtonIconWrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--primary-c1-color-600) !important;
+  background-color: var(--primary-c1-color-300) !important;
+  transition: $primary-transition;
+  border-radius: 12px !important;
+  padding: 9px 10px !important;
+  height: 100%;
+  cursor: pointer;
+
+  &:hover {
+    transition: $primary-transition;
+    border: 1px solid var(--primary-c1-color-700);
+  }
+}
