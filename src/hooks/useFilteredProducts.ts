@@ -53,8 +53,8 @@ export const useFilteredProducts = () => {
   }
 
   if (productCategory !== (ProductFilterType.ALL_CATEGORIES as string)) {
-    const formattedCategory = applyTrimAndLowerCase(productCategory);
-    filters.push(product => applyTrimAndLowerCase(product.category) === formattedCategory);
+    const formattedCategory = getSlugString(productCategory);
+    filters.push(product => getSlugString(product.category) === formattedCategory);
   }
 
   if (productBrands.length && !productBrands[0].startsWith(ProductFilterType.ALL_BRANDS)) {

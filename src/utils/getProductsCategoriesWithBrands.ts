@@ -17,7 +17,7 @@ export const getProductsCategoriesWithBrands = (products: Product[]) => {
       };
     }
 
-    acc[category].brands[getTitleBrand(brand.toLowerCase(), getSlugString(category))] = brand;
+    acc[category].brands[getTitleBrand(getSlugString(brand), getSlugString(category))] = brand;
 
     return acc;
   }, {});
