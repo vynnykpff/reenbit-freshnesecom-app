@@ -42,8 +42,9 @@ export const SearchDropList: FC<Props> = ({ searchRef }) => {
         {filteredProducts.length ? (
           filteredProducts.map(product => (
             <SearchDropListItem
-              setIsVisible={setIsVisible}
               key={product.id}
+              setIsVisible={setIsVisible}
+              product={product}
               searchImage={product.images[0]}
               productTitle={product.title}
               productCategory={product.category}

@@ -1,7 +1,7 @@
-import { Product } from "@/common/types";
+import { Products } from "@/common/types";
 import { SortingTypes, SortingVariants } from "@/common/constants";
 
-type SortFunctionParams = (res: Product[], sortType: SortingTypes) => Product[];
+type SortFunctionParams = (res: Products[], sortType: SortingTypes) => Products[];
 
 export const sortFunctions: Record<SortingVariants, SortFunctionParams> = {
   [SortingVariants.PRICE](res, sortType) {

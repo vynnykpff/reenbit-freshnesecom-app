@@ -1,7 +1,7 @@
 import { PRODUCT_INITIAL_PRICE, ProductPrices } from "@/common/constants";
-import { Product, ProductSelectedPrice } from "@/common/types";
+import { ProductSelectedPrice, Products } from "@/common/types";
 
-export const getMinMaxProductPrice = (products: Product[]) => {
+export const getMinMaxProductPrice = (products: Products[]) => {
   if (!products.length) {
     return { minPrice: ProductPrices.MIN_PRICE, maxPrice: ProductPrices.MAX_PRICE };
   }

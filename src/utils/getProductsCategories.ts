@@ -1,8 +1,8 @@
-import { Product, SelectVariants } from "@/common/types";
+import { Products, SelectVariants } from "@/common/types";
 import { ProductDefaultValue, ProductFilterType } from "@/common/constants";
 import { getSlugString } from "./getSlugString.ts";
 
-export const getProductsCategories = (productsCategories: Product[]) => {
+export const getProductsCategories = (productsCategories: Products[]) => {
   const res: SelectVariants = {
     [ProductFilterType.ALL_CATEGORIES]: ProductDefaultValue.CATEGORIES,
   };

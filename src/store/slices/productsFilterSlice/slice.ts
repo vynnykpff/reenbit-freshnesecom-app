@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getTitleBrand } from "@/utils";
-import { Product, ProductsFilterState } from "@/common/types";
+import { Products, ProductsFilterState } from "@/common/types";
 import { PRODUCTS_PRICE_DEFAULT, PRODUCT_RATING_DEFAULT, ProductFilterType, SortingTypes, SortingVariants } from "@/common/constants";
 
 const initialState: ProductsFilterState = {
@@ -16,7 +16,7 @@ export const productsFilterSlice = createSlice({
   name: "products_filters",
   initialState,
   reducers: {
-    setCategory: (state, action: PayloadAction<Product["category"]>) => {
+    setCategory: (state, action: PayloadAction<Products["category"]>) => {
       state.productPrice = PRODUCTS_PRICE_DEFAULT;
       state.productCategory = action.payload;
     },

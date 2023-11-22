@@ -1,5 +1,5 @@
 import { MediaQueries, Routes } from "@/common/constants";
-import { Product } from "@/common/types";
+import { Products } from "@/common/types";
 import { useMatchMedia } from "@/hooks";
 import { useActions } from "@/store";
 import { getSlugString } from "@/utils";
@@ -8,19 +8,20 @@ import { NavLink } from "react-router-dom";
 import styles from "./SearchDropListItem.module.scss";
 
 type Props = {
-  productTitle: Product["title"];
-  productCategory: Product["category"];
+  productTitle: Products["title"];
+  productCategory: Products["category"];
+  product: Products;
   searchImage: string;
   setIsVisible: Dispatch<SetStateAction<boolean>>;
 };
 
-export const SearchDropListItem: FC<Props> = ({ productTitle, productCategory, searchImage, setIsVisible }) => {
+export const SearchDropListItem: FC<Props> = ({ searchImage, setIsVisible, productCategory, productTitle, product }) => {
   const isMobile = useMatchMedia(`(max-width: ${MediaQueries.LARGE_MOBILE}px)`);
-  const { setCurrentProduct } = useActions();
+  const { setProduct } = useActions();
 
   const handleClick = () => {
     setIsVisible(false);
-    setCurrentProduct(productTitle);
+    setProduct(product);
   };
 
   return (

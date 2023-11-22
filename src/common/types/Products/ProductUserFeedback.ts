@@ -1,4 +1,4 @@
-import { ProductId } from "./Product.ts";
+import { ProductId } from "./Products.ts";
 
 export type ProductUserData = {
   name: string;

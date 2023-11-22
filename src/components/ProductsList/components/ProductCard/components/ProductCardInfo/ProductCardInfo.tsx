@@ -1,20 +1,13 @@
-import { Product } from "@/common/types";
-import { FC } from "react";
+import { Products } from "@/common/types";
 import { ProductCardDelivery, ProductCardNavigation, ProductCardPrice } from "./components";
 import styles from "./ProductCardInfo.module.scss";
 
-type Props = {
-  price: Product["price"];
-  delivery: Product["delivery"];
-  title: Product["title"];
-};
-
-export const ProductCardInfo: FC<Props> = ({ price, delivery, title }) => {
+export const ProductCardInfo = (props: Products) => {
   return (
     <div className={styles.productInfoContainer}>
-      <ProductCardPrice {...price} />
-      <ProductCardDelivery {...delivery} />
-      <ProductCardNavigation title={title} />
+      <ProductCardPrice {...props.price} />
+      <ProductCardDelivery {...props.delivery} />
+      <ProductCardNavigation {...props} />
     </div>
   );
 };

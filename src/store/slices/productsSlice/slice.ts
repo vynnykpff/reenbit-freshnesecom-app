@@ -1,11 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Product, ProductsState } from "@/common/types";
+import { Products, ProductsState } from "@/common/types";
 import { ErrorMessages } from "@/common/constants";
 import productsSliceThunks from "./thunks";
 
 const initialState: ProductsState = {
   products: [],
-  currentProduct: "",
   productsCategoriesWithBrands: [],
   productsCategories: {},
   searchValue: "",
@@ -17,15 +16,11 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setCurrentProduct: (state, action: PayloadAction<string>) => {
-      state.currentProduct = action.payload;
-    },
-
     setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
     },
 
-    setProducts: (state, action: PayloadAction<Product[]>) => {
+    setProducts: (state, action: PayloadAction<Products[]>) => {
       state.products = action.payload;
     },
   },
