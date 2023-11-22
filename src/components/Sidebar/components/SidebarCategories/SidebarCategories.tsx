@@ -42,6 +42,7 @@ export const SidebarCategories: FC<FiltersProps> = () => {
 
   useChangeEffect(() => {
     handleResetBrands();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [productCategory]);
 
   const getUniqCategories = (category: string) => {
@@ -57,8 +58,7 @@ export const SidebarCategories: FC<FiltersProps> = () => {
       <h4 className={commonStyles.sidebarTitle}>Categories</h4>
       <motion.ul {...animationVariants} className={styles.sidebarCategoriesList}>
         {localProductsCategories.map(category => (
-          <li key={uuidv4()} onClick={() => setCategory(getSlugString(category.title))}
-              className={styles.sidebarCategoriesItem}>
+          <li key={uuidv4()} onClick={() => setCategory(getSlugString(category.title))} className={styles.sidebarCategoriesItem}>
             <span
               className={cn(
                 styles.sidebarCategoriesItemTitle,

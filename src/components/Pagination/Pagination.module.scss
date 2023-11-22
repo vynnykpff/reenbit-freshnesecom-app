@@ -1,0 +1,14 @@
+@import "@/styles/media";
+
+.paginationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+
+  @include sidebarLargeMobile {
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+}

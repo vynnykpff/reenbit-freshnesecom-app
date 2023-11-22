@@ -6,3 +6,4 @@ export type { BaseState } from "./BaseState.ts";
 export type * from "./Select.ts";
 export type * from "./Product";
 export type * from "./Filter";
+export type * from "./Pagination";

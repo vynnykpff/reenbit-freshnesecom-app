@@ -1,15 +1,19 @@
 import { FC } from "react";
+import { useAppSelector } from "@/store";
 import { useFilteredProducts } from "@/hooks";
 import { NoMatches } from "@/components/UI";
 import { ProductCard } from "./components";
 import styles from "./ProductsList.module.scss";
 
 export const ProductsList: FC = () => {
+  const { paginationStartPage, paginationEndPage } = useAppSelector(state => state.productsPagination);
   const filteredProducts = useFilteredProducts();
+
+  const slicedProducts = filteredProducts.slice(paginationStartPage, paginationStartPage + paginationEndPage);
 
   return (
     <ul className={styles.productsListContainer}>
-      {filteredProducts.length ? filteredProducts.map(product => <ProductCard key={product.id} {...product} />) : <NoMatches />}
+      {slicedProducts.length ? slicedProducts.map(product => <ProductCard key={product.id} {...product} />) : <NoMatches />}
     </ul>
   );
 };
