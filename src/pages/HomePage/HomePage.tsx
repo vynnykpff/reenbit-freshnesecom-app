@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { Routes } from "@/common/constants";
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import { withErrorBoundary } from "react-error-boundary";
 import { Button, ErrorFallback } from "@/components/UI";
+import { Routes } from "@/common/constants";
 import styles from "./HomePage.module.scss";
 
 const HomePage: FC = () => {

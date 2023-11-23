@@ -54,7 +54,6 @@ export const SidebarPrice: FC = () => {
   const handleAfterPriceChange = useDebouncedCallback((selectedPrices: ProductSelectedPrice) => {
     const currentSelectedPrices = getMinMaxSelectedPrice(selectedPrices);
     setPrice([currentSelectedPrices.minPrice, currentSelectedPrices.maxPrice]);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }, GlobalDelay.DEFAULT);
 
   const handlePriceChange = (selectedPrices: ProductSelectedPrice) => {

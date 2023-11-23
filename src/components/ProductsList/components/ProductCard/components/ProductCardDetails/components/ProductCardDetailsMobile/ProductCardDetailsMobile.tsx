@@ -1,9 +1,9 @@
-import DropdownArrow from "#/icons/select-chevron.svg?react";
-import { NavigationLink } from "@/common/types";
-import { Dropdown } from "@/components/UI/Dropdown";
-import commonStyles from "@/styles/Common.module.scss";
-import cn from "classnames";
 import { FC, useState } from "react";
+import cn from "classnames";
+import { NavigationLink } from "@/common/types";
+import { Dropdown } from "@/components/UI";
+import commonStyles from "@/styles/Common.module.scss";
+import DropdownArrow from "#/icons/select-chevron.svg?react";
 import styles from "./ProductCardDetailsMobile.module.scss";
 
 export const ProductCardDetailsMobile: FC<{

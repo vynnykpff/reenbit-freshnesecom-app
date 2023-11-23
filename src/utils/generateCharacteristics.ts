@@ -1,14 +1,14 @@
 import { NavigationLink, Product } from "@/common/types";
-import { getSlugString } from "@/utils/getSlugString.ts";
+import { getSlugString } from "./getSlugString.ts";
 
-type Props = {
+export type GenerateCharacteristicsParams = {
   originCountry: Product["originCountry"];
   brand: Product["brand"];
   delivery: Product["delivery"];
   stock: Product["stock"];
 };
 
-export const generateCharacteristics = ({ originCountry, brand, delivery, stock }: Props): NavigationLink[] => {
+export const generateCharacteristics = ({ originCountry, brand, delivery, stock }: GenerateCharacteristicsParams): NavigationLink[] => {
   return [
     { title: "Origin", value: originCountry, id: `${getSlugString(originCountry)}_country`, link: "#" },
     { title: "Brand", value: brand, id: `${getSlugString(originCountry)}_brand`, link: "#" },

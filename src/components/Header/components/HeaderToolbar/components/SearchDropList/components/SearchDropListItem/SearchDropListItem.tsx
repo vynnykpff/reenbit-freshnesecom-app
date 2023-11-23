@@ -10,17 +10,18 @@ import styles from "./SearchDropListItem.module.scss";
 type Props = {
   productTitle: Product["title"];
   productCategory: Product["category"];
+  product: Product;
   searchImage: string;
   setIsVisible: Dispatch<SetStateAction<boolean>>;
 };
 
-export const SearchDropListItem: FC<Props> = ({ productTitle, productCategory, searchImage, setIsVisible }) => {
+export const SearchDropListItem: FC<Props> = ({ searchImage, setIsVisible, productCategory, productTitle, product }) => {
   const isMobile = useMatchMedia(`(max-width: ${MediaQueries.LARGE_MOBILE}px)`);
-  const { setCurrentProduct } = useActions();
+  const { setProduct } = useActions();
 
   const handleClick = () => {
     setIsVisible(false);
-    setCurrentProduct(productTitle);
+    setProduct(product);
   };
 
   return (

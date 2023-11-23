@@ -5,19 +5,18 @@ import { Product } from "@/common/types";
 import { Button } from "@/components/UI";
 import { useActions } from "@/store";
 import { getSlugString } from "@/utils";
-import { FC } from "react";
 import { Link } from "react-router-dom";
 import styles from "./ProductCardNavigation.module.scss";
 
-export const ProductCardNavigation: FC<{ title: Product["title"] }> = ({ title }) => {
-  const { setCurrentProduct } = useActions();
+export const ProductCardNavigation = (props: Product) => {
+  const { setProduct } = useActions();
 
   return (
     <div className={styles.productCardButtonsContainer}>
       <Link
-        onClick={() => setCurrentProduct(title)}
+        onClick={() => setProduct(props)}
         className={styles.productDetailsButtonContainer}
-        to={`${Routes.PRODUCTS}/${getSlugString(title)}`}
+        to={`${Routes.PRODUCTS}/${getSlugString(props.title)}`}
       >
         <Button className={styles.productDetailsButton}>
           <span>Product Details</span> <ProductDetailsIcon className={styles.productDetailsIcon} />

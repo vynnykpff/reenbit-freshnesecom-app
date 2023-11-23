@@ -42,7 +42,6 @@ export const SidebarCategories: FC<FiltersProps> = () => {
 
   useChangeEffect(() => {
     handleResetBrands();
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [productCategory]);
 
   const getUniqCategories = (category: string) => {

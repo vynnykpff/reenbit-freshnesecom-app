@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import cn from "classnames";
-import { FOOTER_NAVIGATION_TITLES, NAVIGATION_KEYS } from "@/common/constants";
 import { NavigationLink } from "@/common/types";
+import { FOOTER_NAVIGATION_TITLES, NAVIGATION_KEYS } from "@/common/constants";
 import commonStyles from "@/styles/Common.module.scss";
 import styles from "./FooterNavbarDesktop.module.scss";
 

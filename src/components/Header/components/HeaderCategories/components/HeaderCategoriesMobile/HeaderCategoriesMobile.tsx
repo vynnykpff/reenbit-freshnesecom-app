@@ -1,12 +1,13 @@
 import { FC, MouseEvent, useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLocation, useNavigate } from "react-router-dom";
 import cn from "classnames";
-import { animationBurgerMenu, animationList } from "@/common/constants";
-import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts/HeaderCategoriesContext";
-import { RenderCategories } from "../RenderCategories";
-import { useChangeEffect, useWindowScrollable } from "@/hooks";
 import { useActions, useAppSelector } from "@/store";
+import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts";
+import { useChangeEffect, useWindowScrollable } from "@/hooks";
 import { checkCategory } from "@/utils";
+import { RenderCategories } from "../RenderCategories";
+import { Routes, animationBurgerMenu, animationList } from "@/common/constants";
 import styles from "./HeaderCategoriesMobile.module.scss";
 
 export const HeaderCategoriesMobile: FC = () => {
@@ -20,6 +21,9 @@ export const HeaderCategoriesMobile: FC = () => {
 
   const [currentProductCategoryWithBrands, setCurrentProductCategoryWithBrands] = useState("");
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   useWindowScrollable(!isOpenBurgerNav);
 
   const handleCloseBurgerMenu = () => {
@@ -31,6 +35,10 @@ export const HeaderCategoriesMobile: FC = () => {
     setBrand(currentProductCategoryWithBrands);
 
     checkCategory({ currentProductCategoryWithBrands, productsCategoriesWithBrands, setCategory });
+
+    if (location.pathname !== (Routes.PRODUCTS as string)) {
+      navigate(Routes.PRODUCTS);
+    }
   }, [currentProductCategoryWithBrands]);
 
   return (

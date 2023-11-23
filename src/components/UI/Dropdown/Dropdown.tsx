@@ -1,8 +1,8 @@
-import { animationList, animationVariants } from "@/common/constants";
-import { NavigationLink } from "@/common/types";
-import cn from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
 import { FC, HTMLAttributes } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import cn from "classnames";
+import { NavigationLink } from "@/common/types";
+import { animationList, animationVariants } from "@/common/constants";
 import styles from "./Dropdown.module.scss";
 
 type DropdownMenuProps = {

@@ -1,28 +1,22 @@
-import NoAvailableImageIcon from "#/icons/no-image-available.svg?react";
-import { Routes } from "@/common/constants";
-import { Product } from "@/common/types";
+import { Link } from "react-router-dom";
 import { useActions } from "@/store";
 import { getSlugString } from "@/utils";
-import { FC } from "react";
-import { Link } from "react-router-dom";
+import { Product } from "@/common/types";
+import { Routes } from "@/common/constants";
+import NoAvailableImageIcon from "#/icons/no-image-available.svg?react";
 import styles from "./ProductCardImage.module.scss";
 
-type Props = {
-  images: Product["images"];
-  title: Product["title"];
-};
-
-export const ProductCardImage: FC<Props> = ({ images, title }) => {
-  const { setCurrentProduct } = useActions();
+export const ProductCardImage = (props: Product) => {
+  const { setProduct } = useActions();
 
   const renderProductImage = () => {
-    return images.length ? (
+    return props.images.length ? (
       <Link
-        onClick={() => setCurrentProduct(title)}
+        onClick={() => setProduct(props)}
         className={styles.productCardImageWrapper}
-        to={`${Routes.PRODUCTS}/${getSlugString(title)}`}
+        to={`${Routes.PRODUCTS}/${getSlugString(props.title)}`}
       >
-        <img className={styles.productCardImage} src={images[0]} alt={getSlugString(title)} />
+        <img className={styles.productCardImage} src={props.images[0]} alt={getSlugString(props.title)} />
       </Link>
     ) : (
       <NoAvailableImageIcon className={styles.productCardNoAvailableImage} />

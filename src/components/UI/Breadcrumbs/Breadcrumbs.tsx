@@ -1,14 +1,14 @@
-import { BREADCRUMBS, Routes } from "@/common/constants";
-import { useAppSelector } from "@/store";
-import cn from "classnames";
 import { FC } from "react";
+import cn from "classnames";
 import { Link, NavLink, useLocation, useMatch } from "react-router-dom";
+import { useAppSelector } from "@/store";
+import { BREADCRUMBS, Routes } from "@/common/constants";
 import styles from "./Breadcrumbs.module.scss";
 
 export const Breadcrumbs: FC = () => {
   const { pathname } = useLocation();
   const isHomePage = useMatch(Routes.HOME);
-  const { currentProduct } = useAppSelector(state => state.products);
+  const { product } = useAppSelector(state => state.product);
 
   const renderBreadcrumbs = (pathname: string) => {
     let currentLink = "";
@@ -18,7 +18,7 @@ export const Breadcrumbs: FC = () => {
       currentLink += `/${crumb}`;
 
       const isLastElement = index === routePaths.length - 1;
-      const breadcrumb = BREADCRUMBS[currentLink as keyof typeof BREADCRUMBS] ?? currentProduct;
+      const breadcrumb = BREADCRUMBS[currentLink as keyof typeof BREADCRUMBS] ?? product.title;
 
       return (
         <Link key={crumb} className={cn(styles.crumb, isLastElement ? styles.activeCrumb : styles.pastCrumb)} to={currentLink}>

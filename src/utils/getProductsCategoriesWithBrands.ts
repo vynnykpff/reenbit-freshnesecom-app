@@ -1,5 +1,5 @@
-import { ProductDefaultValue, ProductFilterType } from "@/common/constants";
 import { Product, ProductCategory } from "@/common/types";
+import { ProductDefaultValue, ProductFilterType } from "@/common/constants";
 import { getTitleBrand } from "./getTitleBrand.ts";
 import { getSlugString } from "./getSlugString.ts";
 

@@ -4,6 +4,7 @@ import cn from "classnames";
 import { useActions, useAppSelector } from "@/store";
 import { useFilteredProducts } from "@/hooks";
 import { getCountPages } from "@/utils";
+import { PaginationState } from "@/common/types";
 import { DEFAULT_AMOUNT_PRODUCT_PER_PAGE, NEXT_PAGE, PaginationVariables } from "@/common/constants";
 import NavigationPaginateIcon from "#/icons/select-chevron.svg?react";
 import styles from "./PaginationPages.module.scss";
@@ -17,22 +18,31 @@ export const PaginationPages: FC = () => {
   const filteredProducts = useFilteredProducts();
   const totalPages = getCountPages(filteredProducts.length);
 
+  const setMarkersForPage = ({ paginationPage, paginationStartPage, paginationEndPage }: PaginationState) => {
+    setPaginationPage(paginationPage);
+    setStartPaginationPage(paginationStartPage);
+    setEndPaginationPage(paginationEndPage);
+  };
+
   useEffect(() => {
     setPaginationPage(getCountPages(paginationStartPage));
   }, []);
 
   useEffect(() => {
-    setPaginationPage(getCountPages(paginationStartPage));
-    setStartPaginationPage(0);
-    setEndPaginationPage(DEFAULT_AMOUNT_PRODUCT_PER_PAGE);
+    setMarkersForPage({
+      paginationPage: getCountPages(paginationStartPage),
+      paginationStartPage: 0,
+      paginationEndPage: DEFAULT_AMOUNT_PRODUCT_PER_PAGE,
+    });
   }, [productCategory, productBrands, productRatings, productPrice]);
 
   const handlePageChange = (selectedPage: { selected: number }) => {
     const newStartPage = (selectedPage.selected * DEFAULT_AMOUNT_PRODUCT_PER_PAGE) % filteredProducts.length;
-    setStartPaginationPage(newStartPage);
-    setEndPaginationPage(DEFAULT_AMOUNT_PRODUCT_PER_PAGE);
-    setPaginationPage(selectedPage.selected);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setMarkersForPage({
+      paginationPage: selectedPage.selected,
+      paginationStartPage: newStartPage,
+      paginationEndPage: DEFAULT_AMOUNT_PRODUCT_PER_PAGE,
+    });
   };
 
   return (

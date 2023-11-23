@@ -1,15 +1,19 @@
+import { FC, useCallback, useEffect, useRef } from "react";
 import { FooterNavbar, ProductTags } from "./components";
-import { FC, useEffect, useRef } from "react";
 import styles from "./Footer.module.scss";
 
 export const Footer: FC = () => {
   const spanRef = useRef<HTMLSpanElement | null>(null);
 
-  useEffect(() => {
+  const getCurrentYear = useCallback(() => {
     const currentYear = new Date().getFullYear();
     if (spanRef.current) {
       spanRef.current.textContent = currentYear.toString();
     }
+  }, []);
+
+  useEffect(() => {
+    getCurrentYear();
   }, []);
 
   return (

@@ -1,9 +1,9 @@
-import { MediaQueries } from "@/common/constants";
-import { HeaderCategories, HeaderInfo, HeaderInfoMobile, HeaderToolbar } from "@/components/Header/components";
-import { Breadcrumbs } from "@/components/UI/Breadcrumbs";
-import { HeaderCategoriesContextProvider } from "@/contexts/HeaderCategoriesContext";
-import { useMatchMedia } from "@/hooks";
 import { FC } from "react";
+import { useMatchMedia } from "@/hooks";
+import { HeaderCategoriesContextProvider } from "@/contexts";
+import { HeaderCategories, HeaderInfo, HeaderInfoMobile, HeaderToolbar } from "./components";
+import { Breadcrumbs } from "@/components/UI";
+import { MediaQueries } from "@/common/constants";
 import styles from "./Header.module.scss";
 
 export const Header: FC = () => {

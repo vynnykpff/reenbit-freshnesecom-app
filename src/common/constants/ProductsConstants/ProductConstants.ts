@@ -1,5 +1,5 @@
 import { ProductCategory } from "@/common/types";
-import { ProductFilterType } from "./ProductFilters.ts";
+import { ProductFilterType } from "../ProductFiltersConstants.ts";
 
 export const enum ProductDefaultValue {
   CATEGORIES = "All Categories",

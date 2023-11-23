@@ -1,7 +1,7 @@
-import { ProductsService } from "@/services";
-import { getProductsCategories, getProductsCategoriesWithBrands } from "@/utils";
 import { CaseReducer, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
+import { ProductsService } from "@/services";
+import { getProductsCategories, getProductsCategoriesWithBrands } from "@/utils";
 import { Product, ProductsState, StoreAsyncThunk } from "@/common/types";
 
 const asyncThunk = createAsyncThunk("products/getProducts", async function (_, { rejectWithValue }) {

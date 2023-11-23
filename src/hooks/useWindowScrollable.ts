@@ -1,6 +1,6 @@
-import { Attributes } from "@/common/constants";
-import { removeDataAttribute, setDataAttribute } from "@/utils";
 import { useEffect } from "react";
+import { removeDataAttribute, setDataAttribute } from "@/utils";
+import { Attributes } from "@/common/constants";
 
 export const useWindowScrollable = (isScrollable: boolean) => {
   useEffect(() => {
