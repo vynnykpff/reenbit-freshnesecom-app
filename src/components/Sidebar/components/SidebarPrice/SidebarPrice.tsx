@@ -12,12 +12,10 @@ import { PriceRange } from "./components";
 import commonStyles from "@/styles/Common.module.scss";
 import "rc-slider/assets/index.css";
 import styles from "./SidebarPrice.module.scss";
-
 export const SidebarPrice: FC = () => {
   const { products } = useAppSelector(state => state.products);
   const { productCategory, productRatings, productBrands } = useAppSelector(state => state.productsFilter);
   const { setPrice, resetRating, resetPrice } = useActions();
-
   const filteredProducts = useFilteredProducts();
   const [localPrice, setLocalPrice] = useState(getMinMaxProductPrice(filteredProducts));
   const [sliderValue, setSliderValue] = useState<[number, number]>([localPrice.minPrice, localPrice.maxPrice]);
