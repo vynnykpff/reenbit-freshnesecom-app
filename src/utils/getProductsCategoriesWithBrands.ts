@@ -1,9 +1,9 @@
-import { ProductCategory, Products } from "@/common/types";
+import { Product, ProductCategory } from "@/common/types";
 import { ProductDefaultValue, ProductFilterType } from "@/common/constants";
 import { getTitleBrand } from "./getTitleBrand.ts";
 import { getSlugString } from "./getSlugString.ts";
 
-export const getProductsCategoriesWithBrands = (products: Products[]) => {
+export const getProductsCategoriesWithBrands = (products: Product[]) => {
   const categoryData = products.reduce<Record<string, ProductCategory>>((acc, product) => {
     const { category, brand } = product;
 

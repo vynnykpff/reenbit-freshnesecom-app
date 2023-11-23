@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ProductState, Products } from "@/common/types";
+import { Product, ProductState } from "@/common/types";
 
 const initialState: ProductState = {
   product: {},
@@ -9,7 +9,7 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setProduct: (state, action: PayloadAction<Products>) => {
+    setProduct: (state, action: PayloadAction<Product>) => {
       state.product = action.payload;
     },
 

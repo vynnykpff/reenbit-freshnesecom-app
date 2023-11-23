@@ -1,9 +1,9 @@
 import { useAppSelector } from "@/store";
 import { applyTrimAndLowerCase, getSlugString, sortFunctions } from "@/utils";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { ProductFilterType } from "@/common/constants";
 
-export type ProductFilter = (p: Products, i: number, d: Products[]) => boolean;
+export type ProductFilter = (p: Product, i: number, d: Product[]) => boolean;
 
 const MERGED_PRODUCT_BRANDS = ProductFilterType.ALL_BRANDS.split("_").join("");
 

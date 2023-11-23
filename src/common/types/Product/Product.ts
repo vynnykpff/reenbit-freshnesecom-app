@@ -1,5 +1,5 @@
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 
 export type ProductState = {
-  product: Partial<Products>;
+  product: Partial<Product>;
 };

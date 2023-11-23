@@ -1,7 +1,7 @@
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 
 type ProductFullDescription = {
-  title: Products["title"];
+  title: Product["title"];
   subtitle: string;
   content: string;
 };

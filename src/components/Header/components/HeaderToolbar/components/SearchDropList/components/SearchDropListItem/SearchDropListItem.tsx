@@ -1,5 +1,5 @@
 import { MediaQueries, Routes } from "@/common/constants";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { useMatchMedia } from "@/hooks";
 import { useActions } from "@/store";
 import { getSlugString } from "@/utils";
@@ -8,9 +8,9 @@ import { NavLink } from "react-router-dom";
 import styles from "./SearchDropListItem.module.scss";
 
 type Props = {
-  productTitle: Products["title"];
-  productCategory: Products["category"];
-  product: Products;
+  productTitle: Product["title"];
+  productCategory: Product["category"];
+  product: Product;
   searchImage: string;
   setIsVisible: Dispatch<SetStateAction<boolean>>;
 };

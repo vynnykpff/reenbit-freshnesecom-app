@@ -1,15 +1,15 @@
 import { Dispatch, SetStateAction } from "react";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { SortingTypes, SortingVariants } from "@/common/constants";
 
-export type ProductBrand = Products["brand"][];
+export type ProductBrand = Product["brand"][];
 
-export type ProductRating = Products["rating"][];
+export type ProductRating = Product["rating"][];
 
 export type ProductFilterPrice = [number, number];
 
 export type ProductsFilterState = {
-  productCategory: Products["category"];
+  productCategory: Product["category"];
   productBrands: ProductBrand;
   productRatings: ProductRating;
   productPrice: ProductFilterPrice;

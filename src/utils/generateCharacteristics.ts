@@ -1,11 +1,11 @@
-import { NavigationLink, Products } from "@/common/types";
+import { NavigationLink, Product } from "@/common/types";
 import { getSlugString } from "./getSlugString.ts";
 
 export type GenerateCharacteristicsParams = {
-  originCountry: Products["originCountry"];
-  brand: Products["brand"];
-  delivery: Products["delivery"];
-  stock: Products["stock"];
+  originCountry: Product["originCountry"];
+  brand: Product["brand"];
+  delivery: Product["delivery"];
+  stock: Product["stock"];
 };
 
 export const generateCharacteristics = ({ originCountry, brand, delivery, stock }: GenerateCharacteristicsParams): NavigationLink[] => {

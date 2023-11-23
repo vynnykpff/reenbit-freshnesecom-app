@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { DAY_DELIVERY, ProductDeliveryType } from "@/common/constants";
 import styles from "./ProductCardDelivery.module.scss";
 
-export const ProductCardDelivery: FC<Products["delivery"]> = ({ time, cost }) => {
+export const ProductCardDelivery: FC<Product["delivery"]> = ({ time, cost }) => {
   const handleGetDeliveryType = (): string => {
     return cost ? ProductDeliveryType.PAID : ProductDeliveryType.FREE;
   };

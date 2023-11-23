@@ -1,5 +1,5 @@
 import { SelectVariants } from "@/common/types";
-import { ProductId } from "./Products.ts";
+import { ProductId } from "./Product.ts";
 
 export type ProductCategory = {
   title: string;

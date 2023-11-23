@@ -8,7 +8,7 @@ export type ProductId = {
   id: string;
 };
 
-export type Products = {
+export type Product = {
   category: string;
   brand: string;
   images: string[];
@@ -25,7 +25,7 @@ export type Products = {
 } & ProductId;
 
 export type ProductsState = {
-  products: Products[];
+  products: Product[];
   productsCategoriesWithBrands: ProductCategory[];
   productsCategories: SelectVariants;
   searchValue: string;
