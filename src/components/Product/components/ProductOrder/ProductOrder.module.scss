@@ -1,0 +1,83 @@
+@import "@/styles/variables";
+
+.productOrderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  border: 1px solid var(--primary-c1-color-400);
+  max-width: 650px;
+  padding: 12px 24px 12px 16px;
+  margin-bottom: 24px;
+
+  .productOrderPriceContainer {
+    margin-bottom: 0;
+  }
+
+  .productDiscountOrderPrice, .productOriginalOrderPrice {
+    font-size: 26px;
+    margin-bottom: 0;
+  }
+
+  .productOrderNavigation {
+    display: flex;
+    align-items: center;
+
+    .productOrderInputContainer {
+      display: flex;
+      margin-right: 24px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      border: 1px solid var(--primary-c1-color-600);
+      background-color: var(--primary-c1-color-300);
+      width: 170px;
+      padding: 1.5px 16px;
+
+      .productOrderInputWrapper {
+        display: flex;
+        align-items: center;
+
+        &:after {
+          content: "|";
+          margin: 0 16px;
+          width: 2px;
+          height: 100%;
+          color: var(--primary-c1-color-700);
+        }
+      }
+
+      .productOrderInput {
+        background-color: var(--primary-c1-color-300);
+        width: 25px;
+      }
+
+      .productOrderSelect {
+        width: 100%;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+
+    .productOrderButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 6px;
+      font-size: 15px;
+      padding: 12px 16px;
+
+      &:hover {
+        .productOrderIcon {
+          transition: $primary-transition;
+          stroke: var(--secondary-c2-color-500);
+        }
+      }
+
+      .productOrderIcon {
+        transition: $primary-transition;
+        stroke: var(--secondary-c2-color-300);
+      }
+    }
+  }
+}

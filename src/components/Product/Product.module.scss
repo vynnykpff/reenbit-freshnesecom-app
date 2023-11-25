@@ -1,0 +1,8 @@
+@import "@/styles/variables";
+
+.productContainer {
+  display: flex;
+  gap: 32px;
+  height: 700px;
+  word-break: break-word;
+}

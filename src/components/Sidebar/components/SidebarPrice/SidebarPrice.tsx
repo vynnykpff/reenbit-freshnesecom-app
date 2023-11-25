@@ -5,9 +5,15 @@ import cn from "classnames";
 import { motion } from "framer-motion";
 import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect, useFilteredProducts } from "@/hooks";
-import { getMinMaxProductPrice, getMinMaxSelectedPrice } from "@/utils";
+import { getAnimationVariant, getMinMaxProductPrice, getMinMaxSelectedPrice } from "@/utils";
 import { ProductSelectedPrice } from "@/common/types";
-import { GlobalDelay, PRODUCTS_PRICE_DEFAULT, ProductFilterType, animationVariants } from "@/common/constants";
+import {
+  AnimationDefaultDuration,
+  GlobalDelay,
+  PRODUCTS_PRICE_DEFAULT,
+  ProductFilterType,
+  animationDefaultVariants,
+} from "@/common/constants";
 import { PriceRange } from "./components";
 import commonStyles from "@/styles/Common.module.scss";
 import "rc-slider/assets/index.css";
@@ -67,7 +73,7 @@ export const SidebarPrice: FC = () => {
   return (
     <div className={cn(commonStyles.sidebarItemContainer, styles.sidebarPriceContainer)}>
       <h4 className={commonStyles.sidebarTitle}>Price</h4>
-      <motion.div {...animationVariants}>
+      <motion.div {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}>
         <Slider
           classNames={{ handle: styles.handle, rail: styles.rail, track: styles.track }}
           className={styles["rc-slider"]}

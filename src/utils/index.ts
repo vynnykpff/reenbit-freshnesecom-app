@@ -8,6 +8,7 @@ export { applyTrimAndLowerCase } from "./applyTrimAndLowerCase.ts";
 export { getTitleBrand } from "./getTitleBrand.ts";
 export { getCountPages } from "./getCountPages.ts";
 export { sortFunctions } from "./sortFunctions.ts";
+export { getAnimationVariant } from "./getAnimationVariant.ts";
 export * from "./generateCharacteristics.ts";
 export * from "./getMinMaxProductPrice.ts";
 export * from "./checkPriceCorrectValue.ts";

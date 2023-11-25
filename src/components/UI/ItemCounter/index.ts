@@ -1,1 +1,1 @@
-export { ItemCounter } from "./ItemCounter.tsx";
+export { ProductInfoNotification } from "./ProductInfoNotification.tsx";

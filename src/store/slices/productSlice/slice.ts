@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ProductState, Products } from "@/common/types";
 
 const initialState: ProductState = {
-  product: {},
+  product: {} as Products,
 };
 
 export const productsSlice = createSlice({
@@ -14,7 +14,7 @@ export const productsSlice = createSlice({
     },
 
     resetProduct: state => {
-      state.product = {};
+      state.product = {} as Products;
     },
   },
 });

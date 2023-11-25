@@ -5,7 +5,7 @@ import { useAppSelector } from "@/store";
 import { useFilteredProducts, useMatchMedia } from "@/hooks";
 import { MediaQueries } from "@/common/constants";
 import { Pagination, ProductSorting, ProductsList, Sidebar, SidebarMobile } from "@/components";
-import { ErrorFallback, ItemCounter } from "@/components/UI";
+import { ErrorFallback, ProductInfoNotification } from "@/components/UI";
 import styles from "./ProductsPage.module.scss";
 
 const ProductsPage: FC = () => {
@@ -22,7 +22,7 @@ const ProductsPage: FC = () => {
       <div className={styles.productsPageHeaderContainer}>
         <div className={styles.productsPageHeader}>
           <h2 className={styles.productsPageTitle}>All Products</h2>
-          <ItemCounter count={filteredProducts.length} counterName="Products found" />
+          <ProductInfoNotification count={`${filteredProducts.length}`} counterName="Products found" />
         </div>
         {!isMobile && <ProductSorting />}
       </div>

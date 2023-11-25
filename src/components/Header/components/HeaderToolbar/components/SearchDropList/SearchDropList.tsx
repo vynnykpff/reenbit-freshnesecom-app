@@ -2,8 +2,9 @@ import { FC, MutableRefObject, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useAppSelector } from "@/store";
 import { useFilteredProducts, useOutsideClick } from "@/hooks";
+import { getAnimationVariant } from "@/utils";
 import { SearchDropListItem } from "./components";
-import { animationVariants } from "@/common/constants";
+import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./SearchDropList.module.scss";
 
 type Props = {
@@ -33,7 +34,11 @@ export const SearchDropList: FC<Props> = ({ searchRef }) => {
   }
 
   return (
-    <motion.section ref={containerRef} {...animationVariants} className={styles.searchDropListContainer}>
+    <motion.section
+      ref={containerRef}
+      {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}
+      className={styles.searchDropListContainer}
+    >
       <div className={styles.searchDropListHeader}>
         <span className={styles.searchDropListHeaderItem}>Product</span>
         <span className={styles.searchDropListHeaderItem}>Category</span>

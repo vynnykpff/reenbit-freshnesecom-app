@@ -1,8 +1,9 @@
+import { getAnimationVariant } from "@/utils";
 import { FC } from "react";
 import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 import { useActions, useAppSelector } from "@/store";
-import { animationVariants } from "@/common/constants";
+import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import { Checkbox, Rating } from "@/components/UI";
 import commonStyles from "@/styles/Common.module.scss";
 import styles from "./SidebarRating.module.scss";
@@ -43,7 +44,10 @@ export const SidebarRating: FC = () => {
   return (
     <div className={commonStyles.sidebarItemContainer}>
       <h4 className={commonStyles.sidebarTitle}>Rating</h4>
-      <motion.ul {...animationVariants} className={styles.sidebarRatingList}>
+      <motion.ul
+        {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}
+        className={styles.sidebarRatingList}
+      >
         {renderRating()}
       </motion.ul>
     </div>

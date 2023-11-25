@@ -1,10 +1,11 @@
+import { getAnimationVariant } from "@/utils";
 import { FC, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import cn from "classnames";
 import { useOutsideClick } from "@/hooks";
 import { SelectProps } from "@/common/types";
+import { AnimationDefaultDuration, animationDefaultSelect, animationDefaultVariants } from "@/common/constants";
 import commonStyles from "@/styles/Common.module.scss";
-import { animationList, animationSelect } from "@/common/constants";
 import SelectArrow from "#/icons/select-chevron.svg?react";
 import styles from "./Select.module.scss";
 
@@ -36,7 +37,11 @@ export const Select: FC<SelectProps> = ({
       }
 
       return (
-        <motion.span {...animationList} onClick={() => setValue(value)} key={i}>
+        <motion.span
+          {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.DEFAULT })}
+          onClick={() => setValue(value)}
+          key={i}
+        >
           {variants[value]}
         </motion.span>
       );
@@ -55,7 +60,10 @@ export const Select: FC<SelectProps> = ({
       </div>
       <AnimatePresence>
         {variantsVisible && (
-          <motion.div {...animationSelect} className={cn(styles.selectVariantsContainer, className)}>
+          <motion.div
+            {...getAnimationVariant({ ...animationDefaultSelect, duration: AnimationDefaultDuration.DEFAULT })}
+            className={cn(styles.selectVariantsContainer, className)}
+          >
             {renderVariants()}
           </motion.div>
         )}

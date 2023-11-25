@@ -92,3 +92,14 @@
     border: 1px solid var(--primary-c1-color-700);
   }
 }
+
+.likeIcon {
+  transition: $primary-transition;
+  stroke: var(--primary-c1-color-900);
+}
+
+.likeIconActive {
+  transition: $primary-transition;
+  stroke: var(--additional-c4-color-500);
+  fill: var(--additional-c4-color-600);
+}

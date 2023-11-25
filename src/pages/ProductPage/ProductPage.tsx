@@ -1,9 +1,14 @@
-import { withErrorBoundary } from "react-error-boundary";
-import { ErrorFallback } from "@/components/UI";
 import { FC } from "react";
+import { withErrorBoundary } from "react-error-boundary";
+import { Product } from "@/components";
+import { ErrorFallback } from "@/components/UI";
 
 const ProductPage: FC = () => {
-  return <h2>Current Product</h2>;
+  return (
+    <section className={"container"}>
+      <Product />
+    </section>
+  );
 };
 
 export default withErrorBoundary(ProductPage, { FallbackComponent: ErrorFallback });

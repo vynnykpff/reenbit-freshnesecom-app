@@ -1,0 +1,16 @@
+@import "@/styles/variables";
+
+.productInfoContainer {
+  .productInfoTitle {
+    font-family: $secondary-font;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .productDescription {
+    font-size: 17px;
+    margin-bottom: 40px;
+  }
+
+}

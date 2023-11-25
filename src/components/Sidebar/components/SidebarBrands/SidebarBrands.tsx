@@ -2,9 +2,9 @@ import { FC, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 import { useActions, useAppSelector } from "@/store";
-import { getSlugString, getTitleBrand } from "@/utils";
+import { getAnimationVariant, getSlugString, getTitleBrand } from "@/utils";
 import { Checkbox } from "@/components/UI";
-import { ProductDefaultValue, ProductFilterType, animationVariants } from "@/common/constants";
+import { AnimationDefaultDuration, ProductDefaultValue, ProductFilterType, animationDefaultVariants } from "@/common/constants";
 import commonStyles from "@/styles/Common.module.scss";
 import styles from "./SidebarBrands.module.scss";
 
@@ -32,7 +32,6 @@ export const SidebarBrands: FC = () => {
         }
       });
     });
-    // window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const getCategoryBrands = () => {
@@ -65,7 +64,10 @@ export const SidebarBrands: FC = () => {
   return (
     <div className={commonStyles.sidebarItemContainer}>
       <h4 className={commonStyles.sidebarTitle}>Brands</h4>
-      <motion.ul {...animationVariants} className={styles.sidebarBrandsList}>
+      <motion.ul
+        {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}
+        className={styles.sidebarBrandsList}
+      >
         {currentProductCategoryBrands.map(productBrand => (
           <li key={uuidv4()} className={styles.sidebarBrandsItem} onClick={() => handleSetProductBrand(productBrand)}>
             <Checkbox id={uuidv4()} name={productBrand} isChecked={handleIsChecked(productBrand)} />
