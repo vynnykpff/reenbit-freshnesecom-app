@@ -25,8 +25,8 @@ export const ProductOrder: FC = () => {
       <ProductCardPrice
         className={[styles.productOrderPriceContainer, styles.productOriginalOrderPrice, styles.productDiscountOrderPrice]}
         currency="USD"
-        discount={0}
-        original={48.56}
+        discount={40}
+        original={30}
       />
       <div className={styles.productOrderNavigation}>
         <div className={styles.productOrderInputContainer}>

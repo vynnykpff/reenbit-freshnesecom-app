@@ -8,9 +8,8 @@ export const ProductCardPriceWithDiscount: FC<Props> = ({ discount, currency, or
   return (
     <div className={styles.productCardPriceWithDiscountContainer}>
       <div className={commonStyles.totalPriceContainer}>
-        <p className={cn(styles.discountPrice, className)}>
-          {discount} {currency}
-        </p>
+        <p className={cn(styles.discountPrice, className)}>{discount}</p>
+        <span>{currency}</span>
       </div>
       <p className={styles.originalPrice}>{original}</p>
     </div>

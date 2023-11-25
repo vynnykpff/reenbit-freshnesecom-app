@@ -1,4 +1,5 @@
 @import "@/styles/variables";
+@import "@/styles/media";
 
 .productInfoContainer {
   .productInfoTitle {
@@ -6,11 +7,33 @@
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 8px;
+    transition: $primary-transition;
+
+    &:hover {
+      color: var(--primary-c1-color-800);
+    }
+
+    @include productCardsContainer {
+      font-size: 26px;
+      transition: $primary-transition;
+    }
+
   }
 
   .productDescription {
     font-size: 17px;
     margin-bottom: 40px;
+    transition: $primary-transition;
+
+    &:hover {
+      color: var(--primary-c1-color-800);
+    }
+
+    @include productCardsContainer {
+      margin-bottom: 30px;
+      font-size: 16px;
+      transition: $primary-transition;
+    }
   }
 
 }

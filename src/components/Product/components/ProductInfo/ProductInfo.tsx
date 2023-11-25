@@ -1,8 +1,8 @@
-import { getAnimationVariant } from "@/utils";
 import { FC } from "react";
 import { motion } from "framer-motion";
-import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
+import { getAnimationVariant } from "@/utils";
 import { ProductCustomersReviews } from "./components";
+import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./ProductInfo.module.scss";
 
 export const ProductInfo: FC = () => {

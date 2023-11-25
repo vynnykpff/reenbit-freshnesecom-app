@@ -1,7 +1,13 @@
+@import "@/styles/media";
+
 .productCustomersReviewsContainer {
   display: flex;
   column-gap: 8px;
   margin-bottom: 40px;
+
+  @include productCardsContainer {
+    margin-bottom: 30px;
+  }
 
   .productCustomersReviewsContent {
     color: var(--primary-c1-color-700);

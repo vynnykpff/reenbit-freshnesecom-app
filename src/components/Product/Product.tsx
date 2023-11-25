@@ -6,7 +6,7 @@ import styles from "./Product.module.scss";
 export const Product: FC = () => {
   return (
     <div className={styles.productContainer}>
-      <div>
+      <div className={styles.productMediaContainer}>
         <ProductNotification />
         <ProductGallery />
       </div>
