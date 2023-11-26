@@ -11,7 +11,6 @@
   max-width: 650px;
   padding: 12px 24px 12px 16px;
   margin-bottom: 24px;
-  transition: $primary-transition;
 
   @include productCardsContainer {
     flex-direction: column;
@@ -20,7 +19,6 @@
     row-gap: 20px;
     padding: 12px 16px;
     margin-bottom: 18px;
-    transition: $primary-transition;
   }
 
   @include tablet {
@@ -30,13 +28,11 @@
     align-items: stretch;
     max-width: 100%;
     column-gap: 24px;
-    transition: $primary-transition;
   }
 
   .productOrderPriceContainer {
     margin-bottom: 0;
     max-width: 200px;
-    transition: $primary-transition;
   }
 
   .productDiscountOrderPrice, .productOriginalOrderPrice {
@@ -53,24 +49,21 @@
       flex-direction: column;
       align-items: flex-end;
       gap: 16px;
-      transition: $primary-transition;
     }
 
     @include productCardsContainer {
       flex-direction: row;
       flex-wrap: wrap;
-      transition: $primary-transition;
     }
 
     @include productLaptopContainer {
       align-items: flex-start;
-      transition: $primary-transition;
     }
 
     @include largeMobile {
       flex-direction: column;
       width: 100%;
-      transition: $primary-transition;
+      transition: width .3s;
     }
 
     .productOrderInputContainer {
@@ -83,7 +76,7 @@
       background-color: var(--primary-c1-color-300);
       width: 170px;
       padding: 1.5px 16px;
-      transition: $primary-transition;
+      transition: width .3s;
 
       @include desktop {
         margin-right: 0;
@@ -91,13 +84,12 @@
 
       @include largeMobile {
         width: 100%;
-        transition: $primary-transition;
+        transition: width .3s;
       }
 
       .productOrderInputWrapper {
         display: flex;
         align-items: center;
-        transition: $primary-transition;
 
         &:after {
           content: "|";
@@ -111,11 +103,11 @@
       .productOrderInput {
         background-color: var(--primary-c1-color-300);
         width: 25px;
-        transition: $primary-transition;
+        transition: width .3s;
 
         @include largeMobile {
           width: 100%;
-          transition: $primary-transition;
+          transition: width .3s;
         }
       }
 
@@ -123,7 +115,7 @@
         width: 100%;
         font-size: 14px;
         font-weight: 600;
-        transition: $primary-transition;
+        transition: width .3s;
       }
     }
 
@@ -134,11 +126,11 @@
       column-gap: 6px;
       font-size: 15px;
       padding: 12px 16px;
-      transition: $primary-transition;
+      transition: width .3s;
 
       @include largeMobile {
         width: 100%;
-        transition: $primary-transition;
+        transition: width .3s;
       }
 
       &:hover {

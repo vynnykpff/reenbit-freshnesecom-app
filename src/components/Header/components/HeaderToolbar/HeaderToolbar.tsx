@@ -22,7 +22,9 @@ export const HeaderToolbar: FC = () => {
   const { setCategory, resetFilters } = useActions();
 
   useChangeEffect(() => {
-    resetFilters();
+    if (!location.pathname.startsWith(Routes.PRODUCTS)) {
+      resetFilters();
+    }
   }, [location.pathname]);
 
   useWindowScrollable(!isOpenBurgerNav);

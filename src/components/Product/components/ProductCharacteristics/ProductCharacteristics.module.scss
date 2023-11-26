@@ -4,50 +4,11 @@
   display: flex;
   column-gap: 30px;
   margin-bottom: 40px;
-  transition: $primary-transition;
 
   @include productCardsContainer {
     flex-direction: column;
     column-gap: 0;
     row-gap: 12px;
     margin-bottom: 30px;
-    transition: $primary-transition;
-  }
-
-  .productCharacteristicsItemWrapper {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    gap: 12px;
-    transition: $primary-transition;
-
-    .productCharacteristicsItem {
-      display: flex;
-      transition: $primary-transition;
-
-      &:hover {
-        .productCharacteristicsItemKey {
-          color: var(--secondary-c2-color-500);
-        }
-      }
-
-
-      .productCharacteristicsItemKey {
-        color: var(--primary-c1-color-700);
-        margin-right: 20px;
-        width: 110px;
-        transition: $primary-transition;
-
-        @include desktop {
-          min-width: 75px;
-          max-width: 75px;
-        }
-
-        @include productCardsContainer {
-          min-width: 110px;
-          max-width: 110px;
-        }
-      }
-    }
   }
 }

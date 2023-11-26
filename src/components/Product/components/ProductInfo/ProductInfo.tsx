@@ -1,15 +1,21 @@
 import { FC } from "react";
 import { motion } from "framer-motion";
 import { getAnimationVariant } from "@/utils";
+import { Products } from "@/common/types";
 import { ProductCustomersReviews } from "./components";
 import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./ProductInfo.module.scss";
 
-export const ProductInfo: FC = () => {
+type Props = {
+  title: Products["title"];
+  longDescription: string;
+};
+
+export const ProductInfo: FC<Props> = ({ title, longDescription }) => {
   return (
     <div className={styles.productInfoContainer}>
       <motion.div {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}>
-        <h4 className={styles.productInfoTitle}>Carrots from Tom Farm</h4>
+        <h4 className={styles.productInfoTitle}>{title}</h4>
         <ProductCustomersReviews />
       </motion.div>
 
@@ -17,8 +23,7 @@ export const ProductInfo: FC = () => {
         className={styles.productDescription}
         {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.SECONDARY })}
       >
-        Carrots from Tomissy Farm are one of the best on the market. Tomisso and his family are giving a full love to his Bio products. To
-        misso’s carrots are growing on the fields naturally.
+        {longDescription}
       </motion.p>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/store";
-import { applyTrimAndLowerCase, getSlugString, sortFunctions } from "@/utils";
+import { applyTrimAndLowerCase, getProductRating, getSlugString, sortFunctions } from "@/utils";
 import { Products } from "@/common/types";
 import { ProductFilterType } from "@/common/constants";
 
@@ -13,7 +13,7 @@ export const useFilteredProducts = () => {
   const filters: ProductFilter[] = [];
 
   if (productRatings.length) {
-    filters.push(product => productRatings.some(item => item === product.rating));
+    filters.push(product => productRatings.some(item => item === getProductRating(product.reviews)));
   }
 
   if (productCategory === (ProductFilterType.ALL_CATEGORIES as string) && !searchValue && !productBrands.length && !productRatings) {

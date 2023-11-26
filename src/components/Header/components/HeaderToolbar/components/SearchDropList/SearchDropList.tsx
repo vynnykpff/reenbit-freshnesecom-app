@@ -49,7 +49,6 @@ export const SearchDropList: FC<Props> = ({ searchRef }) => {
             <SearchDropListItem
               key={product.id}
               setIsVisible={setIsVisible}
-              product={product}
               searchImage={product.images[0]}
               productTitle={product.title}
               productCategory={product.category}

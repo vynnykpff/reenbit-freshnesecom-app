@@ -1,13 +1,23 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { motion } from "framer-motion";
 import cn from "classnames";
-import { useAppSelector } from "@/store";
 import { getAnimationVariant } from "@/utils";
+import { Products } from "@/common/types";
 import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./ProductGallery.module.scss";
 
-export const ProductGallery: FC = () => {
-  const { product } = useAppSelector(state => state.product);
+type Props = {
+  title: Products["title"];
+  images: Products["images"];
+};
+
+export const ProductGallery: FC<Props> = ({ title, images }) => {
+  const [activeImage, setActiveImage] = useState(images[0]);
+  const filteredImages = images.filter(image => image !== activeImage);
+
+  const handleImageClick = (image: string) => {
+    setActiveImage(image);
+  };
 
   return (
     <div className={styles.productGalleryContainer}>
@@ -15,24 +25,22 @@ export const ProductGallery: FC = () => {
         <motion.img
           {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}
           className={cn(styles.productGalleryImage, styles.productGalleryMainImage)}
-          src={product.images[0]}
-          alt={product.title}
+          src={activeImage}
+          alt={title}
         />
       </div>
 
       <div className={styles.productGallerySmallImagesContainer}>
-        <motion.img
-          {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.SECONDARY })}
-          className={cn(styles.productGalleryImage, styles.productGallerySmallImage)}
-          src={product.images[1]}
-          alt={`${product.title}_small_1`}
-        />
-        <motion.img
-          {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.SECONDARY })}
-          className={cn(styles.productGalleryImage, styles.productGallerySmallImage)}
-          src={product.images[2]}
-          alt={`${product.title}_small_2`}
-        />
+        {filteredImages.map((image, index) => (
+          <motion.img
+            key={index}
+            onClick={() => handleImageClick(image)}
+            {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.SECONDARY })}
+            className={cn(styles.productGalleryImage, styles.productGallerySmallImage)}
+            src={image}
+            alt={`${title}_small_${index + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

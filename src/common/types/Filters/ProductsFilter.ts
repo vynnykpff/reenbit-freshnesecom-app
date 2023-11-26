@@ -4,14 +4,12 @@ import { SortingTypes, SortingVariants } from "@/common/constants";
 
 export type ProductBrand = Products["brand"][];
 
-export type ProductRating = Products["rating"][];
-
 export type ProductFilterPrice = [number, number];
 
 export type ProductsFilterState = {
   productCategory: Products["category"];
   productBrands: ProductBrand;
-  productRatings: ProductRating;
+  productRatings: number[];
   productPrice: ProductFilterPrice;
   sortBy: SortingVariants;
   sortType: SortingTypes;

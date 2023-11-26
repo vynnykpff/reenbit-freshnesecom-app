@@ -14,7 +14,12 @@ const tempOrderData = {
   Pack: "Pack",
 };
 
-export const ProductOrder: FC = () => {
+type Props = {
+  original: number;
+  discount: number;
+};
+
+export const ProductOrder: FC<Props> = ({ original, discount }) => {
   const [currentOrderPriceVariant, setCurrentOrderPriceVariant] = useState(tempOrderData.Pcs);
 
   return (
@@ -25,8 +30,8 @@ export const ProductOrder: FC = () => {
       <ProductCardPrice
         className={[styles.productOrderPriceContainer, styles.productOriginalOrderPrice, styles.productDiscountOrderPrice]}
         currency="USD"
-        discount={40}
-        original={30}
+        discount={discount}
+        original={original}
       />
       <div className={styles.productOrderNavigation}>
         <div className={styles.productOrderInputContainer}>

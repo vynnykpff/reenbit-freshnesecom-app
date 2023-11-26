@@ -1,0 +1,1 @@
+export { ProductCharacteristicsRows } from "./UI";

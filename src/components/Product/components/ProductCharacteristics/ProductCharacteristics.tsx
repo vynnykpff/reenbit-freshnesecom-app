@@ -1,45 +1,23 @@
 import { FC } from "react";
 import { motion } from "framer-motion";
-import { getAnimationVariant } from "@/utils";
-import {
-  AnimationDefaultDuration,
-  ProductCharacteristicsOptions,
-  ProductListCharacteristics,
-  ProductListCharacteristicsKeys,
-  animationDefaultVariants,
-} from "@/common/constants";
+import { getAnimationVariant, getProductCharacteristics } from "@/utils";
+import { Products } from "@/common/types";
+import { ProductCharacteristicsRows } from "./components";
+import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./ProductCharacteristics.module.scss";
 
-const createRow = (rowIndex: number) => {
-  const productCharacteristicsData = ProductListCharacteristicsKeys.slice(
-    rowIndex * ProductCharacteristicsOptions.COLUMNS,
-    (rowIndex + ProductCharacteristicsOptions.NEXT_ITEM) * ProductCharacteristicsOptions.COLUMNS,
-  );
+export const ProductCharacteristics: FC<Products> = props => {
+  const productCharacteristicsKeys = Object.keys(getProductCharacteristics(props));
 
-  return (
-    <div className={styles.productCharacteristicsItemWrapper} key={rowIndex}>
-      {productCharacteristicsData.map(key => (
-        <li className={styles.productCharacteristicsItem} key={key}>
-          <span className={styles.productCharacteristicsItemKey}>{key}:</span>
-          <span className={styles.productCharacteristicsItemProperty}>{ProductListCharacteristics[key]}</span>
-        </li>
-      ))}
-    </div>
-  );
-};
-
-const createRows = () => {
-  const rows = Array.from({ length: Math.ceil(ProductListCharacteristicsKeys.length / ProductCharacteristicsOptions.COLUMNS) });
-  return rows.map((_, rowIndex) => createRow(rowIndex));
-};
-
-export const ProductCharacteristics: FC = () => {
   return (
     <motion.ul
       {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.SECONDARY })}
       className={styles.productCharacteristicsList}
     >
-      {createRows()}
+      <ProductCharacteristicsRows
+        productCharacteristicsKeys={productCharacteristicsKeys}
+        productCharacteristicsList={getProductCharacteristics(props)}
+      />
     </motion.ul>
   );
 };

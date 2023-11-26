@@ -31,15 +31,14 @@
   .productGalleryMainImageContainer {
     display: flex;
     margin-bottom: 26px;
-    cursor: pointer;
     border-radius: 12px;
-    transition: $primary-transition;
     user-select: none;
+    transition: box-shadow .3s ease;
 
     &:hover {
       .productGalleryImage {
-        transition: $primary-transition;
         box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+        transition: box-shadow .3s ease;
       }
     }
 
@@ -58,19 +57,19 @@
       padding: 30px 20px;
 
       @include productLaptopContainer {
-        transition: $primary-transition;
+        transition: width, height .3s ease;
         height: 320px;
       }
 
       @include tablet {
         width: 100%;
         padding: 15px;
-        transition: $primary-transition;
+        transition: width .3s ease;
       }
 
       @include productCardMobile {
         height: 250px;
-        transition: $primary-transition;
+        transition: height .3s ease;
       }
     }
   }
@@ -81,8 +80,8 @@
     width: 569px;
     height: 218px;
     transition: $primary-transition;
-    cursor: pointer;
     user-select: none;
+    pointer-events: none;
 
     &:hover {
       .productGalleryImage {
@@ -117,7 +116,10 @@
 
     .productGallerySmallImage {
       width: 265px;
-      padding: 0 10px;
+      padding: 10px;
+      cursor: pointer;
+      user-select: none;
+      pointer-events: auto;
 
       @include tablet {
         width: 100%;
@@ -138,5 +140,5 @@
   object-fit: contain;
   background-color: var(--primary-c1-color-500);
   box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
-  transition: $primary-transition;
+  transition: box-shadow .3s ease;
 }

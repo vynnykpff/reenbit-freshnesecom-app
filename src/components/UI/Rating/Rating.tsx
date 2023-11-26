@@ -1,5 +1,6 @@
 import { FC } from "react";
 import cn from "classnames";
+import { ProductRating } from "@/common/constants";
 import RatingIcon from "#/icons/rating-star.svg?react";
 import styles from "./Rating.module.scss";
 
@@ -8,15 +9,14 @@ type Props = {
   className?: string[];
 };
 
-const MAX_AMOUNT_STARS = 5;
 const START_VALUE = 0;
 
 export const Rating: FC<Props> = ({ amountRating, className = "" }) => {
   const renderRating = () => {
     const ratingIcons = [];
-    for (let i = START_VALUE; i < MAX_AMOUNT_STARS; i++) {
+    for (let i = START_VALUE; i < +ProductRating.MAX; i++) {
       ratingIcons.push(
-        <li key={i}>
+        <li className={styles.ratingListItem} key={i}>
           {i < amountRating ? (
             <RatingIcon className={cn(styles.ratingIcon, styles.ratingIconFill, className[1])} />
           ) : (
