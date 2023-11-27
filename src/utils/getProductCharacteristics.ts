@@ -1,7 +1,7 @@
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { getDeliveryTime } from "./getDeliveryTime.ts";
 
-export const getProductCharacteristics = (product: Products) => {
+export const getProductCharacteristics = (product: Product) => {
   const characteristicMappings: Record<string, string> = {
     originCountry: "Country",
     category: "Category",
@@ -16,7 +16,7 @@ export const getProductCharacteristics = (product: Products) => {
 
   for (const [productProp, characteristicProp] of Object.entries(characteristicMappings)) {
     updatedCharacteristics[characteristicProp] =
-      (product[productProp as keyof Products] as string) ?? getNestedPropertyValue(product, productProp);
+      (product[productProp as keyof Product] as string) ?? getNestedPropertyValue(product, productProp);
 
     if (productProp === "delivery.time") {
       const deliveryTime = getNestedPropertyValue(product, productProp);
@@ -27,7 +27,7 @@ export const getProductCharacteristics = (product: Products) => {
   return updatedCharacteristics;
 };
 
-function getNestedPropertyValue(obj: Products, path: string): Products {
+function getNestedPropertyValue(obj: Product, path: string): Product {
   const props = path.split(".");
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access

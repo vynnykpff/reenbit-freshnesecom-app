@@ -43,7 +43,6 @@ export const PaginationPages: FC = () => {
       paginationStartPage: newStartPage,
       paginationEndPage: DEFAULT_AMOUNT_PRODUCT_PER_PAGE,
     });
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

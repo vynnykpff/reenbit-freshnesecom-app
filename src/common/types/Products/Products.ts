@@ -1,28 +1,10 @@
-import { ProductUnitsMeasure } from "@/common/constants";
+import { Product } from "@/common/types";
 import { BaseState } from "../BaseState.ts";
 import { SelectVariants } from "../Select.ts";
-import { ProductDescription } from "./ProductDescription.ts";
-import { ProductCategory, ProductDelivery, ProductPrice, ProductStock } from "./ProductInfo.ts";
-import { ProductReview } from "./ProductUserFeedback.ts";
-
-export type Products = {
-  id: string;
-  category: string;
-  brand: string;
-  images: string[];
-  title: string;
-  description: ProductDescription;
-  originCountry: string;
-  delivery: ProductDelivery;
-  stock: ProductStock;
-  unitsMeasure: ProductUnitsMeasure;
-  price: ProductPrice;
-  reviews: ProductReview[];
-  questions: Omit<ProductReview, "rating">;
-};
+import { ProductCategory } from "./ProductInfo.ts";
 
 export type ProductsState = {
-  products: Products[];
+  products: Product[];
   productsCategoriesWithBrands: ProductCategory[];
   productsCategories: SelectVariants;
   searchValue: string;

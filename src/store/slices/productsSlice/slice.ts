@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Products, ProductsState } from "@/common/types";
+import { Product, ProductsState } from "@/common/types";
 import { ErrorMessages } from "@/common/constants";
 import productsSliceThunks from "./thunks";
 
@@ -20,7 +20,7 @@ export const productsSlice = createSlice({
       state.searchValue = action.payload;
     },
 
-    setProducts: (state, action: PayloadAction<Products[]>) => {
+    setProducts: (state, action: PayloadAction<Product[]>) => {
       state.products = action.payload;
     },
   },

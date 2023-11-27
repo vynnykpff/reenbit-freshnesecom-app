@@ -17,7 +17,6 @@ export const SidebarRating: FC = () => {
 
   const handleClickRating = (count: number) => {
     setRating(count);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleIsChecked = (rating: number): boolean => {

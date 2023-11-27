@@ -8,8 +8,6 @@ export const SidebarResetFilters: FC<FiltersProps> = ({ setIsShowFilters }) => {
   const { resetFilters, setSearchValue } = useActions();
 
   const handleResetFilters = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
     resetFilters();
     setSearchValue("");
 

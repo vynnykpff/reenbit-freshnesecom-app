@@ -1,9 +1,9 @@
 import { productsApi } from "./api";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 
 export class ProductService {
-  public static async getProduct(id: Products["id"]): Promise<Products> {
-    const response = await productsApi.get<Products>(`/products/${id}`);
+  public static async getProduct(id: Product["id"]): Promise<Product> {
+    const response = await productsApi.get<Product>(`/products/${id}`);
     return response.data;
   }
 }

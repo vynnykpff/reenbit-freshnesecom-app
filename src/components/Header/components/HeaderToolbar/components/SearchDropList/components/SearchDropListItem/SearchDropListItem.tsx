@@ -2,13 +2,13 @@ import { Dispatch, FC, SetStateAction } from "react";
 import { NavLink } from "react-router-dom";
 import { useMatchMedia } from "@/hooks";
 import { getSlugString } from "@/utils";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { MediaQueries, Routes } from "@/common/constants";
 import styles from "./SearchDropListItem.module.scss";
 
 type Props = {
-  productTitle: Products["title"];
-  productCategory: Products["category"];
+  productTitle: Product["title"];
+  productCategory: Product["category"];
   searchImage: string;
   setIsVisible: Dispatch<SetStateAction<boolean>>;
 };

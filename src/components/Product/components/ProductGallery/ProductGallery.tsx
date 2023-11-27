@@ -2,13 +2,13 @@ import { FC, useState } from "react";
 import { motion } from "framer-motion";
 import cn from "classnames";
 import { getAnimationVariant } from "@/utils";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./ProductGallery.module.scss";
 
 type Props = {
-  title: Products["title"];
-  images: Products["images"];
+  title: Product["title"];
+  images: Product["images"];
 };
 
 export const ProductGallery: FC<Props> = ({ title, images }) => {

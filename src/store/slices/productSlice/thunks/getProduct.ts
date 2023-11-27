@@ -1,7 +1,7 @@
 import { CaseReducer, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { ProductService } from "@/services";
-import { ProductState, Products, StoreAsyncThunk } from "@/common/types";
+import { Product, ProductState, StoreAsyncThunk } from "@/common/types";
 
 const asyncThunk = createAsyncThunk("product/getProduct", async function (arg: string, { rejectWithValue }) {
   try {
@@ -11,7 +11,7 @@ const asyncThunk = createAsyncThunk("product/getProduct", async function (arg: s
   }
 });
 
-const storeHandler: CaseReducer<ProductState, PayloadAction<Products>> = (state, action) => {
+const storeHandler: CaseReducer<ProductState, PayloadAction<Product>> = (state, action) => {
   state.product = action.payload;
 };
 

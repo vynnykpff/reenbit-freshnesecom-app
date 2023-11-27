@@ -28,11 +28,9 @@ export const HeaderToolbar: FC = () => {
   }, [location.pathname]);
 
   useWindowScrollable(!isOpenBurgerNav);
-
   const onBurgerMenuClick = () => {
     dispatch(updateHeaderCategories({ isOpenBurgerNav: !isOpenBurgerNav }));
   };
-
   return (
     <section className={styles.headerToolbarContainer}>
       <NavLink to={Routes.HOME}>

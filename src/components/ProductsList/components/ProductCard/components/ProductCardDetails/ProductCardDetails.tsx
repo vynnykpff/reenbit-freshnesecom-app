@@ -2,13 +2,13 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useMatchMedia } from "@/hooks";
 import { GenerateCharacteristicsParams, generateCharacteristics, getProductRating, getSlugString } from "@/utils";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { Rating } from "@/components/UI";
 import { ProductCardDetailsDesktop, ProductCardDetailsMobile } from "./components";
 import { MediaQueries, Routes } from "@/common/constants";
 import styles from "./ProductCardDetails.module.scss";
 
-export const ProductCardDetails: FC<Products> = (props: Products) => {
+export const ProductCardDetails: FC<Product> = (props: Product) => {
   const isMobile = useMatchMedia(`(max-width: ${MediaQueries.PRODUCT_CARDS_CONTAINER})`);
 
   const generateCharacteristicsObj: GenerateCharacteristicsParams = {

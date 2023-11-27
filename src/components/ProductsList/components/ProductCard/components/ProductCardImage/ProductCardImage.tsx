@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { getSlugString } from "@/utils";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { Routes } from "@/common/constants";
 import NoAvailableImageIcon from "#/icons/no-image-available.svg?react";
 import styles from "./ProductCardImage.module.scss";
 
-export const ProductCardImage = (props: Products) => {
+export const ProductCardImage = (props: Product) => {
   const renderProductImage = () => {
     return props.images.length ? (
       <Link className={styles.productCardImageWrapper} to={`${Routes.PRODUCTS}/${getSlugString(props.title)}`}>

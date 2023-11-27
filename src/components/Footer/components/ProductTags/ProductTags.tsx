@@ -1,4 +1,4 @@
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { useAppSelector } from "@/store";
 import cn from "classnames";
 import { FC } from "react";
@@ -15,7 +15,7 @@ export const ProductTags: FC = () => {
     <div className={styles.productTagsContainer}>
       <h3 className={cn(commonStyles.titleCategory, styles.productTagsTitle)}>Product tags</h3>
       <ul className={styles.productTagsList}>
-        {limitedProducts.map((tag: Products) => (
+        {limitedProducts.map((tag: Product) => (
           <li className={styles.productTagsListItem} key={tag.id}>
             {tag.title}
           </li>

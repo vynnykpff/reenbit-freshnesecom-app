@@ -1,8 +1,8 @@
-import cn from "classnames";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import cn from "classnames";
 import { getSlugString } from "@/utils";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { Button } from "@/components/UI";
 import { Routes } from "@/common/constants";
 import LikeIcon from "#/icons/like.svg?react";
@@ -10,7 +10,7 @@ import ProductDetailsIcon from "#/icons/select-chevron.svg?react";
 import commonStyles from "@/styles/Common.module.scss";
 import styles from "./ProductCardNavigation.module.scss";
 
-export const ProductCardNavigation = (props: Products) => {
+export const ProductCardNavigation = (props: Product) => {
   const [isClicked, setIsClicked] = useState(false);
 
   return (

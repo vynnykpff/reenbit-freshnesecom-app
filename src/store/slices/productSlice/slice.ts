@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import productSliceThunks from "./thunks";
-import { ProductState, Products } from "@/common/types";
+import { Product, ProductState } from "@/common/types";
 import { ErrorMessages } from "@/common/constants";
 
 const initialState: ProductState = {
-  product: {} as Products,
+  product: {} as Product,
   isPending: false,
   error: null,
 };

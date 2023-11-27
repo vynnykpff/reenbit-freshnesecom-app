@@ -1,7 +1,7 @@
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { getSlugString } from "./getSlugString.ts";
 
-export const getProductId = (products: Products[], pathname: string) => {
+export const getProductId = (products: Product[], pathname: string) => {
   const pathnameArray = pathname.split("/");
   const LAST_PATHNAME = pathnameArray.length - 1;
 

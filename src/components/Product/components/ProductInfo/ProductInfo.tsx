@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { motion } from "framer-motion";
 import { getAnimationVariant } from "@/utils";
-import { Products } from "@/common/types";
+import { Product } from "@/common/types";
 import { ProductCustomersReviews } from "./components";
 import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./ProductInfo.module.scss";
 
 type Props = {
-  title: Products["title"];
+  title: Product["title"];
   longDescription: string;
 };
 
