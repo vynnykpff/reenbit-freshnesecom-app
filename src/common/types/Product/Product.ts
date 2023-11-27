@@ -10,6 +10,7 @@ export type Product = {
   brand: string;
   images: string[];
   title: string;
+  rating: number;
   description: ProductDescription;
   originCountry: string;
   delivery: ProductDelivery;
