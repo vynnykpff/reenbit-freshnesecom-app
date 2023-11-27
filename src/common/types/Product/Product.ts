@@ -1,5 +1,8 @@
+import { BaseState } from "@/common/types";
+import { ProductDescription } from "./ProductDescription.ts";
+import { ProductDelivery, ProductPrice, ProductStock } from "./ProductInfo.ts";
+import { ProductReview } from "./ProductUserFeedback.ts";
 import { ProductUnitsMeasure } from "@/common/constants";
-import { BaseState, ProductDelivery, ProductDescription, ProductPrice, ProductReview, ProductStock } from "@/common/types";
 
 export type Product = {
   id: string;
@@ -18,5 +21,5 @@ export type Product = {
 };
 
 export type ProductState = {
-  product: Partial<Product>;
+  product: Product;
 } & BaseState;
