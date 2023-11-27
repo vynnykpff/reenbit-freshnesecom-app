@@ -1,0 +1,109 @@
+@import "@/styles/media";
+@import "@/styles/variables";
+
+.productOrderNavigation {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+
+  @include desktop {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  @include productCardsContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @include productLaptopContainer {
+    align-items: flex-start;
+  }
+
+  @include largeMobile {
+    flex-direction: column;
+    width: 100%;
+    transition: width .3s;
+  }
+
+  .productOrderInputContainer {
+    display: flex;
+    margin-right: 24px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid var(--primary-c1-color-600);
+    background-color: var(--primary-c1-color-300);
+    width: 170px;
+    padding: 1.5px 16px;
+    transition: width .3s;
+
+    @include desktop {
+      margin-right: 0;
+    }
+
+    @include largeMobile {
+      width: 100%;
+      transition: width .3s;
+    }
+
+    .productOrderInputWrapper {
+      display: flex;
+      align-items: center;
+
+      &:after {
+        content: "|";
+        margin: 0 16px;
+        width: 2px;
+        height: 100%;
+        color: var(--primary-c1-color-700);
+      }
+    }
+
+    .productOrderInput {
+      background-color: var(--primary-c1-color-300);
+      width: 25px;
+      transition: width .3s;
+
+      @include largeMobile {
+        width: 100%;
+        transition: width .3s;
+      }
+    }
+
+    .productOrderSelect {
+      width: 100%;
+      font-size: 14px;
+      font-weight: 600;
+      transition: width .3s;
+    }
+  }
+
+  .productOrderButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 6px;
+    font-size: 15px;
+    padding: 12px 16px;
+    transition: width .3s;
+
+    @include largeMobile {
+      width: 100%;
+      transition: width .3s;
+    }
+
+    &:hover {
+      .productOrderIcon {
+        transition: $primary-transition;
+        stroke: var(--secondary-c2-color-500);
+      }
+    }
+
+    .productOrderIcon {
+      transition: $primary-transition;
+      stroke: var(--secondary-c2-color-300);
+    }
+  }
+}

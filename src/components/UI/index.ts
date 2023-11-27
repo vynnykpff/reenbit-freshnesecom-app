@@ -12,3 +12,4 @@ export { ProductInfoNotification } from "./ItemCounter";
 export { Checkbox } from "./Checkbox";
 export { Breadcrumbs } from "./Breadcrumbs";
 export { Dropdown } from "./Dropdown";
+export { Notification } from "./Notification";

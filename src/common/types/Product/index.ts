@@ -1,2 +1,2 @@
 export * from "./Product.ts";
-export * from "./ProductCharacteristics.ts";
+export * from "./ProductPrice.ts";

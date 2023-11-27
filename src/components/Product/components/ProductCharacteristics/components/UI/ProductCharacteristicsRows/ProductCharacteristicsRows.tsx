@@ -9,6 +9,7 @@ export const ProductCharacteristicsRows: FC<Omit<ProductCharacteristicsListProps
   const rows = Array.from({ length: Math.ceil(productCharacteristicsKeys.length / ProductCharacteristicsOptions.COLUMNS) });
   return rows.map((_, rowIndex) => (
     <ProductCharacteristicsRow
+      key={rowIndex}
       rowIndex={rowIndex}
       productCharacteristicsKeys={productCharacteristicsKeys}
       productCharacteristicsList={productCharacteristicsList}

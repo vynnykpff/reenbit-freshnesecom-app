@@ -1,3 +1,4 @@
+import { ProductUnitsMeasure } from "@/common/constants";
 import { BaseState } from "../BaseState.ts";
 import { SelectVariants } from "../Select.ts";
 import { ProductDescription } from "./ProductDescription.ts";
@@ -14,7 +15,7 @@ export type Products = {
   originCountry: string;
   delivery: ProductDelivery;
   stock: ProductStock;
-  unitsMeasure: string[];
+  unitsMeasure: ProductUnitsMeasure;
   price: ProductPrice;
   reviews: ProductReview[];
   questions: Omit<ProductReview, "rating">;

@@ -4,6 +4,7 @@ import { productsActions } from "./productsSlice";
 import { productActions } from "./productSlice";
 import { productsFiltersActions } from "./productsFilterSlice";
 import { productsPaginationActions } from "./paginationSlice";
+import { notificationActions } from "./notificationSlice.ts";
 
 export const ActionCreators = {
   getProducts: getProducts.asyncThunk,
@@ -12,4 +13,5 @@ export const ActionCreators = {
   ...productActions,
   ...productsFiltersActions,
   ...productsPaginationActions,
+  ...notificationActions,
 };

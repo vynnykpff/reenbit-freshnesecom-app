@@ -1,26 +1,57 @@
 import { FC, useState } from "react";
 import { motion } from "framer-motion";
-import { getAnimationVariant } from "@/utils";
-import { Button, Input, Select } from "@/components/UI";
+import { useActions } from "@/store";
+import { useChangeEffect } from "@/hooks";
+import { getAnimationVariant, getProductPrice, getProductUnitsMeasure } from "@/utils";
+import { ProductPrice } from "@/common/types";
+import { ProductOrderNavigation } from "./components";
 import { ProductCardPrice } from "@/components/ProductsList/components";
-import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
-import PlusIcon from "#/icons/plus.svg?react";
+import {
+  AnimationDefaultDuration,
+  ProductUnitsMeasure,
+  ProductsAmountOfUnitsMeasure,
+  animationDefaultVariants,
+  notificationInfoDefaultTemplate,
+} from "@/common/constants";
 import styles from "./ProductOrder.module.scss";
 
-const tempOrderData = {
-  Pcs: "Pcs",
-  Kgs: "Kgs",
-  Box: "Box",
-  Pack: "Pack",
-};
-
 type Props = {
-  original: number;
-  discount: number;
-};
+  unitsMeasure: ProductUnitsMeasure;
+  amount: number;
+} & ProductPrice;
 
-export const ProductOrder: FC<Props> = ({ original, discount }) => {
-  const [currentOrderPriceVariant, setCurrentOrderPriceVariant] = useState(tempOrderData.Pcs);
+export const ProductOrder: FC<Props> = ({ original, discount, currency, unitsMeasure, amount }) => {
+  const [currentOrderPriceVariant, setCurrentOrderPriceVariant] = useState(getProductUnitsMeasure(unitsMeasure).pcs);
+  const [localProductPrice, setLocalProductPrice] = useState<Omit<ProductPrice, "currency">>({ original, discount });
+  const [localInputValue, setLocalInputValue] = useState(ProductsAmountOfUnitsMeasure.PCS);
+  const { setNotification } = useActions();
+
+  useChangeEffect(() => {
+    const variantTitles = {
+      [ProductUnitsMeasure.BOX]: `${ProductsAmountOfUnitsMeasure.BOX} units in ${ProductUnitsMeasure.BOX}`,
+      [ProductUnitsMeasure.PACK]: `${ProductsAmountOfUnitsMeasure.PACK} units in ${ProductUnitsMeasure.PACK}`,
+    };
+
+    const title = variantTitles[currentOrderPriceVariant as keyof typeof variantTitles];
+
+    if (title) {
+      setNotification({ ...notificationInfoDefaultTemplate, title });
+    }
+  }, [currentOrderPriceVariant]);
+
+  useChangeEffect(() => {
+    getProductPrice({
+      original,
+      discount,
+      productAmount: amount,
+      value: ProductsAmountOfUnitsMeasure.PCS,
+      currentOrderPriceVariant,
+      setLocalProductPrice,
+      setLocalInputValue,
+      setNotification,
+    });
+    setLocalInputValue(ProductsAmountOfUnitsMeasure.PCS);
+  }, [currentOrderPriceVariant]);
 
   return (
     <motion.div
@@ -29,27 +60,21 @@ export const ProductOrder: FC<Props> = ({ original, discount }) => {
     >
       <ProductCardPrice
         className={[styles.productOrderPriceContainer, styles.productOriginalOrderPrice, styles.productDiscountOrderPrice]}
-        currency="USD"
+        currency={currency}
+        discount={localProductPrice.discount}
+        original={localProductPrice.original}
+      />
+      <ProductOrderNavigation
+        localInputValue={localInputValue}
+        currentOrderPriceVariant={currentOrderPriceVariant}
+        setCurrentOrderPriceVariant={setCurrentOrderPriceVariant}
+        unitsMeasure={unitsMeasure}
+        amount={amount}
+        setLocalInputValue={setLocalInputValue}
         discount={discount}
         original={original}
+        setLocalProductPrice={setLocalProductPrice}
       />
-      <div className={styles.productOrderNavigation}>
-        <div className={styles.productOrderInputContainer}>
-          <div className={styles.productOrderInputWrapper}>
-            <Input className={styles.productOrderInput} defaultValue="1" />
-          </div>
-          <Select
-            className={styles.productOrderSelect}
-            currentVariant={currentOrderPriceVariant}
-            setCurrentVariant={setCurrentOrderPriceVariant}
-            isShowSelectedValue
-            variants={tempOrderData}
-          />
-        </div>
-        <Button className={styles.productOrderButton}>
-          <PlusIcon className={styles.productOrderIcon} /> <span>Add to cart</span>
-        </Button>
-      </div>
     </motion.div>
   );
 };

@@ -31,13 +31,13 @@ export const Product: FC = () => {
       {product.id && productId ? (
         <div className={styles.productContainer}>
           <div className={styles.productMediaContainer}>
-            <ProductNotification original={product.price.original} discount={product.price.discount} cost={product.delivery.cost} />
+            <ProductNotification {...product.price} cost={product.delivery.cost} />
             <ProductGallery title={product.title} images={product.images} />
           </div>
           <div className={styles.productContentContainer}>
             <ProductInfo title={product.title} longDescription={product.description.long} />
             <ProductCharacteristics {...product} />
-            <ProductOrder original={product.price.original} discount={product.price.discount} />
+            <ProductOrder {...product.price} amount={product.stock.amount} unitsMeasure={product.unitsMeasure} />
             <ProductWishButton />
           </div>
         </div>

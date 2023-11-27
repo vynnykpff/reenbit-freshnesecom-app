@@ -29,6 +29,7 @@ export const getProductCharacteristics = (product: Products) => {
 
 function getNestedPropertyValue(obj: Products, path: string): Products {
   const props = path.split(".");
+
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access
   return props.reduce((acc, prop) => (acc as any)[prop], obj);
 }
