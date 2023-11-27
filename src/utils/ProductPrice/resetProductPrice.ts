@@ -1,5 +1,11 @@
 import { ProductPrice, ProductPriceBaseParams } from "@/common/types";
-import { NotificationDelay, NotificationType, ProductPriceNotifications, ProductsAmountOfUnitsMeasure } from "@/common/constants";
+import {
+  NotificationDelay,
+  NotificationType,
+  ProductPriceNotifications,
+  ProductsAmountOfUnitsMeasure,
+  RESET_PRICE_VALUE,
+} from "@/common/constants";
 
 type Params = {
   checkValue: number;
@@ -16,14 +22,12 @@ export const resetProductPrice = ({
   unitMeasure,
   setNotification,
 }: Params) => {
-  setLocalProductPrice({
-    original: original * unitMeasure,
-    discount: discount * unitMeasure,
-  });
-
-  setLocalInputValue(ProductsAmountOfUnitsMeasure.PCS);
-
   if (checkValue) {
+    setLocalProductPrice({
+      original: original * unitMeasure,
+      discount: discount * unitMeasure,
+    });
+    setLocalInputValue(ProductsAmountOfUnitsMeasure.PCS);
     setNotification({
       title: ProductPriceNotifications.OVER_AMOUNT_VALUE,
       delay: NotificationDelay.DEFAULT,
@@ -32,6 +36,13 @@ export const resetProductPrice = ({
 
     return;
   }
+
+  setLocalProductPrice({
+    original: RESET_PRICE_VALUE,
+    discount: RESET_PRICE_VALUE,
+  });
+
+  setLocalInputValue(RESET_PRICE_VALUE);
 
   setNotification({
     title: ProductPriceNotifications.INVALID_VALUE,

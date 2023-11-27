@@ -3,7 +3,7 @@ import { useActions } from "@/store";
 import { getProductPrice, getProductUnitsMeasure } from "@/utils";
 import { ProductPrice } from "@/common/types";
 import { Button, Input, Select } from "@/components/UI";
-import { ProductUnitsMeasure, ProductsAmountOfUnitsMeasure } from "@/common/constants";
+import { ProductUnitsMeasure, ProductsAmountOfUnitsMeasure, RESET_PRICE_VALUE } from "@/common/constants";
 import PlusIcon from "#/icons/plus.svg?react";
 import styles from "./ProductOrderNavigation.module.scss";
 
@@ -48,7 +48,13 @@ export const ProductOrderNavigation: FC<Props> = ({
     <div className={styles.productOrderNavigation}>
       <div className={styles.productOrderInputContainer}>
         <div className={styles.productOrderInputWrapper}>
-          <Input type="number" className={styles.productOrderInput} value={localInputValue} onChange={handeChangeInputPrice} />
+          <Input
+            type="number"
+            className={styles.productOrderInput}
+            value={!localInputValue ? "" : localInputValue}
+            placeholder={`${RESET_PRICE_VALUE}`}
+            onChange={handeChangeInputPrice}
+          />
         </div>
         <Select
           className={styles.productOrderSelect}

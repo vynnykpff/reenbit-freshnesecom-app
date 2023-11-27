@@ -16,6 +16,7 @@ export { getDeliveryTime } from "./getDeliveryTime.ts";
 export { getProductRating } from "./getProductRating.ts";
 export { getProductUnitsMeasure } from "./getProductUnitsMeasure.ts";
 export { getProductPrice } from "./ProductPrice";
+export { getFixedPrice } from "./getFixedPrice.ts";
 export * from "./generateCharacteristics.ts";
 export * from "./getMinMaxProductPrice.ts";
 export * from "./checkPriceCorrectValue.ts";
