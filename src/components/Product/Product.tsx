@@ -1,15 +1,15 @@
 import { FC, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useActions, useAppSelector } from "@/store";
 import { getProductId } from "@/utils";
+import { useActions, useAppSelector } from "@/store";
 import { Loader, NoMatches } from "@/components/UI";
-import { ProductWishButton } from "./components/ui";
 import { ProductCharacteristics, ProductGallery, ProductInfo, ProductNotification, ProductOrder, ProductTabs } from "./components";
-import { Routes } from "@/common/constants";
+import { ProductTabsVariants, Routes } from "@/common/constants";
+import { ProductWishButton } from "./components/ui";
 import styles from "./Product.module.scss";
 
 export const Product: FC = () => {
-  const { getProduct } = useActions();
+  const { getProduct, setSelectedTab } = useActions();
   const { product, isPending } = useAppSelector(state => state.product);
   const { products } = useAppSelector(state => state.products);
   const { productBrands } = useAppSelector(state => state.productsFilter);
@@ -20,6 +20,8 @@ export const Product: FC = () => {
     if (location.pathname.startsWith(`${Routes.PRODUCTS}/`)) {
       getProduct(getProductId(products, location.pathname));
     }
+
+    setSelectedTab(ProductTabsVariants.DESCRIPTION);
   }, [productBrands]);
 
   if (isPending) {

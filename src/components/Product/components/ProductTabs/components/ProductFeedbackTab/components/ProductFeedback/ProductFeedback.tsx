@@ -7,7 +7,7 @@ type Props = {
   isRating: boolean;
 } & ProductReview;
 
-export const ProductFeedback: FC<Props> = ({ rating, content, createdDate, userData: { name, image }, isRating = true }) => {
+export const ProductFeedback: FC<Props> = ({ rating = 1, content, createdDate, userData: { name, image }, isRating = true }) => {
   return (
     <li className={styles.productFeedbackContainer}>
       <img className={styles.productFeedbackImage} src={image} alt={`${name}_review`} />

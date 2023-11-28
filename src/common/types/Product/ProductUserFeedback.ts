@@ -6,7 +6,7 @@ export type ProductUserData = {
 export type ProductReview = {
   createdDate: string;
   content: string;
-  rating: number;
+  rating?: number;
   userData: ProductUserData;
   id: string;
 };
