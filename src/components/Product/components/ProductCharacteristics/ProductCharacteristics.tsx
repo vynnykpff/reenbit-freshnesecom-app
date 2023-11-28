@@ -1,23 +1,26 @@
+import { useMatchMedia } from "@/hooks";
 import { FC } from "react";
 import { motion } from "framer-motion";
 import { getAnimationVariant, getProductCharacteristics } from "@/utils";
 import { Product } from "@/common/types";
-import { ProductCharacteristicsRows } from "./components";
-import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
+import { AnimationDefaultDuration, MOBILE_ORDER_LIST, MediaQueries, animationDefaultVariants } from "@/common/constants";
 import styles from "./ProductCharacteristics.module.scss";
 
 export const ProductCharacteristics: FC<Product> = props => {
-  const productCharacteristicsKeys = Object.keys(getProductCharacteristics(props));
+  const isMobile = useMatchMedia(`(max-width: ${MediaQueries.PRODUCT_CARDS_CONTAINER}px)`);
+  const productCharacteristicsKeys = isMobile ? MOBILE_ORDER_LIST : Object.keys(getProductCharacteristics(props));
 
   return (
     <motion.ul
       {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.SECONDARY })}
       className={styles.productCharacteristicsList}
     >
-      <ProductCharacteristicsRows
-        productCharacteristicsKeys={productCharacteristicsKeys}
-        productCharacteristicsList={getProductCharacteristics(props)}
-      />
+      {productCharacteristicsKeys.map(key => (
+        <li className={styles.productCharacteristicsItem} key={key}>
+          <span className={styles.productCharacteristicsItemKey}>{key}:</span>
+          <span className={styles.productCharacteristicsItemProperty}>{getProductCharacteristics(props)[key]}</span>
+        </li>
+      ))}
     </motion.ul>
   );
 };

@@ -1,10 +1,1 @@
-export const enum ProductCharacteristicsOptions {
-  COLUMNS = 4,
-  NEXT_ITEM = 1,
-}
-
-export type ProductCharacteristicsListProps = {
-  rowIndex: number;
-  productCharacteristicsKeys: string[];
-  productCharacteristicsList: Record<string, string>;
-};
+export const MOBILE_ORDER_LIST = ["Country", "Category", "Brand", "Stock", "Buy by", "Delivery", "Delivery area"];

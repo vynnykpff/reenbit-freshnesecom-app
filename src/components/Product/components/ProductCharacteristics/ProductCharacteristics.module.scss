@@ -1,14 +1,43 @@
 @import "@/styles/media";
 
 .productCharacteristicsList {
-  display: flex;
-  column-gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 16px;
+  column-gap: 24px;
   margin-bottom: 40px;
 
   @include productCardsContainer {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     column-gap: 0;
     row-gap: 12px;
     margin-bottom: 30px;
+  }
+
+  .productCharacteristicsItem {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    transition: color .3s;
+
+    &:hover {
+      .productCharacteristicsItemKey {
+        color: var(--secondary-c2-color-500);
+      }
+    }
+
+    .productCharacteristicsItemKey {
+      color: var(--primary-c1-color-700);
+      transition: color .3s;
+
+      @include desktop {
+        min-width: 75px;
+        max-width: 75px;
+      }
+
+      @include productCardsContainer {
+        min-width: 110px;
+        max-width: 110px;
+      }
+    }
   }
 }

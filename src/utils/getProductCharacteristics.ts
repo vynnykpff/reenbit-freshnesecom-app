@@ -1,15 +1,16 @@
 import { Product } from "@/common/types";
+import { getProductUnitsMeasure } from "./getProductUnitsMeasure.ts";
 import { getDeliveryTime } from "./getDeliveryTime.ts";
 
 export const getProductCharacteristics = (product: Product) => {
   const characteristicMappings: Record<string, string> = {
     originCountry: "Country",
-    category: "Category",
-    brand: "Brand",
-    "stock.amount": "Stock",
     unitsMeasure: "Buy by",
+    category: "Category",
     "delivery.time": "Delivery",
+    brand: "Brand",
     "delivery.regions": "Delivery area",
+    "stock.amount": "Stock",
   };
 
   const updatedCharacteristics: Record<string, string> = {};
@@ -17,6 +18,11 @@ export const getProductCharacteristics = (product: Product) => {
   for (const [productProp, characteristicProp] of Object.entries(characteristicMappings)) {
     updatedCharacteristics[characteristicProp] =
       (product[productProp as keyof Product] as string) ?? getNestedPropertyValue(product, productProp);
+
+    if (productProp === "stock.amount") {
+      const unitMeasure = Object.keys(getProductUnitsMeasure(product.unitsMeasure))[0];
+      updatedCharacteristics[characteristicProp] = `${product.stock.amount} ${unitMeasure}`;
+    }
 
     if (productProp === "delivery.time") {
       const deliveryTime = getNestedPropertyValue(product, productProp);

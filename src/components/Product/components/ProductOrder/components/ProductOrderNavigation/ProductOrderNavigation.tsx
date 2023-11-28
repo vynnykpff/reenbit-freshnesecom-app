@@ -1,5 +1,6 @@
-import { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react";
 import { useActions } from "@/store";
+import { useChangeEffect } from "@/hooks";
 import { getProductPrice, getProductUnitsMeasure } from "@/utils";
 import { ProductPrice } from "@/common/types";
 import { Button, Input, Select } from "@/components/UI";
@@ -29,6 +30,9 @@ export const ProductOrderNavigation: FC<Props> = ({
   setLocalProductPrice,
 }) => {
   const { setNotification } = useActions();
+  const [isShowMessage, setIsShowMessage] = useState(false);
+  const [messageOfAmountUnits, setMessageOfAmountUnits] = useState("");
+
   const handeChangeInputPrice = (e: ChangeEvent<HTMLInputElement>) => {
     const value = Math.floor(+e.target.value);
     setLocalInputValue(value);
@@ -44,25 +48,45 @@ export const ProductOrderNavigation: FC<Props> = ({
     });
   };
 
+  useChangeEffect(() => {
+    const variantTitles = {
+      [ProductUnitsMeasure.BOX]: `${ProductsAmountOfUnitsMeasure.BOX} units in ${ProductUnitsMeasure.BOX}`,
+      [ProductUnitsMeasure.PACK]: `${ProductsAmountOfUnitsMeasure.PACK} units in ${ProductUnitsMeasure.PACK}`,
+    };
+
+    const title = variantTitles[currentOrderPriceVariant as keyof typeof variantTitles];
+
+    if (title) {
+      setIsShowMessage(true);
+      setMessageOfAmountUnits(title);
+      return;
+    }
+
+    setIsShowMessage(false);
+  }, [currentOrderPriceVariant]);
+
   return (
     <div className={styles.productOrderNavigation}>
-      <div className={styles.productOrderInputContainer}>
-        <div className={styles.productOrderInputWrapper}>
-          <Input
-            type="number"
-            className={styles.productOrderInput}
-            value={!localInputValue ? "" : localInputValue}
-            placeholder={`${RESET_PRICE_VALUE}`}
-            onChange={handeChangeInputPrice}
+      <div className={styles.productOrderNavigationWrapper}>
+        {isShowMessage && <span className={styles.productOrderNotification}>{messageOfAmountUnits}</span>}
+        <div className={styles.productOrderInputContainer}>
+          <div className={styles.productOrderInputWrapper}>
+            <Input
+              type="number"
+              className={styles.productOrderInput}
+              value={!localInputValue ? "" : localInputValue}
+              placeholder={`${RESET_PRICE_VALUE}`}
+              onChange={handeChangeInputPrice}
+            />
+          </div>
+          <Select
+            className={styles.productOrderSelect}
+            currentVariant={currentOrderPriceVariant}
+            setCurrentVariant={setCurrentOrderPriceVariant}
+            isShowSelectedValue
+            variants={getProductUnitsMeasure(unitsMeasure)}
           />
         </div>
-        <Select
-          className={styles.productOrderSelect}
-          currentVariant={currentOrderPriceVariant}
-          setCurrentVariant={setCurrentOrderPriceVariant}
-          isShowSelectedValue
-          variants={getProductUnitsMeasure(unitsMeasure)}
-        />
       </div>
       <Button className={styles.productOrderButton}>
         <PlusIcon className={styles.productOrderIcon} /> <span>Add to cart</span>
