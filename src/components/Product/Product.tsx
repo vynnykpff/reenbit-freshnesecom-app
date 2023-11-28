@@ -4,7 +4,7 @@ import { useActions, useAppSelector } from "@/store";
 import { getProductId } from "@/utils";
 import { Loader, NoMatches } from "@/components/UI";
 import { ProductWishButton } from "./components/ui";
-import { ProductCharacteristics, ProductGallery, ProductInfo, ProductNotification, ProductOrder } from "./components";
+import { ProductCharacteristics, ProductGallery, ProductInfo, ProductNotification, ProductOrder, ProductTabs } from "./components";
 import { Routes } from "@/common/constants";
 import styles from "./Product.module.scss";
 
@@ -39,6 +39,7 @@ export const Product: FC = () => {
             <ProductCharacteristics {...product} />
             <ProductOrder {...product.price} amount={product.stock.amount} unitsMeasure={product.unitsMeasure} />
             <ProductWishButton />
+            <ProductTabs />
           </div>
         </div>
       ) : (

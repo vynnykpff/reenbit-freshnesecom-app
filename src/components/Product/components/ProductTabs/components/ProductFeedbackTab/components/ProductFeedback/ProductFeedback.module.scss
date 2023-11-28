@@ -1,0 +1,45 @@
+@import "@/styles/variables";
+
+.productFeedbackContainer {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+
+  .productFeedbackImage {
+    width: 50px;
+    border-radius: 50%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+  }
+
+  .productFeedbackContentContainer {
+    padding-bottom: 15px;
+    border-bottom: 1.5px solid var(--primary-c1-color-700);
+
+    .productFeedbackUserCredentials {
+      display: flex;
+      align-items: center;
+      column-gap: 18px;
+      margin-bottom: 6px;
+      font-family: $secondary-font;
+
+      .productFeedbackUserName {
+        font-size: 15px;
+      }
+
+      .productFeedbackTimestamp {
+        color: var(--primary-c1-color-700);
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .productFeedbackRating {
+    width: 16px;
+  }
+
+  .productFeedbackContent {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+}

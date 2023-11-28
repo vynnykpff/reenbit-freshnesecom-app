@@ -103,3 +103,13 @@
   stroke: var(--additional-c4-color-500);
   fill: var(--additional-c4-color-600);
 }
+
+.productTabsContentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-height: 400px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  overflow-y: auto;
+}

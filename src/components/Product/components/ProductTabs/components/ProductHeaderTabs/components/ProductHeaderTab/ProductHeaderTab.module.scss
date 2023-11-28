@@ -1,0 +1,35 @@
+@import "@/styles/variables";
+@import "@/styles/media";
+
+.productHeaderTab {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 170px;
+  align-items: center;
+  column-gap: 8px;
+  font-family: $secondary-font;
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 16px;
+  cursor: pointer;
+  user-select: none;
+
+  @include tablet {
+    font-size: 16px;
+    min-width: 140px;
+  }
+
+}
+
+.productHeaderTabActive {
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    height: 2px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: var(--primary-c1-color-900);
+  }
+}

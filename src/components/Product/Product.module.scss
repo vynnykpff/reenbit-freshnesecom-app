@@ -23,6 +23,18 @@
   }
 
   .productContentContainer {
-    width: 100%;
+    width: calc(100% - 601px);
+
+    @include productCardsContainer {
+      width: calc(100% - 482px);
+    }
+
+    @include productLaptopContainer {
+      width: calc(100% - 382px);
+    }
+
+    @include tablet {
+      width: 100%;
+    }
   }
 }

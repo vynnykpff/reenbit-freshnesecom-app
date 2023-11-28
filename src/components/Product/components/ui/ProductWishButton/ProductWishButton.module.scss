@@ -1,22 +1,26 @@
 @import "@/styles/variables";
 
-.productWishListButton {
-  display: flex;
-  column-gap: 6px;
-  align-items: center;
-  background-color: transparent;
-  color: var(--primary-c1-color-900);
-  border: none;
-  transition: $primary-transition;
+.productWishListButtonContainer {
+  margin-bottom: 60px;
 
-  &:hover {
-    color: var(--primary-c1-color-800);
+  .productWishListButton {
+    display: flex;
+    column-gap: 6px;
+    align-items: center;
     background-color: transparent;
+    color: var(--primary-c1-color-900);
+    border: none;
     transition: $primary-transition;
 
-    .productLikeIcon {
+    &:hover {
+      color: var(--primary-c1-color-800);
+      background-color: transparent;
       transition: $primary-transition;
-      stroke: var(--primary-c1-color-800);
+
+      .productLikeIcon {
+        transition: $primary-transition;
+        stroke: var(--primary-c1-color-800);
+      }
     }
   }
 }

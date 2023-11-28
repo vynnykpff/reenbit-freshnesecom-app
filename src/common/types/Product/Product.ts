@@ -18,7 +18,7 @@ export type Product = {
   unitsMeasure: ProductUnitsMeasure;
   price: ProductPrice;
   reviews: ProductReview[];
-  questions: Omit<ProductReview, "rating">;
+  questions: Omit<ProductReview, "rating">[];
 };
 
 export type ProductState = {
