@@ -5,18 +5,20 @@ import { productsReducer } from "./slices/productsSlice";
 import { productReducer } from "./slices/productSlice";
 import { productsFiltersReducer } from "./slices/productsFilterSlice";
 import { productsPaginationReducer } from "./slices/paginationSlice";
+import { notificationReducer } from "./slices/notificationSlice.ts";
 
 const rootReducer = combineReducers({
   products: productsReducer,
   product: productReducer,
   productsFilter: productsFiltersReducer,
   productsPagination: productsPaginationReducer,
+  notification: notificationReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["products", "productsPagination"],
+  blacklist: ["products", "productsPagination", "notification"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

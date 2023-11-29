@@ -1,15 +1,15 @@
-import { Product } from "@/common/types";
 import { FC } from "react";
+import cn from "classnames";
+import { Props } from "../../ProductCardPrice.tsx";
 import commonStyles from "../../ProductCardPrice.module.scss";
 import styles from "./ProductCardPriceWithDiscount.module.scss";
 
-export const ProductCardPriceWithDiscount: FC<Product["price"]> = ({ discount, currency, original }) => {
+export const ProductCardPriceWithDiscount: FC<Props> = ({ discount, currency, original, className = "" }) => {
   return (
     <div className={styles.productCardPriceWithDiscountContainer}>
       <div className={commonStyles.totalPriceContainer}>
-        <p className={styles.discountPrice}>
-          {discount} {currency}
-        </p>
+        <p className={cn(styles.discountPrice, className)}>{discount}</p>
+        <span>{currency}</span>
       </div>
       <p className={styles.originalPrice}>{original}</p>
     </div>

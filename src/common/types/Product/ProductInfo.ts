@@ -1,10 +1,10 @@
 import { SelectVariants } from "@/common/types";
-import { ProductId } from "./Product.ts";
 
 export type ProductCategory = {
   title: string;
   brands: SelectVariants;
-} & ProductId;
+  id: string;
+};
 
 export type ProductDelivery = {
   time: number;

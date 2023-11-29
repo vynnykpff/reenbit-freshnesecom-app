@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useAppSelector } from "@/store";
 import { useFilteredProducts } from "@/hooks";
-import { ItemCounter } from "@/components/UI";
+import { ProductInfoNotification } from "@/components/UI";
 import { PaginationPages, ShowMoreButton } from "./components";
 import styles from "./Pagination.module.scss";
 
@@ -18,7 +18,7 @@ export const Pagination: FC = () => {
     <section className={styles.paginationContainer}>
       <PaginationPages />
       {showMoreButtonVisible && <ShowMoreButton />}
-      <ItemCounter count={filteredProducts.length} counterName={ITEM_COUNTER_TITLE} />
+      <ProductInfoNotification count={`${filteredProducts.length}`} counterName={ITEM_COUNTER_TITLE} />
     </section>
   );
 };

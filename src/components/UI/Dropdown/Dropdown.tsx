@@ -1,8 +1,9 @@
 import { FC, HTMLAttributes } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import cn from "classnames";
+import { getAnimationVariant } from "@/utils";
 import { NavigationLink } from "@/common/types";
-import { animationList, animationVariants } from "@/common/constants";
+import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./Dropdown.module.scss";
 
 type DropdownMenuProps = {
@@ -16,9 +17,16 @@ export const Dropdown: FC<DropdownMenuProps> = ({ dropDownData, isShowDropList, 
     <div className={styles.dropdownMenuContainer}>
       <AnimatePresence>
         {isShowDropList && (
-          <motion.ul {...animationVariants} className={cn(styles.dropdownMenuList, className[0])}>
+          <motion.ul
+            {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}
+            className={cn(styles.dropdownMenuList, className[0])}
+          >
             {dropDownData.map((listItem: NavigationLink) => (
-              <motion.li {...animationList} className={cn(styles.dropDownMenuListItem, className[1])} key={listItem.id}>
+              <motion.li
+                {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.DEFAULT })}
+                className={cn(styles.dropDownMenuListItem, className[1])}
+                key={listItem.id}
+              >
                 <span className={className[1]}>{listItem.title}</span>
                 <span className={className[2]}>{listItem.value}</span>
               </motion.li>

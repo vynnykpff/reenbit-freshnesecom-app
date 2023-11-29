@@ -8,9 +8,11 @@
   .totalPriceContainer {
     font-size: 18px;
     display: flex;
+    align-items: center;
     column-gap: 4px;
     color: var(--primary-c1-color-900);
     margin-bottom: 4px;
     overflow-wrap: break-word;
+    text-wrap: nowrap;
   }
 }

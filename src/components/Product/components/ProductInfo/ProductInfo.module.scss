@@ -1,0 +1,38 @@
+@import "@/styles/variables";
+@import "@/styles/media";
+
+.productInfoContainer {
+  .productInfoTitle {
+    font-family: $secondary-font;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: font-size .3s;
+
+    &:hover {
+      color: var(--primary-c1-color-800);
+    }
+
+    @include productCardsContainer {
+      font-size: 26px;
+      transition: font-size .3s;
+    }
+  }
+
+  .productDescription {
+    font-size: 17px;
+    margin-bottom: 40px;
+    transition: font-size .3s;
+
+    &:hover {
+      color: var(--primary-c1-color-800);
+    }
+
+    @include productCardsContainer {
+      margin-bottom: 30px;
+      font-size: 16px;
+      transition: font-size .3s;
+    }
+  }
+
+}

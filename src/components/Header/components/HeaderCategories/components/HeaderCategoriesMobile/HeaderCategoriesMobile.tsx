@@ -5,9 +5,9 @@ import cn from "classnames";
 import { useActions, useAppSelector } from "@/store";
 import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts";
 import { useChangeEffect, useWindowScrollable } from "@/hooks";
-import { checkCategory } from "@/utils";
+import { checkCategory, getAnimationVariant } from "@/utils";
 import { RenderCategories } from "../RenderCategories";
-import { Routes, animationBurgerMenu, animationList } from "@/common/constants";
+import { AnimationDefaultDuration, Routes, animationBurgerMenu, animationDefaultList } from "@/common/constants";
 import styles from "./HeaderCategoriesMobile.module.scss";
 
 export const HeaderCategoriesMobile: FC = () => {
@@ -45,7 +45,7 @@ export const HeaderCategoriesMobile: FC = () => {
     <AnimatePresence>
       {isOpenBurgerNav && (
         <motion.section
-          {...animationList}
+          {...getAnimationVariant({ ...animationDefaultList, duration: AnimationDefaultDuration.DEFAULT })}
           onClick={handleCloseBurgerMenu}
           className={cn(styles.headerCategoriesMobileContainer, isOpenBurgerNav && styles.headerCategoriesMobileContainerActive)}
         >

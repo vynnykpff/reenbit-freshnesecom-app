@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 import { useActions, useAppSelector } from "@/store";
-import { useMatchMedia } from "@/hooks";
+import { useChangeEffect, useMatchMedia } from "@/hooks";
 import { SelectProps, SelectVariants } from "@/common/types";
 import { Input, Select } from "@/components/UI";
 import { SearchDropList } from "@/components/Header/components";
@@ -56,6 +56,11 @@ export const Search: FC<
       setBrand(ProductFilterType.ALL_BRANDS);
     }
   }, [currentVariant]);
+
+  useChangeEffect(() => {
+    setLocalSearchValue("");
+    setSearchValue("");
+  }, [location.pathname]);
 
   const updateGlobalSearchValue = useDebouncedCallback(() => {
     if (localSearchValue.length >= SEARCH_LENGTH) {

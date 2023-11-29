@@ -18,6 +18,12 @@
   }
 }
 
+@mixin productLaptopContainer() {
+  @media (max-width: $PRODUCT_LAPTOP_CONTAINER) {
+    @content;
+  }
+}
+
 @mixin sidebarTablet() {
   @media (max-width: $SIDEBAR_TABLET_CONTAINER) {
     @content;

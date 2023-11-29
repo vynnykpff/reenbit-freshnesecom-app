@@ -1,0 +1,28 @@
+@import "@/styles/variables";
+@import "@/styles/media";
+
+.productContainer {
+  display: flex;
+  gap: 32px;
+  word-break: break-word;
+
+  @include tablet {
+    flex-direction: column;
+  }
+
+  .productMediaContainer {
+    position: sticky;
+    top: 24px;
+    left: 0;
+    height: 100%;
+
+    @include tablet {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  .productContentContainer {
+    width: 100%;
+  }
+}

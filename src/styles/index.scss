@@ -33,6 +33,7 @@ body {
   font-family: "Open Sans", sans-serif;
   min-width: $MOBILE;
   scroll-behavior: smooth;
+  color: var(--primary-c1-color-900);
 }
 
 body[scrollable] {

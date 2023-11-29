@@ -2,8 +2,14 @@
 
 .ratingContainer {
   display: flex;
+  align-items: center;
   gap: 3px;
   stroke: var(--primary-c1-color-600);
+
+  .ratingListItem {
+    display: flex;
+    align-items: center;
+  }
 
   .ratingIconFill {
     stroke: none;
@@ -22,5 +28,4 @@
       stroke: var(--additional-c3-color-600);
     }
   }
-
 }
