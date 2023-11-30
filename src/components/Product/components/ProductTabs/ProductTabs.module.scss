@@ -1,0 +1,15 @@
+@import "@/styles/media";
+
+.productTabsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @include tablet {
+    gap: 32px;
+  }
+
+  @include largeMobile {
+    gap: 20px;
+  }
+}

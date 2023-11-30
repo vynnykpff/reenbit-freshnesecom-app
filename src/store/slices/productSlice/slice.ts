@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
-import productSliceThunks from "./thunks";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Product, ProductState } from "@/common/types";
-import { ErrorMessages } from "@/common/constants";
+import { ErrorMessages, ProductTabsVariants } from "@/common/constants";
+import productSliceThunks from "./thunks";
 
 const initialState: ProductState = {
   product: {} as Product,
+  selectedTab: ProductTabsVariants.DESCRIPTION,
   isPending: false,
   error: null,
 };
@@ -12,7 +13,11 @@ const initialState: ProductState = {
 export const productsSlice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedTab: (state, action: PayloadAction<ProductTabsVariants>) => {
+      state.selectedTab = action.payload;
+    },
+  },
   extraReducers: builder => {
     for (const thunk of productSliceThunks) {
       builder.addCase(thunk.asyncThunk.pending, state => {

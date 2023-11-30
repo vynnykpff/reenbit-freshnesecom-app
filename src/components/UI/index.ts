@@ -8,7 +8,7 @@ export { Button } from "./Button";
 export { Rating } from "./Rating";
 export { NoMatches } from "./NoMatches";
 export { BurgerMenuButton } from "./BurgerMenuButton";
-export { ProductInfoNotification } from "./ItemCounter";
+export { ProductInfoNotification } from "./ProductInfoNotification";
 export { Checkbox } from "./Checkbox";
 export { Breadcrumbs } from "./Breadcrumbs";
 export { Dropdown } from "./Dropdown";

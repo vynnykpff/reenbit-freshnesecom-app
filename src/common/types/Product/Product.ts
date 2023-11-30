@@ -2,7 +2,7 @@ import { BaseState } from "@/common/types";
 import { ProductDescription } from "./ProductDescription.ts";
 import { ProductDelivery, ProductPrice, ProductStock } from "./ProductInfo.ts";
 import { ProductReview } from "./ProductUserFeedback.ts";
-import { ProductUnitsMeasure } from "@/common/constants";
+import { ProductTabsVariants, ProductUnitsMeasure } from "@/common/constants";
 
 export type Product = {
   id: string;
@@ -18,9 +18,10 @@ export type Product = {
   unitsMeasure: ProductUnitsMeasure;
   price: ProductPrice;
   reviews: ProductReview[];
-  questions: Omit<ProductReview, "rating">;
+  questions: Omit<ProductReview, "rating">[];
 };
 
 export type ProductState = {
   product: Product;
+  selectedTab: ProductTabsVariants;
 } & BaseState;

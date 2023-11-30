@@ -1,15 +1,15 @@
 import { FC, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useActions, useAppSelector } from "@/store";
 import { getProductId } from "@/utils";
+import { useActions, useAppSelector } from "@/store";
 import { Loader, NoMatches } from "@/components/UI";
+import { ProductCharacteristics, ProductGallery, ProductInfo, ProductNotification, ProductOrder, ProductTabs } from "./components";
+import { ProductTabsVariants, Routes } from "@/common/constants";
 import { ProductWishButton } from "./components/ui";
-import { ProductCharacteristics, ProductGallery, ProductInfo, ProductNotification, ProductOrder } from "./components";
-import { Routes } from "@/common/constants";
 import styles from "./Product.module.scss";
 
 export const Product: FC = () => {
-  const { getProduct } = useActions();
+  const { getProduct, setSelectedTab } = useActions();
   const { product, isPending } = useAppSelector(state => state.product);
   const { products } = useAppSelector(state => state.products);
   const { productBrands } = useAppSelector(state => state.productsFilter);
@@ -20,6 +20,8 @@ export const Product: FC = () => {
     if (location.pathname.startsWith(`${Routes.PRODUCTS}/`)) {
       getProduct(getProductId(products, location.pathname));
     }
+
+    setSelectedTab(ProductTabsVariants.DESCRIPTION);
   }, [productBrands]);
 
   if (isPending) {
@@ -39,6 +41,7 @@ export const Product: FC = () => {
             <ProductCharacteristics {...product} />
             <ProductOrder {...product.price} amount={product.stock.amount} unitsMeasure={product.unitsMeasure} />
             <ProductWishButton />
+            <ProductTabs />
           </div>
         </div>
       ) : (

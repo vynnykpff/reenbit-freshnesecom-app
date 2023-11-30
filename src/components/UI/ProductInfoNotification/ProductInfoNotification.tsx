@@ -1,6 +1,6 @@
 import { FC } from "react";
 import cn from "classnames";
-import styles from "./ItemCounter.module.scss";
+import styles from "./ProductInfoNotification.module.scss";
 
 type Props = {
   count: string;

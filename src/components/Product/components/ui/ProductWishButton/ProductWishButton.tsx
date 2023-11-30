@@ -12,7 +12,10 @@ export const ProductWishButton: FC = () => {
   const [isClicked, setIsClicked] = useState(false);
 
   return (
-    <motion.div {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.TERTIARY })}>
+    <motion.div
+      className={styles.productWishListButtonContainer}
+      {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.TERTIARY })}
+    >
       <Button onClick={() => setIsClicked(prev => !prev)} className={styles.productWishListButton}>
         <LikeIcon className={cn(commonStyles.likeIcon, styles.productLikeIcon, isClicked && commonStyles.likeIconActive)} />
         <span>Add to my wish list</span>

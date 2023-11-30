@@ -1,7 +1,6 @@
 export type ProductUserData = {
   name: string;
   image: string;
-  id: string;
 };
 
 export type ProductReview = {
