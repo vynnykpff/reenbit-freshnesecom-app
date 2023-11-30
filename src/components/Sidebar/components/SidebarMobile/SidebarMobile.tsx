@@ -1,9 +1,9 @@
-import { getAnimationVariant } from "@/utils";
+import { getAnimationVariant, removeDataAttribute, setDataAttribute } from "@/utils";
 import { FC, MouseEvent, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import cn from "classnames";
 import { useMatchMedia, useWindowScrollable } from "@/hooks";
-import { AnimationDefaultDuration, MediaQueries, animationDefaultVariants, animationSidebarMenu } from "@/common/constants";
+import { AnimationDefaultDuration, Attributes, MediaQueries, animationDefaultVariants, animationSidebarMenu } from "@/common/constants";
 import { Sidebar } from "@/components/Sidebar";
 import { BurgerMenuButton, Button } from "@/components/UI";
 import FiltersLogo from "#/icons/filter.svg?react";
@@ -18,6 +18,12 @@ export const SidebarMobile: FC = () => {
 
   const handleShowFiltersMenu = () => {
     setIsShowFilters(prev => !prev);
+
+    if (!isShowFilters) {
+      setDataAttribute({ tagName: "body", attributeName: Attributes.FILTERS }, "true");
+    } else {
+      removeDataAttribute({ tagName: "body", attributeName: Attributes.FILTERS });
+    }
   };
 
   return (

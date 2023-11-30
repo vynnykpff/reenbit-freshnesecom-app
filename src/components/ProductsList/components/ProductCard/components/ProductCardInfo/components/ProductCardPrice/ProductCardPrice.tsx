@@ -1,26 +1,27 @@
-import { getFixedPrice } from "@/utils";
 import { FC } from "react";
 import cn from "classnames";
+import { getFixedPrice } from "@/utils";
 import { ProductCardPriceWithDiscount, ProductCardPriceWithoutDiscount } from "./components";
+import { DEFAULT_PRICE_CURRENCY } from "@/common/constants";
 import styles from "./ProductCardPrice.module.scss";
 
 export type Props = {
   className?: string | string[];
   discount: number;
   original: number;
-  currency: string;
+  currency?: string;
 };
 
-const DECIMIAL_PLACES = 2;
+const DECIMAL_PLACES = 2;
 
-export const ProductCardPrice: FC<Props> = ({ className = ["", "", ""], currency, original, discount }) => {
+export const ProductCardPrice: FC<Props> = ({ className = ["", "", ""], currency = DEFAULT_PRICE_CURRENCY, original, discount }) => {
   const handleCheckDiscount = () => {
     return !discount ? (
-      <ProductCardPriceWithoutDiscount currency={currency} original={getFixedPrice(original, DECIMIAL_PLACES)} className={className[1]} />
+      <ProductCardPriceWithoutDiscount currency={currency} original={getFixedPrice(original, DECIMAL_PLACES)} className={className[1]} />
     ) : (
       <ProductCardPriceWithDiscount
-        discount={getFixedPrice(discount, DECIMIAL_PLACES)}
-        original={getFixedPrice(original, DECIMIAL_PLACES)}
+        discount={getFixedPrice(discount, DECIMAL_PLACES)}
+        original={getFixedPrice(original, DECIMAL_PLACES)}
         currency={currency}
         className={className[2]}
       />

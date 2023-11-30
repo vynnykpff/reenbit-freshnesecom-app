@@ -4,6 +4,7 @@
 .productContainer {
   display: flex;
   gap: 32px;
+  margin-bottom: 85px;
   word-break: break-word;
 
   @include tablet {

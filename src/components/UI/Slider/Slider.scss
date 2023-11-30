@@ -1,0 +1,22 @@
+.swiper-button-prev, .swiper-button-next {
+  color: var(--secondary-c2-color-500);
+
+  &:after {
+    font-size: 22px;
+    font-weight: 700;
+  }
+}
+
+.swiper-button-prev {
+  left: -7px;
+}
+
+.swiper-button-next {
+  right: -7px;
+}
+
+.productSliderWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
