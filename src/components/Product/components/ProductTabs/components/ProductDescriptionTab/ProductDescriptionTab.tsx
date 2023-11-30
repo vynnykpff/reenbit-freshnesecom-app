@@ -14,8 +14,8 @@ export const ProductDescriptionTab: FC = () => {
       {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}
       className={commonStyles.productTabsContentContainer}
     >
-      {product.description.full.map(description => (
-        <ProductDescriptionItem title={description.title} content={description.content} />
+      {product.description.full.map((description, index) => (
+        <ProductDescriptionItem key={index} title={description.title} content={description.content} />
       ))}
     </motion.ul>
   );
