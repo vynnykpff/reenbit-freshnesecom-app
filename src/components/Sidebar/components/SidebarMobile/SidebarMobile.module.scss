@@ -6,6 +6,12 @@ body[scrollable] {
   }
 }
 
+body[filters] {
+  main {
+    z-index: 5;
+  }
+}
+
 .sidebarMobileContainer {
   order: 1;
 

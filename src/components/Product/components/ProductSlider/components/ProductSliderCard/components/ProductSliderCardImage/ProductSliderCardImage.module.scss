@@ -1,0 +1,25 @@
+.productSliderCardImageContainer {
+  width: 100%;
+  height: 180px;
+  background-color: var(--primary-c1-color-400);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  position: relative;
+  cursor: pointer;
+
+  .productSliderCardImage {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+
+  .productSliderNotification {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+}
