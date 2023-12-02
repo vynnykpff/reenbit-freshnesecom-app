@@ -49,13 +49,13 @@ body[filters] {
   .sidebarMobileMenuContainer {
     position: relative;
     width: 100%;
-    z-index: 5;
+    z-index: 111;
 
     .sidebarMobileContent {
       display: flex;
       position: absolute;
       background-color: var(--primary-c1-color-100);
-      z-index: 1;
+      z-index: 111;
       left: 0;
       height: 100%;
       width: 100%;
@@ -84,7 +84,7 @@ body[filters] {
     width: 100%;
     min-width: $MOBILE;
     height: 100vh;
-    z-index: 2;
+    z-index: 111;
     background-color: rgba(0, 0, 0, 0.5);
   }
 }

@@ -9,3 +9,4 @@ export type * from "./Product";
 export type * from "./Filters";
 export type * from "./Pagination";
 export type * from "./Notification.ts";
+export type * from "./Cart";

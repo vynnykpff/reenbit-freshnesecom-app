@@ -112,3 +112,15 @@
   padding-right: 20px;
   overflow-y: auto;
 }
+
+.activeLink {
+  font-weight: 500;
+  color: var(--secondary-c2-color-500);
+  text-decoration: underline;
+  transition: $primary-transition;
+
+  &:hover {
+    color: var(--secondary-c2-color-300);
+    transition: $primary-transition;
+  }
+}

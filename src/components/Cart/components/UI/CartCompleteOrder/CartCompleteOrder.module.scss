@@ -1,0 +1,9 @@
+@import "@/styles/media";
+
+.cartCompleteOrderButton {
+  padding: 10px 30px;
+
+  @include largeMobile {
+    width: 100%;
+  }
+}

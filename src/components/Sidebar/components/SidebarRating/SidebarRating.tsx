@@ -1,15 +1,12 @@
-import { getAnimationVariant } from "@/utils";
-import { FC } from "react";
-import { motion } from "framer-motion";
-import { v4 as uuidv4 } from "uuid";
-import { useActions, useAppSelector } from "@/store";
-import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
+import { AnimationDefaultDuration, ProductRating, animationDefaultVariants } from "@/common/constants";
 import { Checkbox, Rating } from "@/components/UI";
+import { useActions, useAppSelector } from "@/store";
 import commonStyles from "@/styles/Common.module.scss";
+import { getAnimationVariant } from "@/utils";
+import { motion } from "framer-motion";
+import { FC } from "react";
+import { v4 as uuidv4 } from "uuid";
 import styles from "./SidebarRating.module.scss";
-
-const START_VALUE = 5;
-const MIN_AMOUNT_STARS = 1;
 
 export const SidebarRating: FC = () => {
   const { productRatings } = useAppSelector(state => state.productsFilter);
@@ -26,7 +23,7 @@ export const SidebarRating: FC = () => {
   const renderRating = () => {
     const ratingIcons = [];
 
-    for (let i = START_VALUE; i >= MIN_AMOUNT_STARS; i--) {
+    for (let i = ProductRating.MAX; i >= ProductRating.MIN; i--) {
       ratingIcons.push(
         <li key={uuidv4()} className={styles.sidebarRatingItem} onClick={() => handleClickRating(i)}>
           <Checkbox

@@ -1,0 +1,13 @@
+@import "@/styles/media";
+
+.cartBillingInfoFormContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 32px;
+
+  @include productCardMobile {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
+  }
+}

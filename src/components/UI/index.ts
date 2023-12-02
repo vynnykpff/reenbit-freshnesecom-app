@@ -1,5 +1,7 @@
 export { Layout } from "./Layout";
 export { Input } from "./Input";
+export { CartInput } from "./CartInput";
+export { CartTextarea } from "./CartTextarea";
 export { Select } from "./Select";
 export { ErrorFallback } from "./ErrorFallback";
 export { Search } from "./Search";
