@@ -5,6 +5,7 @@ import { productsReducer } from "./slices/productsSlice";
 import { productReducer } from "./slices/productSlice";
 import { productsFiltersReducer } from "./slices/productsFilterSlice";
 import { productsPaginationReducer } from "./slices/paginationSlice";
+import { cartReducer } from "./slices/cartSlice";
 import { notificationReducer } from "./slices/notificationSlice.ts";
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   product: productReducer,
   productsFilter: productsFiltersReducer,
   productsPagination: productsPaginationReducer,
+  cart: cartReducer,
   notification: notificationReducer,
 });
 
