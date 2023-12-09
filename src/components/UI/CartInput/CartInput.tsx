@@ -1,8 +1,10 @@
 import { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
 import cn from "classnames";
 import { useActions, useAppSelector } from "@/store";
-import { getCartLocation, getCartValidationValue } from "@/utils";
-import { CartFields, CartInputProps, State, ValidationFields, ValidationFunction, ValidationMethods } from "@/common/types";
+import { useOutsideClick } from "@/hooks";
+import { getCartValidationValue } from "@/utils";
+import { CartFields, CartInputProps, CartValidationForm, State, ValidationFunction } from "@/common/types";
+import { CartDropdownMenu } from "@/components/UI";
 import commonStyles from "@/styles/CartCommon.module.scss";
 
 type Props = {
@@ -14,8 +16,7 @@ type Props = {
   filteredStates?: State[];
   filteredCities?: string[];
   disabled?: boolean;
-} & ValidationFields &
-  ValidationMethods &
+} & CartValidationForm &
   CartFields &
   CartInputProps;
 
@@ -39,15 +40,16 @@ export const CartInput: FC<Props> = ({
   handleFocus,
   ...props
 }) => {
-  const { countries, error } = useAppSelector(state => state.cart);
+  const error = useAppSelector(state => state.cart.error);
   const { setField, resetCountries, resetStates } = useActions();
+  const containerRef = useOutsideClick<HTMLDivElement>(() => setIsShowDropDown?.(false));
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
   };
 
-  const handleSetSelectedCountry = (name: string) => {
+  const handleSetSelectedValue = (name: string) => {
     const value = name.trim();
 
     setInputValue(value);
@@ -71,7 +73,7 @@ export const CartInput: FC<Props> = ({
   };
 
   return (
-    <div className={commonStyles.cartInputContainer}>
+    <div ref={containerRef} className={commonStyles.cartInputContainer}>
       <label className={commonStyles.cartFieldLabel} htmlFor={id}>
         <span className={commonStyles.cartFieldLabelRequiredIcon}>*</span> {label}
       </label>
@@ -90,14 +92,14 @@ export const CartInput: FC<Props> = ({
       />
 
       {isShowDropDown && (
-        <ul>
-          {getCartLocation({ fieldName, countries, states: filteredStates, cities: filteredCities }).map((country, index) => (
-            <li onClick={() => handleSetSelectedCountry(country)} key={index}>
-              {country}
-            </li>
-          ))}
-        </ul>
+        <CartDropdownMenu
+          handleSetSelectedValue={handleSetSelectedValue}
+          fieldName={fieldName}
+          filteredStates={filteredStates}
+          filteredCities={filteredCities}
+        />
       )}
+
       <div className={commonStyles.cartFieldErrorMessage}>{errors?.[fieldName]?.message}</div>
     </div>
   );

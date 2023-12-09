@@ -5,12 +5,12 @@ import { isValidPhoneNumber } from "react-phone-number-input";
 import { useDebounce } from "use-debounce";
 import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
+import { getCountriesCodes } from "@/utils";
 import { CartBillingInfoItem, CartInputProps, FormFields, ValidationFields } from "@/common/types";
 import { GlobalDelay } from "@/common/constants";
 import commonStyles from "@/styles/CartCommon.module.scss";
 import "react-phone-input-2/lib/style.css";
 import "./CartPhoneInput.scss";
-import { getCountriesCodes } from "@/utils";
 
 type Props = {
   setValue: UseFormSetValue<FormFields>;
