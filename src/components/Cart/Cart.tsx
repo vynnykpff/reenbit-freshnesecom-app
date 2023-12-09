@@ -1,33 +1,58 @@
-import { FC, useEffect } from "react";
-import { useActions, useAppSelector } from "@/store";
-import { useChangeEffect } from "@/hooks";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
+import { useActions } from "@/store";
+import { checkOnValidFormValues } from "@/utils";
+import { FormFields } from "@/common/types";
 import { CartCompleteOrder, CartOrderDetails, CartOrderSummary } from "./components";
+import { CartErrorMessages, CartSuccessMessages, GlobalDelay, NotificationType } from "@/common/constants";
 import styles from "./Cart.module.scss";
 
 export const Cart: FC = () => {
-  const { getCountries, getStates, getCities } = useActions();
-  const { countries, countryStates } = useAppSelector(state => state.cart);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    setError,
+    getValues,
+    clearErrors,
+    reset,
+    formState: { errors },
+  } = useForm<FormFields>({ mode: "onBlur" });
+  const { resetFields, setNotification } = useActions();
 
-  // TODO: refactor this
-  useEffect(() => {
-    getCountries("ukr");
-  }, []);
+  const handleClick = () => {
+    const formValues = getValues();
+    if (!formValues.phoneNumber) {
+      setError("phoneNumber", {
+        type: "required",
+        message: CartErrorMessages.EMPTY_FIELD,
+      });
+    }
 
-  useChangeEffect(() => {
-    getStates(countries[0].name);
-  }, [countries]);
+    if (!formValues.confirmOrder) {
+      setError("confirmOrder", { type: "required", message: CartErrorMessages.REQUIRED_CONFIRMATION });
+    }
+  };
 
-  useChangeEffect(() => {
-    getCities({ country: countries[0].name, state: countryStates[1].name });
-  }, [countryStates]);
+  const onSubmit = () => {
+    handleClick();
+
+    if (!Object.keys(errors).length && getValues("confirmOrder")?.length) {
+      reset();
+      resetFields();
+      setNotification({ type: NotificationType.SUCCESS, delay: GlobalDelay.PRICE, title: CartSuccessMessages.ORDER_SUCCESS });
+    }
+  };
 
   return (
-    <form className={styles.cartContainer}>
-      <div className={styles.cartOrderWrapper}>
-        <CartOrderDetails />
-        <CartOrderSummary />
-      </div>
-      <CartCompleteOrder />
-    </form>
+    <div>
+      <form className={styles.cartContainer} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.cartOrderWrapper}>
+          <CartOrderDetails clearErrors={clearErrors} register={register} errors={errors} setValue={setValue} setError={setError} />
+          <CartOrderSummary />
+        </div>
+        <CartCompleteOrder isDisabled={checkOnValidFormValues(getValues(), errors)} handleSubmit={onSubmit} />
+      </form>
+    </div>
   );
 };

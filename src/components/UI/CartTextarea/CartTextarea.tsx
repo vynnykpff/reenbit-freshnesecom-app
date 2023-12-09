@@ -1,13 +1,59 @@
-import { FC, TextareaHTMLAttributes } from "react";
+import { ChangeEvent, FC, TextareaHTMLAttributes, useState } from "react";
+import { useDebounce } from "use-debounce";
 import cn from "classnames";
+import { useActions, useAppSelector } from "@/store";
+import { useChangeEffect } from "@/hooks";
+import { CartValidationForm } from "@/common/types";
+import { CartErrorMessages, CartFieldsConstants, CartFieldsPlaceholders, GlobalDelay } from "@/common/constants";
+import commonStyles from "@/styles/CartCommon.module.scss";
 import styles from "./CartTextarea.module.scss";
 
 type Props = {
   id: string;
-} & TextareaHTMLAttributes<HTMLTextAreaElement>;
+} & TextareaHTMLAttributes<HTMLTextAreaElement> &
+  CartValidationForm;
 
-const DEFAULT_PLACEHOLDER = "Need a specific delivery day? Sending a gitf? Let’s say ...";
+const textareaValidationRules = {
+  maxLength: { value: CartFieldsConstants.ORDER_NOTES_MAX_LENGTH, message: CartErrorMessages.ORDER_NOTES_MAX_LENGTH },
+};
 
-export const CartTextarea: FC<Props> = ({ className, placeholder = DEFAULT_PLACEHOLDER, id, ...props }) => {
-  return <textarea id={id} className={cn(styles.cartTextArea, className)} placeholder={placeholder} {...props} />;
+export const CartTextarea: FC<Props> = ({
+  className,
+  placeholder = CartFieldsPlaceholders.ORDER_NOTES,
+  id,
+  register,
+  errors,
+  ...props
+}) => {
+  const {
+    fields: { orderNotes },
+  } = useAppSelector(state => state.cart);
+  const { setField } = useActions();
+  const [textareaValue, setTextareaValue] = useState(orderNotes);
+
+  const [debouncedTextareaValue] = useDebounce(textareaValue, GlobalDelay.DEFAULT);
+
+  useChangeEffect(() => {
+    setField({ key: "orderNotes", value: textareaValue });
+  }, [debouncedTextareaValue]);
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    setTextareaValue(value);
+  };
+
+  return (
+    <div className={commonStyles.cartInputContainer}>
+      <textarea
+        id={id}
+        className={cn(styles.cartTextArea, className)}
+        {...register("orderNotes", textareaValidationRules)}
+        placeholder={placeholder}
+        {...props}
+        value={textareaValue}
+        onChange={handleChange}
+      />
+      <div className={commonStyles.cartFieldErrorMessage}>{errors?.orderNotes?.message}</div>
+    </div>
+  );
 };
