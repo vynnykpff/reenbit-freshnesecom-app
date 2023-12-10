@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { motion } from "framer-motion";
-import { useAppSelector } from "@/store";
+import { Product } from "@/common/types";
 import { getAnimationVariant } from "@/utils";
 import { Rating } from "@/components/UI";
 import { ProductCharacteristics } from "@/components/Product/components";
@@ -9,8 +9,8 @@ import { CartProductCardHeader, CartProductCardNavigation, CartProductCardPrice 
 import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./CartProductCard.module.scss";
 
-export const CartProductCard: FC = () => {
-  const { products } = useAppSelector(state => state.products);
+export const CartProductCard: FC<Product> = props => {
+  const { images, title, id } = props;
 
   return (
     <motion.li
@@ -20,10 +20,10 @@ export const CartProductCard: FC = () => {
       <div className={styles.cartProductCardMediaContainer}>
         <ProductCardImage
           className={["", styles.cartImageWrapper, styles.cartImageWrapper, styles.cartImage]}
-          images={products[0].images}
-          title={products[0].title}
+          images={images}
+          title={title}
         />
-        <CartProductCardNavigation />
+        <CartProductCardNavigation productId={id} />
       </div>
 
       <div className={styles.cartProductCardContent}>
@@ -36,10 +36,10 @@ export const CartProductCard: FC = () => {
             styles.cartCharacteristicsProperty,
           ]}
           productCharacteristicsList={["Brand", "Delivery"]}
-          {...products[0]}
+          {...props}
         />
         <Rating className={[styles.cartRatingContainer, styles.cartRatingFillIcon, styles.cartRatingOutlineIcon]} amountRating={4} />
-        <CartProductCardPrice {...products[0]} />
+        <CartProductCardPrice {...props} />
       </div>
     </motion.li>
   );

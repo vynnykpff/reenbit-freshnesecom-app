@@ -52,7 +52,7 @@ export const Product: FC = () => {
             <div className={styles.productContentContainer}>
               <ProductInfo title={product.title} longDescription={product.description.long} />
               <ProductCharacteristics productCharacteristicsList={productCharacteristicsList} {...product} />
-              <ProductOrder {...product.price} amount={product.stock.amount} unitsMeasure={product.unitsMeasure} />
+              <ProductOrder {...product} />
               <ProductWishButton />
               <ProductTabs />
             </div>

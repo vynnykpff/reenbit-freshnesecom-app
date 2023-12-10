@@ -3,12 +3,15 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { persistor, store } from "@/store";
 import { App } from "./App.tsx";
+import { ModalComponents } from "@/components";
 import { Loader, Notification } from "@/components/UI";
 import "./styles/index.scss";
+
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <Notification />
+    <ModalComponents />
     <PersistGate loading={<Loader />} persistor={persistor}>
       <App />
     </PersistGate>

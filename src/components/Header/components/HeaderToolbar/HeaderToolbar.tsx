@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useActions, useAppSelector } from "@/store";
 import { HeaderCategoriesContext, updateHeaderCategories } from "@/contexts";
 import { useChangeEffect, useMatchMedia, useWindowScrollable } from "@/hooks";
-import { BurgerMenuButton, Search } from "@/components/UI";
+import { BurgerMenuButton, IconNotification, Search } from "@/components/UI";
 import { MediaQueries, Routes } from "@/common/constants";
 import CartIcon from "#/icons/cart.svg?react";
 import Logo from "#/icons/logo.svg?react";
@@ -17,7 +17,7 @@ export const HeaderToolbar: FC = () => {
     state: { isOpenBurgerNav },
     dispatch,
   } = useContext(HeaderCategoriesContext);
-
+  const { cartProducts } = useAppSelector(state => state.cart);
   const { productCategory } = useAppSelector(state => state.productsFilter);
   const { setCategory, resetFilters } = useActions();
 
@@ -47,7 +47,10 @@ export const HeaderToolbar: FC = () => {
             <UserProfileIcon className={styles.headerToolbarIcon} />
           </NavLink>
           <NavLink to={Routes.CART} className={({ isActive }) => (isActive ? styles.active : "")}>
-            <CartIcon className={styles.headerToolbarIcon} />
+            <span className={styles.headerToolbarIconWrapper}>
+              <CartIcon className={styles.headerToolbarIcon} />
+              {!!cartProducts.length && <IconNotification count={cartProducts.length} />}
+            </span>
           </NavLink>
         </div>
         {isMobile && (

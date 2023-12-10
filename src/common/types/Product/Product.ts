@@ -1,7 +1,7 @@
 import { BaseState } from "@/common/types";
-import { ProductDescription } from "./ProductDescription.ts";
+import { ProductDescription } from "@/common/types";
 import { ProductDelivery, ProductPrice, ProductStock } from "./ProductInfo.ts";
-import { ProductReview } from "./ProductUserFeedback.ts";
+import { ProductReview } from "@/common/types";
 import { ProductTabsVariants, ProductUnitsMeasure } from "@/common/constants";
 
 export type Product = {

@@ -19,3 +19,5 @@ export { Breadcrumbs } from "./Breadcrumbs";
 export { Dropdown } from "./Dropdown";
 export { Notification } from "./Notification";
 export { Slider } from "./Slider";
+export { IconNotification } from "./IconNotification";
+export { Modal } from "./Modal";

@@ -1,0 +1,9 @@
+.emptyCartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .emptyCartWrapper {
+    margin-bottom: 20px;
+  }
+}

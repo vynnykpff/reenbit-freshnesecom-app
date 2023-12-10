@@ -1,5 +1,5 @@
 import { CaseReducer, PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CartState, FieldData, FormFields } from "@/common/types";
+import { CartState, FieldData, FormFields, Product } from "@/common/types";
 import { CartInitialFields, ErrorMessages } from "@/common/constants";
 import cartSliceThunks from "./thunks";
 
@@ -8,6 +8,7 @@ const initialState: CartState = {
   countries: [{ name: "", countryCode: "" }],
   states: [{ name: "" }],
   cities: [],
+  cartProducts: [],
   isPending: false,
   error: null,
 };
@@ -42,6 +43,14 @@ export const cartSlice = createSlice({
 
     resetFields: state => {
       state.fields = CartInitialFields;
+    },
+
+    setCartProduct: (state, action: PayloadAction<Product>) => {
+      state.cartProducts = [action.payload, ...state.cartProducts];
+    },
+
+    removeCartProduct: (state, action: PayloadAction<Product["id"]>) => {
+      state.cartProducts = state.cartProducts.filter(({ id }) => id !== action.payload);
     },
   },
 

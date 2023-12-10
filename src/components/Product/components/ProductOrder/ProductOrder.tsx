@@ -3,24 +3,31 @@ import { motion } from "framer-motion";
 import { useActions } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { getAnimationVariant, getProductPrice, getProductUnitsMeasure } from "@/utils";
-import { ProductPrice } from "@/common/types";
+import { Product, ProductPrice } from "@/common/types";
+import { ProductCardPrice } from "@/components/ProductsList/components";
 import { Button } from "@/components/UI";
 import { ProductOrderNavigation } from "./components";
-import { ProductCardPrice } from "@/components/ProductsList/components";
-import { AnimationDefaultDuration, ProductUnitsMeasure, ProductsAmountOfUnitsMeasure, animationDefaultVariants } from "@/common/constants";
+import {
+  AnimationDefaultDuration,
+  CartSuccessMessages,
+  GlobalDelay,
+  NotificationType,
+  ProductsAmountOfUnitsMeasure,
+  animationDefaultVariants,
+} from "@/common/constants";
 import PlusIcon from "#/icons/plus.svg?react";
 import styles from "./ProductOrder.module.scss";
 
-type Props = {
-  unitsMeasure: ProductUnitsMeasure;
-  amount: number;
-} & ProductPrice;
-
-export const ProductOrder: FC<Props> = ({ original, discount, currency, unitsMeasure, amount }) => {
+export const ProductOrder: FC<Product> = props => {
+  const {
+    price: { discount, original, currency },
+    unitsMeasure,
+    stock: { amount },
+  } = props;
   const [currentOrderPriceVariant, setCurrentOrderPriceVariant] = useState(getProductUnitsMeasure(unitsMeasure).pcs);
   const [localProductPrice, setLocalProductPrice] = useState<Omit<ProductPrice, "currency">>({ original, discount });
   const [localInputValue, setLocalInputValue] = useState(ProductsAmountOfUnitsMeasure.PCS);
-  const { setNotification } = useActions();
+  const { setNotification, setCartProduct } = useActions();
 
   useChangeEffect(() => {
     getProductPrice({
@@ -35,6 +42,11 @@ export const ProductOrder: FC<Props> = ({ original, discount, currency, unitsMea
     });
     setLocalInputValue(ProductsAmountOfUnitsMeasure.PCS);
   }, [currentOrderPriceVariant]);
+
+  const handleAddProductToCart = () => {
+    setCartProduct(props);
+    setNotification({ delay: GlobalDelay.PRODUCT_CART, type: NotificationType.SUCCESS, title: CartSuccessMessages.ADDED_TO_CART });
+  };
 
   return (
     <motion.div
@@ -59,7 +71,7 @@ export const ProductOrder: FC<Props> = ({ original, discount, currency, unitsMea
           original={original}
           setLocalProductPrice={setLocalProductPrice}
         />
-        <Button className={styles.productOrderButton}>
+        <Button onClick={handleAddProductToCart} className={styles.productOrderButton}>
           <PlusIcon className={styles.productOrderIcon} /> <span>Add to cart</span>
         </Button>
       </div>
