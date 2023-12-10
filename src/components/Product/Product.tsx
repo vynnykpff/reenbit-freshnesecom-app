@@ -1,7 +1,8 @@
 import { FC, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { getProductId } from "@/utils";
 import { useActions, useAppSelector } from "@/store";
+import { useMatchMedia } from "@/hooks";
+import { getProductCharacteristics, getProductId } from "@/utils";
 import { Loader, NoMatches } from "@/components/UI";
 import {
   ProductCharacteristics,
@@ -12,7 +13,7 @@ import {
   ProductSlider,
   ProductTabs,
 } from "./components";
-import { ProductTabsVariants, Routes } from "@/common/constants";
+import { MOBILE_ORDER_LIST, MediaQueries, ProductTabsVariants, Routes } from "@/common/constants";
 import { ProductWishButton } from "./components/ui";
 import styles from "./Product.module.scss";
 
@@ -23,6 +24,9 @@ export const Product: FC = () => {
   const { productBrands } = useAppSelector(state => state.productsFilter);
   const location = useLocation();
   const productId = getProductId(products, location.pathname);
+
+  const isMobile = useMatchMedia(`(max-width: ${MediaQueries.PRODUCT_CARDS_CONTAINER}px)`);
+  const productCharacteristicsList = isMobile ? MOBILE_ORDER_LIST : Object.keys(getProductCharacteristics(product));
 
   useEffect(() => {
     if (location.pathname.startsWith(`${Routes.PRODUCTS}/`)) {
@@ -47,7 +51,7 @@ export const Product: FC = () => {
             </div>
             <div className={styles.productContentContainer}>
               <ProductInfo title={product.title} longDescription={product.description.long} />
-              <ProductCharacteristics {...product} />
+              <ProductCharacteristics productCharacteristicsList={productCharacteristicsList} {...product} />
               <ProductOrder {...product.price} amount={product.stock.amount} unitsMeasure={product.unitsMeasure} />
               <ProductWishButton />
               <ProductTabs />

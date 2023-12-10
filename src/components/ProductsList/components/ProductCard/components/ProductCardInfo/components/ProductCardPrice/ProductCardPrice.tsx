@@ -14,7 +14,7 @@ export type Props = {
 
 const DECIMAL_PLACES = 2;
 
-export const ProductCardPrice: FC<Props> = ({ className = ["", "", ""], currency = DEFAULT_PRICE_CURRENCY, original, discount }) => {
+export const ProductCardPrice: FC<Props> = ({ className = [], currency = DEFAULT_PRICE_CURRENCY, original, discount }) => {
   const handleCheckDiscount = () => {
     return !discount ? (
       <ProductCardPriceWithoutDiscount currency={currency} original={getFixedPrice(original, DECIMAL_PLACES)} className={className[1]} />

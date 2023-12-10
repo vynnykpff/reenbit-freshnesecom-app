@@ -1,0 +1,28 @@
+.cartPromoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 30px;
+  padding: 12px 16px 12px 21px !important;
+  margin-bottom: 40px;
+
+  .cartPromoInput {
+    width: 100%;
+    padding: 15px 0;
+    background-color: transparent;
+  }
+
+  .cartPromoButton {
+    text-wrap: nowrap;
+    background: transparent;
+    border: none;
+    color: var(--primary-c1-color-900);
+    padding: 8px 10px;
+    transition: color .3s;
+
+    &:hover {
+      color: var(--primary-c1-color-800);
+      transition: color .3s;
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@import "@/styles/media";
+
+.cartProductCardNavigationContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  margin-top: 12px;
+
+  @include largeMobile {
+    margin-top: 0;
+  }
+
+  .cartNavigationButton {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+
+
+    .cartNavigationButtonTitle {
+      color: var(--primary-c1-color-700);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .cartNavigationIcon {
+      display: flex;
+      width: 16px;
+      height: 16px;
+    }
+
+    .cartNavigationWishIcon {
+      stroke: var(--additional-c4-color-500);
+    }
+
+    .cartNavigationRemoveIcon {
+      stroke-width: 5;
+    }
+  }
+}
