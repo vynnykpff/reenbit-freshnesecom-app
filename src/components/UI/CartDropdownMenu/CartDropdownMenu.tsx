@@ -15,6 +15,8 @@ type Props = {
   className?: string | string[];
 };
 
+const NO_RESULT = "No result";
+
 export const CartDropdownMenu: FC<Props> = ({
   handleSetSelectedValue,
   fieldName,
@@ -24,16 +26,24 @@ export const CartDropdownMenu: FC<Props> = ({
 }) => {
   const { countries } = useAppSelector(state => state.cart);
 
+  const renderCartDropdownMenuList = getCartLocation({ fieldName, countries, states: filteredStates, cities: filteredCities });
+
   return (
     <motion.ul
       {...getAnimationVariant({ ...animationDefaultSelect, duration: AnimationDefaultDuration.TERTIARY })}
       className={cn(styles.cartDropdownMenuList, className[0])}
     >
-      {getCartLocation({ fieldName, countries, states: filteredStates, cities: filteredCities }).map((value, index) => (
-        <li onClick={() => handleSetSelectedValue(value)} className={cn(styles.cartDropdownMenuItem, className[1])} key={index}>
-          {value}
+      {renderCartDropdownMenuList.length ? (
+        renderCartDropdownMenuList.map((value, index) => (
+          <li onClick={() => handleSetSelectedValue(value)} className={cn(styles.cartDropdownMenuItem, className[1])} key={index}>
+            {value}
+          </li>
+        ))
+      ) : (
+        <li className={cn(styles.cartDropdownMenuItem, className[1])}>
+          <span>{NO_RESULT}</span>
         </li>
-      ))}
+      )}
     </motion.ul>
   );
 };

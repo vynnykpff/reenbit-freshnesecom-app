@@ -43,6 +43,10 @@ export const cartSlice = createSlice({
     resetFields: state => {
       state.fields = CartInitialFields;
     },
+
+    resetError: state => {
+      state.error = null;
+    },
   },
 
   extraReducers: builder => {

@@ -37,6 +37,12 @@ export const CartTextarea: FC<Props> = ({
     setField({ key: CartFormFields.ORDER_NOTES, value: textareaValue });
   }, [debouncedTextareaValue]);
 
+  useChangeEffect(() => {
+    if (!orderNotes.length) {
+      setTextareaValue("");
+    }
+  }, [orderNotes]);
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setTextareaValue(value);
