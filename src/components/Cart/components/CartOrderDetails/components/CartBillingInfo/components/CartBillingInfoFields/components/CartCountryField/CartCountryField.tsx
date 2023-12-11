@@ -4,7 +4,7 @@ import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { CartValidationFields } from "@/common/types";
 import { CartInput } from "@/components/UI";
-import { CartErrorMessages, CartFieldsConstants, GlobalDelay } from "@/common/constants";
+import { CartErrorMessages, CartFieldsConstants, CartFormFields, GlobalDelay } from "@/common/constants";
 
 export const CartCountryField: FC<CartValidationFields> = props => {
   const { fieldName, fieldValue, clearErrors, setError } = props;
@@ -24,10 +24,10 @@ export const CartCountryField: FC<CartValidationFields> = props => {
 
   useChangeEffect(() => {
     if (city.length) {
-      setField({ key: "state", value: "" });
-      setError("state", { type: "validate", message: CartErrorMessages.INCORRECT_STATE });
-      setField({ key: "city", value: "" });
-      setError("city", { type: "validate", message: CartErrorMessages.INCORRECT_CITY });
+      setField({ key: CartFormFields.STATE, value: "" });
+      setError(CartFormFields.STATE, { type: "validate", message: CartErrorMessages.INCORRECT_STATE });
+      setField({ key: CartFormFields.CITY, value: "" });
+      setError(CartFormFields.CITY, { type: "validate", message: CartErrorMessages.INCORRECT_CITY });
     }
 
     if (!country.length) {

@@ -4,7 +4,7 @@ import { useChangeEffect } from "@/hooks";
 import { useActions, useAppSelector } from "@/store";
 import { CartValidationFields } from "@/common/types";
 import { CartInput } from "@/components/UI";
-import { CartErrorMessages, GlobalDelay } from "@/common/constants";
+import { CartErrorMessages, CartFormFields, GlobalDelay } from "@/common/constants";
 
 export const CartCityField: FC<CartValidationFields> = props => {
   const { fieldName, fieldValue, setError, setValue } = props;
@@ -43,7 +43,7 @@ export const CartCityField: FC<CartValidationFields> = props => {
     }
 
     setField({ key: fieldName, value });
-    setValue("city", value, { shouldValidate: true });
+    setValue(CartFormFields.CITY, value, { shouldValidate: true });
 
     const filteredCities = cities.filter(city => city.toLowerCase().includes(value.toLowerCase()));
     setFilteredCities(filteredCities);
@@ -59,7 +59,7 @@ export const CartCityField: FC<CartValidationFields> = props => {
 
   const handleFocus = () => {
     if (error) {
-      setError("city", { type: "validate", message: CartErrorMessages.INCORRECT_CITY });
+      setError(CartFormFields.CITY, { type: "validate", message: CartErrorMessages.INCORRECT_CITY });
       return;
     }
 

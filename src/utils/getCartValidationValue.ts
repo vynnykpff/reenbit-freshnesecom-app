@@ -1,6 +1,6 @@
 import { UseFormSetError } from "react-hook-form";
 import { FormFields, State } from "@/common/types";
-import { CartErrorMessages } from "@/common/constants";
+import { CartErrorMessages, CartFormFields } from "@/common/constants";
 
 type ValidationResult = string | true;
 
@@ -36,9 +36,9 @@ export const getCartValidationValue = ({
   }
 
   if (error === CartErrorMessages.INCORRECT_CITY) {
-    if (fieldName === "state" && !filteredStates?.length) {
+    if (fieldName === CartFormFields.STATE && !filteredStates?.length) {
       return setErrorAndReturnMessage(CartErrorMessages.INCORRECT_STATE);
-    } else if (fieldName === "city") {
+    } else if (fieldName === CartFormFields.CITY) {
       resetFieldValue();
       return setErrorAndReturnMessage(CartErrorMessages.INCORRECT_CITY);
     }

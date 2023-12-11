@@ -1,4 +1,5 @@
 import { Country, State } from "@/common/types";
+import { CartFormFields } from "@/common/constants";
 
 type Params = {
   fieldName: string;
@@ -8,11 +9,11 @@ type Params = {
 };
 
 export const getCartLocation = ({ fieldName, countries, states, cities }: Params) => {
-  if (fieldName === "country") {
+  if (fieldName === (CartFormFields.COUNTRY as string)) {
     return countries.map(country => country.name);
   }
 
-  if (fieldName === "city") {
+  if (fieldName === (CartFormFields.CITY as string)) {
     return cities;
   }
 

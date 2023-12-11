@@ -4,7 +4,7 @@ import cn from "classnames";
 import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { CartValidationForm } from "@/common/types";
-import { CartErrorMessages, CartFieldsConstants, CartFieldsPlaceholders, GlobalDelay } from "@/common/constants";
+import { CartErrorMessages, CartFieldsConstants, CartFieldsPlaceholders, CartFormFields, GlobalDelay } from "@/common/constants";
 import commonStyles from "@/styles/CartCommon.module.scss";
 import styles from "./CartTextarea.module.scss";
 
@@ -34,7 +34,7 @@ export const CartTextarea: FC<Props> = ({
   const [debouncedTextareaValue] = useDebounce(textareaValue, GlobalDelay.DEFAULT);
 
   useChangeEffect(() => {
-    setField({ key: "orderNotes", value: textareaValue });
+    setField({ key: CartFormFields.ORDER_NOTES, value: textareaValue });
   }, [debouncedTextareaValue]);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -47,7 +47,7 @@ export const CartTextarea: FC<Props> = ({
       <textarea
         id={id}
         className={cn(styles.cartTextArea, className)}
-        {...register("orderNotes", textareaValidationRules)}
+        {...register(CartFormFields.ORDER_NOTES, textareaValidationRules)}
         placeholder={placeholder}
         {...props}
         value={textareaValue}
