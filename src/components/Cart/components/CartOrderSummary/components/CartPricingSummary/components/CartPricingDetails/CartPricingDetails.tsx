@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { getPriceWithTax, getSubtotalPrice } from "@/utils";
-import { CartPayload } from "@/common/types";
+import { getPriceWithPromo, getPriceWithTax, getSubtotalPrice } from "@/utils";
+import { CartPayload, CartPromocode } from "@/common/types";
 import styles from "./CartPricingDetails.module.scss";
 
 type PricingItem = {
@@ -10,12 +10,16 @@ type PricingItem = {
 
 type Props = {
   cartProductsPayload: CartPayload[];
+  orderPromo: CartPromocode;
 };
 
-export const CartPricingDetails: FC<Props> = ({ cartProductsPayload }) => {
+export const CartPricingDetails: FC<Props> = ({ cartProductsPayload, orderPromo }) => {
   const pricingData: PricingItem[] = [
     { title: "Subtotal", subtitle: `${getSubtotalPrice(cartProductsPayload)} USD` },
-    { title: "Promo", subtitle: "0% 0.00 USD" },
+    {
+      title: "Promo",
+      subtitle: `${orderPromo.discount}% ${getPriceWithPromo(getSubtotalPrice(cartProductsPayload), orderPromo.discount)} USD`,
+    },
     { title: "Tax", subtitle: `17% ${getPriceWithTax(getSubtotalPrice(cartProductsPayload))} USD` },
   ];
 

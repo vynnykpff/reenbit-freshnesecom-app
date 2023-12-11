@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { useActions } from "@/store";
+import { useActions, useAppSelector } from "@/store";
 import { checkOnValidFormValues } from "@/utils";
 import { FormFields } from "@/common/types";
 import { CartCompleteOrder, CartOrderDetails, CartOrderSummary } from "./components";
@@ -19,6 +19,7 @@ export const Cart: FC = () => {
     formState: { errors },
   } = useForm<FormFields>({ mode: "onBlur" });
   const { resetFields, setNotification } = useActions();
+  const { cartProducts, error } = useAppSelector(state => state.cart);
 
   const handleClick = () => {
     const formValues = getValues();
@@ -51,7 +52,10 @@ export const Cart: FC = () => {
           <CartOrderDetails clearErrors={clearErrors} register={register} errors={errors} setValue={setValue} setError={setError} />
           <CartOrderSummary />
         </div>
-        <CartCompleteOrder isDisabled={checkOnValidFormValues(getValues(), errors)} handleSubmit={onSubmit} />
+        <CartCompleteOrder
+          isDisabled={checkOnValidFormValues({ cartProducts, error, errors, formValues: getValues() })}
+          handleSubmit={onSubmit}
+        />
       </form>
     </div>
   );

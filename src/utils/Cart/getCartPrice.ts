@@ -4,6 +4,7 @@ import { CartPayload } from "@/common/types";
 const DEFAULT_VALUE = 0;
 const DESIMIAL_PLACES = 2;
 const DEFAULT_TAX = 0.17;
+const COUNT_PERCENTAGE = 100;
 
 export const getSubtotalPrice = (products: CartPayload[]): number => {
   return products.reduce((subtotal, product) => {
@@ -15,7 +16,9 @@ export const getSubtotalPrice = (products: CartPayload[]): number => {
   }, DEFAULT_VALUE);
 };
 
-export const getPriceWithPromo = () => {};
+export const getPriceWithPromo = (subtotalPrice: number, discountPercentage: number): number => {
+  return (subtotalPrice / COUNT_PERCENTAGE) * discountPercentage;
+};
 
 export const getPriceWithTax = (subtotalPrice: number): number => {
   const taxAmount = subtotalPrice * DEFAULT_TAX;

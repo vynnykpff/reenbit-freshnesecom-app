@@ -1,7 +1,7 @@
 import { CaseReducer, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { removeItemByCondition } from "@/utils";
-import { CartItem, CartPayload, CartProduct, CartState, FieldData, FormFields } from "@/common/types";
-import { CartInitialCountries, CartInitialFields, CartInitialStates, ErrorMessages } from "@/common/constants";
+import { CartItem, CartPayload, CartProduct, CartPromocode, CartState, FieldData, FormFields } from "@/common/types";
+import { CartInitialCountries, CartInitialFields, CartInitialStates, ErrorMessages, OrderInitialPromocode } from "@/common/constants";
 import cartSliceThunks from "./thunks";
 
 const initialState: CartState = {
@@ -11,6 +11,7 @@ const initialState: CartState = {
   cities: [],
   cartProducts: [],
   cartProductsPayload: [],
+  orderPromo: OrderInitialPromocode,
   isPending: false,
   error: null,
 };
@@ -45,6 +46,10 @@ export const cartSlice = createSlice({
 
     resetFields: state => {
       state.fields = CartInitialFields;
+    },
+
+    setOrderPromo: (state, { payload }: PayloadAction<CartPromocode>) => {
+      state.orderPromo = payload;
     },
 
     setCartProduct: (state, action: PayloadAction<CartProduct>) => {

@@ -4,13 +4,13 @@ import { CartPricingDetails, CartPromo, CartTotalPriceAndDelivery } from "./comp
 import styles from "./CartPricingSummary.module.scss";
 
 export const CartPricingSummary: FC = () => {
-  const { cartProductsPayload, cartProducts } = useAppSelector(state => state.cart);
+  const { cartProductsPayload, cartProducts, orderPromo } = useAppSelector(state => state.cart);
 
   return (
     <div className={styles.cartPricingSummartContainer}>
-      <CartPricingDetails cartProductsPayload={cartProductsPayload} />
+      <CartPricingDetails cartProductsPayload={cartProductsPayload} orderPromo={orderPromo} />
       <CartPromo />
-      <CartTotalPriceAndDelivery cartProductsPayload={cartProductsPayload} cartProducts={cartProducts} />
+      <CartTotalPriceAndDelivery cartProductsPayload={cartProductsPayload} cartProducts={cartProducts} orderPromo={orderPromo} />
     </div>
   );
 };

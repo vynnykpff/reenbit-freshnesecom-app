@@ -1,4 +1,4 @@
-import { BaseState, CityData, Country, FormFields, Product, State } from "@/common/types";
+import { BaseState, CartPromocode, CityData, Country, FormFields, Product, State } from "@/common/types";
 
 export type CartPayload = {
   id: string;
@@ -24,4 +24,5 @@ export type CartState = {
   cities: CityData["data"];
   cartProducts: CartProduct[];
   cartProductsPayload: CartPayload[];
+  orderPromo: CartPromocode;
 } & BaseState;

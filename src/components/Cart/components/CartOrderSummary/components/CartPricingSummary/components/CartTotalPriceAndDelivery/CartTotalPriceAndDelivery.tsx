@@ -1,16 +1,21 @@
 import { FC } from "react";
-import { getCartDeliveryTime, getPriceWithTax, getSubtotalPrice } from "@/utils";
-import { CartPayload, CartProduct } from "@/common/types";
+import { getCartDeliveryTime, getPriceWithPromo, getPriceWithTax, getSubtotalPrice } from "@/utils";
+import { CartPayload, CartProduct, CartPromocode } from "@/common/types";
 import styles from "./CartTotalPriceAndDelivery.module.scss";
 
 type Props = {
   cartProducts: CartProduct[];
   cartProductsPayload: CartPayload[];
+  orderPromo: CartPromocode;
 };
 
-export const CartTotalPriceAndDelivery: FC<Props> = ({ cartProductsPayload, cartProducts }) => {
+export const CartTotalPriceAndDelivery: FC<Props> = ({ cartProductsPayload, cartProducts, orderPromo }) => {
   const getTotalPrice = () => {
-    return getSubtotalPrice(cartProductsPayload) + getPriceWithTax(getSubtotalPrice(cartProductsPayload));
+    const subtotalPrice = getSubtotalPrice(cartProductsPayload);
+    const taxIncludedPrice = getPriceWithTax(subtotalPrice);
+    const priceWithPromo = getPriceWithPromo(subtotalPrice, orderPromo.discount);
+
+    return priceWithPromo ? subtotalPrice + taxIncludedPrice - priceWithPromo : subtotalPrice + taxIncludedPrice;
   };
 
   return (
