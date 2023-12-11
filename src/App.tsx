@@ -1,5 +1,5 @@
 import { Routing } from "@/components";
-import { Loader } from "@/components/UI";
+import { Preloader } from "@/components/UI";
 import { useActions, useAppSelector } from "@/store";
 import { FC, useEffect } from "react";
 
@@ -12,7 +12,7 @@ export const App: FC = () => {
   }, []);
 
   if (isPending) {
-    return <Loader />;
+    return <Preloader />;
   }
 
   return <Routing />;
