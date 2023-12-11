@@ -9,6 +9,8 @@ import { AnimationDefaultDuration, CartErrorMessages, animationDefaultVariants, 
 import commonStyles from "@/styles/CartCommon.module.scss";
 import styles from "./CartAgreementList.module.scss";
 
+const MIN_CHECKED_ITEMS = 2;
+
 export const CartAgreementList: FC<CartValidationForm> = ({ setValue, setError, errors, clearErrors }) => {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
   const { country } = useAppSelector(state => state.cart.fields);
@@ -21,20 +23,17 @@ export const CartAgreementList: FC<CartValidationForm> = ({ setValue, setError, 
 
   const handleToggleChecked = (itemId: string) => {
     setCheckedItems(prev => {
-      if (prev.includes(itemId)) {
-        return prev.filter(id => id !== itemId);
+      const updatedItems = prev.includes(itemId) ? prev.filter(id => id !== itemId) : [...prev, itemId];
+
+      if (updatedItems.length >= MIN_CHECKED_ITEMS) {
+        clearErrors("confirmOrder");
+        setValue("confirmOrder", "confirmed");
       } else {
-        return [...prev, itemId];
+        setError("confirmOrder", { type: "required", message: CartErrorMessages.REQUIRED_CONFIRMATION });
       }
+
+      return updatedItems;
     });
-
-    if (checkedItems.length >= 2) {
-      setValue("confirmOrder", "confirmed");
-      clearErrors("confirmOrder");
-      return;
-    }
-
-    setError("confirmOrder", { type: "required", message: CartErrorMessages.REQUIRED_CONFIRMATION });
   };
 
   return (
