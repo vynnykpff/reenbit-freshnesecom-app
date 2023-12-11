@@ -10,18 +10,19 @@ import styles from "./CartProductCardNavigation.module.scss";
 
 type Props = {
   productId: string;
+  selectedUnit: string;
 };
 
-export const CartProductCardNavigation: FC<Props> = ({ productId }) => {
-  const { removeCartProduct } = useActions();
+export const CartProductCardNavigation: FC<Props> = ({ productId, selectedUnit }) => {
   const setConfirmModalActive = useModalState("confirmModal")[1];
-  const { setNotification } = useActions();
+  const { setNotification, removeCartProduct, removeCartProductPrice } = useActions();
 
   const handleRemoveProductFromCart = () => {
     setConfirmModalActive(true, {
       confirmCallback: () => {
         setNotification({ title: CartSuccessMessages.REMOVE_FROM_CART, delay: GlobalDelay.PRICE, type: NotificationType.SUCCESS });
-        removeCartProduct(productId);
+        removeCartProduct({ id: productId, selectedUnit });
+        removeCartProductPrice({ id: productId, selectedUnit });
       },
       message: CartConfirmMessages.REMOVE_FROM_CART,
     });

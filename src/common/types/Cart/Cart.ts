@@ -1,22 +1,20 @@
-import { BaseState, CityData, Country, Product, State } from "@/common/types";
+import { BaseState, CityData, Country, FormFields, Product, State } from "@/common/types";
 
-export type FormFields = {
-  firstName: string;
-  lastName: string;
-  country: string;
-  state: string;
-  city: string;
-  phoneNumber: string;
-  emailAddress: string;
-  address: string;
-  postalCode: string;
-  orderNotes: string;
-  confirmOrder: string;
+export type CartPayload = {
+  id: string;
+  price: number;
+  amount: number;
+  unit: string;
 };
 
-export type FieldData = {
-  key: keyof FormFields;
-  value: string;
+export type CartProduct = {
+  product: Product;
+  selectedUnit: string;
+};
+
+export type CartItem = {
+  id: Product["id"];
+  selectedUnit: CartProduct["selectedUnit"];
 };
 
 export type CartState = {
@@ -24,5 +22,6 @@ export type CartState = {
   countries: Country[];
   states: State[];
   cities: CityData["data"];
-  cartProducts: Product[];
+  cartProducts: CartProduct[];
+  cartProductsPayload: CartPayload[];
 } & BaseState;

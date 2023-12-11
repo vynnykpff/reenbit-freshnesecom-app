@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { motion } from "framer-motion";
 import { useActions } from "@/store";
 import { useChangeEffect } from "@/hooks";
-import { getAnimationVariant, getProductPrice, getProductUnitsMeasure } from "@/utils";
+import { getAnimationVariant, getCurrentProductPrice, getProductPrice, getProductUnitsMeasure } from "@/utils";
 import { Product, ProductPrice } from "@/common/types";
 import { ProductCardPrice } from "@/components/ProductsList/components";
 import { Button } from "@/components/UI";
@@ -23,11 +23,13 @@ export const ProductOrder: FC<Product> = props => {
     price: { discount, original, currency },
     unitsMeasure,
     stock: { amount },
+    id,
   } = props;
-  const [currentOrderPriceVariant, setCurrentOrderPriceVariant] = useState(getProductUnitsMeasure(unitsMeasure).pcs);
+  const unitsMeasureData = getProductUnitsMeasure(unitsMeasure);
+  const [currentOrderPriceVariant, setCurrentOrderPriceVariant] = useState(unitsMeasureData.prs || unitsMeasureData.pcs);
   const [localProductPrice, setLocalProductPrice] = useState<Omit<ProductPrice, "currency">>({ original, discount });
   const [localInputValue, setLocalInputValue] = useState(ProductsAmountOfUnitsMeasure.PCS);
-  const { setNotification, setCartProduct } = useActions();
+  const { setNotification, setCartProduct, setCartProductPrice } = useActions();
 
   useChangeEffect(() => {
     getProductPrice({
@@ -44,8 +46,17 @@ export const ProductOrder: FC<Product> = props => {
   }, [currentOrderPriceVariant]);
 
   const handleAddProductToCart = () => {
-    setCartProduct(props);
+    setCartProduct({ product: props, selectedUnit: currentOrderPriceVariant });
     setNotification({ delay: GlobalDelay.PRODUCT_CART, type: NotificationType.SUCCESS, title: CartSuccessMessages.ADDED_TO_CART });
+    setCartProductPrice({
+      products: {
+        price: getCurrentProductPrice(original, discount),
+        id,
+        amount: localInputValue,
+        unit: currentOrderPriceVariant,
+      },
+      isCart: false,
+    });
   };
 
   return (

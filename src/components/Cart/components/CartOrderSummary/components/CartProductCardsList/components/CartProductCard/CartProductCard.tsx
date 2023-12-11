@@ -1,33 +1,32 @@
 import { FC } from "react";
-import { motion } from "framer-motion";
 import { Product } from "@/common/types";
-import { getAnimationVariant } from "@/utils";
+import { getProductRating } from "@/utils";
 import { Rating } from "@/components/UI";
 import { ProductCharacteristics } from "@/components/Product/components";
 import { ProductCardImage } from "@/components/ProductsList/components";
 import { CartProductCardHeader, CartProductCardNavigation, CartProductCardPrice } from "./components";
-import { AnimationDefaultDuration, animationDefaultVariants } from "@/common/constants";
 import styles from "./CartProductCard.module.scss";
 
-export const CartProductCard: FC<Product> = props => {
-  const { images, title, id } = props;
+type Props = {
+  selectedUnit: string;
+} & Product;
+
+export const CartProductCard: FC<Props> = props => {
+  const { images, title, id, reviews, selectedUnit } = props;
 
   return (
-    <motion.li
-      {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.SECONDARY })}
-      className={styles.productCardListItem}
-    >
+    <li className={styles.productCardListItem}>
       <div className={styles.cartProductCardMediaContainer}>
         <ProductCardImage
           className={["", styles.cartImageWrapper, styles.cartImageWrapper, styles.cartImage]}
           images={images}
           title={title}
         />
-        <CartProductCardNavigation productId={id} />
+        <CartProductCardNavigation productId={id} selectedUnit={selectedUnit} />
       </div>
 
       <div className={styles.cartProductCardContent}>
-        <CartProductCardHeader />
+        <CartProductCardHeader title={title} />
         <ProductCharacteristics
           className={[
             styles.cartCharacteristicsList,
@@ -38,9 +37,12 @@ export const CartProductCard: FC<Product> = props => {
           productCharacteristicsList={["Brand", "Delivery"]}
           {...props}
         />
-        <Rating className={[styles.cartRatingContainer, styles.cartRatingFillIcon, styles.cartRatingOutlineIcon]} amountRating={4} />
+        <Rating
+          className={[styles.cartRatingContainer, styles.cartRatingFillIcon, styles.cartRatingOutlineIcon]}
+          amountRating={getProductRating(reviews)}
+        />
         <CartProductCardPrice {...props} />
       </div>
-    </motion.li>
+    </li>
   );
 };

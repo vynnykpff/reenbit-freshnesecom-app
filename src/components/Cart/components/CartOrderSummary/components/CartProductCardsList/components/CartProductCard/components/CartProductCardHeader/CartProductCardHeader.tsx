@@ -1,13 +1,19 @@
 import { FC } from "react";
-import { useAppSelector } from "@/store";
+import { Link } from "react-router-dom";
+import { getSlugString } from "@/utils";
+import { Routes } from "@/common/constants";
 import styles from "./CartProductCardHeader.module.scss";
 
-export const CartProductCardHeader: FC = () => {
-  const { product } = useAppSelector(state => state.product);
+type Props = {
+  title: string;
+};
 
+export const CartProductCardHeader: FC<Props> = ({ title }) => {
   return (
     <div className={styles.productCardHeaderContainer}>
-      <h5 className={styles.productCardHeaderTitle}>{product.title}</h5>
+      <Link to={`${Routes.PRODUCTS}/${getSlugString(title)}`}>
+        <h5 className={styles.productCardHeaderTitle}>{title}</h5>
+      </Link>
     </div>
   );
 };
