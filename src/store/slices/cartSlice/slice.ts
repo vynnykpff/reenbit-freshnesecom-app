@@ -103,6 +103,10 @@ export const cartSlice = createSlice({
         product => product.id === id && product.unit === selectedUnit,
       );
     },
+
+    resetError: state => {
+      state.error = null;
+    },
   },
 
   extraReducers: builder => {

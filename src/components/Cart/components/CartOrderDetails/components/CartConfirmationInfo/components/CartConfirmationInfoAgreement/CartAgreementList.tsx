@@ -5,9 +5,17 @@ import { useChangeEffect } from "@/hooks";
 import { getAnimationVariant } from "@/utils";
 import { CartValidationForm } from "@/common/types";
 import { CartAgreementListItem } from "./components";
-import { AnimationDefaultDuration, CartErrorMessages, animationDefaultVariants, cartConfirmationItems } from "@/common/constants";
+import {
+  AnimationDefaultDuration,
+  CartErrorMessages,
+  CartFormFields,
+  animationDefaultVariants,
+  cartConfirmationItems,
+} from "@/common/constants";
 import commonStyles from "@/styles/CartCommon.module.scss";
 import styles from "./CartAgreementList.module.scss";
+
+const MIN_CHECKED_ITEMS = 2;
 
 export const CartAgreementList: FC<CartValidationForm> = ({ setValue, setError, errors, clearErrors }) => {
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
@@ -21,20 +29,17 @@ export const CartAgreementList: FC<CartValidationForm> = ({ setValue, setError, 
 
   const handleToggleChecked = (itemId: string) => {
     setCheckedItems(prev => {
-      if (prev.includes(itemId)) {
-        return prev.filter(id => id !== itemId);
+      const updatedItems = prev.includes(itemId) ? prev.filter(id => id !== itemId) : [...prev, itemId];
+
+      if (updatedItems.length >= MIN_CHECKED_ITEMS) {
+        clearErrors(CartFormFields.CONFIRM_ORDER);
+        setValue(CartFormFields.CONFIRM_ORDER, "confirmed");
       } else {
-        return [...prev, itemId];
+        setError(CartFormFields.CONFIRM_ORDER, { type: "required", message: CartErrorMessages.REQUIRED_CONFIRMATION });
       }
+
+      return updatedItems;
     });
-
-    if (checkedItems.length >= 2) {
-      setValue("confirmOrder", "confirmed");
-      clearErrors("confirmOrder");
-      return;
-    }
-
-    setError("confirmOrder", { type: "required", message: CartErrorMessages.REQUIRED_CONFIRMATION });
   };
 
   return (

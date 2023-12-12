@@ -8,7 +8,7 @@ export { FormErrorMessage } from "./FormErrorMessage";
 export { Select } from "./Select";
 export { ErrorFallback } from "./ErrorFallback";
 export { Search } from "./Search";
-export { Loader } from "./Loader";
+export { Preloader } from "./Preloader";
 export { Button } from "./Button";
 export { Rating } from "./Rating";
 export { NoMatches } from "./NoMatches";

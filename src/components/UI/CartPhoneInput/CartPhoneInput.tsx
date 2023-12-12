@@ -7,7 +7,7 @@ import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { getCountriesCodes } from "@/utils";
 import { CartBillingInfoItem, CartInputProps, FormFields, ValidationFields } from "@/common/types";
-import { GlobalDelay } from "@/common/constants";
+import { CartFormFields, GlobalDelay } from "@/common/constants";
 import commonStyles from "@/styles/CartCommon.module.scss";
 import "react-phone-input-2/lib/style.css";
 import "./CartPhoneInput.scss";
@@ -35,7 +35,7 @@ export const CartPhoneInput: FC<Props> = ({ label, id, setValue, fieldName, disa
   const [debouncedPhoneValue] = useDebounce(phoneValue, GlobalDelay.DEFAULT);
 
   useEffect(() => {
-    setValue("phoneNumber", phoneNumber, { shouldValidate: true });
+    setValue(CartFormFields.PHONE_NUMBER, phoneNumber, { shouldValidate: true });
   }, []);
 
   useChangeEffect(() => {
@@ -50,7 +50,7 @@ export const CartPhoneInput: FC<Props> = ({ label, id, setValue, fieldName, disa
       return country.name.toLowerCase() === fields.country.toLowerCase();
     });
 
-    if (filteredCountries.length > 0) {
+    if (filteredCountries.length) {
       setSelectedCountryCode(filteredCountries[0].countryCode);
     }
   };
@@ -58,7 +58,7 @@ export const CartPhoneInput: FC<Props> = ({ label, id, setValue, fieldName, disa
   useChangeEffect(() => {
     if (isValidNumber) {
       setField({ key: fieldName, value: debouncedPhoneValue });
-      clearErrors("phoneNumber");
+      clearErrors(CartFormFields.PHONE_NUMBER);
     }
   }, [debouncedPhoneValue]);
 
@@ -88,10 +88,11 @@ export const CartPhoneInput: FC<Props> = ({ label, id, setValue, fieldName, disa
 
   const handlePhoneBlur = (e: FocusEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setIsValidNumber(isValidPhoneNumber(value));
+    const isValid = isValidPhoneNumber(value);
+    setIsValidNumber(isValid);
 
-    if (isValidPhoneNumber(value)) {
-      setValue("phoneNumber", value, { shouldValidate: true });
+    if (isValid) {
+      setValue(CartFormFields.PHONE_NUMBER, value, { shouldValidate: true });
     }
   };
 

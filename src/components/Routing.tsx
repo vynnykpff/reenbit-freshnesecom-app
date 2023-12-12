@@ -1,7 +1,7 @@
 import { FC, Suspense, lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Routes } from "@/common/constants/Routes.ts";
-import { Layout, Loader } from "@/components/UI";
+import { Layout, Preloader } from "@/components/UI";
 
 const HomePage = lazy(() => import("@/pages/HomePage/HomePage.tsx"));
 const CartPage = lazy(() => import("@/pages/CartPage/CartPage.tsx"));
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
 
 export const Routing: FC = () => {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Preloader />}>
       <RouterProvider router={router} />
     </Suspense>
   );
