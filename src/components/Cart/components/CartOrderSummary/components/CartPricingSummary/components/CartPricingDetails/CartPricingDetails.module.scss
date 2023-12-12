@@ -13,18 +13,33 @@
     justify-content: space-between;
     font-size: 14px;
     font-weight: 600;
-    column-gap: 30px;
     text-wrap: nowrap;
     overflow: hidden;
+    column-gap: 30px;
 
-    & .cartPriceDetailsTitle {
-
+    .cartPriceDetailsTitle {
+      display: flex;
+      min-width: 60px;
     }
 
-    & .cartPriceDetailsSubtitle {
+    .cartPriceDetailsContainer {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .cartPriceDetailsWrapper {
+      display: flex;
+      overflow: hidden;
+    }
+
+    & .cartPriceDetailsPrice {
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 200px;
+    }
+
+
+    & .cartPriceDetailsCurrency {
+      margin-left: 6px;
     }
   }
 }

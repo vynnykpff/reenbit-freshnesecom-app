@@ -1,3 +1,5 @@
+import { DEFAULT_TAX } from "@/common/constants";
+import cn from "classnames";
 import { FC } from "react";
 import { getPriceWithPromo, getPriceWithTax, getSubtotalPrice } from "@/utils";
 import { CartPayload, CartPromocode } from "@/common/types";
@@ -15,12 +17,12 @@ type Props = {
 
 export const CartPricingDetails: FC<Props> = ({ cartProductsPayload, orderPromo }) => {
   const pricingData: PricingItem[] = [
-    { title: "Subtotal", subtitle: `${getSubtotalPrice(cartProductsPayload)} USD` },
+    { title: "Subtotal", subtitle: `${getSubtotalPrice(cartProductsPayload)}` },
     {
       title: "Promo",
-      subtitle: `${orderPromo.discount}% ${getPriceWithPromo(getSubtotalPrice(cartProductsPayload), orderPromo.discount)} USD`,
+      subtitle: `${orderPromo.discount}% ${getPriceWithPromo(getSubtotalPrice(cartProductsPayload), orderPromo.discount)}`,
     },
-    { title: "Tax", subtitle: `17% ${getPriceWithTax(getSubtotalPrice(cartProductsPayload))} USD` },
+    { title: "Tax", subtitle: `${DEFAULT_TAX}% ${getPriceWithTax(getSubtotalPrice(cartProductsPayload))}` },
   ];
 
   return (
@@ -28,7 +30,12 @@ export const CartPricingDetails: FC<Props> = ({ cartProductsPayload, orderPromo 
       {pricingData.map((item, index) => (
         <li key={index} className={styles.cartPricingDetailsItem}>
           <span className={styles.cartPriceDetailsTitle}>{item.title}</span>
-          <span className={styles.cartPriceDetailsSubtitle}>{item.subtitle}</span>
+          <div className={styles.cartPriceDetailsContainer}>
+            <div className={styles.cartPriceDetailsWrapper}>
+              <span className={cn(styles.cartPriceDetailsSubtitle, styles.cartPriceDetailsPrice)}>{item.subtitle}</span>
+            </div>
+            <span className={cn(styles.cartPriceDetailsSubtitle, styles.cartPriceDetailsCurrency)}>USD</span>
+          </div>
         </li>
       ))}
     </ul>
