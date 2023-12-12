@@ -1,0 +1,37 @@
+@import "@/styles/variables";
+
+.cartDropdownMenuList {
+  outline: none;
+  z-index: 10;
+  list-style: none;
+  position: absolute;
+  margin: 10px 0 10px -1px;
+  width: 300px;
+  overflow-y: scroll;
+  box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+  transition: all 0.3s;
+  background-color: var(--primary-c1-color-400);
+  min-width: 100%;
+  max-width: 300px;
+  max-height: 150px;
+  border-radius: 10px;
+  text-wrap: nowrap;
+  padding: 7px 9px;
+
+  .cartDropdownMenuItem {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 5px;
+    border-radius: 10px;
+    padding: 7px 9px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: $secondary-font;
+    color: var(--primary-c1-color-900);
+
+    &:hover {
+      transition: $primary-transition;
+      background-color: var(--secondary-c2-color-200);
+    }
+  }
+}

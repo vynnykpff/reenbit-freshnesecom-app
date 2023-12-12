@@ -1,0 +1,14 @@
+@import "@/styles/media";
+
+.cartContainer {
+  .cartOrderWrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 32px;
+
+    @include productCardsContainer {
+      flex-direction: column-reverse;
+    }
+  }
+}

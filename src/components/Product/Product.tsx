@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getProductId } from "@/utils";
 import { useActions, useAppSelector } from "@/store";
-import { Loader, NoMatches } from "@/components/UI";
+import { NoMatches, Preloader } from "@/components/UI";
 import {
   ProductCharacteristics,
   ProductGallery,
@@ -33,7 +33,7 @@ export const Product: FC = () => {
   }, [productBrands, location.pathname]);
 
   if (isPending) {
-    return <Loader />;
+    return <Preloader />;
   }
 
   return (
