@@ -21,3 +21,4 @@ export { Notification } from "./Notification";
 export { Slider } from "./Slider";
 export { IconNotification } from "./IconNotification";
 export { Modal } from "./Modal";
+export { ProductAmount } from "./ProductAmount";

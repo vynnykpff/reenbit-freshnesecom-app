@@ -26,34 +26,37 @@ export const ProductOrder: FC<Product> = props => {
     id,
   } = props;
   const unitsMeasureData = getProductUnitsMeasure(unitsMeasure);
-  const [currentOrderPriceVariant, setCurrentOrderPriceVariant] = useState(unitsMeasureData.prs || unitsMeasureData.pcs);
-  const [localProductPrice, setLocalProductPrice] = useState<Omit<ProductPrice, "currency">>({ original, discount });
-  const [localInputValue, setLocalInputValue] = useState(ProductsAmountOfUnitsMeasure.PCS);
-  const { setNotification, setCartProduct, setCartProductPrice } = useActions();
+  const [priceVariant, setPriceVariant] = useState(unitsMeasureData.pcs);
+  const [productPrice, setProductPrice] = useState<Omit<ProductPrice, "currency">>({ original, discount });
+  const [inputValue, setInputValue] = useState(+ProductsAmountOfUnitsMeasure.PCS);
+  const { setNotification, setCartProduct, setCartProductPayload } = useActions();
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const similarProductOrderParams = { original, discount, amount, priceVariant, setProductPrice, setInputValue };
 
   useChangeEffect(() => {
     getProductPrice({
-      original,
-      discount,
-      productAmount: amount,
+      ...similarProductOrderParams,
       value: ProductsAmountOfUnitsMeasure.PCS,
-      currentOrderPriceVariant,
-      setLocalProductPrice,
-      setLocalInputValue,
       setNotification,
     });
-    setLocalInputValue(ProductsAmountOfUnitsMeasure.PCS);
-  }, [currentOrderPriceVariant]);
+
+    setInputValue(ProductsAmountOfUnitsMeasure.PCS);
+  }, [priceVariant]);
 
   const handleAddProductToCart = () => {
-    setCartProduct({ product: props, selectedUnit: currentOrderPriceVariant });
+    setCartProduct({ product: props, selectedUnit: priceVariant });
+    setInputValue(ProductsAmountOfUnitsMeasure.PCS);
+    setProductPrice({ original, discount });
+    setPriceVariant(unitsMeasureData.pcs);
+
     setNotification({ delay: GlobalDelay.PRODUCT_CART, type: NotificationType.SUCCESS, title: CartSuccessMessages.ADDED_TO_CART });
-    setCartProductPrice({
+    setCartProductPayload({
       products: {
         price: getCurrentProductPrice(original, discount),
         id,
-        amount: localInputValue,
-        unit: currentOrderPriceVariant,
+        amount: inputValue,
+        unit: priceVariant,
       },
       isCart: false,
     });
@@ -67,22 +70,21 @@ export const ProductOrder: FC<Product> = props => {
       <ProductCardPrice
         className={[styles.productOrderPriceContainer, styles.productOriginalOrderPrice, styles.productDiscountOrderPrice]}
         currency={currency}
-        discount={localProductPrice.discount}
-        original={localProductPrice.original}
+        discount={productPrice.discount}
+        original={productPrice.original}
       />
       <div className={styles.productOrderNavigation}>
         <ProductOrderNavigation
-          localInputValue={localInputValue}
-          currentOrderPriceVariant={currentOrderPriceVariant}
-          setCurrentOrderPriceVariant={setCurrentOrderPriceVariant}
+          {...similarProductOrderParams}
+          inputValue={inputValue}
+          setPriceVariant={setPriceVariant}
           unitsMeasure={unitsMeasure}
-          amount={amount}
-          setLocalInputValue={setLocalInputValue}
-          discount={discount}
-          original={original}
-          setLocalProductPrice={setLocalProductPrice}
+          setProductPrice={setProductPrice}
+          id={id}
+          setIsDisabled={setIsDisabled}
+          isDisabled={isDisabled}
         />
-        <Button onClick={handleAddProductToCart} className={styles.productOrderButton}>
+        <Button onClick={handleAddProductToCart} disabled={isDisabled} className={styles.productOrderButton}>
           <PlusIcon className={styles.productOrderIcon} /> <span>Add to cart</span>
         </Button>
       </div>

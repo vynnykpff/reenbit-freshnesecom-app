@@ -28,3 +28,4 @@ export * from "./generateCharacteristics.ts";
 export * from "./getMinMaxProductPrice.ts";
 export * from "./checkPriceCorrectValue.ts";
 export * from "./Cart";
+export * from "./Product";

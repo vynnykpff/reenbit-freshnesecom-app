@@ -65,7 +65,7 @@ export const cartSlice = createSlice({
       }
     },
 
-    setCartProductPrice: (state, action: PayloadAction<{ products: CartPayload; isCart: boolean }>) => {
+    setCartProductPayload: (state, action: PayloadAction<{ products: CartPayload; isCart: boolean }>) => {
       const {
         products: { id, price, unit, amount },
         isCart,

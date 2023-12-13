@@ -1,0 +1,9 @@
+@import "@/styles/variables.scss";
+
+.productCartAmount {
+  display: inline-block;
+  color: var(--secondary-c2-color-500);
+  font-family: $secondary-font;
+  font-size: 14px;
+  margin-bottom: 20px;
+}

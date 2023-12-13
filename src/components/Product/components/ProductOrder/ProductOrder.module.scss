@@ -13,6 +13,10 @@
   padding: 20px 24px 20px 16px;
   margin-bottom: 24px;
 
+  @include desktop {
+    height: 175px;
+  }
+
   @include productCardsContainer {
     flex-direction: column;
     align-items: flex-start;
@@ -20,6 +24,7 @@
     row-gap: 20px;
     padding: 12px 16px;
     margin-bottom: 18px;
+    height: auto;
   }
 
   @include tablet {
@@ -49,13 +54,31 @@
 
     @include desktop {
       flex-direction: column;
+      justify-content: center;
       align-items: flex-end;
       gap: 16px;
     }
 
     @include productCardsContainer {
       flex-direction: row;
+      justify-content: stretch;
+      align-items: flex-start;
       flex-wrap: wrap;
+      height: 55px;
+    }
+
+    @media (max-width: 800px) {
+      height: 120px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    @include tablet {
+      height: auto;
+    }
+
+    @include sidebarLargeMobile {
+      height: 55px;
     }
 
     @include productLaptopContainer {
@@ -63,9 +86,9 @@
     }
 
     @include largeMobile {
-      flex-direction: column;
       width: 100%;
       transition: width .3s;
+      height: auto;
     }
   }
 
