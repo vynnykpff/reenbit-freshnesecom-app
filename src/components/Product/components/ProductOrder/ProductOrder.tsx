@@ -47,7 +47,7 @@ export const ProductOrder: FC<Product> = props => {
 
   const handleAddProductToCart = () => {
     setCartProduct({ product: props, selectedUnit: currentOrderPriceVariant });
-    setNotification({ delay: GlobalDelay.PRODUCT_CART, type: NotificationType.SUCCESS, title: CartSuccessMessages.ADDED_TO_CART });
+    setNotification({ delay: GlobalDelay.DEFAULT, type: NotificationType.SUCCESS, title: CartSuccessMessages.ADDED_TO_CART });
     setCartProductPrice({
       products: {
         price: getCurrentProductPrice(original, discount),
