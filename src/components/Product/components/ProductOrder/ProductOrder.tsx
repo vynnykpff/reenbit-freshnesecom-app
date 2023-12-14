@@ -2,23 +2,34 @@ import { FC, useState } from "react";
 import { motion } from "framer-motion";
 import { useActions } from "@/store";
 import { useChangeEffect } from "@/hooks";
-import { getAnimationVariant, getProductPrice, getProductUnitsMeasure } from "@/utils";
-import { ProductPrice } from "@/common/types";
-import { ProductOrderNavigation } from "./components";
+import { getAnimationVariant, getCurrentProductPrice, getProductPrice, getProductUnitsMeasure } from "@/utils";
+import { Product, ProductPrice } from "@/common/types";
 import { ProductCardPrice } from "@/components/ProductsList/components";
-import { AnimationDefaultDuration, ProductUnitsMeasure, ProductsAmountOfUnitsMeasure, animationDefaultVariants } from "@/common/constants";
+import { Button } from "@/components/UI";
+import { ProductOrderNavigation } from "./components";
+import {
+  AnimationDefaultDuration,
+  CartSuccessMessages,
+  GlobalDelay,
+  NotificationType,
+  ProductsAmountOfUnitsMeasure,
+  animationDefaultVariants,
+} from "@/common/constants";
+import PlusIcon from "#/icons/plus.svg?react";
 import styles from "./ProductOrder.module.scss";
 
-type Props = {
-  unitsMeasure: ProductUnitsMeasure;
-  amount: number;
-} & ProductPrice;
-
-export const ProductOrder: FC<Props> = ({ original, discount, currency, unitsMeasure, amount }) => {
-  const [currentOrderPriceVariant, setCurrentOrderPriceVariant] = useState(getProductUnitsMeasure(unitsMeasure).pcs);
+export const ProductOrder: FC<Product> = props => {
+  const {
+    price: { discount, original, currency },
+    unitsMeasure,
+    stock: { amount },
+    id,
+  } = props;
+  const unitsMeasureData = getProductUnitsMeasure(unitsMeasure);
+  const [currentOrderPriceVariant, setCurrentOrderPriceVariant] = useState(unitsMeasureData.prs || unitsMeasureData.pcs);
   const [localProductPrice, setLocalProductPrice] = useState<Omit<ProductPrice, "currency">>({ original, discount });
   const [localInputValue, setLocalInputValue] = useState(ProductsAmountOfUnitsMeasure.PCS);
-  const { setNotification } = useActions();
+  const { setNotification, setCartProduct, setCartProductPrice } = useActions();
 
   useChangeEffect(() => {
     getProductPrice({
@@ -34,6 +45,20 @@ export const ProductOrder: FC<Props> = ({ original, discount, currency, unitsMea
     setLocalInputValue(ProductsAmountOfUnitsMeasure.PCS);
   }, [currentOrderPriceVariant]);
 
+  const handleAddProductToCart = () => {
+    setCartProduct({ product: props, selectedUnit: currentOrderPriceVariant });
+    setNotification({ delay: GlobalDelay.DEFAULT, type: NotificationType.SUCCESS, title: CartSuccessMessages.ADDED_TO_CART });
+    setCartProductPrice({
+      products: {
+        price: getCurrentProductPrice(original, discount),
+        id,
+        amount: localInputValue,
+        unit: currentOrderPriceVariant,
+      },
+      isCart: false,
+    });
+  };
+
   return (
     <motion.div
       {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.TERTIARY })}
@@ -45,17 +70,22 @@ export const ProductOrder: FC<Props> = ({ original, discount, currency, unitsMea
         discount={localProductPrice.discount}
         original={localProductPrice.original}
       />
-      <ProductOrderNavigation
-        localInputValue={localInputValue}
-        currentOrderPriceVariant={currentOrderPriceVariant}
-        setCurrentOrderPriceVariant={setCurrentOrderPriceVariant}
-        unitsMeasure={unitsMeasure}
-        amount={amount}
-        setLocalInputValue={setLocalInputValue}
-        discount={discount}
-        original={original}
-        setLocalProductPrice={setLocalProductPrice}
-      />
+      <div className={styles.productOrderNavigation}>
+        <ProductOrderNavigation
+          localInputValue={localInputValue}
+          currentOrderPriceVariant={currentOrderPriceVariant}
+          setCurrentOrderPriceVariant={setCurrentOrderPriceVariant}
+          unitsMeasure={unitsMeasure}
+          amount={amount}
+          setLocalInputValue={setLocalInputValue}
+          discount={discount}
+          original={original}
+          setLocalProductPrice={setLocalProductPrice}
+        />
+        <Button onClick={handleAddProductToCart} className={styles.productOrderButton}>
+          <PlusIcon className={styles.productOrderIcon} /> <span>Add to cart</span>
+        </Button>
+      </div>
     </motion.div>
   );
 };

@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Product, ProductState } from "@/common/types";
-import { ErrorMessages, ProductTabsVariants } from "@/common/constants";
+import { ProductState } from "@/common/types";
+import { ErrorMessages, InitialProduct, ProductTabsVariants } from "@/common/constants";
 import productSliceThunks from "./thunks";
 
 const initialState: ProductState = {
-  product: {} as Product,
+  product: InitialProduct,
   selectedTab: ProductTabsVariants.DESCRIPTION,
   isPending: false,
   error: null,

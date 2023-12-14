@@ -2,6 +2,7 @@ import { FC } from "react";
 import { motion } from "framer-motion";
 import { getAnimationVariant } from "@/utils";
 import { CartSectionHeader } from "@/components/Cart";
+import { CartPricingSummary, CartProductCardsList } from "./components";
 import { AnimationDefaultDuration, CartSectionConstants, animationDefaultVariants } from "@/common/constants";
 import styles from "./CartOrderSummary.module.scss";
 
@@ -14,6 +15,8 @@ export const CartOrderSummary: FC = () => {
       {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}
     >
       <CartSectionHeader {...orderSummary} />
+      <CartProductCardsList />
+      <CartPricingSummary />
     </motion.div>
   );
 };

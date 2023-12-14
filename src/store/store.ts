@@ -7,6 +7,7 @@ import { productsFiltersReducer } from "./slices/productsFilterSlice";
 import { productsPaginationReducer } from "./slices/paginationSlice";
 import { cartReducer } from "./slices/cartSlice";
 import { notificationReducer } from "./slices/notificationSlice.ts";
+import { modalWindowReducer } from "./slices/modalWindowSlice.ts";
 
 const rootReducer = combineReducers({
   products: productsReducer,
@@ -15,12 +16,13 @@ const rootReducer = combineReducers({
   productsPagination: productsPaginationReducer,
   cart: cartReducer,
   notification: notificationReducer,
+  modalWindow: modalWindowReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["products", "productsPagination", "notification"],
+  blacklist: ["products", "productsPagination", "notification", "modalWindow"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -21,10 +21,12 @@ const createBillingInfoItem = (
 export const cartBillingInfoItems: CartBillingInfoItem[] = [
   createBillingInfoItem("First name", "First name", "firstName", {
     required: CartErrorMessages?.EMPTY_FIELD,
+    maxLength: { value: 15, message: "Max length should be 15" },
     pattern: { value: FIELD_LETTERS_PATTERN, message: CartErrorMessages?.ONLY_LETTERS },
   }),
   createBillingInfoItem("Last name", "Last name", "lastName", {
     required: CartErrorMessages?.EMPTY_FIELD,
+    maxLength: { value: 15, message: "Max length should be 15" },
     pattern: { value: FIELD_LETTERS_PATTERN, message: CartErrorMessages?.ONLY_LETTERS },
   }),
   createBillingInfoItem("Country", "Choose a country", "country", {

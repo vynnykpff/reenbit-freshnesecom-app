@@ -1,0 +1,11 @@
+@import "@/styles/variables";
+
+.productCardHeaderContainer {
+  margin-bottom: 6px;
+
+ .productCardHeaderTitle {
+   font-size: 15px;
+   font-family: $secondary-font;
+   font-weight: 500;
+ }
+}

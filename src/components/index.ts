@@ -6,4 +6,6 @@ export { ProductSorting } from "./ProductSorting";
 export { Pagination } from "./Pagination";
 export { Product } from "./Product";
 export { Cart } from "./Cart";
+export { ModalComponents } from "./ModalComponents.tsx";
+export { ConfirmModal } from "./ConfirmModal";
 export * from "./Sidebar";

@@ -1,0 +1,45 @@
+@import "@/styles/variables";
+
+.cartPricingDetailsList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  margin-bottom: 32px;
+  font-family: $secondary-font;
+
+  .cartPricingDetailsItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    text-wrap: nowrap;
+    overflow: hidden;
+    column-gap: 30px;
+
+    .cartPriceDetailsTitle {
+      display: flex;
+      min-width: 60px;
+    }
+
+    .cartPriceDetailsContainer {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .cartPriceDetailsWrapper {
+      display: flex;
+      overflow: hidden;
+    }
+
+    & .cartPriceDetailsPrice {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+
+    & .cartPriceDetailsCurrency {
+      margin-left: 6px;
+    }
+  }
+}

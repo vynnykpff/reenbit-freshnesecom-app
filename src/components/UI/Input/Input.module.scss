@@ -9,4 +9,9 @@
   &::placeholder {
     color: var(--primary-c1-color-700);
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--primary-c1-color-500);
+  }
 }

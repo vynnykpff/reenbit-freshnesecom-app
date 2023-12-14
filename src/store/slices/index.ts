@@ -7,6 +7,7 @@ import { productsFiltersActions } from "./productsFilterSlice";
 import { productsPaginationActions } from "./paginationSlice";
 import { cartActions } from "./cartSlice";
 import { notificationActions } from "./notificationSlice.ts";
+import { modalWindowActions } from "./modalWindowSlice.ts";
 
 export const ActionCreators = {
   getProducts: getProducts.asyncThunk,
@@ -20,4 +21,5 @@ export const ActionCreators = {
   ...productsPaginationActions,
   ...cartActions,
   ...notificationActions,
+  ...modalWindowActions,
 };

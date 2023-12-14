@@ -1,0 +1,45 @@
+@import "@/styles/media";
+
+.cartProductCardPriceContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+
+  @include largeMobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cartPriceContainer {
+    margin-bottom: 0;
+    text-wrap: nowrap;
+    overflow: hidden;
+
+    .cartPrice {
+      color: var(--secondary-c2-color-500);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+  }
+
+  .cartOrderNotification {
+    right: 0;
+    left: auto;
+
+    @include largeMobile {
+      top: 6px;
+    }
+  }
+
+  .cartOrderInputContainer {
+    margin-right: 0;
+    width: 160px;
+
+    @include largeMobile {
+      width: 100%;
+    }
+  }
+}

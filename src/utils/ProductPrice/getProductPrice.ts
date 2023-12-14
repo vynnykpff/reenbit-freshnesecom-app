@@ -1,6 +1,6 @@
 import { ProductPrice, ProductPriceBaseParams } from "@/common/types";
-import { checkProductOnCorrectAmount } from "./checkProductOnCorrectAmount.ts";
-import { resetProductPrice } from "./resetProductPrice.ts";
+import { checkProductOnCorrectAmount } from "@/utils";
+import { resetProductPrice } from "@/utils";
 import { ProductUnitsMeasure, ProductsAmountOfUnitsMeasure } from "@/common/constants";
 
 type Params = {

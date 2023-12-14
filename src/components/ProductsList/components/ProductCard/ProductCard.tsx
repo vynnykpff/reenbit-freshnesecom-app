@@ -12,7 +12,7 @@ export const ProductCard: FC<Product> = props => {
       className={styles.productCardContainer}
       {...getAnimationVariant({ ...animationDefaultVariants, duration: AnimationDefaultDuration.PRIMARY })}
     >
-      <ProductCardImage {...props} />
+      <ProductCardImage images={props.images} title={props.title} />
       <div className={styles.productCardContentWrapper}>
         <ProductCardDetails {...props} />
         <ProductCardInfo {...props} />

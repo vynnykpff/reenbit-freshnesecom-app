@@ -37,6 +37,10 @@
           }
         }
       }
+      
+      .headerToolbarIconWrapper {
+        position: relative;
+      }
 
       .headerToolbarIcon {
         stroke: var(--primary-c1-color-900);

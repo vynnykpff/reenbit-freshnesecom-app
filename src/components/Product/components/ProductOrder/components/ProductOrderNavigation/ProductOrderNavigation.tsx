@@ -1,11 +1,11 @@
 import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react";
+import cn from "classnames";
 import { useActions } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { getProductPrice, getProductUnitsMeasure } from "@/utils";
 import { ProductPrice } from "@/common/types";
-import { Button, Input, Select } from "@/components/UI";
+import { Input, Select } from "@/components/UI";
 import { ProductUnitsMeasure, ProductsAmountOfUnitsMeasure, RESET_PRICE_VALUE } from "@/common/constants";
-import PlusIcon from "#/icons/plus.svg?react";
 import styles from "./ProductOrderNavigation.module.scss";
 
 type Props = {
@@ -16,6 +16,7 @@ type Props = {
   amount: number;
   setLocalInputValue: Dispatch<SetStateAction<ProductsAmountOfUnitsMeasure>>;
   setLocalProductPrice: Dispatch<SetStateAction<Omit<ProductPrice, "currency">>>;
+  className?: string | string[];
 } & Omit<ProductPrice, "currency">;
 
 export const ProductOrderNavigation: FC<Props> = ({
@@ -28,6 +29,7 @@ export const ProductOrderNavigation: FC<Props> = ({
   amount,
   setLocalInputValue,
   setLocalProductPrice,
+  className = "",
 }) => {
   const { setNotification } = useActions();
   const [isShowMessage, setIsShowMessage] = useState(false);
@@ -66,31 +68,26 @@ export const ProductOrderNavigation: FC<Props> = ({
   }, [currentOrderPriceVariant]);
 
   return (
-    <div className={styles.productOrderNavigation}>
-      <div className={styles.productOrderNavigationWrapper}>
-        {isShowMessage && <span className={styles.productOrderNotification}>{messageOfAmountUnits}</span>}
-        <div className={styles.productOrderInputContainer}>
-          <div className={styles.productOrderInputWrapper}>
-            <Input
-              type="number"
-              className={styles.productOrderInput}
-              value={!localInputValue ? "" : localInputValue}
-              placeholder={`${RESET_PRICE_VALUE}`}
-              onChange={handeChangeInputPrice}
-            />
-          </div>
-          <Select
-            className={styles.productOrderSelect}
-            currentVariant={currentOrderPriceVariant}
-            setCurrentVariant={setCurrentOrderPriceVariant}
-            isShowSelectedValue
-            variants={getProductUnitsMeasure(unitsMeasure)}
+    <div className={styles.productOrderNavigationWrapper}>
+      {isShowMessage && <span className={cn(styles.productOrderNotification, className[0])}>{messageOfAmountUnits}</span>}
+      <div className={cn(styles.productOrderInputContainer, className[1])}>
+        <div className={cn(styles.productOrderInputWrapper, className[2])}>
+          <Input
+            type="number"
+            className={cn(styles.productOrderInput, className[3])}
+            value={!localInputValue ? "" : localInputValue}
+            placeholder={`${RESET_PRICE_VALUE}`}
+            onChange={handeChangeInputPrice}
           />
         </div>
+        <Select
+          className={cn(styles.productOrderSelect, className[4])}
+          currentVariant={currentOrderPriceVariant}
+          setCurrentVariant={setCurrentOrderPriceVariant}
+          isShowSelectedValue
+          variants={getProductUnitsMeasure(unitsMeasure)}
+        />
       </div>
-      <Button className={styles.productOrderButton}>
-        <PlusIcon className={styles.productOrderIcon} /> <span>Add to cart</span>
-      </Button>
     </div>
   );
 };

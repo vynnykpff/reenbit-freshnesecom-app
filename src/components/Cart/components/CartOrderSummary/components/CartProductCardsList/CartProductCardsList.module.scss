@@ -1,0 +1,8 @@
+.productCardsList {
+  max-height: 680px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 32px;
+}
