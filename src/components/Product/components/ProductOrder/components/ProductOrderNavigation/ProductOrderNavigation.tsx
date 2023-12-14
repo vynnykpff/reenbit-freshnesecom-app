@@ -3,7 +3,7 @@ import cn from "classnames";
 import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { getMaxAvailableAmount, getProductAmountInSelectedVariant, getProductAmountMessage, getProductPrice } from "@/utils";
-import { ProductInputValue, ProductPrice, ProductSelectValue } from "@/common/types";
+import { ProductPrice, ProductSelectValue, ProductValue } from "@/common/types";
 import { ProductAmount } from "@/components/UI";
 import { GlobalInitialValues, ProductUnitsMeasure } from "@/common/constants";
 import commonStyles from "@/styles/CartCommon.module.scss";
@@ -18,7 +18,7 @@ type Props = {
   setProductPrice: Dispatch<SetStateAction<Omit<ProductPrice, "currency">>>;
   setIsDisabled: Dispatch<SetStateAction<boolean>>;
 } & ProductSelectValue &
-  ProductInputValue &
+  ProductValue &
   Omit<ProductPrice, "currency">;
 
 export const ProductOrderNavigation: FC<Props> = ({

@@ -1,7 +1,7 @@
 import { ChangeEvent, FC } from "react";
 import cn from "classnames";
 import { getProductUnitsMeasure } from "@/utils";
-import { ProductInputValue, ProductSelectValue } from "@/common/types";
+import { ProductSelectValue, ProductValue } from "@/common/types";
 import { Input, Select } from "@/components/UI";
 import { ProductUnitsMeasure, RESET_PRICE_VALUE } from "@/common/constants";
 import styles from "./ProductAmount.module.scss";
@@ -11,10 +11,10 @@ type Props = {
   className?: string | string[];
   unitsMeasure: ProductUnitsMeasure;
 } & ProductSelectValue &
-  ProductInputValue;
+  ProductValue;
 
 export const ProductAmount: FC<Props> = ({ handleChange, priceVariant, setPriceVariant, inputValue, className = "", unitsMeasure }) => {
-  const getPriceValue = () => inputValue || "";
+  const value = inputValue ? inputValue.toString() : "";
 
   return (
     <div className={cn(styles.productOrderInputContainer, className[0])}>
@@ -22,7 +22,7 @@ export const ProductAmount: FC<Props> = ({ handleChange, priceVariant, setPriceV
         <Input
           type="number"
           className={cn(styles.productOrderInput, className[2])}
-          value={getPriceValue()}
+          value={value}
           placeholder={`${RESET_PRICE_VALUE}`}
           onChange={handleChange}
         />
