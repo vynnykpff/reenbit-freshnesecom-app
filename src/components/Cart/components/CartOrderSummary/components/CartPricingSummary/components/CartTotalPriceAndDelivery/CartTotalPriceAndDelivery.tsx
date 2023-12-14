@@ -15,7 +15,13 @@ export const CartTotalPriceAndDelivery: FC<Props> = ({ cartProductsPayload, cart
     const taxIncludedPrice = getPriceWithTax(subtotalPrice);
     const priceWithPromo = getPriceWithPromo(subtotalPrice, orderPromo.discount);
 
-    return priceWithPromo ? subtotalPrice + taxIncludedPrice - priceWithPromo : subtotalPrice + taxIncludedPrice;
+    let totalPrice = subtotalPrice + taxIncludedPrice;
+
+    if (priceWithPromo) {
+      totalPrice -= priceWithPromo;
+    }
+
+    return totalPrice;
   };
 
   return (

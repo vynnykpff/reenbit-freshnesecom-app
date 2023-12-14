@@ -1,5 +1,6 @@
 import { FieldErrors } from "react-hook-form";
 import { CartProduct, FormFields } from "@/common/types";
+import { CartFormFields } from "@/common/constants";
 
 type Params = {
   formValues: FormFields;
@@ -13,7 +14,9 @@ export const checkOnValidFormValues = ({ formValues, errors, error, cartProducts
     return false;
   }
 
-  const isValidFormValues = Object.entries(formValues).every(([key, value]) => key === "orderNotes" || Boolean(value));
+  const isValidFormValues = Object.entries(formValues).every(
+    ([key, value]) => key === (CartFormFields.ORDER_NOTES as string) || Boolean(value),
+  );
   const hasNoErrors = !Object.keys(errors).length;
   const hasConfirmOrder = formValues.confirmOrder?.length;
 

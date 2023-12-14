@@ -103,6 +103,15 @@ export const cartSlice = createSlice({
         product => product.id === id && product.unit === selectedUnit,
       );
     },
+
+    resetCartProducts: state => {
+      state.cartProductsPayload = [];
+      state.cartProducts = [];
+    },
+
+    resetError: state => {
+      state.error = null;
+    },
   },
 
   extraReducers: builder => {

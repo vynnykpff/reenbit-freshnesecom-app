@@ -1,13 +1,13 @@
 import { CaseReducer, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { CartService } from "@/services";
 import { CartState, LocationCountry, StoreAsyncThunk } from "@/common/types";
-import { ErrorMessages } from "@/common/constants";
+import { CartErrorMessages } from "@/common/constants";
 
 const asyncThunk = createAsyncThunk("cart/getCountries", async function (country: string, { rejectWithValue }) {
   try {
     return await CartService.getCountries(country);
   } catch (error) {
-    return rejectWithValue(ErrorMessages.INCORRECT_COUNTRY);
+    return rejectWithValue(CartErrorMessages.INCORRECT_COUNTRY);
   }
 });
 

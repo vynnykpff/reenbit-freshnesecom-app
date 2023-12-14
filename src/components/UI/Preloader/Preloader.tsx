@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { TailSpin } from "react-loader-spinner";
-import styles from "./Loader.module.scss";
+import * as Loader from "react-loader-spinner";
+import styles from "./Preloader.module.scss";
 
-export const Loader: FC = () => {
+export const Preloader: FC = () => {
   return (
-    <TailSpin
+    <Loader.TailSpin
       height="80"
       width="80"
       color="var(--secondary-c2-color-500)"

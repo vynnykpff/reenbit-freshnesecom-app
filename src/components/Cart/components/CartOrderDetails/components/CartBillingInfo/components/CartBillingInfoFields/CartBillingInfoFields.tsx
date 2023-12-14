@@ -5,7 +5,7 @@ import { getAnimationVariant } from "@/utils";
 import { CartBillingInfoItem, CartValidationForm } from "@/common/types";
 import { CartPhoneInput } from "@/components/UI";
 import { CartCityField, CartCountryField, CartStateField, CartUniversalField } from "./components";
-import { AnimationDefaultDuration, animationDefaultVariants, cartBillingInfoItems } from "@/common/constants";
+import { AnimationDefaultDuration, CartFormFields, animationDefaultVariants, cartBillingInfoItems } from "@/common/constants";
 import styles from "./CartBillingInfoFields.module.scss";
 
 export const CartBillingInfoFields: FC<CartValidationForm> = props => {
@@ -15,13 +15,13 @@ export const CartBillingInfoFields: FC<CartValidationForm> = props => {
     const commonProps = { key: field.id, fieldValue: fields[field.fieldName], ...field, ...props };
 
     switch (field.fieldName) {
-      case "phoneNumber":
+      case CartFormFields.PHONE_NUMBER:
         return <CartPhoneInput disabled={!fields.city} {...commonProps} />;
-      case "country":
+      case CartFormFields.COUNTRY:
         return <CartCountryField {...commonProps} />;
-      case "state":
+      case CartFormFields.STATE:
         return <CartStateField {...commonProps} />;
-      case "city":
+      case CartFormFields.CITY:
         return <CartCityField {...commonProps} />;
       default:
         return <CartUniversalField index={index} {...commonProps} />;

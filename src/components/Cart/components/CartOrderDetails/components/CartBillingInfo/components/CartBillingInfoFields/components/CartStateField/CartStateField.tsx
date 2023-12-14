@@ -4,7 +4,7 @@ import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { CartValidationFields } from "@/common/types";
 import { CartInput } from "@/components/UI";
-import { CartErrorMessages, GlobalDelay } from "@/common/constants";
+import { CartErrorMessages, CartFormFields, GlobalDelay } from "@/common/constants";
 
 export const CartStateField: FC<CartValidationFields> = props => {
   const { fieldName, fieldValue, setError, setValue, clearErrors } = props;
@@ -29,8 +29,8 @@ export const CartStateField: FC<CartValidationFields> = props => {
 
   useChangeEffect(() => {
     if (city.length) {
-      setField({ key: "city", value: "" });
-      setError("city", { type: "validate", message: CartErrorMessages.INCORRECT_CITY });
+      setField({ key: CartFormFields.CITY, value: "" });
+      setError(CartFormFields.CITY, { type: "validate", message: CartErrorMessages.INCORRECT_CITY });
     }
   }, [state]);
 
@@ -44,7 +44,7 @@ export const CartStateField: FC<CartValidationFields> = props => {
     }
 
     setField({ key: fieldName, value });
-    setValue("state", value, { shouldValidate: true });
+    setValue(CartFormFields.STATE, value, { shouldValidate: true });
 
     const getFilteredStates = states.filter(state => state.name.toLowerCase().includes(value.toLowerCase()));
     setFilteredStates(getFilteredStates);
@@ -62,7 +62,7 @@ export const CartStateField: FC<CartValidationFields> = props => {
 
   const handleFocus = () => {
     if (error && inputValue) {
-      setError("state", { type: "validate", message: CartErrorMessages.INCORRECT_STATE });
+      setError(CartFormFields.STATE, { type: "validate", message: CartErrorMessages.INCORRECT_STATE });
       return;
     }
 

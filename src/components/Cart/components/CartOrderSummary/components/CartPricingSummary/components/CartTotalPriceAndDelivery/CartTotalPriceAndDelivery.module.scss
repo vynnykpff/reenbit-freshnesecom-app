@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
   gap: 40px;
 
   @include productCardMobile {
@@ -17,12 +18,9 @@
     display: flex;
     row-gap: 4px;
     justify-content: center;
-    flex-shrink: 0;
     flex-direction: column;
     flex-wrap: nowrap;
     font-size: 14px;
-    text-wrap: nowrap;
-    overflow: hidden;
 
     .cartDeliveryTitle {
       font-family: $secondary-font;
@@ -44,11 +42,5 @@
     font-size: 26px;
     font-weight: 600;
     text-wrap: nowrap;
-    overflow: hidden;
-
-    .cartTotalPrice {
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
   }
 }
