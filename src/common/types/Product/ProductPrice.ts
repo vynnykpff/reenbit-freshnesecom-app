@@ -3,7 +3,7 @@ import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { NotificationState, ProductPrice } from "@/common/types";
 
 export type ProductPriceBaseParams = {
-  setLocalProductPrice: Dispatch<SetStateAction<Omit<ProductPrice, "currency">>>;
-  setLocalInputValue: Dispatch<SetStateAction<number>>;
+  setProductPrice: Dispatch<SetStateAction<Omit<ProductPrice, "currency">>>;
+  setInputValue: Dispatch<SetStateAction<number>>;
   setNotification: ActionCreatorWithPayload<NotificationState>;
 };

@@ -4,7 +4,7 @@ import { getProductRating } from "@/utils";
 import { Rating } from "@/components/UI";
 import { ProductCharacteristics } from "@/components/Product/components";
 import { ProductCardImage } from "@/components/ProductsList/components";
-import { CartProductCardHeader, CartProductCardNavigation, CartProductCardPrice } from "./components";
+import { CartOrderNavigation, CartProductCardHeader, CartProductCardPrice } from "./components";
 import styles from "./CartProductCard.module.scss";
 
 type Props = {
@@ -22,7 +22,7 @@ export const CartProductCard: FC<Props> = props => {
           images={images}
           title={title}
         />
-        <CartProductCardNavigation productId={id} selectedUnit={selectedUnit} />
+        <CartOrderNavigation productId={id} selectedUnit={selectedUnit} />
       </div>
 
       <div className={styles.cartProductCardContent}>

@@ -1,12 +1,11 @@
+import { checkProductOnCorrectAmount, resetProductPrice } from "@/utils";
 import { ProductPrice, ProductPriceBaseParams } from "@/common/types";
-import { checkProductOnCorrectAmount } from "@/utils";
-import { resetProductPrice } from "@/utils";
 import { ProductUnitsMeasure, ProductsAmountOfUnitsMeasure } from "@/common/constants";
 
 type Params = {
   value: number;
-  currentOrderPriceVariant: string;
-  productAmount: number;
+  amount: number;
+  priceVariant: string;
 } & ProductPriceBaseParams &
   Omit<ProductPrice, "currency">;
 
@@ -14,23 +13,23 @@ export const getProductPrice = ({
   value,
   original,
   discount,
-  productAmount,
-  currentOrderPriceVariant,
-  setLocalInputValue,
-  setLocalProductPrice,
+  amount,
+  priceVariant,
+  setInputValue,
+  setProductPrice,
   setNotification,
 }: Params) => {
-  if (currentOrderPriceVariant === (ProductUnitsMeasure.BOX as string)) {
+  if (priceVariant === (ProductUnitsMeasure.BOX as string)) {
     const checkValue = value * ProductsAmountOfUnitsMeasure.BOX;
-    const res = checkProductOnCorrectAmount({ checkValue, productAmount, setLocalProductPrice, original, discount });
+    const res = checkProductOnCorrectAmount({ checkValue, amount, setProductPrice, original, discount });
 
     if (!res) {
       resetProductPrice({
         original,
         discount,
         unitMeasure: ProductsAmountOfUnitsMeasure.BOX,
-        setLocalProductPrice,
-        setLocalInputValue,
+        setProductPrice,
+        setInputValue,
         setNotification,
         checkValue,
       });
@@ -40,18 +39,18 @@ export const getProductPrice = ({
     return;
   }
 
-  if (currentOrderPriceVariant === (ProductUnitsMeasure.PACK as string)) {
+  if (priceVariant === (ProductUnitsMeasure.PACK as string)) {
     const checkValue = value * ProductsAmountOfUnitsMeasure.PACK;
 
-    const res = checkProductOnCorrectAmount({ checkValue, productAmount, setLocalProductPrice, original, discount });
+    const res = checkProductOnCorrectAmount({ checkValue, amount, setProductPrice, original, discount });
 
     if (!res) {
       resetProductPrice({
         original,
         discount,
         unitMeasure: ProductsAmountOfUnitsMeasure.PACK,
-        setLocalProductPrice,
-        setLocalInputValue,
+        setProductPrice,
+        setInputValue,
         setNotification,
         checkValue,
       });
@@ -61,15 +60,15 @@ export const getProductPrice = ({
     return;
   }
 
-  const res = checkProductOnCorrectAmount({ checkValue: value, productAmount, setLocalProductPrice, original, discount });
+  const res = checkProductOnCorrectAmount({ checkValue: value, amount, setProductPrice, original, discount });
 
   if (!res) {
     resetProductPrice({
       original,
       discount,
       unitMeasure: ProductsAmountOfUnitsMeasure.PCS,
-      setLocalProductPrice,
-      setLocalInputValue,
+      setProductPrice,
+      setInputValue,
       setNotification,
       checkValue: value,
     });

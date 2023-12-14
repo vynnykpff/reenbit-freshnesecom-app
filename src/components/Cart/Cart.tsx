@@ -18,7 +18,7 @@ export const Cart: FC = () => {
     reset,
     formState: { errors },
   } = useForm<FormFields>({ mode: "onBlur" });
-  const { resetFields, setNotification, resetError } = useActions();
+  const { resetFields, setNotification, resetError, resetCartProducts } = useActions();
   const { cartProducts, error } = useAppSelector(state => state.cart);
 
   const handleClick = () => {
@@ -40,9 +40,10 @@ export const Cart: FC = () => {
 
     if (!Object.keys(errors).length && getValues(CartFormFields.CONFIRM_ORDER)?.length) {
       reset();
+      resetCartProducts();
       resetFields();
       resetError();
-      setNotification({ type: NotificationType.SUCCESS, delay: GlobalDelay.PRICE, title: CartSuccessMessages.ORDER_SUCCESS });
+      setNotification({ type: NotificationType.SUCCESS, delay: GlobalDelay.PRODUCT_CART, title: CartSuccessMessages.ORDER_SUCCESS });
     }
   };
 

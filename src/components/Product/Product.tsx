@@ -5,6 +5,7 @@ import { useMatchMedia } from "@/hooks";
 import { getProductCharacteristics, getProductId } from "@/utils";
 import { NoMatches, Preloader } from "@/components/UI";
 import {
+  ProductCartAmount,
   ProductCharacteristics,
   ProductGallery,
   ProductInfo,
@@ -22,6 +23,7 @@ export const Product: FC = () => {
   const { product, isPending } = useAppSelector(state => state.product);
   const { products } = useAppSelector(state => state.products);
   const { productBrands } = useAppSelector(state => state.productsFilter);
+  const { cartProductsPayload } = useAppSelector(state => state.cart);
   const location = useLocation();
   const productId = getProductId(products, location.pathname);
 
@@ -52,6 +54,7 @@ export const Product: FC = () => {
             <div className={styles.productContentContainer}>
               <ProductInfo title={product.title} longDescription={product.description.long} />
               <ProductCharacteristics productCharacteristicsList={productCharacteristicsList} {...product} />
+              {!!cartProductsPayload.length && <ProductCartAmount id={product.id} />}
               <ProductOrder {...product} />
               <ProductWishButton />
               <ProductTabs />

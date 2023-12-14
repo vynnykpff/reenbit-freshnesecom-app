@@ -17,17 +17,17 @@ export const resetProductPrice = ({
   original,
   discount,
   checkValue,
-  setLocalProductPrice,
-  setLocalInputValue,
+  setProductPrice,
+  setInputValue,
   unitMeasure,
   setNotification,
 }: Params) => {
   if (checkValue) {
-    setLocalProductPrice({
+    setProductPrice({
       original: original * unitMeasure,
       discount: discount * unitMeasure,
     });
-    setLocalInputValue(ProductsAmountOfUnitsMeasure.PCS);
+    setInputValue(ProductsAmountOfUnitsMeasure.PCS);
     setNotification({
       title: ProductPriceNotifications.OVER_AMOUNT_VALUE,
       delay: NotificationDelay.DEFAULT,
@@ -37,12 +37,12 @@ export const resetProductPrice = ({
     return;
   }
 
-  setLocalProductPrice({
+  setProductPrice({
     original: RESET_PRICE_VALUE,
     discount: RESET_PRICE_VALUE,
   });
 
-  setLocalInputValue(RESET_PRICE_VALUE);
+  setInputValue(RESET_PRICE_VALUE);
 
   setNotification({
     title: ProductPriceNotifications.INVALID_VALUE,
