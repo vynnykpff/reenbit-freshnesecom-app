@@ -9,9 +9,16 @@ import {
   getMaxAvailableUnits,
   getProductAmountInSelectedVariant,
 } from "@/utils";
-import { CartPayload, ProductInputValue, ProductPrice, ProductSelectValue } from "@/common/types";
+import { CartPayload, ProductPrice, ProductSelectValue, ProductValue } from "@/common/types";
 import { ProductAmount } from "@/components/UI";
-import { CartConfirmMessages, CartSuccessMessages, GlobalDelay, NotificationType, ProductUnitsMeasure } from "@/common/constants";
+import {
+  CartConfirmMessages,
+  CartSuccessMessages,
+  GlobalDelay,
+  GlobalInitialValues,
+  NotificationType,
+  ProductUnitsMeasure,
+} from "@/common/constants";
 import styles from "./CartOrderPrice.module.scss";
 
 type Props = {
@@ -21,8 +28,10 @@ type Props = {
   id: string;
   setProductPrice: Dispatch<SetStateAction<Omit<ProductPrice, "currency">>>;
 } & ProductSelectValue &
-  ProductInputValue &
+  ProductValue &
   Omit<ProductPrice, "currency">;
+
+const PARSED_INT_RADIX = 10;
 
 export const CartOrderPrice: FC<Props> = ({
   inputValue,
@@ -84,9 +93,11 @@ export const CartOrderPrice: FC<Props> = ({
   }, GlobalDelay.INPUT_VALUE);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = +e.target.value;
+    const rawValue = e.target.value;
+    const value = parseInt(rawValue.replace(/^0+/, ""), PARSED_INT_RADIX);
 
-    setInputValue(value);
+    setInputValue(isNaN(value) ? GlobalInitialValues.MIN_PRODUCT_AMOUNT : value);
+
     checkOnValidValue(value);
   };
 

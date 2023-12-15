@@ -5,7 +5,7 @@ export type ProductSelectValue = {
   setPriceVariant: Dispatch<SetStateAction<string>>;
 };
 
-export type ProductInputValue = {
+export type ProductValue = {
   inputValue: number;
   setInputValue: Dispatch<SetStateAction<number>>;
 };
