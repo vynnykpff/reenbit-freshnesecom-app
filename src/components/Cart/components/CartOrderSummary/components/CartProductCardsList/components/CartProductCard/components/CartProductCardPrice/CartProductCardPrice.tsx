@@ -3,8 +3,8 @@ import { useDebounce } from "use-debounce";
 import { useActions, useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
 import { getCartProduct, getCurrentProductPrice, getProductPriceDependsOnUnit } from "@/utils";
-import { ProductCardPrice } from "@/components/ProductsList/components";
 import { Product, ProductPrice } from "@/common/types";
+import { ProductCardPrice } from "@/components/ProductsList/components";
 import { CartOrderPrice } from "./components";
 import { GlobalDelay, GlobalInitialValues } from "@/common/constants";
 import styles from "./CartProductCardPrice.module.scss";
@@ -49,7 +49,7 @@ export const CartProductCardPrice: FC<Props> = props => {
       },
       isCart: true,
     });
-  }, [debouncedLocalProductPrice, debouncedLocalInputValue, debouncedUnitMeasure]);
+  }, [debouncedLocalProductPrice, debouncedLocalInputValue]);
 
   return (
     <div className={styles.cartProductCardPriceContainer}>

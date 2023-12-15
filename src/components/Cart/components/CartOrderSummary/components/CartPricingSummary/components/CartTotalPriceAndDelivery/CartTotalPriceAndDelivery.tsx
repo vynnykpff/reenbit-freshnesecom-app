@@ -1,6 +1,7 @@
 import { FC } from "react";
-import { getCartDeliveryTime, getPriceWithPromo, getPriceWithTax, getSubtotalPrice } from "@/utils";
+import { getCartDeliveryTime, getFixedPrice, getPriceWithPromo, getPriceWithTax, getSubtotalPrice } from "@/utils";
 import { CartPayload, CartProduct, CartPromocode } from "@/common/types";
+import { DECIMAL_PLACES } from "@/common/constants";
 import styles from "./CartTotalPriceAndDelivery.module.scss";
 
 type Props = {
@@ -21,7 +22,7 @@ export const CartTotalPriceAndDelivery: FC<Props> = ({ cartProductsPayload, cart
       totalPrice -= priceWithPromo;
     }
 
-    return totalPrice;
+    return getFixedPrice(totalPrice, DECIMAL_PLACES);
   };
 
   return (
