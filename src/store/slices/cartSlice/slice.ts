@@ -127,12 +127,13 @@ export const cartSlice = createSlice({
       const currentCartProduct = state.cartProductsPayload[currentCartProductIndex];
 
       const prevCartProductIndex = state.cartProductsPayload.findIndex(product => product.id === id && product.unit === prevSelectedUnit);
-      const prevCartProduct = prevCartProductIndex !== -1 ? state.cartProductsPayload[prevCartProductIndex] : null;
+      const prevCartProduct =
+        prevCartProductIndex !== +GlobalInitialValues.NOT_FOUND ? state.cartProductsPayload[prevCartProductIndex] : null;
 
       if (currentCartProduct) {
         const mergedAmount = (prevCartProduct?.amount ?? GlobalInitialValues.DEFAULT) + currentCartProduct.amount;
 
-        state.cartProductsPayload = state.cartProductsPayload
+        const updatedCartProducts = state.cartProductsPayload
           .map(cartProduct => {
             if (cartProduct.id === id && cartProduct.unit === selectedUnit) {
               return {
@@ -140,11 +141,15 @@ export const cartSlice = createSlice({
                 unit: selectedUnit,
                 amount: mergedAmount,
               };
+            } else if (cartProduct.id === id && cartProduct.unit === prevSelectedUnit) {
+              return null;
             }
 
             return cartProduct;
           })
           .filter(Boolean);
+
+        state.cartProductsPayload = updatedCartProducts as CartPayload[];
       }
     },
 

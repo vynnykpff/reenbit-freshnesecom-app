@@ -13,7 +13,10 @@ export const useFilteredProducts = () => {
   const filters: ProductFilter[] = [];
 
   if (productRatings.length) {
-    filters.push(product => productRatings.some(item => item === getProductRating(product.reviews)));
+    filters.push(product => {
+      const productRating = getProductRating(product.reviews);
+      return productRatings.some(item => item === productRating);
+    });
   }
 
   if (productCategory === (ProductFilterType.ALL_CATEGORIES as string) && !searchValue && !productBrands.length && !productRatings) {
