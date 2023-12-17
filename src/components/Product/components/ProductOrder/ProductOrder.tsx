@@ -82,7 +82,6 @@ export const ProductOrder: FC<Product> = props => {
           setProductPrice={setProductPrice}
           id={id}
           setIsDisabled={setIsDisabled}
-          isDisabled={isDisabled}
         />
         <Button onClick={handleAddProductToCart} disabled={isDisabled} className={styles.productOrderButton}>
           <PlusIcon className={styles.productOrderIcon} /> <span>Add to cart</span>

@@ -1,12 +1,11 @@
 import { FC, useState } from "react";
-import { useDebounce } from "use-debounce";
-import { useActions, useAppSelector } from "@/store";
+import { useAppSelector } from "@/store";
 import { useChangeEffect } from "@/hooks";
-import { getCartProduct, getCurrentProductPrice, getProductPriceDependsOnUnit } from "@/utils";
+import { getCartProduct, getProductPriceDependsOnUnit } from "@/utils";
 import { Product, ProductPrice } from "@/common/types";
 import { ProductCardPrice } from "@/components/ProductsList/components";
 import { CartOrderPrice } from "./components";
-import { GlobalDelay, GlobalInitialValues } from "@/common/constants";
+import { GlobalInitialValues } from "@/common/constants";
 import styles from "./CartProductCardPrice.module.scss";
 
 type Props = {
@@ -28,28 +27,12 @@ export const CartProductCardPrice: FC<Props> = props => {
   const [inputValue, setInputValue] = useState(cartProduct.amount);
   const [priceVariant, setPriceVariant] = useState(cartProduct.unit);
 
-  const { setCartProductPayload } = useActions();
-
-  const [debouncedLocalProductPrice] = useDebounce(productPrice, GlobalDelay.DEFAULT);
-  const [debouncedLocalInputValue] = useDebounce(inputValue, GlobalDelay.DEFAULT);
-  const [debouncedUnitMeasure] = useDebounce(priceVariant, GlobalDelay.DEFAULT);
-
   useChangeEffect(() => {
     if (!inputValue || inputValue < +GlobalInitialValues.DEFAULT) {
       setInputValue(GlobalInitialValues.MIN_PRODUCT_AMOUNT);
       return;
     }
-
-    setCartProductPayload({
-      products: {
-        price: getCurrentProductPrice(original, discount),
-        id,
-        amount: debouncedLocalInputValue,
-        unit: debouncedUnitMeasure,
-      },
-      isCart: true,
-    });
-  }, [debouncedLocalProductPrice, debouncedLocalInputValue]);
+  }, [productPrice, inputValue]);
 
   return (
     <div className={styles.cartProductCardPriceContainer}>

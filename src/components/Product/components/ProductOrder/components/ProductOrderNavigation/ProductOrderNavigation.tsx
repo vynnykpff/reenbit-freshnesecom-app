@@ -14,7 +14,6 @@ type Props = {
   amount: number;
   className?: string | string[];
   id: string;
-  isDisabled: boolean;
   setProductPrice: Dispatch<SetStateAction<Omit<ProductPrice, "currency">>>;
   setIsDisabled: Dispatch<SetStateAction<boolean>>;
 } & ProductSelectValue &
@@ -84,6 +83,8 @@ export const ProductOrderNavigation: FC<Props> = ({
       setIsDisabled(true);
       return;
     }
+
+    setIsDisabled(false);
 
     if (maxAvailableAmount && !maxAvailableUnits) {
       setIsDisabled(true);
