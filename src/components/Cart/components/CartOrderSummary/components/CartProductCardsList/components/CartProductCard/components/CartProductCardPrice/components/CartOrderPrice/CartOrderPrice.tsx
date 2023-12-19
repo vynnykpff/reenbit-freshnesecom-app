@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
+import { ChangeEvent, FC } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useActions } from "@/store";
 import { useModalState } from "@/hooks";
@@ -14,7 +14,14 @@ import {
 } from "@/utils";
 import { CartPayload, ProductPrice, ProductSelectValue, ProductValue } from "@/common/types";
 import { ProductAmount } from "@/components/UI";
-import { CartConfirmMessages, CartSuccessMessages, GlobalDelay, NotificationType, ProductUnitsMeasure } from "@/common/constants";
+import {
+  CartConfirmMessages,
+  CartSuccessMessages,
+  GlobalDelay,
+  GlobalInitialValues,
+  NotificationType,
+  ProductUnitsMeasure,
+} from "@/common/constants";
 import styles from "./CartOrderPrice.module.scss";
 
 type Props = {
@@ -22,7 +29,6 @@ type Props = {
   amount: number;
   cartProducts: CartPayload[];
   id: string;
-  setProductPrice: Dispatch<SetStateAction<Omit<ProductPrice, "currency">>>;
 } & ProductSelectValue &
   ProductValue &
   Omit<ProductPrice, "currency">;
@@ -94,6 +100,11 @@ export const CartOrderPrice: FC<Props> = ({
       original,
       priceVariant,
     };
+
+    if (!value || value < +GlobalInitialValues.DEFAULT) {
+      setInputValue(GlobalInitialValues.MIN_PRODUCT_AMOUNT);
+      return;
+    }
 
     if (selectedProductAmount <= maxAvailableAmount || (!maxAvailableAmount && selectedProductAmount <= amount)) {
       setCartProductValue({ ...cartProductParams, cartValue: value, inputValue: value });

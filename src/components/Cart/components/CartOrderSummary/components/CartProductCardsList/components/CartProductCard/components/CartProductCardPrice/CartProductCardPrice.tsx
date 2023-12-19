@@ -1,8 +1,7 @@
 import { FC, useState } from "react";
 import { useAppSelector } from "@/store";
-import { useChangeEffect } from "@/hooks";
 import { getCartProduct, getProductPriceDependsOnUnit } from "@/utils";
-import { Product, ProductPrice } from "@/common/types";
+import { Product } from "@/common/types";
 import { ProductCardPrice } from "@/components/ProductsList/components";
 import { CartOrderPrice } from "./components";
 import { GlobalInitialValues } from "@/common/constants";
@@ -23,16 +22,8 @@ export const CartProductCardPrice: FC<Props> = props => {
   const { cartProductsPayload } = useAppSelector(state => state.cart);
   const cartProduct = getCartProduct({ cartProducts: cartProductsPayload, selectedUnit, id });
 
-  const [productPrice, setProductPrice] = useState<Omit<ProductPrice, "currency">>({ original, discount });
   const [inputValue, setInputValue] = useState(cartProduct.amount);
   const [priceVariant, setPriceVariant] = useState(cartProduct.unit);
-
-  useChangeEffect(() => {
-    if (!inputValue || inputValue < +GlobalInitialValues.DEFAULT) {
-      setInputValue(GlobalInitialValues.MIN_PRODUCT_AMOUNT);
-      return;
-    }
-  }, [productPrice, inputValue]);
 
   return (
     <div className={styles.cartProductCardPriceContainer}>
@@ -55,7 +46,6 @@ export const CartProductCardPrice: FC<Props> = props => {
         original={original}
         discount={discount}
         setInputValue={setInputValue}
-        setProductPrice={setProductPrice}
         setPriceVariant={setPriceVariant}
         cartProducts={cartProductsPayload}
         id={id}
