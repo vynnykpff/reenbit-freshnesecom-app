@@ -9,5 +9,5 @@ export const getProductRating = (productReviewsRatings: ProductReview[]) => {
   const totalRating = productReviewsRatings.reduce((acc, review) => acc + review.rating, 0);
   const averageRating = totalRating / productReviewsRatings.length;
 
-  return Math.max(ProductRating.MIN, Math.min(ProductRating.MAX, averageRating));
+  return Math.floor(Math.max(ProductRating.MIN, Math.min(ProductRating.MAX, averageRating)));
 };

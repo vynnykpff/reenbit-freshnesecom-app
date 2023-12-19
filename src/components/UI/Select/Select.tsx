@@ -1,12 +1,12 @@
-import { getAnimationVariant } from "@/utils";
 import { FC, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import cn from "classnames";
 import { useOutsideClick } from "@/hooks";
+import { getAnimationVariant } from "@/utils";
 import { SelectProps } from "@/common/types";
 import { AnimationDefaultDuration, animationDefaultSelect, animationDefaultVariants } from "@/common/constants";
-import commonStyles from "@/styles/Common.module.scss";
 import SelectArrow from "#/icons/select-chevron.svg?react";
+import commonStyles from "@/styles/Common.module.scss";
 import styles from "./Select.module.scss";
 
 export const Select: FC<SelectProps> = ({
@@ -19,6 +19,8 @@ export const Select: FC<SelectProps> = ({
   isShowSelectedValue = false,
   placeholder = "",
   bgColor,
+  isCart = false,
+  setFieldValue,
 }) => {
   const [variantsVisible, setVariantsVisible] = useState<boolean>(false);
   const containerRef = useOutsideClick<HTMLDivElement>(() => {
@@ -26,6 +28,12 @@ export const Select: FC<SelectProps> = ({
   });
 
   const setValue = (key: string) => {
+    if (isCart && setFieldValue) {
+      setFieldValue(key);
+      setVariantsVisible(false);
+      return;
+    }
+
     setCurrentVariant(key);
     setVariantsVisible(false);
   };

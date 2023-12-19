@@ -10,10 +10,21 @@ type Props = {
   handleChange(e: ChangeEvent<HTMLInputElement>): void;
   className?: string | string[];
   unitsMeasure: ProductUnitsMeasure;
+  isCart?: boolean;
+  setFieldValue?(key: string): void;
 } & ProductSelectValue &
   ProductValue;
 
-export const ProductAmount: FC<Props> = ({ handleChange, priceVariant, setPriceVariant, inputValue, className = "", unitsMeasure }) => {
+export const ProductAmount: FC<Props> = ({
+  handleChange,
+  priceVariant,
+  setPriceVariant,
+  setFieldValue,
+  inputValue,
+  isCart = false,
+  className = "",
+  unitsMeasure,
+}) => {
   const value = inputValue ? inputValue.toString() : "";
 
   return (
@@ -33,6 +44,8 @@ export const ProductAmount: FC<Props> = ({ handleChange, priceVariant, setPriceV
         setCurrentVariant={setPriceVariant}
         isShowSelectedValue
         variants={getProductUnitsMeasure(unitsMeasure)}
+        isCart={isCart}
+        setFieldValue={setFieldValue}
       />
     </div>
   );

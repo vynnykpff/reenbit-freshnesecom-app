@@ -1,7 +1,14 @@
 import { CaseReducer, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { removeItemByCondition } from "@/utils";
 import { CartItem, CartPayload, CartProduct, CartPromocode, CartState, FieldData, FormFields } from "@/common/types";
-import { CartInitialCountries, CartInitialFields, CartInitialStates, ErrorMessages, OrderInitialPromocode } from "@/common/constants";
+import {
+  CartInitialCountries,
+  CartInitialFields,
+  CartInitialStates,
+  ErrorMessages,
+  GlobalInitialValues,
+  OrderInitialPromocode,
+} from "@/common/constants";
 import cartSliceThunks from "./thunks";
 
 const initialState: CartState = {
@@ -111,6 +118,60 @@ export const cartSlice = createSlice({
 
     resetError: state => {
       state.error = null;
+    },
+
+    mergeCartProductsPayload: (state, action: PayloadAction<CartItem>) => {
+      const { id, selectedUnit, prevSelectedUnit = "" } = action.payload;
+
+      const currentCartProductIndex = state.cartProductsPayload.findIndex(product => product.id === id && product.unit === selectedUnit);
+      const currentCartProduct = state.cartProductsPayload[currentCartProductIndex];
+
+      const prevCartProductIndex = state.cartProductsPayload.findIndex(product => product.id === id && product.unit === prevSelectedUnit);
+      const prevCartProduct =
+        prevCartProductIndex !== +GlobalInitialValues.NOT_FOUND ? state.cartProductsPayload[prevCartProductIndex] : null;
+
+      if (currentCartProduct) {
+        const mergedAmount = (prevCartProduct?.amount ?? GlobalInitialValues.DEFAULT) + currentCartProduct.amount;
+
+        const updatedCartProducts = state.cartProductsPayload
+          .map(cartProduct => {
+            if (cartProduct.id === id && cartProduct.unit === selectedUnit) {
+              return {
+                ...cartProduct,
+                unit: selectedUnit,
+                amount: mergedAmount,
+              };
+            } else if (cartProduct.id === id && cartProduct.unit === prevSelectedUnit) {
+              return null;
+            }
+
+            return cartProduct;
+          })
+          .filter(Boolean);
+
+        state.cartProductsPayload = updatedCartProducts as CartPayload[];
+      }
+    },
+
+    swapCartProductPayload: (state, { payload }: PayloadAction<CartItem>) => {
+      const { id, selectedUnit, prevSelectedUnit } = payload;
+
+      const searchedProductPayload = state.cartProductsPayload.find(product => {
+        if (product.unit === prevSelectedUnit && product.id === id) {
+          product.unit = selectedUnit;
+        }
+      });
+
+      const searchedProduct = state.cartProducts.find(product => {
+        if (product.selectedUnit === prevSelectedUnit && product.product.id === id) {
+          product.selectedUnit = selectedUnit;
+        }
+      });
+
+      if (searchedProductPayload && searchedProduct) {
+        state.cartProducts = [...state.cartProducts, searchedProduct];
+        state.cartProductsPayload = [...state.cartProductsPayload, searchedProductPayload];
+      }
     },
   },
 

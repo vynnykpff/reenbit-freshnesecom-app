@@ -15,6 +15,7 @@ export type CartProduct = {
 export type CartItem = {
   id: Product["id"];
   selectedUnit: CartProduct["selectedUnit"];
+  prevSelectedUnit?: CartProduct["selectedUnit"];
 };
 
 export type CartState = {

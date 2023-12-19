@@ -1,3 +1,4 @@
+import { getProductRating } from "./getProductRating.ts";
 import { Product } from "@/common/types";
 import { SortingTypes, SortingVariants } from "@/common/constants";
 
@@ -15,7 +16,9 @@ export const sortFunctions: Record<SortingVariants, SortFunctionParams> = {
 
   [SortingVariants.RATING](res, sortType) {
     return res.sort((a, b) => {
-      return sortType === SortingTypes.ASC ? a.rating - b.rating : b.rating - a.rating;
+      const ratingA = getProductRating(a.reviews);
+      const ratingB = getProductRating(b.reviews);
+      return sortType === SortingTypes.ASC ? ratingA - ratingB : ratingB - ratingA;
     });
   },
 

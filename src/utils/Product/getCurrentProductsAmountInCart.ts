@@ -1,4 +1,4 @@
-import { getProductAmountInSelectedVariant } from "@/utils";
+import { getAmountProduct } from "@/utils";
 import { CartPayload } from "@/common/types";
 import { GlobalInitialValues } from "@/common/constants";
 
@@ -12,7 +12,7 @@ export const getCurrentProductsAmountInCart = ({ productsInCart, id }: Params) =
 
   if (productInCart.length) {
     return productInCart.reduce(
-      (acc, product) => acc + product.amount * getProductAmountInSelectedVariant(product.unit),
+      (acc, product) => acc + getAmountProduct({ value: product.amount, priceVariant: product.unit }),
       GlobalInitialValues.DEFAULT,
     );
   }

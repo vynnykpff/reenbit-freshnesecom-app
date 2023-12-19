@@ -26,9 +26,7 @@ export const ConfirmModal: FC<Props> = ({ message, confirmCallback }) => {
     <Modal modalActive={modalActive} setModalActive={setModalActive}>
       <form onSubmit={e => e.preventDefault()} className={modalStyles.modalForm}>
         <div className={modalStyles.modalFieldsWrapper}>
-          <p className={styles.confirmMessage}>
-            Would you like to <span className={styles.highlightConfirmMessage}>{message}</span> ?
-          </p>
+          <p className={styles.confirmMessage}>{message}</p>
         </div>
         <div className={modalStyles.footerModal}>
           <Button onClick={handleCloseModal} type="button" className={cn(modalStyles.cancelButton, modalStyles.confirmModalButton)}>
